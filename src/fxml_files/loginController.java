@@ -5,11 +5,8 @@
  */
 package fxml_files;
 
-import entities.Person;
-import gibms.dbConnect;
+import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +41,7 @@ public class loginController implements Initializable
             
             primaryStage.show();
         }
-        catch (Exception e)
+        catch (IOException e)
         {
             System.out.println("Stage setting exception:\n" + e);
         }

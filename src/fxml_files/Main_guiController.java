@@ -25,7 +25,6 @@ public class Main_guiController implements Initializable
     @FXML private TreeView tree;
     @FXML private Pane pane_object;
     
-    private int current_index=0;
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
