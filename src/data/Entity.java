@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package data;
+
 
 import com.mysql.jdbc.Statement;
 import java.sql.Connection;
@@ -16,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import data.*;
 
 /**
  *

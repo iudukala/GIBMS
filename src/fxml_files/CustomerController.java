@@ -23,8 +23,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.Toggle;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -34,7 +32,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import entities.*;
+import entities.*;        
 import data.*;
 /**
  * FXML Controller class
