@@ -11,6 +11,7 @@ package data;
  */
 public class Manipulator
 {
+    //DO NOT USE
     public static String psFromQuery(String sqlQuery)
     {
         StringBuilder strb=new StringBuilder(sqlQuery);
