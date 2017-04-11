@@ -75,7 +75,7 @@ public class CustomerController implements Initializable
     @FXML private TextField text_earnvehicles;
     @FXML private TextField text_earnland;
     
-    private Person getPersonInputs()
+    private Entity getPersonInputs()
     {
         //person object inputs
         String nic=text_nic.getText();
@@ -96,34 +96,34 @@ public class CustomerController implements Initializable
         Entity person = new Entity("person");
         person.add("nic", nic);
         person.add("full_name", name);
-        person.add("dob", name);
+        person.add("dob", dob);
         person.add("email", email);
         person.add("phone", personal_phone);
         person.add("address", home_addr);
-        person.add("gender", gender);
-        person.add("marital_status", marital_status);
+        person.add("gender", Character.toString(gender));
+        person.add("marital_status", Character.toString(marital_status));
         
-        return new Person(name,nic,dob,personal_phone, home_addr, gender, marital_status, email);
+        return person;
     }
-    private Customer getCustomerInputs()
+    private Entity getCustomerInputs()
     {
         //customer object inputs
         String nic=text_nic.getText();
         if(!Validator.isNIC(nic)) return null; 
         
-        char sector='e';
+        char emp_sector='e';
         if(sectorGroup.getSelectedToggle().toString().endsWith("'State'"))
-            sector='s';
+            emp_sector='s';
         else if(sectorGroup.getSelectedToggle().toString().endsWith("'State corporation'"))
-            sector='c';
+            emp_sector='c';
         
         String work_phone=text_wphone.getText();
         if(!Validator.isPhone(work_phone)) return null;
         
         String company=text_company.getText();
-        char service_type = (serviceGroup.getSelectedToggle().toString().endsWith("'Permanent'")) ? 'p':'t';
+        char service_nature = (serviceGroup.getSelectedToggle().toString().endsWith("'Permanent'")) ? 'p':'t';
         String position = text_position.getText();
-        LocalDate employment = date_employment.getValue();
+        LocalDate employment_start = date_employment.getValue();
         
         String acc_num = text_account.getText();
         
@@ -148,7 +148,25 @@ public class CustomerController implements Initializable
         {
             return null;
         }
-        return new Customer(nic,work_phone,company,position,acc_num,acc_bank,acc_branch,sector,service_type, employment, career,business, houses,vehicles,land);
+        Entity customer = new Entity("customer_state");
+        customer.add("nic", nic);
+        customer.add("work_phone",work_phone);
+        customer.add("emp_sector", Character.toString(emp_sector));
+        customer.add("company", company);
+        customer.add("position", position);
+        customer.add("emp_startdate", employment_start);
+        customer.add("service_nature", Character.toString(service_nature));
+        customer.add("account_num",acc_num);
+        customer.add("account_bank", acc_bank);
+        customer.add("account_branch",acc_branch);
+        customer.add("earn_career", career);
+        customer.add("earn_business", business);
+        customer.add("earn_houses", houses);
+        customer.add("earn_vehicles", vehicles);
+        customer.add("earn_land",land);
+        
+        return customer;
+        //return new Customer(nic,work_phone,company,position,acc_num,acc_bank,acc_branch,sector,service_type, employment, career,business, houses,vehicles,land);
     }
     
     @FXML private Text text_addinvalid;
@@ -156,15 +174,22 @@ public class CustomerController implements Initializable
     @FXML
     private void handle_addButton(ActionEvent event) 
     {
-        Person person_object = getPersonInputs();
-        Customer customer_object = getCustomerInputs();
+        Entity person = getPersonInputs();
+        Entity customer = getCustomerInputs();
         
-        if(person_object != null && customer_object != null)
+        if(person != null && customer != null)
         {
             text_addinvalid.setVisible(false);
             
-            person_object.consolidate(conn);
-            customer_object.consolidate(conn);
+            person.validateTable(conn);
+            customer.validateTable(conn);
+            
+            person.validateData(conn);
+            customer.validateData(conn);
+            
+            
+            person.consolidate(conn);
+            customer.consolidate(conn);
         }
         else
         {
@@ -269,34 +294,34 @@ public class CustomerController implements Initializable
     @FXML
     private void handle_customerupdate(ActionEvent event)
     {
-        Person person_object = getPersonInputs();
-        Customer customer_object = getCustomerInputs();
-        
-        if(person_object != null && customer_object != null)
-        {
-            text_addinvalid.setVisible(false);
-            
-            try
-            {
-                PreparedStatement prp = conn.prepareStatement("delete from customer_state where nic = ?");
-                prp.setString(1, person_object.nic);
-                prp.executeUpdate();
-                prp = conn.prepareStatement("delete from person where nic = ?");
-                prp.setString(1, person_object.nic);
-                prp.executeUpdate();
-            }
-            catch(SQLException e)
-            {
-                System.out.println("Error removing customer\n" + e);
-            }
-            
-            person_object.consolidate(conn);
-            customer_object.consolidate(conn);
-        }
-        else
-        {
-            text_addinvalid.setVisible(true);
-        }
+//        Person person_object = getPersonInputs();
+//        Customer customer_object = getCustomerInputs();
+//        
+//        if(person_object != null && customer_object != null)
+//        {
+//            text_addinvalid.setVisible(false);
+//            
+//            try
+//            {
+//                PreparedStatement prp = conn.prepareStatement("delete from customer_state where nic = ?");
+//                prp.setString(1, person_object.nic);
+//                prp.executeUpdate();
+//                prp = conn.prepareStatement("delete from person where nic = ?");
+//                prp.setString(1, person_object.nic);
+//                prp.executeUpdate();
+//            }
+//            catch(SQLException e)
+//            {
+//                System.out.println("Error removing customer\n" + e);
+//            }
+//            
+//            person_object.consolidate(conn);
+//            customer_object.consolidate(conn);
+//        }
+//        else
+//        {
+//            text_addinvalid.setVisible(true);
+//        }
     }
     
     @FXML private TitledPane tpane_spouse;

@@ -38,7 +38,7 @@ public class loginController implements Initializable
             Stage primaryStage =(Stage)button.getScene().getWindow();
             
             primaryStage.setTitle("Graduate Investment Limited");
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true);
             primaryStage.setScene(main_gui);
             primaryStage.centerOnScreen();
             
