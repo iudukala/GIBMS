@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_files.CustomerController">
+   <children>
+      <TabPane fx:id="tabpane_customer" layoutX="114.0" layoutY="57.0" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tab_addcustomer" text="Add customer">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" layoutX="8.0" layoutY="14.0" prefHeight="672.0" prefWidth="480.0" text="Personal information">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="405.0">
+                                 <children>
+                                    <GridPane hgap="10.0" layoutX="30.4" layoutY="45.4" prefHeight="496.0" prefWidth="515.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="263.00421142578125" minWidth="10.0" prefWidth="129.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="453.8032684326172" minWidth="10.0" prefWidth="296.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Full name" GridPane.rowIndex="1" />
+                                          <Label text="Date of Birth" GridPane.rowIndex="2" />
+                                          <Label text="Personal phone" GridPane.rowIndex="3" />
+                                          <Label text="Home address" GridPane.rowIndex="4" />
+                                          <Label text="Gender" GridPane.rowIndex="5" />
+                                          <Label text="Marital status" GridPane.rowIndex="6" />
+                                          <Label text="Workplace phone" GridPane.rowIndex="8" />
+                                          <Label text="Employment sector" GridPane.rowIndex="9" />
+                                          <Label text="Company" GridPane.rowIndex="10" />
+                                          <TextField fx:id="text_nic" GridPane.columnIndex="1">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <TextField fx:id="text_name" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <TextField fx:id="text_pphone" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <TextField fx:id="text_homeaddr" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <TextField fx:id="text_wphone" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <DatePicker fx:id="datepicker_dob" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </DatePicker>
+                                          <RadioButton fx:id="radio_male" mnemonicParsing="false" prefHeight="18.0" prefWidth="97.0" selected="true" text="Male" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="genderGroup" />
+                                             </toggleGroup>
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radio_female" mnemonicParsing="false" text="Female" toggleGroup="$genderGroup" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets left="100.0" />
+                                             </GridPane.margin>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radio_married" mnemonicParsing="false" selected="true" text="Married" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="maritalGroup" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radio_unmarried" mnemonicParsing="false" text="Not married" toggleGroup="$maritalGroup" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+                                             <GridPane.margin>
+                                                <Insets left="100.0" />
+                                             </GridPane.margin>
+                                          </RadioButton>
+                                          <TextField fx:id="text_company" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <Label text="Service nature" GridPane.rowIndex="11" />
+                                          <RadioButton fx:id="radio_permanent" mnemonicParsing="false" selected="true" text="Permanent" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="serviceGroup" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radio_temporary" mnemonicParsing="false" text="Temporary" toggleGroup="$serviceGroup" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                             <GridPane.margin>
+                                                <Insets left="100.0" />
+                                             </GridPane.margin>
+                                          </RadioButton>
+                                          <Label text="Employment start" GridPane.rowIndex="13" />
+                                          <DatePicker fx:id="date_employment" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                          <Label text="Position" GridPane.rowIndex="12" />
+                                          <TextField fx:id="text_position" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                          <Label text="Email" GridPane.rowIndex="7" />
+                                          <TextField fx:id="text_email" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <RadioButton fx:id="radio_statecorp" mnemonicParsing="false" text="State corporation" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+                                             <padding>
+                                                <Insets left="60.0" />
+                                             </padding>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="sectorGroup" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radio_selfemp" mnemonicParsing="false" text="Self employed" toggleGroup="$sectorGroup" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+                                          <RadioButton fx:id="radio_state" mnemonicParsing="false" selected="true" text="State" toggleGroup="$sectorGroup" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <Text fx:id="textelement_nic" strokeType="OUTSIDE" strokeWidth="0.0" text="NIC" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" collapsible="false" layoutX="498.0" layoutY="14.0" prefHeight="373.0" prefWidth="386.0" text="Financial information">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="358.0">
+                                 <children>
+                                    <GridPane hgap="10.0" layoutX="21.4" layoutY="20.4" prefHeight="307.0" prefWidth="363.0" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="106.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.00000762939453" minWidth="10.0" prefWidth="227.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Account number" />
+                                          <Label text="Bank" GridPane.rowIndex="1" />
+                                          <Label text="Branch" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Average monthly earnings" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets top="5.0" />
+                                             </GridPane.margin></Label>
+                                          <Label text="Business" GridPane.rowIndex="5" />
+                                          <Label text="Houses" GridPane.rowIndex="6" />
+                                          <Label text="Vehicles" GridPane.rowIndex="7" />
+                                          <Label text="Land" GridPane.rowIndex="8" />
+                                          <TextField fx:id="text_account" GridPane.columnIndex="1" />
+                                          <TextField fx:id="text_bank" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="text_branch" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="text_earnbusiness" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <TextField fx:id="text_earnhouses" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextField fx:id="text_earnvehicles" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <TextField fx:id="text_earnland" prefWidth="227.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets top="7.0" />
+                                             </GridPane.margin>
+                                          </Separator>
+                                          <TextField fx:id="text_earncareer" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label text="Career" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane fx:id="tpane_spouse" collapsible="false" layoutX="499.0" layoutY="402.0" prefHeight="349.0" prefWidth="386.0" text="Spouse">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="400.0">
+                                 <children>
+                                    <GridPane hgap="10.0" layoutX="34.4" layoutY="-35.6" prefHeight="321.0" prefWidth="358.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="116.99999237060547" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.00000762939453" minWidth="10.0" prefWidth="237.00000762939453" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Name" />
+                                          <Label text="Profession" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Average monthly earnings" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets top="5.0" />
+                                             </GridPane.margin></Label>
+                                          <Label text="Business" GridPane.rowIndex="4" />
+                                          <Label text="Houses" GridPane.rowIndex="5" />
+                                          <Label text="Vehicles" GridPane.rowIndex="6" />
+                                          <Label text="Land" GridPane.rowIndex="7" />
+                                          <TextField GridPane.columnIndex="1" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets top="7.0" />
+                                             </GridPane.margin>
+                                          </Separator>
+                                          <Label text="Career" GridPane.rowIndex="3" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <Button fx:id="button_add" layoutX="93.0" layoutY="721.0" mnemonicParsing="false" onAction="#handle_addButton" text="Add customer" />
+                        <Button fx:id="button_custupdate" disable="true" layoutX="240.0" layoutY="721.0" mnemonicParsing="false" onAction="#handle_customerupdate" text="Update customer" />
+                        <Text fx:id="text_addinvalid" fill="RED" layoutX="104.0" layoutY="711.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid input. Please recheck input fields" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tab_searchcustomer" text="Search and alter">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="table_search" layoutX="5.0" layoutY="131.0" prefHeight="546.0" prefWidth="891.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                        <GridPane hgap="15.0" prefHeight="115.0" prefWidth="853.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="39.388328552246094" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.3100280761719" minWidth="10.0" prefWidth="238.55520629882812" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="121.44479370117188" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="69.118408203125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="236.881591796875" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="93.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="button_searchnic" mnemonicParsing="false" onAction="#handleSearchnic" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Button fx:id="button_searchname" mnemonicParsing="false" onAction="#handleSearchname" text="Search" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <TextField fx:id="text_searchnic" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="text_searchname" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Label text="Search via NIC" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+                              <Label text="Search via customer name" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
+                           </children>
+                        </GridPane>
+                        <GridPane alignment="CENTER" hgap="100.0" layoutX="185.0" layoutY="699.0" maxWidth="713.0" minWidth="400.0" prefHeight="43.0" prefWidth="528.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.6455078125" minWidth="10.0" prefWidth="188.40341186523438" />
+                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="220.72781372070312" minWidth="10.0" prefWidth="181.59658813476562" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="button_searchupdate" mnemonicParsing="false" onAction="#handle_searchupdate" prefHeight="31.0" prefWidth="195.0" text="Update" />
+                              <Button fx:id="button_searchdelete" mnemonicParsing="false" prefHeight="32.0" prefWidth="206.0" text="Delete" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

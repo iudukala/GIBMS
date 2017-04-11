@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" maxHeight="700.0" minHeight="700.0" minWidth="1117.0" prefHeight="700.0" prefWidth="1117.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_files.Main_guiController">
+   <children>
+      <TreeView fx:id="tree" layoutY="39.0" maxHeight="660.0" minHeight="660.0" prefHeight="660.0" prefWidth="235.0">
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding></TreeView>
+      <Pane fx:id="pane_object" layoutX="236.0" maxHeight="700.0" maxWidth="903.0" minHeight="700.0" minWidth="888.0" prefHeight="700.0" prefWidth="903.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="236.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="10.0" layoutY="16.0" text="Navigator" textFill="#b22727" />
+   </children>
+</AnchorPane>

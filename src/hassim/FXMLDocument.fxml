@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hassim.FXMLDocumentController">
+   <children>
+      <TabPane prefHeight="800.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Add Emploee">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                     <children>
+                        <TitledPane animated="false" layoutX="7.0" prefHeight="770.0" prefWidth="319.0" text="Personal Information">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="317.0">
+                                 <children>
+                                    <GridPane layoutX="12.0" layoutY="10.0" prefHeight="406.0" prefWidth="286.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="98.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="188.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Employee Id" />
+                                          <Label text="Employee Name" GridPane.rowIndex="1" />
+                                          <Label text="NIC No" GridPane.rowIndex="2" />
+                                          <Label text="Job Title" GridPane.rowIndex="5" />
+                                          <Label text="E-Mail" GridPane.rowIndex="4" />
+                                          <TextField fx:id="e_empid" GridPane.columnIndex="1" />
+                                          <TextField fx:id="e_empname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="e_nic" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="e_email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField fx:id="e_job" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label text="Date Of Birth" GridPane.rowIndex="3" />
+                                          <DatePicker fx:id="e_datepicker_dob" prefHeight="25.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="13.0" layoutY="438.0" text="Sex" />
+                                    <RadioButton fx:id="female" layoutX="207.0" layoutY="438.0" mnemonicParsing="false" text="Female">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="e_sex" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton fx:id="male" layoutX="115.0" layoutY="438.0" mnemonicParsing="false" text="Male" toggleGroup="$e_sex" />
+                                    <GridPane layoutX="13.0" layoutY="543.0" prefHeight="145.0" prefWidth="290.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="97.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="193.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Address" />
+                                          <Label GridPane.rowIndex="1" />
+                                          <Label text="T.P Number" GridPane.rowIndex="1" />
+                                          <TextField fx:id="e_address" prefHeight="25.0" prefWidth="114.0" GridPane.columnIndex="1" />
+                                          <TextField fx:id="e_tp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="12.0" layoutY="502.0" text="Marital Status" />
+                                    <RadioButton fx:id="married" layoutX="115.0" layoutY="502.0" mnemonicParsing="false" text="Married">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="e_marital" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton fx:id="unmarried" layoutX="207.0" layoutY="502.0" mnemonicParsing="false" text="Unmarried" toggleGroup="$e_marital" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="326.0" prefHeight="250.0" prefWidth="581.0" text="Photo">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="300.0">
+                                 <children>
+                                    <Button fx:id="upload" layoutX="203.0" layoutY="185.0" mnemonicParsing="false" onAction="#upload_image" text="Upload Image" />
+                                    <ImageView fx:id="image" fitHeight="160.0" fitWidth="233.0" layoutX="132.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="326.0" layoutY="250.0" prefHeight="520.0" prefWidth="581.0" text="Qualifications ">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="31.0" layoutY="122.0" text="Educational Qualifications " />
+                                    <Label layoutX="31.0" layoutY="362.0" text="Working Experiance" />
+                                    <TextArea fx:id="e_edu_quali" layoutX="202.0" layoutY="41.0" prefHeight="179.0" prefWidth="200.0" />
+                                    <TextArea fx:id="e_work_exp" layoutX="202.0" layoutY="272.0" prefHeight="179.0" prefWidth="200.0" />
+                                    <Button fx:id="emp_add" layoutX="468.0" layoutY="430.0" mnemonicParsing="false" onAction="#add_emp" prefHeight="34.0" prefWidth="72.0" text="ADD" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="View/Delete Employee">
+               <content>
+                  <TitledPane animated="false" prefHeight="771.0" prefWidth="900.0" text="Edit">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="748.0" prefWidth="900.0">
+                                 <children>
+                                    <Button fx:id="v_search" layoutX="440.0" layoutY="50.0" mnemonicParsing="false" onAction="#v_search_emp" text="Search" />
+                                    <Label layoutX="50.0" layoutY="54.0" prefHeight="17.0" prefWidth="69.0" text="Employee Id" />
+                                    <TextField fx:id="v_empid" layoutX="165.0" layoutY="50.0" prefHeight="25.0" prefWidth="208.0" />
+                                    <Button fx:id="v_delete" layoutX="250.0" layoutY="711.0" mnemonicParsing="false" onAction="#v_delete_emp" text="Delete" />
+                                    <GridPane layoutX="44.0" layoutY="119.0" prefHeight="413.0" prefWidth="331.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="98.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="188.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Employee Name" />
+                                          <Label text="NIC No" GridPane.rowIndex="1" />
+                                          <Label text="Job Title" GridPane.rowIndex="4" />
+                                          <Label text="E-Mail" GridPane.rowIndex="3" />
+                                          <TextField fx:id="v_empname" GridPane.columnIndex="1" />
+                                          <TextField fx:id="v_nic" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="v_email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="v_job" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label text="Date Of Birth" GridPane.rowIndex="2" />
+                                          <TextField fx:id="v_dob" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane layoutX="41.0" layoutY="533.0" prefHeight="155.0" prefWidth="334.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="122.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Address" />
+                                          <Label GridPane.rowIndex="1" />
+                                          <Label text="T.P Number" GridPane.rowIndex="1" />
+                                          <TextField fx:id="v_address" prefHeight="25.0" prefWidth="114.0" GridPane.columnIndex="1" />
+                                          <TextField fx:id="v_tp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Button fx:id="v_save" layoutX="113.0" layoutY="711.0" mnemonicParsing="false" onAction="#v_save_emp" prefHeight="25.0" prefWidth="47.0" text="Save" />
+                                    <Label layoutX="427.0" layoutY="266.0" text="Skills" />
+                                    <TextArea fx:id="v_skills" layoutX="514.0" layoutY="174.0" prefHeight="200.0" prefWidth="200.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+               </content>
+            </Tab>
+            <Tab text="Attendence">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" layoutY="-4.0" prefHeight="780.0" prefWidth="900.0" text="IN/OUT">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="32.0" layoutY="54.0" text="Employee ID" />
+                                    <Label layoutX="32.0" layoutY="101.0" text="Name" />
+                                    <Label layoutX="32.0" layoutY="145.0" text="Job Title" />
+                                    <Button fx:id="a_search" layoutX="384.0" layoutY="50.0" mnemonicParsing="false" onAction="#a_search_emp" text="Search" />
+                                    <Label fx:id="a_job_label" layoutX="179.0" layoutY="145.0" prefHeight="17.0" prefWidth="150.0" />
+                                    <Label fx:id="a_name_label" layoutX="178.0" layoutY="101.0" prefHeight="17.0" prefWidth="152.0" />
+                                    <TextField fx:id="a_empid" layoutX="178.0" layoutY="50.0" />
+                                    <GridPane layoutX="384.0" layoutY="91.0" prefHeight="82.0" prefWidth="234.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="10.0" prefWidth="69.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="10.0" prefWidth="165.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <TextField fx:id="a_in" GridPane.columnIndex="1" />
+                                          <TextField fx:id="a_out" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="In TIme" />
+                                          <Label text="Out Time" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Button fx:id="a_in_but" layoutX="645.0" layoutY="97.0" mnemonicParsing="false" onAction="#a_checkin" text="Check IN" />
+                                    <Button fx:id="a_out_but" layoutX="645.0" layoutY="141.0" mnemonicParsing="false" onAction="#a_checkout" text="Check OUT" />
+                                    <Button fx:id="a_monthly" layoutX="29.0" layoutY="210.0" mnemonicParsing="false" onAction="#a_monthlyattendence" text="Monthly Attendence" />
+                                    <TableView fx:id="a_monthly_table" layoutX="29.0" layoutY="275.0" prefHeight="448.0" prefWidth="705.0">
+                                       <columns>
+                                          <TableColumn prefWidth="153.0" text="Month" />
+                                          <TableColumn prefWidth="113.0" text="Working Days" />
+                                          <TableColumn prefWidth="100.0" text="Prsent" />
+                                          <TableColumn prefWidth="103.0" text="Leaves" />
+                                          <TableColumn prefWidth="115.0" text="Short day" />
+                                          <TableColumn prefWidth="120.0" text="Over Time" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Payroll">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" prefHeight="780.0" prefWidth="900.0" text="Salary Details">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TitledPane animated="false" layoutY="262.0" prefHeight="331.0" prefWidth="450.0" text="Payment">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="448.0">
+                                             <children>
+                                                <GridPane layoutX="48.0" layoutY="43.0" prefHeight="244.0" prefWidth="338.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="65.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="184.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Basic Salary" />
+                                                      <Label text="Overtime" GridPane.rowIndex="1" />
+                                                      <Label text="Bonus" GridPane.rowIndex="2" />
+                                                      <Label text="Medical" GridPane.rowIndex="3" />
+                                                      <Label text="Privilages" GridPane.rowIndex="4" />
+                                                      <TextField fx:id="p_salary" GridPane.columnIndex="1" />
+                                                      <TextField fx:id="p_overtime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="p_bonus" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="p_medical" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="p_privilages" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" layoutX="450.0" layoutY="262.0" prefHeight="331.0" prefWidth="450.0" text="Deduction">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <GridPane layoutX="89.0" layoutY="85.0" prefHeight="156.0" prefWidth="339.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="122.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.0" minWidth="10.0" prefWidth="203.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Provident Fund" />
+                                                      <Label text="Loan" GridPane.rowIndex="1" />
+                                                      <Label text="Other" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="p_epf" GridPane.columnIndex="1" />
+                                                      <TextField fx:id="p_loan" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="p_other" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label text="Tax" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="p_tax" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" prefHeight="263.0" prefWidth="900.0" text="Employee">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Label layoutX="44.0" layoutY="41.0" prefHeight="17.0" prefWidth="92.0" text="Employee Id" />
+                                                <Label layoutX="44.0" layoutY="91.0" text="Name" />
+                                                <Label layoutX="44.0" layoutY="130.0" text="Job TItle" />
+                                                <Button fx:id="p_search" layoutX="431.0" layoutY="37.0" mnemonicParsing="false" onAction="#p_search_emp" text="Search" />
+                                                <TextField fx:id="p_empid" layoutX="208.0" layoutY="37.0" prefHeight="25.0" prefWidth="192.0" />
+                                                <Label fx:id="p_name_label" layoutX="209.0" layoutY="91.0" prefHeight="17.0" prefWidth="193.0" />
+                                                <Label fx:id="p_job_label" layoutX="208.0" layoutY="130.0" prefHeight="17.0" prefWidth="194.0" />
+                                                <Label layoutX="46.0" layoutY="169.0" text="Payment Method" />
+                                                <ComboBox fx:id="p_method_combo" accessibleRole="IMAGE_VIEW" layoutX="208.0" layoutY="165.0" prefHeight="25.0" prefWidth="197.0" />
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </TitledPane>
+                                    <Button fx:id="p_addsalary" layoutX="157.0" layoutY="657.0" mnemonicParsing="false" onAction="#p_addsalary" prefHeight="25.0" prefWidth="136.0" text="Add Salary" />
+                                    <Button fx:id="p_payslip" layoutX="625.0" layoutY="657.0" mnemonicParsing="false" onAction="#p_generatepayslip" prefHeight="25.0" prefWidth="169.0" text="Genarate Payslip" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="Task">
+               <content>
+                  <TitledPane animated="false" prefHeight="496.0" prefWidth="900.0" text="Assign Task">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="898.0">
+                           <children>
+                              <Label layoutX="47.0" layoutY="54.0" text="Employee ID" />
+                              <Label layoutX="48.0" layoutY="94.0" text="Date" />
+                              <Label layoutX="49.0" layoutY="142.0" text="Time Period" />
+                              <Label layoutX="49.0" layoutY="277.0" text="Task" />
+                              <TextArea fx:id="t_task" layoutX="154.0" layoutY="181.0" prefHeight="209.0" prefWidth="412.0" />
+                              <TextField fx:id="t_empid" layoutX="154.0" layoutY="50.0" />
+                              <TextField fx:id="t_time" layoutX="154.0" layoutY="138.0" />
+                              <DatePicker fx:id="t_date" layoutX="154.0" layoutY="90.0" />
+                              <Button fx:id="t_assign" layoutX="252.0" layoutY="419.0" mnemonicParsing="false" onAction="#t_assign" prefHeight="25.0" prefWidth="100.0" text="Assign" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

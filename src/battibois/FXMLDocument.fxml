@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="858.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battibois.FXMLDocumentController">
+   <children>
+      <TabPane layoutX="4.0" layoutY="-3.0" prefHeight="800.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="-3.0">
+        <tabs>
+          <Tab text="Vehicle">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                     <children>
+                        <TableView fx:id="table_vehsearch" layoutX="386.0" layoutY="32.0" prefHeight="542.0" prefWidth="369.0" />
+                        <Button fx:id="vehadd" layoutX="53.0" layoutY="305.0" mnemonicParsing="false" onAction="#handle_vehicleadd" text="Add" />
+                        <Button fx:id="vehdel" layoutX="207.0" layoutY="305.0" mnemonicParsing="false" text="Delete" />
+                        <Button fx:id="vehedit" layoutX="132.0" layoutY="305.0" mnemonicParsing="false" text="Edit" />
+                        <Button fx:id="vehsh" layoutX="185.0" layoutY="390.0" mnemonicParsing="false" onAction="#handle_vehiclesearch" prefHeight="23.0" prefWidth="73.0" text="Search" />
+                        <GridPane layoutX="40.0" layoutY="32.0" prefHeight="235.0" prefWidth="278.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="158.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Brand" />
+                              <Label text="License no" GridPane.rowIndex="1" />
+                              <Label text="Model" GridPane.rowIndex="2" />
+                              <TextField fx:id="brand" GridPane.columnIndex="1" />
+                              <TextField fx:id="mod" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="lice" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Colour" GridPane.rowIndex="3" />
+                              <Label text="Engine no" GridPane.rowIndex="4" />
+                              <Label text="Year" GridPane.rowIndex="5" />
+                              <TextField fx:id="colo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="engi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="year" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                           </children>
+                        </GridPane>
+                        <TextField fx:id="vehsearch" layoutX="20.0" layoutY="390.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Building ">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                     <children>
+                        <Label layoutX="24.0" layoutY="139.0" />
+                        <Label layoutX="41.0" layoutY="99.0" />
+                        <TableView fx:id="table_builsearch" layoutX="314.0" layoutY="47.0" prefHeight="800.0" prefWidth="470.0" />
+                        <Button fx:id="builadd" layoutX="31.0" layoutY="307.0" mnemonicParsing="false" onAction="#handle_addbuilding" text="Add" />
+                        <Button fx:id="builedit" layoutX="130.0" layoutY="307.0" mnemonicParsing="false" text="Edit" />
+                        <Button fx:id="buildel" layoutX="227.0" layoutY="307.0" mnemonicParsing="false" text="Delete" />
+                        <TextField fx:id="builsearch" layoutX="31.0" layoutY="415.0" />
+                        <Button fx:id="builser" layoutX="227.0" layoutY="415.0" mnemonicParsing="false" onAction="#handle_buildingsearch" text="Search" />
+                        <GridPane layoutX="13.0" layoutY="47.0" prefHeight="248.0" prefWidth="272.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="122.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="118.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="61.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="61.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="51.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="56.0" minHeight="4.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="44.0" minHeight="4.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Building address" />
+                              <Label text="Floors" GridPane.rowIndex="1" />
+                              <Label text="Rent date" GridPane.rowIndex="2" />
+                              <Label text="Building condition" GridPane.rowIndex="3" />
+                              <TextField fx:id="builfl" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <DatePicker fx:id="buildate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="builcon" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="builaddr" GridPane.columnIndex="1" />
+                              <Label text="Rental value" GridPane.rowIndex="4" />
+                              <TextField fx:id="builval" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label text="Description" GridPane.rowIndex="5" />
+                              <TextField fx:id="builde" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label text="End date" GridPane.rowIndex="6" />
+                              <DatePicker fx:id="builend" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Bills">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                     <children>
+                        <Label layoutX="324.0" layoutY="45.0" />
+                        <TitledPane animated="false" layoutX="73.0" layoutY="33.0" prefHeight="242.0" prefWidth="322.0" text="Tax Details">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="331.0">
+                                 <children>
+                                    <Button fx:id="taxadd" layoutX="57.0" layoutY="140.0" mnemonicParsing="false" onAction="#handle_addtax" text="Add" />
+                                    <Button fx:id="taxedit" layoutX="120.0" layoutY="140.0" mnemonicParsing="false" text="Edit" />
+                                    <Button fx:id="taxdel" layoutX="172.0" layoutY="140.0" mnemonicParsing="false" text="Delete" />
+                                    <Button fx:id="taxser" layoutX="185.0" layoutY="180.0" mnemonicParsing="false" onAction="#handle_billsearch" text="Search" />
+                                    <TextField fx:id="taxse" layoutX="23.0" layoutY="180.0" />
+                                    <GridPane layoutX="20.0" layoutY="14.0" prefHeight="120.0" prefWidth="246.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="8.0" prefWidth="97.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="103.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Tax no" />
+                                          <Label text="Pay date" GridPane.rowIndex="1" />
+                                          <Label text="Paid amount" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tax" GridPane.columnIndex="1" />
+                                          <TextField fx:id="taxarr" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="Arrears" GridPane.rowIndex="2" />
+                                          <TextField fx:id="taxamo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <DatePicker fx:id="taxdate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="73.0" layoutY="281.0" prefHeight="267.0" prefWidth="322.0" text="Water Bill">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="336.0">
+                                 <children>
+                                    <Label layoutX="40.0" layoutY="43.0" />
+                                    <Label layoutX="34.0" layoutY="209.0" />
+                                    <TextField fx:id="watser" layoutX="34.0" layoutY="205.0" />
+                                    <Label layoutX="196.0" layoutY="240.0" />
+                                    <Button fx:id="watsearch" layoutX="194.0" layoutY="205.0" mnemonicParsing="false" onAction="#handle_billsearch" text="Search" />
+                                    <GridPane layoutX="26.0" layoutY="14.0" prefHeight="150.0" prefWidth="294.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.0" minWidth="10.0" prefWidth="113.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="141.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="32.0" minHeight="0.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Water bill no" />
+                                          <Label text="Units" GridPane.rowIndex="1" />
+                                          <Label text="Issue date" GridPane.rowIndex="2" />
+                                          <Label text="Arrears" GridPane.rowIndex="3" />
+                                          <Label text="Paid amount" GridPane.rowIndex="4" />
+                                          <TextField fx:id="watno" GridPane.columnIndex="1" />
+                                          <TextField fx:id="watuni" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <DatePicker fx:id="watdate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="watarr" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="watamo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                    <Button fx:id="watadd" layoutX="42.0" layoutY="170.0" mnemonicParsing="false" onAction="#handle_addwater" text="Add" />
+                                    <Button fx:id="watdel" layoutX="196.0" layoutY="171.0" mnemonicParsing="false" text="Delete" />
+                                    <Button fx:id="watedit" layoutX="121.0" layoutY="171.0" mnemonicParsing="false" text="Edit" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="409.0" layoutY="33.0" prefHeight="240.0" prefWidth="374.0" text="Electricity Bill ">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="460.0">
+                                 <children>
+                                    <TextField fx:id="eleser" layoutX="69.0" layoutY="183.0" />
+                                    <Label layoutX="295.0" layoutY="199.0" />
+                                    <Button fx:id="elesearch" layoutX="230.0" layoutY="183.0" mnemonicParsing="false" onAction="#handle_billsearch" text="Search" />
+                                    <GridPane hgap="10.0" layoutX="34.0" layoutY="14.0" prefHeight="160.0" prefWidth="311.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Bill no" />
+                                          <Label text="Units" GridPane.rowIndex="1" />
+                                          <TextField fx:id="eleno" GridPane.columnIndex="1" />
+                                          <TextField fx:id="eleuni" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <DatePicker fx:id="eledate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="Issue date" GridPane.rowIndex="2" />
+                                          <Label text="Arrears" GridPane.rowIndex="3" />
+                                          <Label text="Paid amount" GridPane.rowIndex="4" />
+                                          <TextField fx:id="elearr" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="eleamo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Button fx:id="eleadd" mnemonicParsing="false" onAction="#handle_elect" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                                          <Button fx:id="eleedit" mnemonicParsing="false" text="Edit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Button fx:id="eledel" mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane animated="false" layoutX="410.0" layoutY="279.0" prefHeight="271.0" prefWidth="373.0" text="Telephone Bill">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane layoutX="32.0" layoutY="14.0" prefHeight="136.0" prefWidth="307.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Bill no" />
+                                          <Label text="Call chargers" GridPane.rowIndex="1" />
+                                          <Label text="Issue date" GridPane.rowIndex="2" />
+                                          <Label text="Arrears" GridPane.rowIndex="3" />
+                                          <Label text="Paid amount" GridPane.rowIndex="4" />
+                                          <TextField fx:id="telcha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="telarr" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="telamo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <DatePicker fx:id="teldate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="telno" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Button fx:id="teladd" layoutX="100.0" layoutY="155.0" mnemonicParsing="false" onAction="#handle_tele" text="Add" />
+                                    <Button fx:id="teledit" layoutX="158.0" layoutY="155.0" mnemonicParsing="false" text="Edit" />
+                                    <Button fx:id="teldel" layoutX="220.0" layoutY="155.0" mnemonicParsing="false" text="Delete" />
+                                    <Button fx:id="telsearch" layoutX="224.0" layoutY="196.0" mnemonicParsing="false" onAction="#handle_billsearch" text="Search" />
+                                    <TextField fx:id="telsear" layoutX="64.0" layoutY="196.0" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </TitledPane>
+                        <TableView fx:id="table_bill" layoutX="189.0" layoutY="558.0" prefHeight="210.0" prefWidth="490.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Other resource">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                     <children>
+                        <GridPane layoutX="66.0" layoutY="45.0" prefHeight="242.0" prefWidth="284.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="137.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="10.0" prefWidth="203.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Category" GridPane.rowIndex="1" />
+                              <TextField fx:id="othcat" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label text="Description" GridPane.rowIndex="2" />
+                              <Label text="Price" GridPane.rowIndex="3" />
+                              <Label text="Usage" GridPane.rowIndex="4" />
+                              <Label text="Quantity" GridPane.rowIndex="5" />
+                              <TextField fx:id="othdes" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="othpri" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="othus" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="othqun" prefWidth="257.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label text="Date" GridPane.rowIndex="6" />
+                              <Label text="Bill_no" />
+                              <TextField fx:id="othbill" GridPane.columnIndex="1" />
+                              <DatePicker fx:id="othdate" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           </children>
+                        </GridPane>
+                        <TableView fx:id="table_other" layoutX="367.0" layoutY="45.0" prefHeight="554.0" prefWidth="452.0" />
+                        <TextField fx:id="othser" layoutX="80.0" layoutY="452.0" />
+                        <Button fx:id="othadd" layoutX="80.0" layoutY="341.0" mnemonicParsing="false" onAction="#handle_other" text="Add" />
+                        <Button fx:id="othedit" layoutX="192.0" layoutY="341.0" mnemonicParsing="false" text="Edit" />
+                        <Button fx:id="othdel" layoutX="299.0" layoutY="341.0" mnemonicParsing="false" text="Delete" />
+                        <Button fx:id="othsearch" layoutX="247.0" layoutY="452.0" mnemonicParsing="false" onAction="#handle_othersearch" text="Search" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
