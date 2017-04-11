@@ -179,11 +179,8 @@ public class CustomerController implements Initializable
         {
             text_addinvalid.setVisible(false);
             
-            person.validateTable(conn);
-            customer.validateTable(conn);
-            
-            person.validateData(conn);
-            customer.validateData(conn);
+            person.validate(conn,true);
+            customer.validate(conn,true);
             
             
             person.consolidate(conn);

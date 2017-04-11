@@ -24,8 +24,10 @@ import java.util.Map.Entry;
  */
 public class Entity
 {
-    private Map<String,Object> data = new HashMap<>();
+    private final Map<String,Object> data = new HashMap<>();
     private final String tablename;
+    private String ag_column=null;
+    private Integer ag_key=null;
     
     public Entity(String tablename)
     {
@@ -66,7 +68,7 @@ public class Entity
         return (LocalDate)get(key,LocalDate.class);
     }
     
-    public void consolidate(Connection conn)
+    public int consolidate(Connection conn)
     {
         String sql = parseConsolidateSQL();
         try
@@ -85,22 +87,30 @@ public class Entity
                     prp.setInt(counter++,(Integer)entry.getValue());
             }
             
-            
-            
             prp.executeUpdate();
             ResultSet rs = prp.getGeneratedKeys();
-            System.out.println(rs.getMetaData().getColumnCount());
-            //System.out.println("safsaf");
-            while(rs.next())
+            if(rs.next())
             {
-                for(int i=1;i<rs.getMetaData().getColumnCount() + 1;i++)
-                    System.out.println("XXXXXX: " + rs.getString(i));
+                ag_key = rs.getInt(1);
+                rs.close();
+                
+                ResultSet ag_rs=prp.executeQuery("show columns from `" + tablename + "` where `Extra`='auto_increment';");
+                ag_rs.next();
+                ag_column = ag_rs.getString("Field");
+                data.put(ag_column,ag_key);
             }
+            
             System.out.println("Consolidation successful in : " + tablename);
+            return 0;
+        }
+        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e)
+        {
+            return 1;
         }
         catch(SQLException e)
         {
             System.out.println(tablename + " consolidation error\n" + e);
+            return 2;
         }
     }
     
@@ -125,9 +135,10 @@ public class Entity
         return strb1.toString();
     }
     
-    public boolean validateTable(Connection conn)
+    public boolean validate(Connection conn, boolean verbose)
     {
-        boolean valid = false;
+        StringBuilder strb = new StringBuilder();
+        boolean table_valid = true;
         try
         {
             PreparedStatement prp = conn.prepareStatement("show tables like ?;");
@@ -140,17 +151,24 @@ public class Entity
                 tables.add(rs.getString(1).toLowerCase());
                 rs.next();
             }
-            valid = tables.contains(tablename);
+            if(!tables.contains(tablename))
+            {
+                strb.append("Validation failure\nTable [").append(tablename).append("] not found in database.");
+                table_valid = false;
+            }
         }
         catch(SQLException e)
         {
-            System.out.println("Table validation error : " + tablename + "\n" + e);
+            strb.append("Table validation error : ").append(tablename).append("\n").append(e);
+            table_valid = false;
         }
-        return valid;
-    }
-    public boolean validateData(Connection conn)
-    {
-        boolean valid = false;
+        if(!table_valid)
+        {
+            System.out.println(strb);
+            return false;
+        }
+        
+        boolean data_valid = false;
         List<List> tdata = new ArrayList<>();
         try
         {
@@ -186,6 +204,7 @@ public class Entity
             
             for(Entry<String,Object> entry : data.entrySet())
             {
+                boolean valid_temp;
                 for(int i=0;i<tdata.size();i++)
                 {
                     if(entry.getKey().equals(tdata.get(i).get(0)))
@@ -199,37 +218,41 @@ public class Entity
                         {
                             if(entry.getValue().toString().length() > (int)tdata.get(i).get(2))
                                 sizeMismatches.add(entry.getKey());
-                            valid=true;
+                            valid_temp=true;
                         }
                         else if(eclass.equals(Double.class) && rtype.equalsIgnoreCase("double"))
-                            valid=true;
+                            valid_temp=true;
                         else if(eclass.equals(LocalDate.class) && rtype.equalsIgnoreCase("date"))
-                            valid=true;
+                            valid_temp=true;
                         else if(eclass.equals(Integer.class) && rtype.equalsIgnoreCase("int"))
-                            valid=true;
+                            valid_temp=true;
                         else
-                            valid=false;
-                        if(!valid)
+                            valid_temp=false;
+                        
+                        if(!valid_temp)
                             typeMismatches.add(entry.getKey());
                     }
                 }
             }
             int totalinvalid = typeMismatches.size() + columnMismatches.size() + sizeMismatches.size();
-            System.out.println("[" + tablename + "] \n" + (data.size() - totalinvalid) + " field(s) valid, " + totalinvalid + " field(s) invalid");
-            valid = (typeMismatches.isEmpty() && columnMismatches.isEmpty() && sizeMismatches.isEmpty());
-            if(!valid)
+            strb.append("[").append(tablename).append("] \n")
+                    .append(data.size() - totalinvalid).append(" field(s) valid, ")
+                    .append(totalinvalid).append(" field(s) invalid");
+            data_valid = (typeMismatches.isEmpty() && columnMismatches.isEmpty() && sizeMismatches.isEmpty());
+            if(!data_valid)
             {
-                System.out.println("Type mismatches\t\t: " + typeMismatches);
-                System.out.println("Column mismatches\t: " + columnMismatches);
-                System.out.println("Size mismatches\t\t: " + sizeMismatches);
+                strb.append("\nType mismatches\t\t: ").append(typeMismatches);
+                strb.append("\nColumn mismatches\t: ").append(columnMismatches);
+                strb.append("\nSize mismatches\t\t: ").append(sizeMismatches);
             }
-            System.out.println();
         }
         catch(SQLException e)
         {
             System.out.println("Column validation error: " + tablename + "\n" + e);
         }
-        return valid;
+        if(verbose)
+            System.out.println(strb);
+        return table_valid && data_valid;
     }
     
     @Override
@@ -271,9 +294,14 @@ public class Entity
         int counter = 1;
         for(Entry<String, Object> entry : data.entrySet())
         {
-            strb.append("\n")
-                    .append(Manipulator.formatTabs(counter++,COL_COUNTER,true))
-                    .append(Manipulator.formatTabs("| " + entry.getKey(),COL1,true))
+            strb.append("\n");
+            
+            if(entry.getKey().equals(ag_column))
+                strb.append(Manipulator.formatTabs(counter++ + "[AG]",COL_COUNTER,true));
+            else
+                strb.append(Manipulator.formatTabs(counter++,COL_COUNTER,true));
+            
+            strb.append(Manipulator.formatTabs("| " + entry.getKey(),COL1,true))
                     .append(Manipulator.formatTabs(Retriever.getClassStr(entry),COL2,true))
                     .append(entry.getValue());
             
