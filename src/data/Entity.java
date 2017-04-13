@@ -46,7 +46,7 @@ public class Entity
             return data.get(key);
         else
         {
-            System.out.println("Requesting <" + Retriever.getClassStr(reqClass) + "> cast to <" + Retriever.getClassStr(data.get(key).getClass()) + ">");
+            System.out.println("Requesting <" + Manipulate.getClassStr(reqClass) + "> cast to <" + Manipulate.getClassStr(data.get(key).getClass()) + ">");
             return null;
         }
     }
@@ -70,7 +70,10 @@ public class Entity
     
     public int consolidate(Connection conn)
     {
-        String sql = parseConsolidateSQL();
+        String sql = parseConsolidateStatement();
+        if(!validate(conn,false))
+            System.out.println("Warning:\nConsolidating to database with validation failure for [" + tablename + "].");
+        
         try
         {
             PreparedStatement prp = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
@@ -89,6 +92,7 @@ public class Entity
             
             prp.executeUpdate();
             ResultSet rs = prp.getGeneratedKeys();
+            
             if(rs.next())
             {
                 ag_key = rs.getInt(1);
@@ -103,10 +107,14 @@ public class Entity
             System.out.println("Consolidation successful in : " + tablename);
             return 0;
         }
-        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e)
-        {
-            return 1;
-        }
+//        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e)
+//        {
+//            return 1;
+//        }
+//        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e)
+//        {
+//            return 2;
+//        }
         catch(SQLException e)
         {
             System.out.println(tablename + " consolidation error\n" + e);
@@ -114,7 +122,7 @@ public class Entity
         }
     }
     
-    public String parseConsolidateSQL()
+    public String parseConsolidateStatement()
     {
         StringBuilder strb1 = new StringBuilder("insert into ").append(tablename).append("(");
         StringBuilder strb2 = new StringBuilder(") values(");
@@ -162,7 +170,7 @@ public class Entity
             strb.append("Table validation error : ").append(tablename).append("\n").append(e);
             table_valid = false;
         }
-        if(!table_valid)
+        if(verbose)
         {
             System.out.println(strb);
             return false;
@@ -248,11 +256,50 @@ public class Entity
         }
         catch(SQLException e)
         {
-            System.out.println("Column validation error: " + tablename + "\n" + e);
+            strb.append("\nColumn validation error: ").append(tablename).append("\n").append(e);
         }
         if(verbose)
             System.out.println(strb);
+        
         return table_valid && data_valid;
+    }
+    
+    public static List<Entity> parseFromRS(ResultSet rs, Connection conn)
+    {
+        //resetting the RS incase next() has been called on it before being passed
+        try{rs.beforeFirst();}catch(SQLException e){System.out.println("Error in passed resultset\n" + e);}
+        
+        final String strclass = String.class.getName();
+        List<Entity> entities = new ArrayList<>();
+        String newtable = null;
+        
+        try
+        {
+            newtable = rs.getMetaData().getTableName(1);
+            while(rs.next())
+            {
+                Entity temp_entity = new Entity(newtable);
+                for(int i=0;i<rs.getMetaData().getColumnCount();i++)
+                {
+                    String col_class = rs.getMetaData().getColumnClassName(i+1);
+                    String column_name = rs.getMetaData().getColumnName(i+1);
+                    if(col_class.equals(String.class.getName()))
+                        temp_entity.add(column_name, rs.getString(column_name));
+                    else if(col_class.equals(java.sql.Date.class.getName()))
+                        temp_entity.add(column_name, rs.getDate(column_name).toLocalDate());
+                    else if(col_class.equals(Double.class.getName()))
+                        temp_entity.add(column_name, rs.getDouble(column_name));
+                    else if(col_class.equals(Integer.class.getName()))
+                        temp_entity.add(column_name, rs.getInt(column_name));
+                }
+                entities.add(temp_entity);
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error encountered while parsing Entities [" + newtable + "[");
+        }
+        return entities;
     }
     
     @Override
@@ -284,9 +331,9 @@ public class Entity
         for(int i=0;i<total*8-(lheader + tablename.length() +2);i++)strb.append("-");
         
         //generating body
-        strb.append(Manipulator.formatTabs("\n#",COL_COUNTER,true))
-                .append(Manipulator.formatTabs("| Column", COL1, true))
-                .append(Manipulator.formatTabs("Type", COL2, true))
+        strb.append(Manipulate.formatTabs("\n#",COL_COUNTER,true))
+                .append(Manipulate.formatTabs("| Column", COL1, true))
+                .append(Manipulate.formatTabs("Type", COL2, true))
                 .append("Value\n");
         
         for(int i=0;i<total*8;i++)strb.append("-");
@@ -297,12 +344,12 @@ public class Entity
             strb.append("\n");
             
             if(entry.getKey().equals(ag_column))
-                strb.append(Manipulator.formatTabs(counter++ + "[AG]",COL_COUNTER,true));
+                strb.append(Manipulate.formatTabs(counter++ + "[AG]",COL_COUNTER,true));
             else
-                strb.append(Manipulator.formatTabs(counter++,COL_COUNTER,true));
+                strb.append(Manipulate.formatTabs(counter++,COL_COUNTER,true));
             
-            strb.append(Manipulator.formatTabs("| " + entry.getKey(),COL1,true))
-                    .append(Manipulator.formatTabs(Retriever.getClassStr(entry),COL2,true))
+            strb.append(Manipulate.formatTabs("| " + entry.getKey(),COL1,true))
+                    .append(Manipulate.formatTabs(Manipulate.getClassStr(entry),COL2,true))
                     .append(entry.getValue());
             
         }

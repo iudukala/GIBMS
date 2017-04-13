@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battibois;
+package Battibois;
 import java.sql.*;
 
-import data.Manipulator;
+import data.Manipulate;
 
 public class Resourceman 
 {
@@ -36,7 +36,7 @@ public class Resourceman
         try
         {
              String query="insert into resource(resource_id)";
-            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=con.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1, Integer.toString(resource_id));
             
             prp.executeUpdate();

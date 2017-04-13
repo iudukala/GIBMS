@@ -235,8 +235,8 @@ public class CustomerController implements Initializable
         String x=table_search.getItems().get(index).toString();
         String nic = x.split(",")[0].substring(1);
         
-        Person person = intFunc.customer_search.personFromSQL(nic, conn);
-        Customer customer= intFunc.customer_search.customerFromSQL(nic, conn);
+        Person person = mediators.customer_search.personFromSQL(nic, conn);
+        Customer customer= mediators.customer_search.customerFromSQL(nic, conn);
         
         //person
         text_nic.setText(person.nic);

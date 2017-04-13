@@ -5,7 +5,7 @@
  */
 package dumiya;
 
-import data.Manipulator;
+import data.Manipulate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -55,7 +55,7 @@ public class Insurance_Claim {
          try
         {
             String query = "insert into Insurance_Claim(Claim_Number,Claim_Status,Claim_Type,Open_Date,Closed_Date,Description)";
-            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1,Claim_Number);
             prp.setString(2,Claim_Status);
             prp.setString(3,Claim_Type);

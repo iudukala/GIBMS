@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import data.Manipulator;
+import data.Manipulate;
 
 /**
  *
@@ -61,7 +61,7 @@ public class bank_reconciliation
         try
         {
             String query = "insert into bank_reconciliation(date,br_no,description,withdrawals,deposits,balance)";
-            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1, date.toString());
             prp.setString(2,br_no);
             prp.setString(3, description);

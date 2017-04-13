@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulator;
+import data.Manipulate;
 
 /**
  *
@@ -59,7 +59,7 @@ public class Person
         try
         {
             String query = "insert into person(nic, full_name, email, dob, phone, address, gender, marital_status)";
-            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1,nic);
             prp.setString(2,name);
             prp.setString(3, email);

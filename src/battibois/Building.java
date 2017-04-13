@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battibois;
+package Battibois;
 import java.sql.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulator;
+import data.Manipulate;
 
 public class Building 
 {
@@ -83,7 +83,7 @@ public class Building
         try
         {
             String query="insert into building(`address`,`floor`,`description`,`condition`,`rent_value`,`end_date`,`rent_date`)";
-            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=con.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1, address);
             prp.setString(2, floor);
             prp.setString(3, description);

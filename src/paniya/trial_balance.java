@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import data.Manipulator;
+import data.Manipulate;
 
 /**
  *
@@ -60,7 +60,7 @@ public class trial_balance
         try
         {
             String query = "insert into trial_balance(date,trial_balance_id,transation_code,transation_name,assets,liabilities,balance)";
-            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1, date.toString());
             prp.setString(2, trial_balance_id);
             prp.setString(3, transation_code);

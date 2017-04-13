@@ -1,9 +1,9 @@
-package battibois;
+package Battibois;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulator;
+import data.Manipulate;
 
 
 public class Bill 
@@ -71,7 +71,7 @@ public class Bill
         try
         {
              String query="insert into bill(`date`,`bill_no`,`units`,`amount`,`arrears`,`charges`)";
-            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=con.prepareStatement(Manipulate.psFromQuery(query));
            
             prp.setString(1, date);
            // prp.setString(2, tax_no);

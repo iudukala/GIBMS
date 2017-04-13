@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import data.Manipulator;
+import data.Manipulate;
 
 /**
  *
@@ -83,7 +83,7 @@ public class cashbook
         {
             String query = "insert into cashbook (date,cashbook_id,serial_no,br_no,bank_slip_no,receipt_voucher,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance,commercial_bank,sampath_bank)";
                     
-            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1, date.toString());
             prp.setString(2,cashbook_id);
             prp.setString(3,serial_no);

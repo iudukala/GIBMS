@@ -143,7 +143,7 @@ public class FXMLDocumentController implements Initializable {
                 unic.setDisable(true);
                 
                 shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic, conn);
-                Person person_object = intFunc.customer_search.personFromSQL(nic, conn);
+                Person person_object = mediators.customer_search.personFromSQL(nic, conn);
                 
                 unic.setText(person_object.nic);
                 uname.setText(person_object.name);

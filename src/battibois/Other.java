@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battibois;
+package Battibois;
 
-import data.Manipulator;
+import data.Manipulate;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -78,7 +78,7 @@ public class Other {
         try
         {
           String query="insert into other_bill(`bill_id`,`category`,`description`,`price`,`usage`,`quantity`,`date`)";
-            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
+            PreparedStatement prp=con.prepareStatement(Manipulate.psFromQuery(query));
             prp.setString(1,Integer.toString(bill_id));
             prp.setString(2,category );
             prp.setString(3,description );
