@@ -6,14 +6,19 @@
 package integrator;
 
 import com.jfoenix.controls.JFXListView;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 /**
  *
@@ -25,14 +30,24 @@ public class Navigator
     {
         List<List<String>> TREE_LIST = new ArrayList<List<String>>();
         
-        TREE_LIST.add(new ArrayList(Arrays.asList("/paniya/FXMLDocument.fxml","Cashflow management","<Placeholder>")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/customer.fxml","Customer & loan plan","Add customer", "Search customers")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/kiriya/FXMLDocument.fxml","Share management","<Placeholder>")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/janiya/FXMLDocument.fxml", "External bank fund management","<Placeholder>")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/battibois/FXMLDocument.fxml", "Resource management","<Placeholder>")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/FXMLDocument.fxml", "Arrears management","<Placeholder>")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/dumiya/FXMLDocument.fxml", "Insurance management","<Placeholder>")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/hassim/FXMLDocument.fxml", "HR & payroll management","<Placeholder>")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/Customer.fxml","Customer & loan plan")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/CustomerOld.fxml","Cashflow management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/kiriya/FXMLDocument.fxml","Share management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/janiya/FXMLDocument.fxml", "External bank fund management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/battibois/FXMLDocument.fxml", "Resource management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/FXMLDocument.fxml", "Arrears management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/dumiya/FXMLDocument.fxml", "Insurance management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/hassim/FXMLDocument.fxml", "HR & payroll management")));
+        
+        
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/paniya/FXMLDocument.fxml","Cashflow management","<Placeholder>")));
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/customer.fxml","Customer & loan plan","Add customer", "Search customers")));
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/kiriya/FXMLDocument.fxml","Share management","<Placeholder>")));
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/janiya/FXMLDocument.fxml", "External bank fund management","<Placeholder>")));
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/battibois/FXMLDocument.fxml", "Resource management","<Placeholder>")));
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/FXMLDocument.fxml", "Arrears management","<Placeholder>")));
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/dumiya/FXMLDocument.fxml", "Insurance management","<Placeholder>")));
+//        TREE_LIST.add(new ArrayList(Arrays.asList("/hassim/FXMLDocument.fxml", "HR & payroll management","<Placeholder>")));
         return TREE_LIST;
     }
     
@@ -51,6 +66,40 @@ public class Navigator
     }
     
     
+    public static void switchForm(AnchorPane anchor, int index)
+    {
+        final List<List<String>> TREE_LIST = initializeTree();
+        if(index>-1 && index<TREE_LIST.size())
+        {
+            Parent parent = null;
+            //anchor.getChildren().clear();
+            try
+            {
+                //anchor.getChildren().add(FXMLLoader.load(Navigator.class.getResource("/fxml_files/Customer.fxml")));
+                parent = FXMLLoader.load(Navigator.class.getResource(TREE_LIST.get(index).get(0)));
+            }
+            catch (IOException e)
+            {
+                System.out.println("Form switch error\n" + e);
+            }
+            
+            Stage stage = (Stage)anchor.getScene().getWindow();
+            Scene scene = new Scene(parent);
+            
+            stage.setScene(scene);
+            stage.show();
+        }
+//        switch(index)
+//        {
+//            case 0:
+//                anchor.getChildren().add(FXMLLoader.load(Navigator.class.getResource("testrun.fxml")));
+//                break;
+//            case 1:
+//                anchor.getChildren().add(FXMLLoader.load(Navigator.class.getResource("testrun.fxml")));
+//        }
+    }
+    
+    //deprecated
     public static TreeItem<String> getCategoryTree()
     {
         final List<List<String>> TREE_LIST = initializeTree();
@@ -69,10 +118,10 @@ public class Navigator
                 category.getChildren().add(sub);
             }
         }
-        
         return root;
     }
     
+    //deprecated
     public static void switchPane(Pane current_pane, int tree_index) throws Exception
     {
         //if(tree_index>0)tree_index--;else    return;

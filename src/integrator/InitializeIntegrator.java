@@ -64,10 +64,7 @@ public class InitializeIntegrator
                 anchor.getChildren().clear();
                 try
                 {
-                    if((Integer)newValue == 0)
-                        anchor.getChildren().add(FXMLLoader.load(getClass().getResource("testrun.fxml")));
-                    else if((Integer)newValue == 1)
-                        anchor.getChildren().add(FXMLLoader.load(getClass().getResource("customer.fxml")));
+                    Navigator.switchForm(anchor, (Integer)newValue);
                 }
                 catch(Exception e){}
                 System.out.println(oldValue);

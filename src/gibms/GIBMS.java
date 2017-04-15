@@ -23,7 +23,7 @@ public class GIBMS extends Application
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Graduate Investment system login");
+        stage.setTitle("Graduate Investment login");
         stage.setResizable(false);
         stage.setScene(scene);
         

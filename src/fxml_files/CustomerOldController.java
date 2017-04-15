@@ -34,6 +34,8 @@ import javafx.scene.text.Text;
 
 import entities.*;        
 import data.*;
+import integrator.InitializeIntegrator;
+import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
  *
@@ -42,6 +44,24 @@ import data.*;
 public class CustomerOldController implements Initializable
 {
     Connection conn=null;
+    
+    
+    @FXML
+    private AnchorPane anchorP;
+    @FXML
+    private RadioButton radio_statecorp;
+    @FXML
+    private RadioButton radio_selfemp;
+    @FXML
+    private RadioButton radio_state;
+    @FXML
+    private Tab tab_searchcustomer;
+    @FXML
+    private Button button_searchnic;
+    @FXML
+    private Button button_searchname;
+    
+    
     
     //tab1 person controls
     @FXML private ToggleGroup genderGroup;
@@ -328,6 +348,8 @@ public class CustomerOldController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        InitializeIntegrator.initializeTabs(anchorP, tabpane_customer);
+        
         conn=dbConnect.connect();
         DynamicTable.getColumns(conn, "select * from customer_view", table_search);
         

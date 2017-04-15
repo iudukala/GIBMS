@@ -16,6 +16,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 
 import integrator.*;
+import javafx.scene.Scene;
 /**
  * FXML Controller class
  *
