@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mediators;
+package integrator;
 
+import com.jfoenix.controls.JFXListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 
 /**
  *
  * @author Isuru Udukala
  */
-public class main_tree
+public class Navigator
 {
     private static List<List<String>> initializeTree()
     {
@@ -33,32 +36,48 @@ public class main_tree
         return TREE_LIST;
     }
     
+    public static JFXListView<Label> getCategoryList()
+    {
+        JFXListView<Label> list = new JFXListView<>();
+        final List<List<String>> TREE_LIST = initializeTree();
+        
+        for(int i=0;i<TREE_LIST.size();i++)
+        {
+            Label catLabel = new Label(TREE_LIST.get(i).get(1));
+            catLabel.setFont(Font.font(12.5));
+            list.getItems().add(catLabel);
+        }
+        return list;
+    }
+    
+    
     public static TreeItem<String> getCategoryTree()
     {
         final List<List<String>> TREE_LIST = initializeTree();
-        TreeItem<String> root = new TreeItem<String>("Categories");
+        TreeItem<String> root = new TreeItem<>("Categories");
         root.setExpanded(true);
         for(int i=0;i<TREE_LIST.size();i++)
         {
-            TreeItem<String> category = new TreeItem<String>(TREE_LIST.get(i).get(1));
+            TreeItem<String> category = new TreeItem<>(TREE_LIST.get(i).get(1));
             
             root.getChildren().add(category);
             category.setExpanded(true);
             
             for(int j=2;j<TREE_LIST.get(i).size();j++)
             {
-                TreeItem<String> sub= new TreeItem<String>(TREE_LIST.get(i).get(j));
+                TreeItem<String> sub= new TreeItem<>(TREE_LIST.get(i).get(j));
                 category.getChildren().add(sub);
             }
         }
+        
         return root;
     }
+    
     public static void switchPane(Pane current_pane, int tree_index) throws Exception
     {
-//        if(tree_index>0)
-//            tree_index--;
-//        else
-//            return;
+        //if(tree_index>0)tree_index--;else    return;
+        //TreeView.setShowRoot() should be set to false;
+        
         final List<List<String>> TREE_LIST = initializeTree();
         
         int row_index=0, column_index = 0, counter=0;

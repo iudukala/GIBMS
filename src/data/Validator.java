@@ -17,7 +17,7 @@ public class Validator
 {
     public static boolean isPhone(String str)
     {
-        List<Character> allowed=new ArrayList<Character>(Arrays.asList('+','-','(',')', ' '));
+        List<Character> allowed=new ArrayList<>(Arrays.asList('+','-','(',')', ' '));
         //allowed.addAll(Arrays.asList('+','-'));
         boolean valid=true;
         for(int i=0; i<str.length(); i++)
@@ -32,7 +32,7 @@ public class Validator
     }
     public static boolean isEmail(String str)
     {
-        List<Character> allowed=new ArrayList<Character>(Arrays.asList('@'));
+        List<Character> allowed=new ArrayList<>(Arrays.asList('@','.'));
         boolean valid=true;
         for(int i=0; i<str.length(); i++)
         {

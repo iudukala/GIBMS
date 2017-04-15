@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 15, 2017, 8:47:06 PM
+    Author     : Isuru Udukala
+*/
+.root{
+    -fx-background-color:#7E57C2;
+}
+.jfx-text-field, .jfx-password-field{
+    -jfx-focus-color: #D1C4E9;
+    -jfx-unfocus-color:#D1C4E9;
+    -fx-text-fill: #D1C4E9;
+}
+
+.button{
+    -fx-background-color:#88C751;
+    -fx-background-radius:0;
+}

@@ -28,7 +28,7 @@ public class Main_guiController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        tree.setRoot(mediators.main_tree.getCategoryTree());
+        tree.setRoot(integrator.Navigator.getCategoryTree());
         tree.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<String>>()
         {
             @Override
@@ -39,7 +39,7 @@ public class Main_guiController implements Initializable
                     System.out.println(tree.getSelectionModel().getSelectedIndex());
                     try
                     {
-                        mediators.main_tree.switchPane(pane_object,tree.getSelectionModel().getSelectedIndex());
+                        integrator.Navigator.switchPane(pane_object,tree.getSelectionModel().getSelectedIndex());
                     }
                     catch(Exception e)
                     {

@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 
@@ -21,9 +22,11 @@ import javafx.stage.Stage;
  *
  * @author Isuru Udukala
  */
-public class loginController implements Initializable
+public class loginOldController implements Initializable
 {
     @FXML private Button button;
+    @FXML
+    private Label label;
     
     @FXML
     private void handleButtonAction(ActionEvent event)
