@@ -1,0 +1,73 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 15, 2017, 8:47:06 PM
+    Author     : Isuru Udukala
+*/
+
+@font-face {
+    src: url("RobotoTTF/Roboto-Light.ttf");
+}
+
+*{
+    /*-fx-font-base: #D1C4E9;*/
+    -fx-font-base: #D3D3D3;
+}
+
+.root{
+    /*-fx-background-color:#7E57C2;*/
+    -fx-background-color:#37455A;
+}
+
+.label{
+    -fx-font-family: "Roboto";
+    /*-fx-font-weight: Light;*/
+}
+.jfx-text-field, .jfx-password-field{
+    -jfx-focus-color: -fx-font-base;
+    -jfx-unfocus-color:-fx-font-base;
+    -fx-text-fill: -fx-font-base;
+    
+    -fx-font-family: "Roboto";
+    -fx-font-size: 15;
+    -fx-pref-height: 20;
+    /*-fx-font-weight: Light;*/
+}
+
+.button{
+/*    -fx-background-color:#5EB355;;*/
+    -fx-background-radius:0;
+    
+    -fx-font-family: "Roboto";
+    -fx-font-size: 16;
+}
+
+.button:hover{
+    -fx-background-color:#68bf5f;;
+    -fx-background-radius:0;
+    
+    -fx-font-family: "Roboto";
+    -fx-font-size: 16;
+}
+
+
+/*
+.jfx-snackbar-content{
+    -fx-background-color: #272A34;
+    -fx-padding: 10;
+    -fx-spacing: 50;
+    -fx-min-width: 50;
+}
+
+.jfx-snackbar-toast{
+    -fx-text-fill: #E91E63;
+    -fx-font-size:12pt;
+}
+
+.jfx-snackbar{
+    -fx-min-height: 450;
+    -fx-min-width: 450;
+}*/

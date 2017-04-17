@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Battibois;
+package battibois;
 
 import data.DynamicTable;
 import java.net.URL;
@@ -26,8 +26,6 @@ public class FXMLDocumentController implements Initializable
 {
     Connection conn = null;
     @FXML
-    private TableView<?> vehtab;
-    @FXML
     private Button vehadd;
     @FXML
     private Button vehdel;
@@ -49,8 +47,6 @@ public class FXMLDocumentController implements Initializable
     private TextField engi;
     @FXML
     private TextField year;
-    @FXML
-    private TableView<?> builtab;
     @FXML
     private Button builadd;
     @FXML
@@ -163,8 +159,6 @@ public class FXMLDocumentController implements Initializable
     private TextField othqun;
     @FXML
     private DatePicker othdate;
-    @FXML
-    private TableView<?> othtab;
     //@FXML
     //private TextField othser;
     @FXML
@@ -178,9 +172,11 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private TextField builde;
     @FXML
-    private TableView<?> teltab;
-    @FXML
     private TextField othser;
+    @FXML
+    private Button telsearch;
+    @FXML
+    private TextField telsear;
     
     @FXML
     private void handle_vehicleadd(ActionEvent event)

@@ -20,10 +20,9 @@ public class GIBMS extends Application
     @Override
     public void start(Stage stage) throws Exception
     {   Parent root = FXMLLoader.load(getClass().getResource("/fxml_files/Login.fxml"));
-        
         Scene scene = new Scene(root);
         
-        stage.setTitle("Graduate Investment login");
+        stage.setTitle("Graduate Investment");
         stage.setResizable(false);
         stage.setScene(scene);
         

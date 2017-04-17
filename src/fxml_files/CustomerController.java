@@ -7,6 +7,8 @@ package fxml_files;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.effects.JFXDepthManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -15,8 +17,13 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 
-import integrator.*;
-import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.StackPane;
+
+import integrator.InitializeIntegrator;
+import mediators.ValidationInterface;
+import mediators.ValidationInterface.NICValidator.*;
 /**
  * FXML Controller class
  *
@@ -32,12 +39,27 @@ public class CustomerController implements Initializable
     JFXTabPane customer_tabpane;
     @FXML
     private TabPane tabpane_customer;
+    @FXML
+    private StackPane stack_add;
+    @FXML
+    private ScrollPane scroll_add;
+    @FXML
+    private JFXTextField text_nic;
+    @FXML
+    private ToggleGroup tgroup_gender;
+    @FXML
+    private ToggleGroup tgroup_marital;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        //initializing gui
+        scroll_add.setPrefHeight(580);
         InitializeIntegrator.initializeTabs(anchor_customer, tabpane_customer);
+        JFXDepthManager.setDepth(scroll_add, 3);
+        
+        ValidationInterface.NICValidator.register(text_nic);
     }
 }

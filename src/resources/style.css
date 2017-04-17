@@ -1,0 +1,239 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 14, 2017, 5:30:08 PM
+    Author     : Isuru Udukala
+*/
+
+@font-face {
+    src: url("RobotoTTF/Roboto-Light.ttf");
+}
+@font-face {
+    src: url("RobotoTTF/RobotoCondensed-Regular.ttf");
+}
+@font-face {
+    src: url("RobotoTTF/RobotoCondensed-Bold.ttf");
+}
+@font-face {
+    src: url("RobotoTTF/Roboto-Bold.ttf");
+}
+
+
+*{
+    -fx-tab-base:#37455A;
+    -fx-font-base: #D3D3D3;
+    /*-fx-nav-base: #5EB355;*/
+    -fx-nav-base: #5EB355;
+    -fx-stack-base: #333333;
+}
+
+.root{
+    /*-fx-background-color: #E2E2E2;*/
+    -fx-background-color: -fx-tab-base;
+}
+
+
+.jfx-text-field, .jfx-password-field, .jfx-text-area, .jfx-combo-box{
+    -jfx-focus-color: -fx-font-base;
+    -jfx-unfocus-color:-fx-font-base;
+    -fx-text-fill: -fx-font-base;
+    -jfx-label-float: true;
+    -fx-padding: 0px;
+    -fx-pref-height: 25;
+    
+    -fx-font-family: "Roboto";
+}
+
+.jfx-radio-button{
+    -jfx-selected-color: -fx-font-base;
+    -jfx-unselected-color: -fx-font-base;
+    -fx-text-fill: -fx-font-base;
+    
+    -fx-font-family: "Roboto";
+}
+
+.headers{
+    -fx-font-family: "Roboto condensed";
+    -fx-font-size: 20px;
+    -fx-font-weight: Normal;
+}
+
+
+.jfx-date-picker{
+    -jfx-default-color: -fx-font-base;
+    
+    -fx-font-family: "Roboto";
+}
+
+.jfx-tab-pane .tab-header-area .jfx-rippler{
+    -jfx-rippler-fill: -fx-tab-base;
+}
+.jfx-tab-pane{
+  -fx-tab-min-height:50px;
+  -fx-tab-max-height:40px;
+}
+.jfx-tab-pane .headers-region {
+    -fx-background-color: -fx-tab-base;
+}
+
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: -fx-tab-base;
+}
+.jfx-tab-pane .tab-selected-line {
+    /*-fx-stroke: #57E7C5;*/
+    -fx-background-color: #57E7C5;
+    -fx-stroke-width: 2pt;
+}
+
+.tab:hover{
+    -fx-background-color:#212837;
+}
+
+.tab-label{
+    -fx-font-size:11pt;
+    -fx-padding:50px;
+}
+
+.menubutton{
+    -fx-background-color:#FFC400;
+    -fx-background-radius:40;
+    -fx-max-height: 45;
+    -fx-max-width: 45;
+    -fx-min-height: 45;
+    -fx-min-width: 45;
+}
+    
+.label{
+    -fx-text-fill: WHITE;
+}
+.jfx-list-cell{
+    -fx-background-insets: 0.0;
+    -fx-background-color:-fx-stack-base;
+}
+.jfx-list-view{
+    -fx-padding:0px;
+    -fx-background-insets: 0;
+    -jfx-cell-horizontal-margin: 0.0;
+    -jfx-cell-horizontal-margin: 0.0;
+    -jfx-cell-vertical-margin: 0.0;
+    -jfx-vertical-gap: 15;
+    -jfx-expanded: false;
+}
+
+
+.menubutton .jfx-rippler{
+    -jfx-rippler-fill:#FFF9C4;
+}
+
+.navigator{
+    -fx-background-color:-fx-nav-base;
+    -fx-font-size:12pt;
+}
+
+.navigator .label{
+    -fx-text-fill: WHITE;
+}
+
+/*list view*/
+
+.navigator .jfx-list-cell{
+    -fx-background-insets: 0.0;
+    -fx-background-color:-fx-nav-base;
+    -fx-padding: 20px;
+}
+
+.navigator .jfx-list-cell:selected{
+    -fx-background-color: #00796B;
+}
+
+.navigator .jfx-list-cell:hover{
+    -fx-background-color: #388E3C;
+}
+
+.navigator .jfx-list-cell .jfx-rippler{
+    -jfx-rippler-fill: #9CCC65
+}
+
+.navigator .jfx-list-view{
+    -fx-padding:0px;
+    -fx-background-insets: 0;
+    -jfx-cell-horizontal-margin: 0.0;
+    -jfx-cell-horizontal-margin: 0.0;
+    -jfx-cell-vertical-margin: 0.0;
+    -jfx-vertical-gap: 15;
+    -jfx-expanded: false;
+}
+
+.scroll-pane {
+    -fx-padding:0px;
+    -fx-background-color: -fx-stack-base;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0.1em;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-tab-base;
+    -fx-background-radius: 0;
+}
+
+/*
+ The main scrollbar **track** CSS class  
+.mylistview .scroll-bar:horizontal .track,
+.mylistview .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius: 2em;
+}
+
+ The increment and decrement button CSS class of scrollbar 
+.mylistview .scroll-bar:horizontal .increment-button,
+.mylistview .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 10 0;
+}
+
+ The increment and decrement button CSS class of scrollbar 
+
+.mylistview .scroll-bar:vertical .increment-button,
+.mylistview .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+
+}
+
+.mylistview .scroll-bar .increment-arrow,
+.mylistview .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+ The main scrollbar **thumb** CSS class which we drag every time (movable) 
+.mylistview .scroll-bar:horizontal .thumb,
+.mylistview .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black, 90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+}
+*/

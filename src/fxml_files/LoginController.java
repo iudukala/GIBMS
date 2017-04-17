@@ -6,12 +6,17 @@
 package fxml_files;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 import com.jfoenix.svg.SVGGlyph;
 import integrator.Navigator;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,7 +25,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-import integrator.*;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -40,6 +44,10 @@ public class LoginController implements Initializable {
     private JFXButton button_login;
     @FXML
     private AnchorPane rootAnchor;
+    
+    private JFXSnackbar snackbar;
+    @FXML
+    private JFXSpinner spinner;
 
     /**
      * Initializes the controller class.
@@ -53,10 +61,14 @@ public class LoginController implements Initializable {
         label.setText("");
         label.setGraphic(glyph);
         
+        spinner.setVisible(false);
+        
         button_login.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e)
             {
+                spinner.setVisible(true);
+                
                 Navigator.switchForm(rootAnchor, 0);
             }
         });

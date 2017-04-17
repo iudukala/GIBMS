@@ -15,7 +15,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -66,22 +65,26 @@ public class InitializeIntegrator
                 {
                     Navigator.switchForm(anchor, (Integer)newValue);
                 }
-                catch(Exception e){}
+                catch(Exception e)
+                {
+                    System.out.println(e);
+                }
                 System.out.println(oldValue);
                 System.out.println(newValue);
             }
         });
         
-        //Label hlabel = new Label();hlabel.setPrefHeight(40);
-        Label dlabel = new Label("Navigator");dlabel.setPrefHeight(80);
-        dlabel.setTextFill(Color.WHITE);
+        //top label on navigator with icon
+        Label dlabel = new Label("Navigator");
+        dlabel.setPrefHeight(80);
         dlabel.setPadding(new Insets(10,10,10,80));
-        SVGGlyph glyph = new SVGGlyph(1,"navigation","M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
-                ,Color.WHITE);
+        SVGGlyph glyph = new SVGGlyph(1,"navigation","M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z",Color.WHITE);
+        
         glyph.setSize(20,25);
         dlabel.setGraphic(glyph);
         dlabel.setGraphicTextGap(20);
         
+        //vbox storing all elements in drawer
         VBox box = new VBox(dlabel, list);
         JFXDepthManager.setDepth(box, 1);
         box.setPrefHeight(700);
@@ -89,7 +92,6 @@ public class InitializeIntegrator
         
         drawer.setSidePane(box);
         drawer.setDefaultDrawerSize(DRAWER_WIDTH);
-        
         drawer.setOverLayVisible(false);
         drawer.setResizableOnDrag(false);
         

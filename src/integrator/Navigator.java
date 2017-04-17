@@ -28,7 +28,7 @@ public class Navigator
 {
     private static List<List<String>> initializeTree()
     {
-        List<List<String>> TREE_LIST = new ArrayList<List<String>>();
+        List<List<String>> TREE_LIST = new ArrayList<>();
         
         TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/Customer.fxml","Customer & loan plan")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/CustomerOld.fxml","Cashflow management")));
@@ -84,7 +84,7 @@ public class Navigator
             }
             
             Stage stage = (Stage)anchor.getScene().getWindow();
-            Scene scene = new Scene(parent);
+            Scene scene = new Scene(parent, 1000,700);
             
             stage.setScene(scene);
             stage.show();
