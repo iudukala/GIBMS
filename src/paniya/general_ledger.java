@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import data.Manipulate;
+import core.Manipulator;
 
 /**
  *
@@ -64,7 +64,7 @@ public class general_ledger
         try
         {
             String query = "insert into general_ledger(date,transaction_code,transaction_name,description,withdrawals,deposits,balance)";
-            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, date.toString());
             
             prp.setString(2, transaction_code);

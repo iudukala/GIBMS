@@ -9,7 +9,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulate;
+import core.Manipulator;
 
 public class Building 
 {
@@ -83,7 +83,7 @@ public class Building
         try
         {
             String query="insert into building(`address`,`floor`,`description`,`condition`,`rent_value`,`end_date`,`rent_date`)";
-            PreparedStatement prp=con.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, address);
             prp.setString(2, floor);
             prp.setString(3, description);

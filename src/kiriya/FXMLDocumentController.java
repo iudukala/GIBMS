@@ -5,6 +5,8 @@
  */
 package kiriya;
 
+import legacy.Person;
+import handlers.DynamicTable;
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -19,9 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-import data.*;
-import entities.*;
-import integrator.InitializeIntegrator;
+import core.Integrator;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
@@ -131,9 +131,9 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        InitializeIntegrator.initializeTabs(anchorpane_shares, tabpane_shares);
+        Integrator.integrate(anchorpane_shares, tabpane_shares);
         
-       conn = gibms.dbConnect.connect();
+       conn = handlers.dbConcurrent.connect();
        DynamicTable.getColumns(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
 "from person p ,shareholder s where p.nic=s.nic" , utable);
        
@@ -148,7 +148,7 @@ public class FXMLDocumentController implements Initializable {
                 unic.setDisable(true);
                 
                 shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic, conn);
-                Person person_object = integrator.customer_search.personFromSQL(nic, conn);
+                Person person_object = legacy.customer_search.personFromSQL(nic, conn);
                 
                 unic.setText(person_object.nic);
                 uname.setText(person_object.name);
@@ -322,7 +322,7 @@ public class FXMLDocumentController implements Initializable {
     private void handleselectt(ActionEvent event)
     {
         String search = usearch.getText();
-        data.DynamicTable.buildData(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
+        handlers.DynamicTable.buildData(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
 "from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, utable);
         
     }

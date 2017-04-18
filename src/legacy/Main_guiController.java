@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fxml_files;
+package legacy;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +28,7 @@ public class Main_guiController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        tree.setRoot(integrator.Navigator.getCategoryTree());
+        tree.setRoot(core.Navigator.getCategoryTree());
         tree.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<String>>()
         {
             @Override
@@ -39,7 +39,7 @@ public class Main_guiController implements Initializable
                     System.out.println(tree.getSelectionModel().getSelectedIndex());
                     try
                     {
-                        integrator.Navigator.switchPane(pane_object,tree.getSelectionModel().getSelectedIndex());
+                        core.Navigator.switchPane(pane_object,tree.getSelectionModel().getSelectedIndex());
                     }
                     catch(Exception e)
                     {

@@ -71,7 +71,7 @@ public class Vehicle
         try
         {
             String query = "insert into vehicle(brand,license,model,colour,engine_no,year)";
-            PreparedStatement prp=conn.prepareStatement(data.Manipulate.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(core.Manipulator.psFromQuery(query));
         //    prp.setString(1,Integer.toString(resource_id));
             prp.setString(1,brand);
             prp.setString(2, license_no);

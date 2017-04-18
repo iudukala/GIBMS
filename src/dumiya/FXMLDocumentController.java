@@ -83,7 +83,7 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        conn = gibms.dbConnect.connect();
+        conn = handlers.dbConcurrent.connect();
     }    
 
     @FXML
@@ -123,7 +123,7 @@ public class FXMLDocumentController implements Initializable {
     private void Search_Button_if(ActionEvent event) {
        
         String Customer_ID_Search = Search_Bar_if.getText();
-        data.DynamicTable.buildData(conn, "select c.Customer_ID,i.Insurance_Fee,i.Date_Issued,i.Expiry_Date,i.Payed_Amount,i.Due_Amount from customer_state c,Insurance_Fund i where c.Customer_ID=i.Customer_ID and i.Customer_ID like ?;", Customer_ID_Search, Table_if);
+        handlers.DynamicTable.buildData(conn, "select c.Customer_ID,i.Insurance_Fee,i.Date_Issued,i.Expiry_Date,i.Payed_Amount,i.Due_Amount from customer_state c,Insurance_Fund i where c.Customer_ID=i.Customer_ID and i.Customer_ID like ?;", Customer_ID_Search, Table_if);
         
     }
 
@@ -164,7 +164,7 @@ public class FXMLDocumentController implements Initializable {
     private void Search_ic(ActionEvent event) {
         
         String Claim_Number_Search = Search_Bar_ic.getText();
-        data.DynamicTable.buildData(conn, "select * from Insurance_Claim where `Claim_Number` like ?;", Claim_Number_Search, Table_ic);
+        handlers.DynamicTable.buildData(conn, "select * from Insurance_Claim where `Claim_Number` like ?;", Claim_Number_Search, Table_ic);
         
     }
 }

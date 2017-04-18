@@ -5,7 +5,7 @@
  */
 package battibois;
 
-import data.DynamicTable;
+import handlers.DynamicTable;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -298,7 +298,7 @@ public class FXMLDocumentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        conn=gibms.dbConnect.connect();
+        conn=handlers.dbConcurrent.connect();
         DynamicTable.getColumns(conn, "select * from vehicle", table_vehsearch);
         DynamicTable.getColumns(conn, "select * from building", table_builsearch);
         DynamicTable.getColumns(conn, "select * from bill", table_bill);
@@ -356,7 +356,7 @@ public class FXMLDocumentController implements Initializable
     private void handle_vehiclesearch(ActionEvent event)
     {
         String search = vehsearch.getText();
-        data.DynamicTable.buildData(conn, "select * from vehicle where `license` like ?", search, table_vehsearch);
+        handlers.DynamicTable.buildData(conn, "select * from vehicle where `license` like ?", search, table_vehsearch);
     }
     @FXML
     private void handle_buildingsearch(ActionEvent event)

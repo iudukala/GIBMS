@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulate;
+import core.Manipulator;
 
 /**
  *
@@ -75,7 +75,7 @@ public class employee
         try
         {
             String query="insert into employee_details(empid,empname,nic,dob,email,job,sex,marital_status,edu_quali,work_exp,tp,address)";
-            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1,empid);
             prp.setString(2,empname);
             prp.setString(3,nic);

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulate;
+import core.Manipulator;
 /**
  *
  * @author Shamodh
@@ -56,7 +56,7 @@ public payroll(double basic_salary,double overtime,double bonus,double medical,d
         try
         {
             String query = "insert into payroll(basic_salary,overtime,bonus,medical,privilages,epf,loan,tax,other)";
-            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setDouble(1,basic_salary);
             prp.setDouble(2,overtime);
             prp.setDouble(3, bonus);

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulate;
+import core.Manipulator;
 /**
  *
  * @author Shamodh
@@ -34,7 +34,7 @@ public class task
         
         try
         {   String query = "insert into task(date,task,time_period)";
-            PreparedStatement prp = conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, time_period);
             prp.setString(2, task);
             prp.setString(3, date.toString());

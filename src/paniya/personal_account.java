@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import data.Manipulate;
+import core.Manipulator;
 
 /**
  *
@@ -78,7 +78,7 @@ public class personal_account
         try
         {
             String query = "insert into personal_account(date,account_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance)";
-            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, date.toString());
             prp.setString(2,account_id);
             prp.setString(3,serial_no);

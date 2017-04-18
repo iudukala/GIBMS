@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mediators;
+package handlers;
 
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.svg.SVGGlyph;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
 
-import data.Validator;
+import core.Validator;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
@@ -20,7 +20,7 @@ import javafx.scene.paint.Color;
  *
  * @author Isuru Udukala
  */
-public class ValidationInterface 
+public class ValidationHandler 
 {
     private static void fieldInvalid(SimpleObjectProperty<Node> icon, ReadOnlyBooleanWrapper hasErrors)
     {
@@ -59,7 +59,7 @@ public class ValidationInterface
         }
         public static void register(JFXTextField textField)
         {
-            ValidationInterface.register(textField);
+            ValidationHandler.register(textField);
         }
     }
     

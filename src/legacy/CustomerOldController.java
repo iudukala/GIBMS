@@ -3,9 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fxml_files;
+package legacy;
 
-import gibms.dbConnect;
+import legacy.Person;
+import legacy.Customer;
+import core.Entity;
+import core.Validator;
+import handlers.DynamicTable;
+import handlers.dbConcurrent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -32,9 +37,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import entities.*;        
-import data.*;
-import integrator.InitializeIntegrator;
+import core.Integrator;
 import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
@@ -220,7 +223,7 @@ public class CustomerOldController implements Initializable
     private void handleSearchnic(ActionEvent event)
     {
         String nic_search = text_searchnic.getText();
-        data.DynamicTable.buildData(conn, "select * from customer_view where `nic` like ?;", nic_search, table_search);
+        handlers.DynamicTable.buildData(conn, "select * from customer_view where `nic` like ?;", nic_search, table_search);
     }
     
     @FXML private TextField text_searchname;
@@ -255,8 +258,8 @@ public class CustomerOldController implements Initializable
         String x=table_search.getItems().get(index).toString();
         String nic = x.split(",")[0].substring(1);
         
-        Person person = integrator.customer_search.personFromSQL(nic, conn);
-        Customer customer= integrator.customer_search.customerFromSQL(nic, conn);
+        Person person = legacy.customer_search.personFromSQL(nic, conn);
+        Customer customer= legacy.customer_search.customerFromSQL(nic, conn);
         
         //person
         text_nic.setText(person.nic);
@@ -348,9 +351,9 @@ public class CustomerOldController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        InitializeIntegrator.initializeTabs(anchorP, tabpane_customer);
+        Integrator.integrate(anchorP, tabpane_customer);
         
-        conn=dbConnect.connect();
+        conn=dbConcurrent.connect();
         DynamicTable.getColumns(conn, "select * from customer_view", table_search);
         
         text_addinvalid.setVisible(false);

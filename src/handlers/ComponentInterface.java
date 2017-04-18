@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mediators;
-
-import java.sql.Connection;
+package handlers;
 
 /**
  *
  * @author Isuru Udukala
  */
-public class dbInterface
+public interface ComponentInterface 
 {
-    Connection conn = null;
+    
 }

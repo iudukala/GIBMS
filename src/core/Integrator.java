@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package integrator;
+package core;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -27,11 +27,11 @@ import javafx.scene.paint.Color;
  *
  * @author Isuru Udukala
  */
-public class InitializeIntegrator
+public class Integrator
 {
     private final static int DRAWER_WIDTH = 300;
     
-    public static JFXTabPane initializeTabs(AnchorPane anchor, TabPane tabpane)
+    public static JFXTabPane integrate(AnchorPane anchor, TabPane tabpane)
     {
         //generate tabpane
         JFXTabPane jfx_tp = new JFXTabPane();
@@ -75,10 +75,12 @@ public class InitializeIntegrator
         });
         
         //top label on navigator with icon
-        Label dlabel = new Label("Navigator");
+        String headerColor = "#57E7C5";
+        Label dlabel = new Label("NAVIGATOR");
         dlabel.setPrefHeight(80);
-        dlabel.setPadding(new Insets(10,10,10,80));
-        SVGGlyph glyph = new SVGGlyph(1,"navigation","M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z",Color.WHITE);
+        dlabel.setPadding(new Insets(10,10,10,60));
+        dlabel.setStyle("-fx-font-size: 21; -fx-text-fill:" + headerColor);
+        SVGGlyph glyph = new SVGGlyph(1,"navigation","M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z",Color.valueOf(headerColor));
         
         glyph.setSize(20,25);
         dlabel.setGraphic(glyph);
@@ -86,7 +88,7 @@ public class InitializeIntegrator
         
         //vbox storing all elements in drawer
         VBox box = new VBox(dlabel, list);
-        JFXDepthManager.setDepth(box, 1);
+        JFXDepthManager.setDepth(box, 5);
         box.setPrefHeight(700);
         box.getStyleClass().add("navigator");
         
@@ -119,6 +121,13 @@ public class InitializeIntegrator
                     drawer.close();
                 else
                     drawer.open();
+            }
+        });
+        return button;
+    }
+}
+
+
 //                int val,time,delay;
 //                if(tp.translateXProperty().get() == 0)
 //                {
@@ -143,9 +152,8 @@ public class InitializeIntegrator
 //                                                                            EASE_BOTH)));
 //                animation.setDelay(Duration.millis(delay));
 //                animation.play();
-            }
-        });
-        return button;
-    }
-}
-
+//            }
+//        });
+//        return button;
+//    }
+//}

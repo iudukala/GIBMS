@@ -31,7 +31,7 @@
                      <children>
                         <ScrollPane fx:id="scroll_add" fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
-                              <StackPane fx:id="stack_add" prefHeight="1500.0" prefWidth="942.0" styleClass="basestack">
+                              <StackPane fx:id="stack_add" prefHeight="1500.0" prefWidth="942.0" styleClass="stackpane">
                                  <children>
                                     <GridPane hgap="20.0">
                                       <columnConstraints>

@@ -3,7 +3,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulate;
+import core.Manipulator;
 
 
 public class Bill 
@@ -71,7 +71,7 @@ public class Bill
         try
         {
              String query="insert into bill(`date`,`bill_no`,`units`,`amount`,`arrears`,`charges`)";
-            PreparedStatement prp=con.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
            
             prp.setString(1, date);
            // prp.setString(2, tax_no);

@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import data.Manipulate;
+import core.Manipulator;
 /**
  *
  * @author Isuru Udukala
@@ -78,7 +78,7 @@ public class bank_receipt_voucher
         System.out.println("AA");
         try
         {   String query = "insert into bank_receipt_voucher(serial_no,date,receipt_voucher,branch_no,branch_name,transation_code,transation_name,narration,nic,resource_id,name,description,amount,total_amount,payment_type,cheque_no,cheque_date)";
-            PreparedStatement prp = conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1,serial_no);
             prp.setString(2, date.toString());
             prp.setString(3,receipt_voucher);

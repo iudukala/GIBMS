@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import data.Manipulate;
+import core.Manipulator;
 /**
  *
  * @author Shamodh
@@ -43,7 +43,7 @@ public void consolidate(Connection conn)
     try
     {
         String query = "insert into attendence(attendenceid,intime,outtime)";
-        PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
+        PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1,attendenceid);
             prp.setString(2,intime);
             prp.setString(3,outtime);

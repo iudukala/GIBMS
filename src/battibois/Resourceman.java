@@ -6,7 +6,7 @@
 package battibois;
 import java.sql.*;
 
-import data.Manipulate;
+import core.Manipulator;
 
 public class Resourceman 
 {
@@ -36,7 +36,7 @@ public class Resourceman
         try
         {
              String query="insert into resource(resource_id)";
-            PreparedStatement prp=con.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, Integer.toString(resource_id));
             
             prp.executeUpdate();

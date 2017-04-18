@@ -5,8 +5,8 @@
  */
 package kiriya;
 
-import entities.Customer;
-import entities.Person;
+import legacy.Customer;
+import legacy.Person;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

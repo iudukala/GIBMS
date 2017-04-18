@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data;
+package core;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @author Isuru Udukala
  */
-public class Manipulate
+public class Manipulator
 {
     //DO NOT USE
     public static String psFromQuery(String sqlQuery)

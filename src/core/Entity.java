@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data;
+package core;
 
 
 import com.mysql.jdbc.Statement;
@@ -46,7 +46,7 @@ public class Entity
             return data.get(key);
         else
         {
-            System.out.println("Requesting <" + Manipulate.getClassStr(reqClass) + "> cast to <" + Manipulate.getClassStr(data.get(key).getClass()) + ">");
+            System.out.println("Requesting <" + Manipulator.getClassStr(reqClass) + "> cast to <" + Manipulator.getClassStr(data.get(key).getClass()) + ">");
             return null;
         }
     }
@@ -170,11 +170,13 @@ public class Entity
             strb.append("Table validation error : ").append(tablename).append("\n").append(e);
             table_valid = false;
         }
-        if(verbose)
+        if(!table_valid && verbose)
         {
             System.out.println(strb);
             return false;
         }
+        //table existence confirmation complete
+        
         
         boolean data_valid = false;
         List<List> tdata = new ArrayList<>();
@@ -331,9 +333,9 @@ public class Entity
         for(int i=0;i<total*8-(lheader + tablename.length() +2);i++)strb.append("-");
         
         //generating body
-        strb.append(Manipulate.formatTabs("\n#",COL_COUNTER,true))
-                .append(Manipulate.formatTabs("| Column", COL1, true))
-                .append(Manipulate.formatTabs("Type", COL2, true))
+        strb.append(Manipulator.formatTabs("\n#",COL_COUNTER,true))
+                .append(Manipulator.formatTabs("| Column", COL1, true))
+                .append(Manipulator.formatTabs("Type", COL2, true))
                 .append("Value\n");
         
         for(int i=0;i<total*8;i++)strb.append("-");
@@ -344,12 +346,12 @@ public class Entity
             strb.append("\n");
             
             if(entry.getKey().equals(ag_column))
-                strb.append(Manipulate.formatTabs(counter++ + "[AG]",COL_COUNTER,true));
+                strb.append(Manipulator.formatTabs(counter++ + "[AG]",COL_COUNTER,true));
             else
-                strb.append(Manipulate.formatTabs(counter++,COL_COUNTER,true));
+                strb.append(Manipulator.formatTabs(counter++,COL_COUNTER,true));
             
-            strb.append(Manipulate.formatTabs("| " + entry.getKey(),COL1,true))
-                    .append(Manipulate.formatTabs(Manipulate.getClassStr(entry),COL2,true))
+            strb.append(Manipulator.formatTabs("| " + entry.getKey(),COL1,true))
+                    .append(Manipulator.formatTabs(Manipulator.getClassStr(entry),COL2,true))
                     .append(entry.getValue());
             
         }

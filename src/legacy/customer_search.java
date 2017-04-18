@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package integrator;
+package legacy;
 
-import entities.Customer;
-import entities.Person;
+import legacy.Customer;
+import legacy.Person;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

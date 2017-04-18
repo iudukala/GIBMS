@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package integrator;
+package core;
 
 import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
@@ -61,7 +61,8 @@ public class Navigator
         for(int i=0;i<TREE_LIST.size();i++)
         {
             Label catLabel = new Label(TREE_LIST.get(i).get(1));
-            catLabel.setFont(Font.font(12.5));
+            catLabel.setStyle("-fx-font-size:15;");
+            //catLabel.setFont(Font.font(8));
             list.getItems().add(catLabel);
         }
         return list;

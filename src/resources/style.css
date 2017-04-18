@@ -25,10 +25,11 @@ and open the template in the editor.
     -fx-tab-base:#37455A;
     -fx-font-base: #D3D3D3;
     /*-fx-nav-base: #5EB355;*/
-    -fx-nav-base: #5EB355;
+    -fx-nav-base: #37455A;
     -fx-stack-base: #333333;
     -fx-header-base: #57E7C5;
     -fx-red-base: #CB503F;
+    -fx-tabhover-base: #212837;
 }
 
 .root{
@@ -36,7 +37,7 @@ and open the template in the editor.
     -fx-background-color: -fx-tab-base;
 }
 
-.basestack{
+.stackpane{
     -fx-background-color:  #333333;
 }
 
@@ -94,6 +95,7 @@ and open the template in the editor.
 .jfx-tab-pane{
   -fx-tab-min-height:50px;
   -fx-tab-max-height:40px;
+  -fx-font-family: "Roboto";
 }
 .jfx-tab-pane .headers-region {
     -fx-background-color: -fx-tab-base;
@@ -109,7 +111,7 @@ and open the template in the editor.
 }
 
 .tab:hover{
-    -fx-background-color:#212837;
+    -fx-background-color:-fx-tabhover-base;
 }
 
 .tab-label{
@@ -147,16 +149,20 @@ and open the template in the editor.
 
 .navigator{
     -fx-background-color:-fx-nav-base;
-    -fx-font-size:12pt;
+    /*-fx-font-size:10pt;*/
 }
 
 .navigator .label{
     -fx-text-fill: WHITE;
+    
+    /**/
+    -fx-font-family: "Roboto condensed";
 }
 
 /*list view*/
 
 .navigator .jfx-list-cell{
+    -fx-font-size:15;
     -fx-background-insets: 0.0;
     -fx-background-color:-fx-nav-base;
     -fx-padding: 20px;
@@ -167,7 +173,7 @@ and open the template in the editor.
 }
 
 .navigator .jfx-list-cell:hover{
-    -fx-background-color: #388E3C;
+    -fx-background-color: -fx-tabhover-base;
 }
 
 .navigator .jfx-list-cell .jfx-rippler{

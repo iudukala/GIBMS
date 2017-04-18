@@ -396,7 +396,7 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         conn = gibms.dbConnect.connect();
+         conn = handlers.dbConcurrent.connect();
          //data.DynamicTable.buildData(con, "select * from person", table);
         // TODO
     }    

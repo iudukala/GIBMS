@@ -11,7 +11,7 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 import com.jfoenix.svg.SVGGlyph;
-import integrator.Navigator;
+import core.Navigator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -71,9 +71,6 @@ public class LoginController implements Initializable {
         });
     }
 }
-
-
-
 
 //public class LoginController implements Initializable {
 //

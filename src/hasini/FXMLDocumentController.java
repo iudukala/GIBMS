@@ -9,7 +9,7 @@ package hasini;
 //import java.sql.SQLException;
 
 
-import gibms.dbConnect;
+import handlers.dbConcurrent;
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -99,7 +99,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
       
         // TODO
-         conn=dbConnect.connect();
+         conn=dbConcurrent.connect();
         //DynamicTable.getColumns(conn, "select * from arrears", table_search);
         
         

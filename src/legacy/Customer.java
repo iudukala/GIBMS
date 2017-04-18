@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package legacy;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import data.Manipulate;
+import core.Manipulator;
 /**
  *
  * @author Isuru Udukala
@@ -49,7 +49,7 @@ public class Customer
         try
         {   String query = "insert into customer_state(nic, work_phone, emp_sector, company, position, emp_startdate, service_nature, account_num, "
                 + "account_bank, account_branch, earn_career, earn_bussiness, earn_houses, earn_vehicles, earn_land)";
-            PreparedStatement prp = conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, nic);
             prp.setString(2, work_phone);
             prp.setString(3, Character.toString(emp_sector));

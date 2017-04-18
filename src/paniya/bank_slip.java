@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import data.Manipulate;
+import core.Manipulator;
 
 /**
  *
@@ -57,7 +57,7 @@ public class bank_slip
         try
         {
             String query = "insert into bank_slip(date,bank_slip_no,description,withdrawals,deposits,balance)";
-            PreparedStatement prp=conn.prepareStatement(Manipulate.psFromQuery(query));
+            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, date.toString());
             prp.setString(2,bank_slip_no);
             prp.setString(3, description);

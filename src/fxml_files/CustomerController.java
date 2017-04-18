@@ -21,8 +21,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 
-import integrator.InitializeIntegrator;
-import mediators.ValidationInterface;
+import core.Integrator;
+import handlers.ValidationHandler;
 /**
  * FXML Controller class
  *
@@ -60,9 +60,9 @@ public class CustomerController implements Initializable
     {
         //initializing gui
         scroll_add.setPrefHeight(580);
-        InitializeIntegrator.initializeTabs(anchor_customer, tabpane_customer);
+        Integrator.integrate(anchor_customer, tabpane_customer);
         JFXDepthManager.setDepth(scroll_add, 3);
         
-        ValidationInterface.NICValidator.register(text_nic);
+        ValidationHandler.NICValidator.register(text_nic);
     }
 }
