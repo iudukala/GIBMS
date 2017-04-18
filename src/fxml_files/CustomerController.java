@@ -23,7 +23,6 @@ import javafx.scene.layout.StackPane;
 
 import integrator.InitializeIntegrator;
 import mediators.ValidationInterface;
-import mediators.ValidationInterface.NICValidator.*;
 /**
  * FXML Controller class
  *
@@ -49,6 +48,10 @@ public class CustomerController implements Initializable
     private ToggleGroup tgroup_gender;
     @FXML
     private ToggleGroup tgroup_marital;
+    @FXML
+    private ToggleGroup tgroup_servicetype;
+    @FXML
+    private ToggleGroup tgroup_sector;
     /**
      * Initializes the controller class.
      */

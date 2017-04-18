@@ -31,10 +31,12 @@ public class Navigator
         List<List<String>> TREE_LIST = new ArrayList<>();
         
         TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/Customer.fxml","Customer & loan plan")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/CustomerOld.fxml","Cashflow management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/CustomerOld.fxml","Customer & loan plan old")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/paniya/FXMLDocument.fxml","Cashflow management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/kiriya/FXMLDocument.fxml","Share management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/janiya/FXMLDocument.fxml", "External bank fund management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/battibois/FXMLDocument.fxml", "Resource management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/battibois/ResourceFXML.fxml", "Resource management new")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/FXMLDocument.fxml", "Arrears management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/dumiya/FXMLDocument.fxml", "Insurance management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/hassim/FXMLDocument.fxml", "HR & payroll management")));

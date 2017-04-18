@@ -21,11 +21,10 @@ import javafx.scene.control.TextField;
 
 import data.*;
 import entities.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import integrator.InitializeIntegrator;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 /**
  *
  * @author ASUS-PC
@@ -125,9 +124,15 @@ public class FXMLDocumentController implements Initializable {
     private Button uselectt;
     @FXML
     private TableView<?> utable;
+    @FXML
+    private AnchorPane anchorpane_shares;
+    @FXML
+    private TabPane tabpane_shares;
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        InitializeIntegrator.initializeTabs(anchorpane_shares, tabpane_shares);
+        
        conn = gibms.dbConnect.connect();
        DynamicTable.getColumns(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
 "from person p ,shareholder s where p.nic=s.nic" , utable);

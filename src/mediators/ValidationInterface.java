@@ -25,6 +25,7 @@ public class ValidationInterface
     private static void fieldInvalid(SimpleObjectProperty<Node> icon, ReadOnlyBooleanWrapper hasErrors)
     {
         SVGGlyph glyphError = new SVGGlyph(1,"menuicon","M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",Color.valueOf("#CB503F"));
+        glyphError.setTranslateY(3);
         glyphError.setSize(15, 15);
         icon.set(glyphError);// = (SimpleObjectProperty<Node>)glyph;
         hasErrors.set(true);
