@@ -5,8 +5,11 @@
  */
 package guiMediators;
 
+import core.Entity;
 import java.util.Map;
+import java.util.Map.Entry;
 import javafx.scene.Node;
+import javafx.scene.control.ToggleGroup;
 
 /**
  *
@@ -17,5 +20,21 @@ public class personNodes
     public final String TABLE_NAME = "person";
     Map<String,Node> nodeList;
     
+    public void add(String key, Node node)
+    {
+        nodeList.put(key, node);
+    }
     
+    public Entity getValues()
+    {
+        for(Entry<String,Node> entry : nodeList.entrySet())
+        {
+            if(entry.getKey().equals("gender"))
+            {
+                //ToggleGroup tg = (ToggleGroup)entry.getValue();
+                //char gender=(()entry.getValue().getSelectedToggle().toString().endsWith("'Male'"))? 'm':'f';
+            }
+        }
+        return null;
+    }
 }

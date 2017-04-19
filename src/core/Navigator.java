@@ -60,8 +60,8 @@ public class Navigator
         
         for(int i=0;i<TREE_LIST.size();i++)
         {
-            Label catLabel = new Label(TREE_LIST.get(i).get(1));
-            catLabel.setStyle("-fx-font-size:15;");
+            Label catLabel = new Label(TREE_LIST.get(i).get(1));//.toUpperCase());
+            catLabel.setStyle("-fx-font-size:14; -fx-font-family: \"Roboto\";");
             //catLabel.setFont(Font.font(8));
             list.getItems().add(catLabel);
         }
@@ -88,6 +88,7 @@ public class Navigator
             
             Stage stage = (Stage)anchor.getScene().getWindow();
             Scene scene = new Scene(parent, 1000,700);
+            scene.getStylesheets().clear();
             
             stage.setScene(scene);
             stage.show();

@@ -6,6 +6,8 @@
 package core;
 
 import java.util.Map;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 
 /**
  *
@@ -66,5 +68,22 @@ public class Manipulator
             return class_str.replace("class java.lang.", "").replace("class java.time.", "");
         else
             return null;
+    }
+    
+    public static void setToggleSelection(ToggleGroup tgroup, String selection)
+    {
+        boolean match = false;
+        Toggle toggle = null;
+        for(int i=0;i<tgroup.getToggles().size();i++)
+        {
+            toggle = tgroup.getToggles().get(i);
+            if(toggle.getUserData().equals(selection))
+            {
+                match = true;
+                toggle.setSelected(true);
+            }
+        }
+        if(!match)
+            toggle.setSelected(true);
     }
 }

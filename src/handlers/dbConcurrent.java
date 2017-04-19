@@ -12,7 +12,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
 /**
  *
  * @author Isuru Udukala
@@ -26,7 +25,6 @@ public class dbConcurrent
         Callable<Connection> connCallable = new dbCallable();
         dbFuture = executor.submit(connCallable);
     }
-    
     public Connection get()
     {
         Connection conn = null;

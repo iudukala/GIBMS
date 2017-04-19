@@ -5,8 +5,6 @@
  */
 package legacy;
 
-import legacy.Person;
-import legacy.Customer;
 import core.Entity;
 import core.Validator;
 import handlers.DynamicTable;

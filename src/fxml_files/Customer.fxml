@@ -27,7 +27,7 @@
          <tabs>
             <Tab fx:id="tab_customer_add" text="Add customer">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="subanchor_tca" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fx:id="scroll_add" fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
@@ -58,6 +58,7 @@
                                           <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="PERSONAL INFORMATION" textFill="WHITE">
@@ -72,21 +73,21 @@
                                           <JFXTextField promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <children>
-                                                <JFXRadioButton prefHeight="17.0" prefWidth="108.0" text="Male">
+                                                <JFXRadioButton fx:id="rb_male" prefHeight="17.0" prefWidth="108.0" text="Male">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="tgroup_gender" />
                                                    </toggleGroup></JFXRadioButton>
-                                                <JFXRadioButton text="Female" toggleGroup="$tgroup_gender" />
+                                                <JFXRadioButton fx:id="rb_female" text="Female" toggleGroup="$tgroup_gender" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
-                                                <JFXRadioButton alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Married">
+                                                <JFXRadioButton fx:id="rb_married" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Married">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="tgroup_marital" />
                                                    </toggleGroup>
                                                 </JFXRadioButton>
-                                                <JFXRadioButton text="Not married" toggleGroup="$tgroup_marital" />
+                                                <JFXRadioButton fx:id="rb_notmarried" text="Not married" toggleGroup="$tgroup_marital" />
                                              </children>
                                           </HBox>
                                           <JFXTextField promptText="Home address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
@@ -110,13 +111,13 @@
                                           <JFXDatePicker prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                              <children>
-                                                <JFXRadioButton alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="104.0" text="State">
+                                                <JFXRadioButton fx:id="rb_state" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="104.0" text="State">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="tgroup_sector" />
                                                    </toggleGroup>
                                                 </JFXRadioButton>
-                                                <JFXRadioButton prefHeight="15.0" prefWidth="154.0" text="State corporation" toggleGroup="$tgroup_sector" />
-                                                <JFXRadioButton text="Self employed" toggleGroup="$tgroup_sector" />
+                                                <JFXRadioButton fx:id="rb_statecorp" prefHeight="15.0" prefWidth="154.0" text="State corporation" toggleGroup="$tgroup_sector" />
+                                                <JFXRadioButton fx:id="rb_selfemployed" text="Self employed" toggleGroup="$tgroup_sector" />
                                              </children>
                                           </HBox>
                                           <JFXTextField promptText="Company phone" GridPane.rowIndex="6" />
