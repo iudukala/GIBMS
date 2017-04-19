@@ -5,9 +5,6 @@
  */
 package kiriya;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.effects.JFXDepthManager;
-import com.jfoenix.svg.SVGGlyph;
 import core.Integrator;
 import guiMediators.Commons;
 import java.net.URL;
@@ -16,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -39,6 +35,6 @@ public class ShareManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         Integrator.integrate(anchor_shareholder, tabpane_shareholder);
-        Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER", Commons.ADD_PERSON_GLYPH);
+        Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER", 200, Commons.ADD_PERSON_GLYPH);
     }
 }

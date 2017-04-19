@@ -150,7 +150,7 @@ public class CustomerController implements Initializable
         Integrator.integrate(anchor_customer, tabpane_customer);
         JFXDepthManager.setDepth(scroll_add, 2);
         
-        JFXButton addButton = Commons.setSubanchorButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
+        JFXButton addButton = Commons.setSubanchorButton(subanchor_tca, "ADD PERSON", 180, Commons.ADD_PERSON_GLYPH);
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {

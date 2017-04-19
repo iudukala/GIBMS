@@ -19,7 +19,7 @@ public class Commons
 {
     public static final String ADD_PERSON_GLYPH = "M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z";
     
-    public static JFXButton setSubanchorButton(AnchorPane subanchor, String btext, String glyphID)
+    public static JFXButton setSubanchorButton(AnchorPane subanchor, String btext, int length, String glyphID)
     {
         JFXButton button = new JFXButton(btext);
         if(glyphID!=null)
@@ -29,7 +29,8 @@ public class Commons
             button.setGraphicTextGap(10);
             button.setGraphic(glyph);
         }
-        button.setPrefSize(180,50);
+        
+        button.setPrefSize(length,50);
         button.setTranslateX(400);
         button.setTranslateY(600);
         button.getStyleClass().add("addbutton");
@@ -39,8 +40,8 @@ public class Commons
         return button;
     }
     
-    public static JFXButton setSubanchorButton(AnchorPane subanchor, String btext)
+    public static JFXButton setSubanchorButton(AnchorPane subanchor, String btext, int length)
     {
-        return setSubanchorButton(subanchor, btext,null);
+        return setSubanchorButton(subanchor, btext, length, null);
     }
 }
