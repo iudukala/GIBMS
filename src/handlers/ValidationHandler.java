@@ -30,11 +30,9 @@ public class ValidationHandler
         icon.set(glyphError);// = (SimpleObjectProperty<Node>)glyph;
         hasErrors.set(true);
     }
-    private static void register(JFXTextField textField)
+    private static <T extends ValidatorBase> void register(T validator, JFXTextField textField)
     {
-        NICValidator vv = new NICValidator();
-        textField.getValidators().add(vv);//new NICValidator());
-
+        textField.getValidators().add(validator);
         textField.focusedProperty().addListener((o,oldVal,newVal)->
         {
             if(!newVal)
@@ -59,7 +57,7 @@ public class ValidationHandler
         }
         public static void register(JFXTextField textField)
         {
-            ValidationHandler.register(textField);
+            ValidationHandler.register(new NICValidator() , textField);
         }
     }
     
@@ -79,6 +77,10 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
+        public static void register(JFXTextField textField)
+        {
+            ValidationHandler.register(new PhoneValidator() , textField);
+        }
     }
     
     public static class EmailValidator extends ValidatorBase
@@ -97,6 +99,10 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
+        public static void register(JFXTextField textField)
+        {
+            ValidationHandler.register(new EmailValidator() , textField);
+        }
     }
     
     public static class NumberValidator extends ValidatorBase
@@ -114,6 +120,10 @@ public class ValidationHandler
                 message.set("Invalid value");
                 fieldInvalid(icon, hasErrors);
             }
+        }
+        public static void register(JFXTextField textField)
+        {
+            ValidationHandler.register(new NumberValidator() , textField);
         }
     }
 }

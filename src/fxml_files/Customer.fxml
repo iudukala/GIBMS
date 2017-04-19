@@ -67,10 +67,10 @@
                                              </font>
                                           </Label>
                                           <JFXTextField fx:id="text_nic" promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Personal phone" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="text_fullname" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXDatePicker fx:id="date_dob" prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="text_pphone" promptText="Personal phone" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="text_email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <children>
                                                 <JFXRadioButton fx:id="rb_male" prefHeight="17.0" prefWidth="108.0" text="Male">
@@ -90,7 +90,7 @@
                                                 <JFXRadioButton fx:id="rb_notmarried" text="Not married" toggleGroup="$tgroup_marital" />
                                              </children>
                                           </HBox>
-                                          <JFXTextField promptText="Home address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="text_haddress" promptText="Home address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="306.0" styleClass="headers" text="OCCUPATIONAL INFORMATION" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />

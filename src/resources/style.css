@@ -174,7 +174,7 @@ and open the template in the editor.
 .navigator .jfx-list-cell{
     -fx-background-insets: 0.0;
     -fx-background-color:-fx-nav-base;
-    -fx-padding: 17px;
+    -fx-padding: 16px;
 }
 
 .navigator .jfx-list-cell:selected{

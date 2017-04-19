@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dumiya.InsuranceManagementController">
    <children>
       <TabPane fx:id="tabpane" layoutX="182.0" layoutY="83.0" prefHeight="700.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <opaqueInsets>
@@ -40,14 +43,17 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="TEMPLATE HEADING" textFill="WHITE">
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="CUSTOMER SEARCH" textFill="WHITE">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Textfield" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="NIC" GridPane.rowIndex="1" />
+                                          <JFXButton prefHeight="25.0" prefWidth="298.0" text="Search" textFill="#f2ecec" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTreeTableView prefHeight="153.0" prefWidth="614.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="2147483647" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -81,14 +87,27 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="TEMPLATE HEADING" textFill="WHITE">
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="INSURANCE FUND" textFill="WHITE">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Textfield" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="NIC" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Insurance fee" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Payed amount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <JFXTextField promptText="Due amount" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <JFXDatePicker prefHeight="28.0" prefWidth="289.0" promptText="Date issued" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXDatePicker prefHeight="28.0" prefWidth="265.0" promptText="Expiry date" GridPane.rowIndex="2" />
+                                          <JFXButton prefHeight="25.0" prefWidth="265.0" text="Add" textFill="#f5f3f3" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <JFXButton prefHeight="25.0" prefWidth="292.0" text="Update" textFill="#fcf9f9" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <JFXButton prefHeight="25.0" prefWidth="282.0" text="Delete" textFill="#f5f3f3" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <JFXButton prefHeight="25.0" prefWidth="282.0" text="Search" textFill="#eeeeee" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Search" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXTreeTableView GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -122,14 +141,27 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="TEMPLATE HEADING" textFill="WHITE">
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="INSURANCE CLAIM" textFill="WHITE">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Textfield" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Claim number" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Claim status" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Claim type" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <JFXDatePicker prefHeight="28.0" prefWidth="268.0" promptText="Open date" GridPane.rowIndex="2" />
+                                          <JFXDatePicker prefHeight="28.0" prefWidth="297.0" promptText="Closed date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <JFXButton prefHeight="25.0" prefWidth="302.0" text="Add" textFill="#fffdfd" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <JFXButton prefHeight="25.0" prefWidth="279.0" text="Update" textFill="#f2efef" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <JFXButton prefHeight="25.0" prefWidth="291.0" text="Delete" textFill="#eeebeb" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <JFXButton prefHeight="25.0" prefWidth="298.0" text="Search" textFill="#ebe8e8" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Search" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXTreeTableView prefHeight="196.0" prefWidth="636.0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

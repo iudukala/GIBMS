@@ -6,11 +6,13 @@
 package fxml_files;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 import com.jfoenix.svg.SVGGlyph;
+import core.Entity;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -25,10 +27,10 @@ import javafx.scene.layout.StackPane;
 
 import core.Integrator;
 import core.Manipulator;
+import guiMediators.PersonControls;
 import handlers.ValidationHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Toggle;
 import javafx.scene.paint.Color;
 /**
  * FXML Controller class
@@ -74,9 +76,19 @@ public class CustomerController implements Initializable
     @FXML
     private JFXRadioButton rb_selfemployed;
     @FXML
-    private JFXButton btn_addupdate;
-    @FXML
     private AnchorPane subanchor_tca;
+    @FXML
+    private JFXTextField text_fullname;
+    @FXML
+    private JFXDatePicker date_dob;
+    @FXML
+    private JFXTextField text_pphone;
+    @FXML
+    private JFXTextField text_email;
+    @FXML
+    private JFXTextField text_haddress;
+    
+    PersonControls personCont;
     /**
      * Initializes the controller class.
      */
@@ -84,10 +96,7 @@ public class CustomerController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         //initializing gui
-        initializeRadioButtons();
         initializeNodes();
-        
-        ValidationHandler.NICValidator.register(text_nic);
     }
     
     private void initializeRadioButtons()
@@ -122,16 +131,37 @@ public class CustomerController implements Initializable
         subanchor_tca.getChildren().add(addButton);
         JFXDepthManager.setDepth(addButton, 5);
         
-        
-        Manipulator.setToggleSelection(tgroup_gender,"F");
-        
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-                text_nic.getUserData();
+                getPersonInputs();
             }
         });
+        
+        initializeRadioButtons();
+        initializePersonInputs();
+    }
+    public Entity getPersonInputs()
+    {
+        return personCont.getValues();
+    }
+    
+    public void initializePersonInputs()
+    {
+        personCont = new PersonControls();
+        
+        ValidationHandler.NICValidator.register(text_nic);
+        personCont.add("nic", text_nic);
+        
+        //ValidationHandler.EmailValidator.register()
+        personCont.add("full_name", text_fullname);
+        personCont.add("email", text_email);
+        personCont.add("dob", date_dob);
+        personCont.add("phone", text_pphone);
+        personCont.add("address", text_haddress);
+        personCont.add("gender", tgroup_gender);
+        personCont.add("marital_status", tgroup_marital);
     }
 }
