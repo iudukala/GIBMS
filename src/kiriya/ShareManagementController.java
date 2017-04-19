@@ -5,14 +5,18 @@
  */
 package kiriya;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.effects.JFXDepthManager;
+import com.jfoenix.svg.SVGGlyph;
 import core.Integrator;
+import guiMediators.Commons;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -25,15 +29,16 @@ public class ShareManagementController implements Initializable {
     private TabPane tabpane_shareholder;
     @FXML
     private AnchorPane anchor_shareholder;
+    @FXML
+    private AnchorPane anchor_shares;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
+    public void initialize(URL url, ResourceBundle rb)
     {
         Integrator.integrate(anchor_shareholder, tabpane_shareholder);
-    }    
-    
-    
+        Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER", Commons.ADD_PERSON_GLYPH);
+    }
 }

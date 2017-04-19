@@ -96,8 +96,8 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Company name" GridPane.rowIndex="5" />
-                                          <JFXTextField promptText="Position" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <JFXTextField fx:id="text_company" promptText="Company name" GridPane.rowIndex="5" />
+                                          <JFXTextField fx:id="text_position" promptText="Position" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                              <children>
                                                 <JFXRadioButton alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="122.0" text="Permanent">
@@ -108,7 +108,7 @@
                                                 <JFXRadioButton prefHeight="15.0" prefWidth="118.0" text="Temporary" toggleGroup="$tgroup_servicetype" />
                                              </children>
                                           </HBox>
-                                          <JFXDatePicker prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />
+                                          <JFXDatePicker fx:id="date_empl_start" prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                              <children>
                                                 <JFXRadioButton fx:id="rb_state" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="104.0" text="State">
@@ -120,20 +120,20 @@
                                                 <JFXRadioButton fx:id="rb_selfemployed" text="Self employed" toggleGroup="$tgroup_sector" />
                                              </children>
                                           </HBox>
-                                          <JFXTextField promptText="Company phone" GridPane.rowIndex="6" />
+                                          <JFXTextField fx:id="text_wphone" promptText="Company phone" GridPane.rowIndex="6" />
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="297.0" styleClass="headers" text="FINANCIAL INFORMATION" textFill="WHITE" GridPane.rowIndex="8">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Account number" GridPane.rowIndex="9" />
-                                          <JFXTextField promptText="Bank" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                          <JFXTextField promptText="Branch" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                          <JFXTextField promptText="Career" GridPane.rowIndex="11" />
-                                          <JFXTextField promptText="Business" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                          <JFXTextField promptText="Houses" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                                          <JFXTextField promptText="Vehicles" GridPane.rowIndex="12" />
-                                          <JFXTextField promptText="Land" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                          <JFXTextField fx:id="text_accnum" promptText="Account number" GridPane.rowIndex="9" />
+                                          <JFXTextField fx:id="text_accbank" promptText="Bank" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <JFXTextField fx:id="text_accbranch" promptText="Branch" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                          <JFXTextField fx:id="text_earncareer" promptText="Career" GridPane.rowIndex="11" />
+                                          <JFXTextField fx:id="text_earnbusiness" promptText="Business" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                          <JFXTextField fx:id="text_earnhouses" promptText="Houses" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                                          <JFXTextField fx:id="text_earnvehicles" promptText="Vehicles" GridPane.rowIndex="12" />
+                                          <JFXTextField fx:id="text_earnland" promptText="Land" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                                           <Label alignment="BOTTOM_LEFT" prefHeight="64.0" prefWidth="408.0" styleClass="subheaders" text="AVERAGE MONTHLY EARNINGS BY CATEGORY" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="10">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
@@ -144,18 +144,18 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="NIC" GridPane.rowIndex="14" />
-                                          <JFXTextField promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                                          <JFXTextField promptText="Profession" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                                          <JFXTextField fx:id="text_spnic" promptText="NIC" GridPane.rowIndex="14" />
+                                          <JFXTextField fx:id="text_spname" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                          <JFXTextField fx:id="text_spprofession" promptText="Profession" GridPane.columnIndex="2" GridPane.rowIndex="14" />
                                           <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.columnSpan="2147483647" GridPane.rowIndex="8" GridPane.valignment="BOTTOM">
                                              <GridPane.margin>
                                                 <Insets bottom="15.0" />
                                              </GridPane.margin></Line>
-                                          <JFXTextField promptText="Career" GridPane.rowIndex="16" />
-                                          <JFXTextField promptText="Business" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                                          <JFXTextField promptText="Houses" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-                                          <JFXTextField promptText="Vehicles" GridPane.rowIndex="17" />
-                                          <JFXTextField promptText="Land" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                                          <JFXTextField fx:id="text_spcareer" promptText="Career" GridPane.rowIndex="16" />
+                                          <JFXTextField fx:id="text_spbusiness" promptText="Business" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                                          <JFXTextField fx:id="text_sphouses" promptText="Houses" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+                                          <JFXTextField fx:id="text_spvehicles" promptText="Vehicles" GridPane.rowIndex="17" />
+                                          <JFXTextField fx:id="text_spland" promptText="Land" GridPane.columnIndex="1" GridPane.rowIndex="17" />
                                           <Label alignment="BOTTOM_LEFT" layoutX="50.0" layoutY="897.0" prefHeight="46.0" prefWidth="396.0" styleClass="subheaders" text="AVERAGE MONTHLY EARNINGS BY CATEGORY" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="15">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />

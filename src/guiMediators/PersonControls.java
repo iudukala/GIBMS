@@ -9,8 +9,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Manipulator;
-import java.util.HashMap;
-import java.util.Map;
+import handlers.ComponentInterface;
 import java.util.Map.Entry;
 import javafx.scene.control.ToggleGroup;
 
@@ -18,16 +17,17 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author Isuru Udukala
  */
-public class PersonControls
+public class PersonControls implements ComponentInterface
 {
     public final String TABLE_NAME = "person";
-    Map<String,Object> nodeList = new HashMap<>();
     
+    @Override
     public void add(String key, Object obj)
     {
         nodeList.put(key, obj);
     }
     
+    @Override
     public Entity getValues()
     {
         Entity person = new Entity(TABLE_NAME);
@@ -48,6 +48,7 @@ public class PersonControls
         return person;
     }
     
+    @Override
     public void setValues(Entity person)
     {
         for(Entry<String,Object> entry : nodeList.entrySet())

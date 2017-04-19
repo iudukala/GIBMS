@@ -47,8 +47,8 @@ public class dbConcurrent
             Connection conn=null;
             try
             {
-                //conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank","root","alpine64");
-                conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","");
+                conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank","root","alpine64");
+                //conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","");
                 System.out.println("Database connection successful");
             }
             catch(SQLException e)

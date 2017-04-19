@@ -73,7 +73,7 @@ public class ValidationHandler
             }
             else
             {
-                message.set("Invalid phone number. (eg : (077) 123 1234)");
+                message.set("Invalid phone number");
                 fieldInvalid(icon, hasErrors);
             }
         }
@@ -95,7 +95,7 @@ public class ValidationHandler
             }
             else
             {
-                message.set("Invalid email. (eg: someone@example.com");
+                message.set("Invalid email.");
                 fieldInvalid(icon, hasErrors);
             }
         }

@@ -26,9 +26,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 
 import core.Integrator;
-import core.Manipulator;
+import guiMediators.Commons;
 import guiMediators.PersonControls;
 import handlers.ValidationHandler;
+import handlers.dbConcurrent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.paint.Color;
@@ -88,17 +89,121 @@ public class CustomerController implements Initializable
     @FXML
     private JFXTextField text_haddress;
     
+    //customer controls
+    @FXML
+    private JFXTextField text_company;
+    @FXML
+    private JFXTextField text_position;
+    @FXML
+    private JFXDatePicker date_empl_start;
+    @FXML
+    private JFXTextField text_wphone;
+    @FXML
+    private JFXTextField text_accnum;
+    @FXML
+    private JFXTextField text_accbank;
+    @FXML
+    private JFXTextField text_accbranch;
+    @FXML
+    private JFXTextField text_earncareer;
+    @FXML
+    private JFXTextField text_earnbusiness;
+    @FXML
+    private JFXTextField text_earnhouses;
+    @FXML
+    private JFXTextField text_earnvehicles;
+    @FXML
+    private JFXTextField text_earnland;
+    @FXML
+    private JFXTextField text_spnic;
+    @FXML
+    private JFXTextField text_spname;
+    @FXML
+    private JFXTextField text_spprofession;
+    @FXML
+    private JFXTextField text_spcareer;
+    @FXML
+    private JFXTextField text_spbusiness;
+    @FXML
+    private JFXTextField text_sphouses;
+    @FXML
+    private JFXTextField text_spvehicles;
+    @FXML
+    private JFXTextField text_spland;
+    
     PersonControls personCont;
-    /**
-     * Initializes the controller class.
-     */
+    dbConcurrent nbconn;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        //initiailizing database connection
+        nbconn = new dbConcurrent();
         //initializing gui
         initializeNodes();
     }
     
+    
+    private void initializeNodes()
+    {
+        scroll_add.setPrefHeight(580);
+        Integrator.integrate(anchor_customer, tabpane_customer);
+        JFXDepthManager.setDepth(scroll_add, 2);
+        
+        JFXButton addButton = Commons.setSubanchorButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
+        
+        addButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity person = getPersonInputs();
+                if(person.validate(nbconn.get(), true))
+                    person.consolidate(nbconn.get());
+            }
+        });
+        
+        initializeRadioButtons();
+        initializePersonInputs();
+    }
+    
+    public Entity getPersonInputs()
+    {
+        return personCont.getValues();
+    }
+    public void setPersonInputs(Entity person)
+    {
+        personCont.setValues(person);
+    }
+    
+    public void initializePersonInputs()
+    {
+        personCont = new PersonControls();
+        
+        ValidationHandler.NICValidator.register(text_nic);
+        personCont.add("nic", text_nic);
+        
+        personCont.add("full_name", text_fullname);
+        
+        ValidationHandler.EmailValidator.register(text_email);
+        personCont.add("email", text_email);
+        
+        personCont.add("dob", date_dob);
+        
+        ValidationHandler.PhoneValidator.register(text_pphone);
+        personCont.add("phone", text_pphone);
+        
+        personCont.add("address", text_haddress);
+        
+        personCont.add("gender", tgroup_gender);
+        
+        personCont.add("marital_status", tgroup_marital);
+    }
+    
+    public void initializeCustomerInputs()
+    {
+        
+    }
     private void initializeRadioButtons()
     {
         rb_male.setUserData("M");
@@ -110,58 +215,5 @@ public class CustomerController implements Initializable
         rb_state.setUserData("S");
         rb_statecorp.setUserData("C");
         rb_selfemployed.setUserData("E");
-    }
-    private void initializeNodes()
-    {
-        scroll_add.setPrefHeight(580);
-        Integrator.integrate(anchor_customer, tabpane_customer);
-        JFXDepthManager.setDepth(scroll_add, 2);
-        
-        
-        JFXButton addButton = new JFXButton("ADD RECORD");
-        SVGGlyph glyph = new SVGGlyph(1,"addperson", "M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-"
-                + "2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z", Color.WHITE);
-        glyph.setSize(20,15);
-        addButton.setGraphicTextGap(10);
-        addButton.setGraphic(glyph);
-        addButton.setPrefSize(180,50);
-        addButton.setTranslateX(400);
-        addButton.setTranslateY(600);
-        addButton.getStyleClass().add("addbutton");
-        subanchor_tca.getChildren().add(addButton);
-        JFXDepthManager.setDepth(addButton, 5);
-        
-        addButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-                getPersonInputs();
-            }
-        });
-        
-        initializeRadioButtons();
-        initializePersonInputs();
-    }
-    public Entity getPersonInputs()
-    {
-        return personCont.getValues();
-    }
-    
-    public void initializePersonInputs()
-    {
-        personCont = new PersonControls();
-        
-        ValidationHandler.NICValidator.register(text_nic);
-        personCont.add("nic", text_nic);
-        
-        //ValidationHandler.EmailValidator.register()
-        personCont.add("full_name", text_fullname);
-        personCont.add("email", text_email);
-        personCont.add("dob", date_dob);
-        personCont.add("phone", text_pphone);
-        personCont.add("address", text_haddress);
-        personCont.add("gender", tgroup_gender);
-        personCont.add("marital_status", tgroup_marital);
     }
 }
