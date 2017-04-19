@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kiriya;
+package legacy;
 
 import legacy.Person;
 import handlers.DynamicTable;
@@ -213,7 +213,7 @@ public class FXMLDocumentController implements Initializable {
             String description = descriptio.getText();
             System.out.println(description);
             
-            alert_box.add_btn.display("info","shares added successfully");
+            legacy.add_btn.display("info","shares added successfully");
        try
        {
            Person person_object = new Person (name,nic,dob,personal_phone,home_address,'.','.',email);

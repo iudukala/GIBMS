@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author ASUS-PC
  */
-public class FXMLTemplateController implements Initializable {
+public class ShareManagementController implements Initializable {
 
     @FXML
     private TabPane tabpane_shareholder;
