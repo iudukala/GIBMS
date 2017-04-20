@@ -68,7 +68,7 @@ public class Validator
         else
             return false;
     }
-    public static boolean isNumber(String str)
+    public static boolean isInteger(String str)
     {
         boolean valid=true;
         for(int i=0; i<str.length(); i++)
@@ -79,6 +79,21 @@ public class Validator
                 break;
             }
         }
-        return false;
+        return valid;
+    }
+    public static boolean isDouble(String str)
+    {
+        List<Character> allowed=new ArrayList<>(Arrays.asList('.'));
+        
+        boolean valid=true;
+        for(int i=0; i<str.length(); i++)
+        {
+            if(! (Character.isDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
+            {
+                valid=false;
+                break;
+            }
+        }
+        return valid;
     }
 }

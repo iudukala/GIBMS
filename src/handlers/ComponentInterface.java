@@ -6,8 +6,6 @@
 package handlers;
 
 import core.Entity;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -15,8 +13,6 @@ import java.util.Map;
  */
 public interface ComponentInterface 
 {
-    
-    
     public void add(String key, Object control);
     public Entity getValues();
     public void setValues(Entity entity);

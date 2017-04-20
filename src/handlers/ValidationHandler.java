@@ -105,13 +105,13 @@ public class ValidationHandler
         }
     }
     
-    public static class NumberValidator extends ValidatorBase
+    public static class IntegerValidator extends ValidatorBase
     {
         @Override
         public void eval()
         {
             TextInputControl textField = (TextInputControl) srcControl.get();
-            if (Validator.isNumber(textField.getText()) || textField.getText().equals(""))
+            if (Validator.isInteger(textField.getText()) || textField.getText().equals(""))
             {
                 hasErrors.set(false);
             }
@@ -123,7 +123,29 @@ public class ValidationHandler
         }
         public static void register(JFXTextField textField)
         {
-            ValidationHandler.register(new NumberValidator() , textField);
+            ValidationHandler.register(new IntegerValidator() , textField);
+        }
+    }
+    
+    public static class DoubleValidator extends ValidatorBase
+    {
+        @Override
+        public void eval()
+        {
+            TextInputControl textField = (TextInputControl) srcControl.get();
+            if (Validator.isDouble(textField.getText()) || textField.getText().equals(""))
+            {
+                hasErrors.set(false);
+            }
+            else
+            {
+                message.set("Invalid value");
+                fieldInvalid(icon, hasErrors);
+            }
+        }
+        public static void register(JFXTextField textField)
+        {
+            ValidationHandler.register(new DoubleValidator() , textField);
         }
     }
 }

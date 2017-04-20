@@ -251,19 +251,19 @@ public class CustomerController implements Initializable
         
         customerControls.add("account_branch", text_accbranch);
         
-        ValidationHandler.NumberValidator.register(text_earncareer);
+        ValidationHandler.DoubleValidator.register(text_earncareer);
         customerControls.add("earn_career", text_earncareer);
         
-        ValidationHandler.NumberValidator.register(text_earnbusiness);
+        ValidationHandler.DoubleValidator.register(text_earnbusiness);
         customerControls.add("earn_business", text_earnbusiness);
         
-        ValidationHandler.NumberValidator.register(text_earnhouses);
+        ValidationHandler.DoubleValidator.register(text_earnhouses);
         customerControls.add("earn_houses", text_earnhouses);
         
-        ValidationHandler.NumberValidator.register(text_earnvehicles);
+        ValidationHandler.DoubleValidator.register(text_earnvehicles);
         customerControls.add("earn_vehicles", text_earnvehicles);
         
-        ValidationHandler.NumberValidator.register(text_earnland);
+        ValidationHandler.DoubleValidator.register(text_earnland);
         customerControls.add("earn_land", text_earnland);
         
     }
