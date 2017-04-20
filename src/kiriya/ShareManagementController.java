@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import core.Integrator;
 import guiMediators.Commons;
-import guiMediators.EntityControls;
 //import guiMediators.PersonControls;
 import handlers.ValidationHandler;
 import handlers.dbConcurrent;
@@ -72,13 +71,13 @@ public class ShareManagementController implements Initializable {
         Integrator.integrate(anchor_shareholder, tabpane_shareholder);
         Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER", 200, Commons.ADD_PERSON_GLYPH);
         
-        initializePersonInputs();
-        initializeShareholderInputs();
-    }
-    
-     public void initializePersonInputs()
-    {
-//        personCont = new EntityControls();
+//        initializePersonInputs();
+//        initializeShareholderInputs();
+   }
+//    
+//     public void initializePersonInputs()
+//    {
+//        personCont = new PersonControls();
 //        
 //        ValidationHandler.NICValidator.register(a_nic);
 //        personCont.add("nic", a_nic);
@@ -94,27 +93,27 @@ public class ShareManagementController implements Initializable {
 //        personCont.add("phone", a_phone);
 //        
 //        personCont.add("address", a_address);
-        
-    
-    }
-     public void initializeShareholderInputs()
-     {
+//        
+//    
+//    }
+//     public void initializeShareholderInputs()
+//     {
 //        ValidationHandler.NumberValidator.register(a_shareamount);
 //        personCont.add("share_amount", a_shareamount);
 //        
 //        
 //        ValidationHandler.NumberValidator.register(a_shareprice);
 //        personCont.add("share_price", a_shareprice);
-        
-//        ValidationHandler.NumberValidator.register(a_accountno);
-//        personCont.add("account_no", a_accountno);
-        
+//        
+////        ValidationHandler.NumberValidator.register(a_accountno);
+////        personCont.add("account_no", a_accountno);
+//        
 //        ValidationHandler.CharacterValidator.register(a_bankname);
 //        personCont.add("bank_name", a_bankname);
-        
-     
-     
-     
-     }
+//        
+//     
+//     
+//     
+//     }
     
 }
