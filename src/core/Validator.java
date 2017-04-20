@@ -36,6 +36,11 @@ public class Validator
         boolean valid=true;
         if(!(str.contains("@") && str.contains(".")))
             return false;
+        else if(str.startsWith("@") || str.startsWith("."))
+            return false;
+        else if(str.endsWith("@") || str.endsWith("."))
+            return false;
+        
         for(int i=0; i<str.length(); i++)
         {
             if(! (Character.isLetterOrDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))

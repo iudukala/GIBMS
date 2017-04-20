@@ -133,9 +133,9 @@ public class CustomerController implements Initializable
     @FXML
     private JFXTextField text_spland;
     
-    EntityControls personControls;
-    EntityControls customerControls;
-    List<? extends ValidatorBase> validators = new ArrayList<>();
+    EntityControls personControls = new EntityControls("person");
+    EntityControls customerControls = new EntityControls("customer_state");
+    
     dbConcurrent nbconn;
     
     @FXML
@@ -164,14 +164,13 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent e)
             {
-                System.out.println(validatePersonInputs());
-//                Entity person = getPersonInputs();
-//                if(person.validate(nbconn.get(), true))
-//                    person.consolidate(nbconn.get());
-//                
-//                Entity customer = getCustomerInputs();
-//                if(customer.validate(nbconn.get(), true))
-//                    customer.consolidate(nbconn.get());
+                Entity person = getPersonInputs();
+                if(person.validate(nbconn.get(), true))
+                    person.consolidate(nbconn.get());
+                
+                Entity customer = getCustomerInputs();
+                if(customer.validate(nbconn.get(), true))
+                    customer.consolidate(nbconn.get());
             }
         });
         
@@ -204,8 +203,6 @@ public class CustomerController implements Initializable
     
     public void initializePersonInputs()
     {
-        personControls = new EntityControls("person");
-        
         ValidationHandler.NICValidator.register(text_nic);
         personControls.add("nic", text_nic);
         
@@ -228,8 +225,6 @@ public class CustomerController implements Initializable
     
     public void initializeCustomerInputs()
     {
-        customerControls = new EntityControls("customer_state");
-        
         customerControls.add("nic", text_nic);
         
         PhoneValidator.register(text_wphone);
