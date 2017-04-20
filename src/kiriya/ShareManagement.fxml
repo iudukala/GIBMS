@@ -52,18 +52,18 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField prefWidth="790.0" promptText="Address" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="Contact No" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Email" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Share amount" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <JFXTextField promptText="Bank name" GridPane.rowIndex="4" />
-                                          <JFXTextField promptText="Share price" GridPane.rowIndex="5" />
-                                          <JFXTextField promptText="Account No" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
-                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of issue" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of expire" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <JFXTextField fx:id="a_nic" promptText="NIC" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="a_fullname" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="a_address" prefWidth="790.0" promptText="Address" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="a_phone" promptText="Contact No" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="a_email" promptText="Email" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="a_shareamount" promptText="Share amount" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <JFXTextField fx:id="a_bankname" promptText="Bank name" GridPane.rowIndex="4" />
+                                          <JFXTextField fx:id="a_shareprice" promptText="Share price" GridPane.rowIndex="5" />
+                                          <JFXTextField fx:id="a_accountno" promptText="Account No" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <JFXDatePicker fx:id="a_dob" prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
+                                          <JFXDatePicker fx:id="a_dateofissue" prefHeight="19.0" prefWidth="280.0" promptText="Date of issue" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <JFXDatePicker fx:id="a_dateofexpire" prefHeight="19.0" prefWidth="280.0" promptText="Date of expire" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
