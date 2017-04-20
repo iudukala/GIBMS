@@ -95,7 +95,7 @@ public class ValidationHandler
             }
             else
             {
-                message.set("Invalid email.");
+                message.set("Invalid email");
                 fieldInvalid(icon, hasErrors);
             }
         }

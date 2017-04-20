@@ -174,6 +174,7 @@
                                                 <Insets bottom="15.0" />
                                              </GridPane.margin>
                                           </Line>
+                                          <JFXTextField fx:id="text_profession" promptText="Profession (Self employed)" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

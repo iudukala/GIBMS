@@ -169,6 +169,10 @@ and open the template in the editor.
     -fx-text-fill: WHITE;
 }
 
+.addbutton:hover{
+    -fx-background-color:#7ddb74;
+}
+
 /*list view*/
 
 .navigator .jfx-list-cell{

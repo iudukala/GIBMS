@@ -11,7 +11,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
-import com.jfoenix.svg.SVGGlyph;
+import com.jfoenix.validation.base.ValidatorBase;
 import core.Entity;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,12 +27,14 @@ import javafx.scene.layout.StackPane;
 
 import core.Integrator;
 import guiMediators.Commons;
-import guiMediators.PersonControls;
+import guiMediators.EntityControls;
 import handlers.ValidationHandler;
+import handlers.ValidationHandler.PhoneValidator;
 import handlers.dbConcurrent;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.paint.Color;
 /**
  * FXML Controller class
  *
@@ -131,8 +133,13 @@ public class CustomerController implements Initializable
     @FXML
     private JFXTextField text_spland;
     
-    PersonControls personCont;
+    EntityControls personControls;
+    EntityControls customerControls;
+    List<? extends ValidatorBase> validators = new ArrayList<>();
     dbConcurrent nbconn;
+    
+    @FXML
+    private JFXTextField text_profession;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -157,51 +164,107 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent e)
             {
-                Entity person = getPersonInputs();
-                if(person.validate(nbconn.get(), true))
-                    person.consolidate(nbconn.get());
+                System.out.println(validatePersonInputs());
+//                Entity person = getPersonInputs();
+//                if(person.validate(nbconn.get(), true))
+//                    person.consolidate(nbconn.get());
+//                
+//                Entity customer = getCustomerInputs();
+//                if(customer.validate(nbconn.get(), true))
+//                    customer.consolidate(nbconn.get());
             }
         });
         
         initializeRadioButtons();
         initializePersonInputs();
+        initializeCustomerInputs();
     }
     
     public Entity getPersonInputs()
     {
-        return personCont.getValues();
+        return personControls.getValues();
     }
     public void setPersonInputs(Entity person)
     {
-        personCont.setValues(person);
+        personControls.setValues(person);
+    }
+    public boolean validatePersonInputs()
+    {
+        return personControls.validateValues();
+    }
+    
+    public Entity getCustomerInputs()
+    {
+        return customerControls.getValues();
+    }
+    public void setCustomerInputs(Entity customer)
+    {
+        customerControls.setValues(customer);
     }
     
     public void initializePersonInputs()
     {
-        personCont = new PersonControls();
+        personControls = new EntityControls("person");
         
         ValidationHandler.NICValidator.register(text_nic);
-        personCont.add("nic", text_nic);
+        personControls.add("nic", text_nic);
         
-        personCont.add("full_name", text_fullname);
+        personControls.add("full_name", text_fullname);
         
         ValidationHandler.EmailValidator.register(text_email);
-        personCont.add("email", text_email);
+        personControls.add("email", text_email);
         
-        personCont.add("dob", date_dob);
+        personControls.add("dob", date_dob);
         
         ValidationHandler.PhoneValidator.register(text_pphone);
-        personCont.add("phone", text_pphone);
+        personControls.add("phone", text_pphone);
         
-        personCont.add("address", text_haddress);
+        personControls.add("address", text_haddress);
         
-        personCont.add("gender", tgroup_gender);
+        personControls.add("gender", tgroup_gender);
         
-        personCont.add("marital_status", tgroup_marital);
+        personControls.add("marital_status", tgroup_marital);
     }
     
     public void initializeCustomerInputs()
     {
+        customerControls = new EntityControls("customer_state");
+        
+        customerControls.add("nic", text_nic);
+        
+        PhoneValidator.register(text_wphone);
+        customerControls.add("work_phone", text_wphone);
+        
+        customerControls.add("emp_sector", tgroup_sector);
+        
+        customerControls.add("company", text_company);
+        
+        customerControls.add("position", text_position);
+        
+        customerControls.add("emp_startdate", date_empl_start);
+        
+        customerControls.add("service_nature",tgroup_servicetype);
+        
+        customerControls.add("profession", text_profession);
+        
+        customerControls.add("account_num", text_accnum);
+        
+        customerControls.add("account_branch", text_accbranch);
+        
+        ValidationHandler.NumberValidator.register(text_earncareer);
+        customerControls.add("earn_career", text_earncareer);
+        
+        ValidationHandler.NumberValidator.register(text_earnbusiness);
+        customerControls.add("earn_business", text_earnbusiness);
+        
+        ValidationHandler.NumberValidator.register(text_earnhouses);
+        customerControls.add("earn_houses", text_earnhouses);
+        
+        ValidationHandler.NumberValidator.register(text_earnvehicles);
+        customerControls.add("earn_vehicles", text_earnvehicles);
+        
+        ValidationHandler.NumberValidator.register(text_earnland);
+        customerControls.add("earn_land", text_earnland);
         
     }
     private void initializeRadioButtons()

@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface ComponentInterface 
 {
-    final Map<String,Object> nodeList = new HashMap<>();
+    
     
     public void add(String key, Object control);
     public Entity getValues();

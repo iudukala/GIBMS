@@ -17,7 +17,7 @@ public class Validator
 {
     public static boolean isPhone(String str)
     {
-        List<Character> allowed=new ArrayList<>(Arrays.asList('+','-','(',')', ' '));
+        List<Character> allowed=new ArrayList<>(Arrays.asList('+','-','(',')'));
         //allowed.addAll(Arrays.asList('+','-'));
         boolean valid=true;
         for(int i=0; i<str.length(); i++)
@@ -34,6 +34,8 @@ public class Validator
     {
         List<Character> allowed=new ArrayList<>(Arrays.asList('@','.'));
         boolean valid=true;
+        if(!(str.contains("@") && str.contains(".")))
+            return false;
         for(int i=0; i<str.length(); i++)
         {
             if(! (Character.isLetterOrDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
@@ -77,6 +79,6 @@ public class Validator
                 break;
             }
         }
-        return valid;
+        return false;
     }
 }

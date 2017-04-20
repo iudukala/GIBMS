@@ -19,6 +19,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -44,6 +45,16 @@ public class Integrator
         
         anchor.getChildren().clear();
         anchor.getChildren().addAll(jfx_tp,button,drawer);
+        
+        anchor.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent me)
+            {
+                if(drawer.isShown())
+                    drawer.close();
+            }
+        });
         return jfx_tp;
     }
     
