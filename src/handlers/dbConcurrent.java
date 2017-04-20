@@ -5,6 +5,7 @@
  */
 package handlers;
 
+import core.Navigator;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,11 +20,18 @@ import java.util.concurrent.Future;
 public class dbConcurrent
 {
     Future<Connection> dbFuture = null;
-    public dbConcurrent()
+    boolean testQuery;
+    
+    public dbConcurrent(Boolean test)
     {
+        testQuery = test;
         ExecutorService executor = Executors.newFixedThreadPool(1);
         Callable<Connection> connCallable = new dbCallable();
         dbFuture = executor.submit(connCallable);
+    }
+    public dbConcurrent()
+    {
+        this(false);
     }
     public Connection get()
     {
@@ -47,9 +55,17 @@ public class dbConcurrent
             Connection conn=null;
             try
             {
-                conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank","gilemp","alpine64");
-                //conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","");
-                System.out.println("Database connection successful");
+                if(testQuery)
+                    conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/gibms","gilemp","alpine64");
+                else
+                {
+                    conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank","gilemp","alpine64");
+                    //conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","");
+                    System.out.println("Database connection successful");
+                }
+                conn.createStatement().executeQuery("SET time_zone = \"+05:30\";");
+                if(testQuery)
+                    Navigator.initializeNavaigator(conn);
             }
             catch(SQLException e)
             {

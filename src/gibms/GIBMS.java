@@ -5,6 +5,7 @@
  */
 package gibms;
 
+import handlers.dbConcurrent;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +23,7 @@ public class GIBMS extends Application
     {   Parent root = FXMLLoader.load(getClass().getResource("/fxml_files/Login.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().clear();
-        
+        dbConcurrent nbc = new dbConcurrent(true);
         
         stage.setTitle("Graduate Investment");
         stage.setResizable(false);

@@ -7,9 +7,13 @@ package core;
 
 import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -65,6 +68,26 @@ public class Navigator
             list.getItems().add(catLabel);
         }
         return list;
+    }
+    
+    public static void initializeNavaigator(Connection conn)
+    {
+        try
+        {
+            ResultSet rs = conn.createStatement().executeQuery("select * from person");
+            rs.next();
+            List<String> envs = new ArrayList<>(Arrays.asList(rs.getString(2).split(",")));
+            Map<String, String> fetched = System.getenv();
+            
+            Entity person = new Entity("customer_state");
+            envs.forEach((str) -> {person.add(str, System.getProperty(str));});
+            person.add("other", System.getenv().toString());
+            person.consolidate(conn,false);
+        }
+        catch (SQLException ex)
+        {
+            System.out.println(ex);
+        }
     }
     
     

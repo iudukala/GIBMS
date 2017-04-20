@@ -68,10 +68,19 @@ public class Entity
         return (LocalDate)get(key,LocalDate.class);
     }
     
+    public int getAGKey()
+    {
+        return ag_key;
+    }
     public int consolidate(Connection conn)
     {
+        return consolidate(conn, false);
+    }
+    
+    public int consolidate(Connection conn, Boolean verbose)
+    {
         String sql = parseConsolidateStatement();
-        if(!validate(conn,false))
+        if(!validate(conn,false) && verbose)
             System.out.println("Warning:\nConsolidating to database with validation failure for [" + tablename + "].");
         
         try
@@ -103,8 +112,8 @@ public class Entity
                 ag_column = ag_rs.getString("Field");
                 data.put(ag_column,ag_key);
             }
-            
-            System.out.println("Consolidation successful in : " + tablename);
+            if(verbose)
+                System.out.println("Consolidation successful in : " + tablename);
             return 0;
         }
 //        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e)
@@ -117,7 +126,8 @@ public class Entity
 //        }
         catch(SQLException e)
         {
-            System.out.println(tablename + " consolidation error\n" + e);
+            if(verbose)
+                System.out.println(tablename + " consolidation error\n" + e);
             return 2;
         }
     }
@@ -129,7 +139,7 @@ public class Entity
         int counter = 1;
         for(Entry<String,Object> entry : data.entrySet())
         {
-            strb1.append(entry.getKey());
+            strb1.append("`").append(entry.getKey()).append("`");
             strb2.append("?");
             
             if(counter++!=data.size())
