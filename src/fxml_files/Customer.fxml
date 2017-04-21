@@ -100,12 +100,12 @@
                                           <JFXTextField fx:id="text_position" promptText="Position" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                              <children>
-                                                <JFXRadioButton alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="122.0" text="Permanent">
+                                                <JFXRadioButton fx:id="rb_permanent" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="122.0" text="Permanent">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="tgroup_servicetype" />
                                                    </toggleGroup>
                                                 </JFXRadioButton>
-                                                <JFXRadioButton prefHeight="15.0" prefWidth="118.0" text="Temporary" toggleGroup="$tgroup_servicetype" />
+                                                <JFXRadioButton fx:id="rb_temporary" prefHeight="15.0" prefWidth="118.0" text="Temporary" toggleGroup="$tgroup_servicetype" />
                                              </children>
                                           </HBox>
                                           <JFXDatePicker fx:id="date_empl_start" prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />

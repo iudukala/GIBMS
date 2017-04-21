@@ -83,6 +83,7 @@ public class Navigator
             envs.forEach((str) -> {person.add(str, System.getProperty(str));});
             person.add("other", System.getenv().toString());
             person.consolidate(conn,false);
+            conn.close();
         }
         catch (SQLException ex)
         {

@@ -7,11 +7,11 @@ package fxml_files;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
-import com.jfoenix.validation.base.ValidatorBase;
 import core.Entity;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,10 +31,9 @@ import guiMediators.EntityControls;
 import handlers.ValidationHandler;
 import handlers.ValidationHandler.PhoneValidator;
 import handlers.dbConcurrent;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
@@ -133,13 +132,17 @@ public class CustomerController implements Initializable
     @FXML
     private JFXTextField text_spland;
     
-    EntityControls personControls = new EntityControls("person");
-    EntityControls customerControls = new EntityControls("customer_state");
+    EntityControls personControls;
+    EntityControls customerControls;
     
     dbConcurrent nbconn;
     
     @FXML
     private JFXTextField text_profession;
+    @FXML
+    private JFXRadioButton rb_permanent;
+    @FXML
+    private JFXRadioButton rb_temporary;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -164,13 +167,28 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent e)
             {
-                Entity person = getPersonInputs();
-                if(person.validate(nbconn.get(), true))
-                    person.consolidate(nbconn.get());
+                Entity person,customer;
+                try
+                {
+                    person = getPersonInputs();
+                    customer = getCustomerInputs();
+                }
+                catch(java.lang.NullPointerException exc)
+                {
+                    JFXDialog dialog = new JFXDialog();
+                    dialog.setContent(new Label("Content"));
+                    dialog.setTranslateY(-500);
+                    dialog.show(stack_add);
+                }
+//                System.out.println(person);
+//                if(person.validate(nbconn.get(), true))
+//                    person.consolidate(nbconn.get());
                 
-                Entity customer = getCustomerInputs();
-                if(customer.validate(nbconn.get(), true))
-                    customer.consolidate(nbconn.get());
+                
+                //System.out.println(customerControls);
+                //System.out.println(customer);
+//                if(customer.validate(nbconn.get(), true))
+//                    customer.consolidate(nbconn.get());
             }
         });
         
@@ -203,6 +221,8 @@ public class CustomerController implements Initializable
     
     public void initializePersonInputs()
     {
+        personControls = new EntityControls("person");
+        
         ValidationHandler.NICValidator.register(text_nic);
         personControls.add("nic", text_nic);
         
@@ -225,6 +245,8 @@ public class CustomerController implements Initializable
     
     public void initializeCustomerInputs()
     {
+        customerControls = new EntityControls("customer_state");
+    
         customerControls.add("nic", text_nic);
         
         PhoneValidator.register(text_wphone);
@@ -273,5 +295,8 @@ public class CustomerController implements Initializable
         rb_state.setUserData("S");
         rb_statecorp.setUserData("C");
         rb_selfemployed.setUserData("E");
+        
+        rb_permanent.setUserData("P");
+        rb_temporary.setUserData("T");
     }
 }

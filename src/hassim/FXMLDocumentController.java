@@ -17,11 +17,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -158,6 +160,10 @@ public class FXMLDocumentController implements Initializable {
     private ToggleGroup e_marital;
     @FXML
     private DatePicker e_datepicker_dob;
+    @FXML
+    private AnchorPane anchor_hr;
+    @FXML
+    private TabPane tabpane_hr;
     
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -165,9 +171,9 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
-            
+    public void initialize(URL url, ResourceBundle rb)
     {
+        core.Integrator.integrate(anchor_hr, tabpane_hr);
         conn=dbConnect.connect();
         
     }    

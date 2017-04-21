@@ -5,15 +5,20 @@
  */
 package kiriya;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import core.Entity;
 import core.Integrator;
 import guiMediators.Commons;
+import guiMediators.EntityControls;
 //import guiMediators.PersonControls;
 import handlers.ValidationHandler;
 import handlers.dbConcurrent;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
@@ -27,6 +32,8 @@ import javafx.scene.layout.AnchorPane;
 public class ShareManagementController implements Initializable {
 
     //PersonControls personCont;
+    EntityControls personCont;
+    EntityControls shareholderCont;
     dbConcurrent nbconn;
     
     @FXML
@@ -69,51 +76,88 @@ public class ShareManagementController implements Initializable {
         nbconn = new dbConcurrent();
         
         Integrator.integrate(anchor_shareholder, tabpane_shareholder);
-        Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER", 200, Commons.ADD_PERSON_GLYPH);
+       JFXButton addButton= Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER", 200, Commons.ADD_PERSON_GLYPH);
         
-//        initializePersonInputs();
-//        initializeShareholderInputs();
+        addButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+              //  System.out.println(validatePersonInputs());
+                
+                Entity person = getPersonInputs();
+                if(person.validate(nbconn.get(), true))
+                    person.consolidate(nbconn.get());
+                
+                Entity shareholder = getCustomerInputs();
+                if(shareholder.validate(nbconn.get(), true))
+                    shareholder.consolidate(nbconn.get());
+            }
+        });
+        
+        
+        
+        initializePersonInputs();
+        initializeShareholderInputs();
    }
-//    
-//     public void initializePersonInputs()
-//    {
-//        personCont = new PersonControls();
-//        
-//        ValidationHandler.NICValidator.register(a_nic);
-//        personCont.add("nic", a_nic);
-//        
-//        personCont.add("full_name", a_fullname);
-//        
-//        ValidationHandler.EmailValidator.register(a_email);
-//        personCont.add("email", a_email);
-//        
-//        personCont.add("dob", a_dob);
-//        
-//        ValidationHandler.PhoneValidator.register(a_phone);
-//        personCont.add("phone", a_phone);
-//        
-//        personCont.add("address", a_address);
-//        
-//    
-//    }
-//     public void initializeShareholderInputs()
-//     {
-//        ValidationHandler.NumberValidator.register(a_shareamount);
-//        personCont.add("share_amount", a_shareamount);
-//        
-//        
-//        ValidationHandler.NumberValidator.register(a_shareprice);
-//        personCont.add("share_price", a_shareprice);
-//        
-////        ValidationHandler.NumberValidator.register(a_accountno);
-////        personCont.add("account_no", a_accountno);
+    
+        public Entity getPersonInputs()
+    {
+        return personCont.getValues();
+    }
+       
+        public Entity getCustomerInputs()
+    {
+        return shareholderCont.getValues();
+    }
+        
+    
+     public void initializePersonInputs()
+    {
+        personCont= new EntityControls("person");
+       
+        
+        ValidationHandler.NICValidator.register(a_nic);
+        personCont.add("nic", a_nic);
+        
+        personCont.add("full_name", a_fullname);
+        
+        ValidationHandler.EmailValidator.register(a_email);
+        personCont.add("email", a_email);
+        
+        personCont.add("dob", a_dob);
+        
+        ValidationHandler.PhoneValidator.register(a_phone);
+        personCont.add("phone", a_phone);
+        
+        personCont.add("address", a_address);
+        
+    
+    }
+     public void initializeShareholderInputs()
+     {
+        shareholderCont= new EntityControls("shareholder");
+         
+        ValidationHandler.IntegerValidator.register(a_shareamount);
+        shareholderCont.add("share_amount", a_shareamount);
+        
+        
+        ValidationHandler.DoubleValidator.register(a_shareprice);
+        shareholderCont.add("share_price", a_shareprice);
+        
+//        ValidationHandler.NumberValidator.register(a_accountno);
+        shareholderCont.add("account_no", a_accountno);
 //        
 //        ValidationHandler.CharacterValidator.register(a_bankname);
-//        personCont.add("bank_name", a_bankname);
-//        
-//     
-//     
-//     
-//     }
+        shareholderCont.add("bank_name", a_bankname);
+        
+        
+        shareholderCont.add("share_range_start", a_dateofissue);
+        
+        shareholderCont.add("share_range_close", a_dateofexpire);
+    
+     
+     
+     }
     
 }
