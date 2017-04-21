@@ -69,7 +69,8 @@ public class dbConcurrent
             }
             catch(SQLException e)
             {
-                System.out.println("dbConnect exception:\n" + e);
+                if(!testQuery)
+                    System.out.println("dbConnect exception:\n" + e);
             }
             return conn;
         }
