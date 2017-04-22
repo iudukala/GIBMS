@@ -66,6 +66,8 @@ public class ShareManagementController implements Initializable {
     private JFXDatePicker a_dateofissue;
     @FXML
     private JFXDatePicker a_dateofexpire;
+    @FXML
+    private AnchorPane anchor_update;
 
     /**
      * Initializes the controller class.
@@ -76,46 +78,42 @@ public class ShareManagementController implements Initializable {
         nbconn = new dbConcurrent();
         
         Integrator.integrate(anchor_shareholder, tabpane_shareholder);
-       JFXButton addButton= Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER", 200, Commons.ADD_PERSON_GLYPH);
+        JFXButton addButton = Commons.setSubanchorButton(anchor_shares, "ADD SHAREHOLDER",200,15,400,600,Commons.ADD_PERSON_GLYPH);
+        Commons.setSubanchorButton(anchor_update, "UPDATE SHAREHOLDER", 220,20,670,550,Commons.UPDATE_GLYPH);
+        
+        initializePersonInputs();
+        initializeShareholderInputs();
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-              //  System.out.println(validatePersonInputs());
-                
                 Entity person = getPersonInputs();
-                if(person.validate(nbconn.get(), true))
-                    person.consolidate(nbconn.get());
+                System.out.println(person.validate(true));
+                person.consolidate();
                 
-                Entity shareholder = getCustomerInputs();
-                if(shareholder.validate(nbconn.get(), true))
-                    shareholder.consolidate(nbconn.get());
+                
+                Entity shareholder = getShareholderInputs();
+                System.out.println(shareholder.validate(true));
+                shareholder.consolidate();
             }
         });
-        
-        
-        
-        initializePersonInputs();
-        initializeShareholderInputs();
-   }
+    }
     
-        public Entity getPersonInputs()
+    public Entity getPersonInputs()
     {
         return personCont.getValues();
     }
-       
-        public Entity getCustomerInputs()
+    
+    public Entity getShareholderInputs()
     {
         return shareholderCont.getValues();
     }
-        
     
-     public void initializePersonInputs()
+    public void initializePersonInputs()
     {
-        personCont= new EntityControls("person");
-       
+        personCont= new EntityControls("person", nbconn);
         
         ValidationHandler.NICValidator.register(a_nic);
         personCont.add("nic", a_nic);
@@ -136,8 +134,11 @@ public class ShareManagementController implements Initializable {
     }
      public void initializeShareholderInputs()
      {
-        shareholderCont= new EntityControls("shareholder");
+        shareholderCont = new EntityControls("shareholder",nbconn);
          
+        ValidationHandler.NICValidator.register(a_nic);
+        shareholderCont.add("nic", a_nic);
+        
         ValidationHandler.IntegerValidator.register(a_shareamount);
         shareholderCont.add("share_amount", a_shareamount);
         
@@ -145,19 +146,13 @@ public class ShareManagementController implements Initializable {
         ValidationHandler.DoubleValidator.register(a_shareprice);
         shareholderCont.add("share_price", a_shareprice);
         
-//        ValidationHandler.NumberValidator.register(a_accountno);
+        ValidationHandler.IntegerValidator.register(a_accountno);
         shareholderCont.add("account_no", a_accountno);
-//        
-//        ValidationHandler.CharacterValidator.register(a_bankname);
-        shareholderCont.add("bank_name", a_bankname);
         
+        shareholderCont.add("bank_name", a_bankname);
         
         shareholderCont.add("share_range_start", a_dateofissue);
         
         shareholderCont.add("share_range_close", a_dateofexpire);
-    
-     
-     
      }
-    
 }

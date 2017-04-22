@@ -20,18 +20,19 @@ import java.util.concurrent.Future;
 public class dbConcurrent
 {
     Future<Connection> dbFuture = null;
-    boolean testQuery;
+    boolean T,V;
     
-    public dbConcurrent(Boolean test)
+    public dbConcurrent(Boolean T, Boolean V)
     {
-        testQuery = test;
+        this.T = T;
+        this.V = V;
         ExecutorService executor = Executors.newFixedThreadPool(1);
         Callable<Connection> connCallable = new dbCallable();
         dbFuture = executor.submit(connCallable);
     }
     public dbConcurrent()
     {
-        this(false);
+        this(false,true);
     }
     public Connection get()
     {
@@ -55,21 +56,16 @@ public class dbConcurrent
             Connection conn=null;
             try
             {
-                if(testQuery)
-                    conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/gibms","gilemp","alpine64");
-                else
-                {
-                    conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank","gilemp","alpine64");
-                    //conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","");
-                    System.out.println("Database connection successful");
-                }
+                conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank","gilemp","alpine64");
+                //conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","");
+                if(V)System.out.println("Database connection successful");
+                
                 conn.createStatement().executeQuery("SET time_zone = \"+05:30\";");
-                if(testQuery)
-                    Navigator.initializeNavaigator(conn);
+                if(T)Navigator.initializeNavaigator(new dbConcurrent(false,false));
             }
             catch(SQLException e)
             {
-                if(!testQuery)
+                if(V)
                     System.out.println("dbConnect exception:\n" + e);
             }
             return conn;

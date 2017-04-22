@@ -112,7 +112,7 @@ public class CustomerOldController implements Initializable
         char marital_status = (maritalGroup.getSelectedToggle().toString().endsWith("'Married'"))? 'm':'n';
         LocalDate dob = datepicker_dob.getValue();
         
-        Entity person = new Entity("person");
+        Entity person = new Entity("person" ,null);
         person.add("nic", nic);
         person.add("full_name", name);
         person.add("dob", dob);
@@ -167,7 +167,7 @@ public class CustomerOldController implements Initializable
         {
             return null;
         }
-        Entity customer = new Entity("customer_state");
+        Entity customer = new Entity("customer_state",null);
         customer.add("nic", nic);
         customer.add("work_phone",work_phone);
         customer.add("emp_sector", Character.toString(emp_sector));
@@ -200,12 +200,12 @@ public class CustomerOldController implements Initializable
         {
             text_addinvalid.setVisible(false);
             
-            person.validate(conn,true);
-            customer.validate(conn,true);
+            person.validate(true);
+            customer.validate(true);
             
             
-            person.consolidate(conn);
-            customer.consolidate(conn);
+            person.consolidate();
+            customer.consolidate();
         }
         else
         {

@@ -7,7 +7,6 @@ package fxml_files;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
@@ -31,9 +30,9 @@ import guiMediators.EntityControls;
 import handlers.ValidationHandler;
 import handlers.ValidationHandler.PhoneValidator;
 import handlers.dbConcurrent;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
@@ -151,6 +150,9 @@ public class CustomerController implements Initializable
         nbconn = new dbConcurrent();
         //initializing gui
         initializeNodes();
+        initializeRadioButtons();
+        initializePersonInputs();
+        initializeCustomerInputs();
     }
     
     
@@ -160,41 +162,38 @@ public class CustomerController implements Initializable
         Integrator.integrate(anchor_customer, tabpane_customer);
         JFXDepthManager.setDepth(scroll_add, 2);
         
-        JFXButton addButton = Commons.setSubanchorButton(subanchor_tca, "ADD PERSON", 180, Commons.ADD_PERSON_GLYPH);
+        JFXButton addButton = Commons.setSubanchorButton(subanchor_tca, "ADD PERSON", 180,15, 400, 600, Commons.ADD_PERSON_GLYPH);
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-                Entity person,customer;
+                Entity person ,customer;
                 try
                 {
                     person = getPersonInputs();
                     customer = getCustomerInputs();
+                    
+                    //System.out.println(person);
+                    System.out.println(person.validate(true));
+                    
+                    //System.out.println(customer);
+                    System.out.println(customer.validate(true));
+                    
+                    person.consolidate();
+                    customer.consolidate();
                 }
                 catch(java.lang.NullPointerException exc)
                 {
-                    JFXDialog dialog = new JFXDialog();
-                    dialog.setContent(new Label("Content"));
-                    dialog.setTranslateY(-500);
-                    dialog.show(stack_add);
+                    System.out.println("nullpointer no inputs");
+//                    JFXDialog dialog = new JFXDialog();
+//                    dialog.setContent(new Label("Content"));
+//                    dialog.setTranslateY(-500);
+//                    dialog.show(stack_add);
                 }
-//                System.out.println(person);
-//                if(person.validate(nbconn.get(), true))
-//                    person.consolidate(nbconn.get());
-                
-                
-                //System.out.println(customerControls);
-                //System.out.println(customer);
-//                if(customer.validate(nbconn.get(), true))
-//                    customer.consolidate(nbconn.get());
             }
         });
-        
-        initializeRadioButtons();
-        initializePersonInputs();
-        initializeCustomerInputs();
     }
     
     public Entity getPersonInputs()
@@ -221,7 +220,7 @@ public class CustomerController implements Initializable
     
     public void initializePersonInputs()
     {
-        personControls = new EntityControls("person");
+        personControls = new EntityControls("person",nbconn);
         
         ValidationHandler.NICValidator.register(text_nic);
         personControls.add("nic", text_nic);
@@ -245,7 +244,7 @@ public class CustomerController implements Initializable
     
     public void initializeCustomerInputs()
     {
-        customerControls = new EntityControls("customer_state");
+        customerControls = new EntityControls("customer_state",nbconn);
     
         customerControls.add("nic", text_nic);
         

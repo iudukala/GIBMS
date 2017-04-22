@@ -10,7 +10,10 @@ import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Manipulator;
 import handlers.ComponentInterface;
+import handlers.dbConcurrent;
+import java.sql.Connection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import javafx.scene.control.Control;
@@ -23,11 +26,14 @@ import javafx.scene.control.ToggleGroup;
 public class EntityControls implements ComponentInterface
 {
     public final String TABLE_NAME;
+    public final dbConcurrent nbconn;
     final Map<String,Object> nodeList = new HashMap<>();
     
-    public EntityControls(String tablename)
+    
+    public EntityControls(String tablename, dbConcurrent nbconn)
     {
         TABLE_NAME = tablename;
+        this.nbconn = nbconn;
     }
     
     @Override
@@ -39,7 +45,7 @@ public class EntityControls implements ComponentInterface
     @Override
     public Entity getValues()
     {
-        Entity entity = new Entity(TABLE_NAME);
+        Entity entity = new Entity(TABLE_NAME, nbconn);
         for(Entry<String,Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();
@@ -54,10 +60,26 @@ public class EntityControls implements ComponentInterface
                 ToggleGroup tg = (ToggleGroup)control;
                 entity.add(key, tg.getSelectedToggle().getUserData());
             }
-            else if(control.getClass().equals(JFXTextField.class))
-                entity.add(key, ((JFXTextField)control).getText());
             else if(control.getClass().equals(JFXDatePicker.class))
                 entity.add(key,((JFXDatePicker)control).getValue());
+            else if(control.getClass().equals(JFXTextField.class))
+            {
+                String value = ((JFXTextField)control).getText();
+                
+                List<List> tdata = entity.fetchTableStructure();
+                
+                for(List list : tdata)
+                    for(int i=0;i<list.size();i++)
+                        if(list.get(0).equals(key))
+                        {
+                            if(list.get(1).equals("varchar"))
+                                entity.add(key, value);
+                            else if(list.get(1).equals("double"))
+                                entity.add(key, Double.parseDouble(value));
+                            else if(list.get(1).equals("int"))
+                                entity.add(key, Integer.parseInt(value));
+                        }
+            }
         }
         return entity;
     }

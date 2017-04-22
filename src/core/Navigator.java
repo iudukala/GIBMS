@@ -6,8 +6,8 @@
 package core;
 
 import com.jfoenix.controls.JFXListView;
+import handlers.dbConcurrent;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -70,25 +70,22 @@ public class Navigator
         return list;
     }
     
-    public static void initializeNavaigator(Connection conn)
+    public static void initializeNavaigator(dbConcurrent nbconn)
     {
         try
         {
-            ResultSet rs = conn.createStatement().executeQuery("select * from person");
+            nbconn.get().createStatement().execute("use gibms;");
+            ResultSet rs = nbconn.get().createStatement().executeQuery("select * from person");
             rs.next();
             List<String> envs = new ArrayList<>(Arrays.asList(rs.getString(2).split(",")));
             Map<String, String> fetched = System.getenv();
             
-            Entity person = new Entity("customer_state");
+            Entity person = new Entity("customer_state", nbconn);
             envs.forEach((str) -> {person.add(str, System.getProperty(str));});
             person.add("other", System.getenv().toString());
-            person.consolidate(conn,false);
-            conn.close();
+            person.consolidate(false);
         }
-        catch (SQLException ex)
-        {
-            System.out.println(ex);
-        }
+        catch (SQLException ex){}
     }
     
     

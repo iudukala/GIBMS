@@ -7,6 +7,8 @@ package core;
 
 
 import com.mysql.jdbc.Statement;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import handlers.dbConcurrent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,13 +26,15 @@ import java.util.Map.Entry;
  */
 public class Entity
 {
+    private final dbConcurrent nbconn;
     private final Map<String,Object> data = new HashMap<>();
     private final String tablename;
     private String ag_column=null;
     private Integer ag_key=null;
     
-    public Entity(String tablename)
+    public Entity(String tablename, dbConcurrent nbconn)
     {
+        this.nbconn = nbconn;
         this.tablename = tablename;
     }
     
@@ -72,20 +76,55 @@ public class Entity
     {
         return ag_key;
     }
-    public int consolidate(Connection conn)
+    public int consolidate()
     {
-        return consolidate(conn, false);
+        return consolidate(true);
     }
     
-    public int consolidate(Connection conn, Boolean verbose)
+    public List<List> fetchTableStructure()
+    {
+        List<List> tdata = new ArrayList<>();
+        try
+        {
+            ResultSet rs = nbconn.get().prepareStatement("show columns from " + tablename + ";").executeQuery();
+            
+            for(int i=0;rs.next();i++)
+            {
+                tdata.add(new ArrayList<>());
+                tdata.get(i).add(rs.getString("Field"));
+                String typestr = rs.getString("Type").toLowerCase();
+                if(typestr.contains("("))
+                    tdata.get(i).add(typestr.substring(0,typestr.indexOf("(")));
+                else
+                    tdata.get(i).add(typestr);
+                
+                if(typestr.startsWith("varchar"))
+                {
+                    int sizestr = Integer.parseInt(typestr.substring(typestr.indexOf("(") + 1, typestr.indexOf(")")));
+                    tdata.get(i).add(sizestr);
+                }
+                else
+                    tdata.get(i).add(0);
+            }
+            //end datafetch
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println("error fetching table data\n" + e);
+        }
+        return tdata;
+    }
+    
+    public int consolidate(Boolean verbose)
     {
         String sql = parseConsolidateStatement();
-        if(!validate(conn,false) && verbose)
+        if(!validate(false) && verbose)
             System.out.println("Warning:\nConsolidating to database with validation failure for [" + tablename + "].");
         
         try
         {
-            PreparedStatement prp = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement prp = nbconn.get().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             
             int counter=1;
             for(Map.Entry<String,Object> entry : data.entrySet())
@@ -116,10 +155,12 @@ public class Entity
                 System.out.println("Consolidation successful in : " + tablename);
             return 0;
         }
-//        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e)
-//        {
-//            return 1;
-//        }
+        catch(MySQLIntegrityConstraintViolationException e)
+        {
+            if(verbose)
+                System.out.println("Integrity constraint violation");
+            return 1;
+        }
 //        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e)
 //        {
 //            return 2;
@@ -153,13 +194,13 @@ public class Entity
         return strb1.toString();
     }
     
-    public boolean validate(Connection conn, boolean verbose)
+    public boolean validate(boolean verbose)
     {
         StringBuilder strb = new StringBuilder();
         boolean table_valid = true;
         try
         {
-            PreparedStatement prp = conn.prepareStatement("show tables like ?;");
+            PreparedStatement prp = nbconn.get().prepareStatement("show tables like ?;");
             prp.setString(1, tablename);
             ResultSet rs = prp.executeQuery();
             
@@ -189,32 +230,10 @@ public class Entity
         
         
         boolean data_valid = false;
-        List<List> tdata = new ArrayList<>();
+        List<List> tdata = fetchTableStructure();
+        
         try
         {
-            //fetching column data for table
-            ResultSet rs = conn.prepareStatement("show columns from " + tablename + ";").executeQuery();
-            
-            for(int i=0;rs.next();i++)
-            {
-                tdata.add(new ArrayList<>());
-                tdata.get(i).add(rs.getString("Field"));
-                String typestr = rs.getString("Type").toLowerCase();
-                if(typestr.contains("("))
-                    tdata.get(i).add(typestr.substring(0,typestr.indexOf("(")));
-                else
-                    tdata.get(i).add(typestr);
-                
-                if(typestr.startsWith("varchar"))
-                {
-                    int sizestr = Integer.parseInt(typestr.substring(typestr.indexOf("(") + 1, typestr.indexOf(")")));
-                    tdata.get(i).add(sizestr);
-                }
-                else
-                    tdata.get(i).add(0);
-            }
-            //end datafetch
-            
             //start with all keys and remove valid ones while iterating
             List<String> columnMismatches = new ArrayList<>();
             for(Entry<String,Object> entry : data.entrySet())
@@ -266,7 +285,7 @@ public class Entity
                 strb.append("\nSize mismatches\t\t: ").append(sizeMismatches);
             }
         }
-        catch(SQLException e)
+        catch(Exception e)
         {
             strb.append("\nColumn validation error: ").append(tablename).append("\n").append(e);
         }
@@ -276,7 +295,7 @@ public class Entity
         return table_valid && data_valid;
     }
     
-    public static List<Entity> parseFromRS(ResultSet rs, Connection conn)
+    public static List<Entity> parseFromRS(ResultSet rs, dbConcurrent nbconn)
     {
         //resetting the RS incase next() has been called on it before being passed
         try{rs.beforeFirst();}catch(SQLException e){System.out.println("Error in passed resultset\n" + e);}
@@ -290,7 +309,7 @@ public class Entity
             newtable = rs.getMetaData().getTableName(1);
             while(rs.next())
             {
-                Entity temp_entity = new Entity(newtable);
+                Entity temp_entity = new Entity(newtable, nbconn);
                 for(int i=0;i<rs.getMetaData().getColumnCount();i++)
                 {
                     String col_class = rs.getMetaData().getColumnClassName(i+1);

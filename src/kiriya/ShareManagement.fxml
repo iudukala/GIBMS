@@ -124,7 +124,7 @@
             </Tab>
             <Tab text="Update shares">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="anchor_update" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
@@ -142,22 +142,25 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <JFXTextField promptText="Email" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Contact No" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXTextField prefWidth="790.0" promptText="Address" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="search by nic" />
-                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of expire" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of issue" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <JFXTextField promptText="Account No" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Share price" GridPane.rowIndex="4" />
-                                          <JFXTextField promptText="Bank name" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Share amount" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <JFXButton text="select" textFill="#fcfafa" GridPane.columnIndex="1" />
+                                          <JFXTextField promptText="Email" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Contact No" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField prefWidth="790.0" promptText="Address" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Full name" GridPane.columnIndex="1" />
+                                          <JFXTextField promptText="NIC" />
+                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.columnIndex="2" />
+                                          <JFXTextField promptText="search by nic" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of expire" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <JFXDatePicker prefHeight="19.0" prefWidth="280.0" promptText="Date of issue" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Account No" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <JFXTextField promptText="Share price" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Bank name" GridPane.rowIndex="2" />
+                                          <JFXTextField promptText="Share amount" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <JFXButton text="select" textFill="#fcfafa" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <JFXTreeTableView GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
