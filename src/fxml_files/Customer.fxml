@@ -68,9 +68,6 @@
                                           </Label>
                                           <JFXTextField fx:id="text_nic" promptText="NIC" GridPane.rowIndex="1" />
                                           <JFXTextField fx:id="text_fullname" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXDatePicker fx:id="date_dob" prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="text_pphone" promptText="Personal phone" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="text_email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <children>
                                                 <JFXRadioButton fx:id="rb_male" prefHeight="17.0" prefWidth="108.0" text="Male">
@@ -80,6 +77,7 @@
                                                 <JFXRadioButton fx:id="rb_female" text="Female" toggleGroup="$tgroup_gender" />
                                              </children>
                                           </HBox>
+                                          <JFXDatePicker fx:id="date_dob" prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
                                                 <JFXRadioButton fx:id="rb_married" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Married">
@@ -90,6 +88,8 @@
                                                 <JFXRadioButton fx:id="rb_notmarried" text="Not married" toggleGroup="$tgroup_marital" />
                                              </children>
                                           </HBox>
+                                          <JFXTextField fx:id="text_pphone" promptText="Personal phone" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="text_email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <JFXTextField fx:id="text_haddress" promptText="Home address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="306.0" styleClass="headers" text="OCCUPATIONAL INFORMATION" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                              <font>
@@ -108,7 +108,7 @@
                                                 <JFXRadioButton fx:id="rb_temporary" prefHeight="15.0" prefWidth="118.0" text="Temporary" toggleGroup="$tgroup_servicetype" />
                                              </children>
                                           </HBox>
-                                          <JFXDatePicker fx:id="date_empl_start" prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />
+                                          <JFXTextField fx:id="text_wphone" promptText="Company phone" GridPane.rowIndex="6" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
                                              <children>
                                                 <JFXRadioButton fx:id="rb_state" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="104.0" text="State">
@@ -120,7 +120,8 @@
                                                 <JFXRadioButton fx:id="rb_selfemployed" text="Self employed" toggleGroup="$tgroup_sector" />
                                              </children>
                                           </HBox>
-                                          <JFXTextField fx:id="text_wphone" promptText="Company phone" GridPane.rowIndex="6" />
+                                          <JFXDatePicker fx:id="date_empl_start" prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />
+                                          <JFXTextField fx:id="text_profession" promptText="Profession (Self employed)" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="297.0" styleClass="headers" text="FINANCIAL INFORMATION" textFill="WHITE" GridPane.rowIndex="8">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
@@ -174,7 +175,6 @@
                                                 <Insets bottom="15.0" />
                                              </GridPane.margin>
                                           </Line>
-                                          <JFXTextField fx:id="text_profession" promptText="Profession (Self employed)" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

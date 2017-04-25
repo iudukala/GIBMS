@@ -1,4 +1,4 @@
-package battibois;
+package legacy;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -92,7 +92,7 @@
                                                 <Insets />
                                              </GridPane.margin>
                                           </DatePicker>
-                                          <RadioButton fx:id="radio_male" mnemonicParsing="false" prefHeight="18.0" prefWidth="97.0" selected="true" text="Male" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+                                          <RadioButton fx:id="radio_male" mnemonicParsing="false" prefHeight="18.0" prefWidth="97.0" text="Male" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="genderGroup" />
                                              </toggleGroup>
@@ -105,7 +105,7 @@
                                                 <Insets left="100.0" />
                                              </GridPane.margin>
                                           </RadioButton>
-                                          <RadioButton fx:id="radio_married" mnemonicParsing="false" selected="true" text="Married" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                          <RadioButton fx:id="radio_married" mnemonicParsing="false" text="Married" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                              <GridPane.margin>
                                                 <Insets />
                                              </GridPane.margin>
@@ -124,7 +124,7 @@
                                              </GridPane.margin>
                                           </TextField>
                                           <Label text="Service nature" GridPane.rowIndex="11" />
-                                          <RadioButton fx:id="radio_permanent" mnemonicParsing="false" selected="true" text="Permanent" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                          <RadioButton fx:id="radio_permanent" mnemonicParsing="false" text="Permanent" GridPane.columnIndex="1" GridPane.rowIndex="11">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="serviceGroup" />
                                              </toggleGroup>
@@ -149,7 +149,7 @@
                                              </toggleGroup>
                                           </RadioButton>
                                           <RadioButton fx:id="radio_selfemp" mnemonicParsing="false" text="Self employed" toggleGroup="$sectorGroup" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
-                                          <RadioButton fx:id="radio_state" mnemonicParsing="false" selected="true" text="State" toggleGroup="$sectorGroup" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <RadioButton fx:id="radio_state" mnemonicParsing="false" text="State" toggleGroup="$sectorGroup" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                                           <Text fx:id="textelement_nic" strokeType="OUTSIDE" strokeWidth="0.0" text="NIC" />
                                        </children>
                                     </GridPane>
@@ -258,7 +258,7 @@
                         </TitledPane>
                         <Button fx:id="button_add" layoutX="93.0" layoutY="721.0" mnemonicParsing="false" onAction="#handle_addButton" text="Add customer" />
                         <Button fx:id="button_custupdate" disable="true" layoutX="240.0" layoutY="721.0" mnemonicParsing="false" onAction="#handle_customerupdate" text="Update customer" />
-                        <Text fx:id="text_addinvalid" fill="RED" layoutX="104.0" layoutY="711.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid input. Please recheck input fields" />
+                        <Text fx:id="text_addinvalid" fill="RED" layoutX="104.0" layoutY="711.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid input. Recheck input fields" />
                      </children>
                   </AnchorPane>
             </content>

@@ -5,6 +5,7 @@
  */
 package hassim;
 
+import handlers.dbConcurrent;
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -165,6 +166,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TabPane tabpane_hr;
     
+    private dbConcurrent nbconn;
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
@@ -174,8 +176,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         core.Integrator.integrate(anchor_hr, tabpane_hr);
-        conn=dbConnect.connect();
-        
+        nbconn=new dbConcurrent();
     }    
 
     @FXML

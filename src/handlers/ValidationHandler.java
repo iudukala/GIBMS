@@ -22,14 +22,6 @@ import javafx.scene.paint.Color;
  */
 public class ValidationHandler 
 {
-    private static void fieldInvalid(SimpleObjectProperty<Node> icon, ReadOnlyBooleanWrapper hasErrors)
-    {
-        SVGGlyph glyphError = new SVGGlyph(1,"menuicon","M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",Color.valueOf("#CB503F"));
-        glyphError.setTranslateY(3);
-        glyphError.setSize(15, 15);
-        icon.set(glyphError);// = (SimpleObjectProperty<Node>)glyph;
-        hasErrors.set(true);
-    }
     private static <T extends ValidatorBase> void register(T validator, JFXTextField textField)
     {
         textField.getValidators().add(validator);
@@ -39,6 +31,7 @@ public class ValidationHandler
                 textField.validate();
         });
     }
+    
     public static class NICValidator extends ValidatorBase
     {
         @Override
@@ -58,6 +51,30 @@ public class ValidationHandler
         public static void register(JFXTextField textField)
         {
             ValidationHandler.register(new NICValidator() , textField);
+        }
+    }
+    
+    public static class ExistingNICValidator extends ValidatorBase
+    {
+        static dbConcurrent nbconn = null;
+        @Override
+        public void eval()
+        {
+            TextInputControl textField = (TextInputControl) srcControl.get();
+            if (!Validator.isExistingNIC(textField.getText(), nbconn))
+            {
+                hasErrors.set(false);
+            }
+            else
+            {
+                message.set("NIC already exists in system");
+                fieldInvalid(icon, hasErrors);
+            }
+        }
+        public static void register(JFXTextField textField, dbConcurrent a_nbconn)
+        {
+            nbconn = a_nbconn;
+            ValidationHandler.register(new ExistingNICValidator() , textField);
         }
     }
     
@@ -95,7 +112,7 @@ public class ValidationHandler
             }
             else
             {
-                message.set("Invalid email");
+                message.set("Invalid email address");
                 fieldInvalid(icon, hasErrors);
             }
         }
@@ -147,5 +164,14 @@ public class ValidationHandler
         {
             ValidationHandler.register(new DoubleValidator() , textField);
         }
+    }
+    
+    private static void fieldInvalid(SimpleObjectProperty<Node> icon, ReadOnlyBooleanWrapper hasErrors)
+    {
+        SVGGlyph glyphError = new SVGGlyph(1,"menuicon","M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",Color.valueOf("#CB503F"));
+        glyphError.setTranslateY(3);
+        glyphError.setSize(15, 15);
+        icon.set(glyphError);// = (SimpleObjectProperty<Node>)glyph;
+        hasErrors.set(true);
     }
 }

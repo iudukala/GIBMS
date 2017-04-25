@@ -25,12 +25,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 
 import core.Integrator;
+import core.Validator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
 import handlers.ValidationHandler;
 import handlers.ValidationHandler.PhoneValidator;
 import handlers.dbConcurrent;
-import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 /**
@@ -130,12 +130,6 @@ public class CustomerController implements Initializable
     private JFXTextField text_spvehicles;
     @FXML
     private JFXTextField text_spland;
-    
-    EntityControls personControls;
-    EntityControls customerControls;
-    
-    dbConcurrent nbconn;
-    
     @FXML
     private JFXTextField text_profession;
     @FXML
@@ -143,6 +137,9 @@ public class CustomerController implements Initializable
     @FXML
     private JFXRadioButton rb_temporary;
     
+    private void seperatorFunc(){}
+    private EntityControls personControls,customerControls, spouseControls;
+    private dbConcurrent nbconn;
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -154,6 +151,36 @@ public class CustomerController implements Initializable
         initializePersonInputs();
         initializeCustomerInputs();
     }
+    public void customer_add_button()
+    {
+        System.out.println(Validator.isExistingNIC(text_nic.getText(), nbconn));
+        Entity person ,customer;
+        try
+        {
+            person = getPersonInputs();
+            customer = getCustomerInputs();
+            
+            System.out.println(person);
+            System.out.println(person.validate(true));
+
+            System.out.println(customer);
+            System.out.println(customer.validate(true));
+
+            person.consolidate();
+            customer.consolidate();
+
+            personControls.clearControls();
+            customerControls.clearControls();
+        }
+        catch(NullPointerException exc)
+        {
+            System.out.println("nullpointer no inputs");
+//                    JFXDialog dialog = new JFXDialog();
+//                    dialog.setContent(new Label("Content"));
+//                    dialog.setTranslateY(-500);
+//                    dialog.show(stack_add);
+        }
+    }
     
     
     private void initializeNodes()
@@ -162,36 +189,14 @@ public class CustomerController implements Initializable
         Integrator.integrate(anchor_customer, tabpane_customer);
         JFXDepthManager.setDepth(scroll_add, 2);
         
-        JFXButton addButton = Commons.setSubanchorButton(subanchor_tca, "ADD PERSON", 180,15, 400, 600, Commons.ADD_PERSON_GLYPH);
+        JFXButton addButton = new Commons.subAnchorButton().getButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-                Entity person ,customer;
-                try
-                {
-                    person = getPersonInputs();
-                    customer = getCustomerInputs();
-                    
-                    //System.out.println(person);
-                    System.out.println(person.validate(true));
-                    
-                    //System.out.println(customer);
-                    System.out.println(customer.validate(true));
-                    
-                    person.consolidate();
-                    customer.consolidate();
-                }
-                catch(java.lang.NullPointerException exc)
-                {
-                    System.out.println("nullpointer no inputs");
-//                    JFXDialog dialog = new JFXDialog();
-//                    dialog.setContent(new Label("Content"));
-//                    dialog.setTranslateY(-500);
-//                    dialog.show(stack_add);
-                }
+                
             }
         });
     }
@@ -217,11 +222,16 @@ public class CustomerController implements Initializable
     {
         customerControls.setValues(customer);
     }
+    public boolean validateCustomerInputs()
+    {
+        return customerControls.validateValues();
+    }
     
     public void initializePersonInputs()
     {
         personControls = new EntityControls("person",nbconn);
         
+        ValidationHandler.ExistingNICValidator.register(text_nic, nbconn);
         ValidationHandler.NICValidator.register(text_nic);
         personControls.add("nic", text_nic);
         
@@ -281,6 +291,12 @@ public class CustomerController implements Initializable
         
         ValidationHandler.DoubleValidator.register(text_earnland);
         customerControls.add("earn_land", text_earnland);
+        
+        //tgroup_marital.selectedToggleProperty().addListener(listener);
+    }
+    private void initializeSpouseInputs()
+    {
+        spouseControls = new EntityControls("spouse", nbconn);
         
     }
     private void initializeRadioButtons()

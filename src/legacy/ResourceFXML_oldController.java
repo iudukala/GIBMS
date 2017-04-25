@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battibois;
+package legacy;
 
+import legacy.Vehicle;
+import legacy.Other;
+import legacy.Building;
+import legacy.Bill;
 import handlers.DynamicTable;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +26,7 @@ import java.time.LocalDate;
  *
  * @author xidew
  */
-public class FXMLDocumentController implements Initializable
+public class ResourceFXML_oldController implements Initializable
 {
     Connection conn = null;
     @FXML
@@ -207,7 +211,7 @@ public class FXMLDocumentController implements Initializable
         
         Building building_object = new Building(address,floor,description,condition,rent_value,end_date,rent_date);
         System.out.println(building_object.toString());
-        building_object.consolidate(conn);
+        //building_object.consolidate(conn);
     }
     
     @FXML

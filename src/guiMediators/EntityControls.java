@@ -9,9 +9,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Manipulator;
-import handlers.ComponentInterface;
 import handlers.dbConcurrent;
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,12 +21,11 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author Isuru Udukala
  */
-public class EntityControls implements ComponentInterface
+public class EntityControls
 {
     public final String TABLE_NAME;
     public final dbConcurrent nbconn;
     final Map<String,Object> nodeList = new HashMap<>();
-    
     
     public EntityControls(String tablename, dbConcurrent nbconn)
     {
@@ -36,13 +33,11 @@ public class EntityControls implements ComponentInterface
         this.nbconn = nbconn;
     }
     
-    @Override
     public void add(String key, Object obj)
     {
         nodeList.put(key, obj);
     }
     
-    @Override
     public Entity getValues()
     {
         Entity entity = new Entity(TABLE_NAME, nbconn);
@@ -84,7 +79,6 @@ public class EntityControls implements ComponentInterface
         return entity;
     }
     
-    @Override
     public void setValues(Entity entity)
     {
         for(Entry<String,Object> entry : nodeList.entrySet())
@@ -126,5 +120,28 @@ public class EntityControls implements ComponentInterface
             }
         }
         return valid;
+    }
+    
+    public void clearControls()
+    {
+        for(Entry<String,Object> entry : nodeList.entrySet())
+        {
+            String key = entry.getKey();
+            Object control = entry.getValue();
+            if(entry.getValue().getClass().equals(ToggleGroup.class))
+                ((ToggleGroup)control).selectToggle(null);
+            
+            else if(control.getClass().equals(JFXDatePicker.class))
+                ((JFXDatePicker)control).setValue(null);
+            else if(control.getClass().equals(JFXTextField.class))
+            {
+                JFXTextField textField = (JFXTextField)control;
+                textField.clear();
+                if(! (textField.getValidators().isEmpty()) )
+                {
+                   textField.validate();
+                }
+            }
+        }
     }
 }

@@ -10,7 +10,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -37,7 +36,6 @@ public class GIBMS extends Application
      */
     public static void main(String[] args)
     {
-        //Font.loadFont(GIBMS.class.getResourceAsStream("/font.ttf"), 16);
         launch(args);
     }   
 }

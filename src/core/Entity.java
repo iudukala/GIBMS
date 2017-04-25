@@ -5,11 +5,9 @@
  */
 package core;
 
-
-import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import handlers.dbConcurrent;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +29,9 @@ public class Entity
     private final String tablename;
     private String ag_column=null;
     private Integer ag_key=null;
+    String consolidate_string=null;
+    String update_string=null;
+    
     
     public Entity(String tablename, dbConcurrent nbconn)
     {
@@ -118,39 +119,27 @@ public class Entity
     
     public int consolidate(Boolean verbose)
     {
-        String sql = parseConsolidateStatement();
+        List<Object> fields = new ArrayList<>();
+        String sql = parseConsolidateStatement(fields);
         if(!validate(false) && verbose)
             System.out.println("Warning:\nConsolidating to database with validation failure for [" + tablename + "].");
         
         try
         {
-            PreparedStatement prp = nbconn.get().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,sql);
+            int counter=0;
+            for(Object field : fields)
+                prpw.setObject(++counter, field);
+            prpw.executeUpdate();
             
-            int counter=1;
-            for(Map.Entry<String,Object> entry : data.entrySet())
+            if(prpw.getGeneratedKeys()!=null)
             {
-                Class eclass = entry.getValue().getClass();
-                if(eclass.equals(String.class) || eclass.equals(LocalDate.class))
-                    prp.setString(counter++, entry.getValue().toString());
-                else if(eclass.equals(Double.class))
-                    prp.setDouble(counter++,(Double)entry.getValue());
-                else if(eclass.equals(Integer.class))
-                    prp.setInt(counter++,(Integer)entry.getValue());
-            }
-            
-            prp.executeUpdate();
-            ResultSet rs = prp.getGeneratedKeys();
-            
-            if(rs.next())
-            {
-                ag_key = rs.getInt(1);
-                rs.close();
-                
-                ResultSet ag_rs=prp.executeQuery("show columns from `" + tablename + "` where `Extra`='auto_increment';");
+                ResultSet ag_rs=nbconn.get().createStatement().executeQuery("show columns from `" + tablename + "` where `Extra`='auto_increment';");
                 ag_rs.next();
                 ag_column = ag_rs.getString("Field");
                 data.put(ag_column,ag_key);
             }
+            
             if(verbose)
                 System.out.println("Consolidation successful in : " + tablename);
             return 0;
@@ -158,13 +147,15 @@ public class Entity
         catch(MySQLIntegrityConstraintViolationException e)
         {
             if(verbose)
-                System.out.println("Integrity constraint violation");
+                System.out.println("Integrity constraint violation\n" + e);
             return 1;
         }
-//        catch(com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e)
-//        {
-//            return 2;
-//        }
+        catch(MySQLSyntaxErrorException e)
+        {
+            if(verbose)
+                System.out.println("Syntax error\n" + e);
+            return 2;
+        }
         catch(SQLException e)
         {
             if(verbose)
@@ -173,7 +164,7 @@ public class Entity
         }
     }
     
-    public String parseConsolidateStatement()
+    public String parseConsolidateStatement(List<Object> fields)
     {
         StringBuilder strb1 = new StringBuilder("insert into ").append(tablename).append("(");
         StringBuilder strb2 = new StringBuilder(") values(");
@@ -181,6 +172,7 @@ public class Entity
         for(Entry<String,Object> entry : data.entrySet())
         {
             strb1.append("`").append(entry.getKey()).append("`");
+            fields.add(entry.getValue());
             strb2.append("?");
             
             if(counter++!=data.size())
@@ -190,8 +182,9 @@ public class Entity
             }
         }
         strb1.append(strb2.append(");"));
-        //System.out.println(strb1);
-        return strb1.toString();
+        
+        consolidate_string = strb1.toString();
+        return consolidate_string;
     }
     
     public boolean validate(boolean verbose)
@@ -381,9 +374,55 @@ public class Entity
             
             strb.append(Manipulator.formatTabs("| " + entry.getKey(),COL1,true))
                     .append(Manipulator.formatTabs(Manipulator.getClassStr(entry),COL2,true))
-                    .append(entry.getValue());
-            
+                    .append(entry.getValue());   
         }
         return strb.append("\n").toString();
+    }
+    
+    public void update()
+    {
+        List<String> primaryKeys = new ArrayList<>();
+        try
+        {
+            ResultSet pkrs=nbconn.get().createStatement().executeQuery("show columns from `" + tablename + "` where `key`='pri';");
+            while(pkrs.next())
+                primaryKeys.add(pkrs.getString("Field"));
+        }
+        catch(SQLException e){
+            System.out.println("Error fetching primary key(s)\n" + e);
+        }
+        
+        List<Object> fields = new ArrayList<>();
+        int keycount=0;
+        //getting primarykey count
+        for(Entry<String,Object> entry : data.entrySet())if(primaryKeys.contains(entry.getKey()))keycount++;
+        //generating update dml statement
+        StringBuilder strb = new StringBuilder("update ").append(tablename).append(" set");
+        int counter=0;
+        for(Entry<String,Object> entry : data.entrySet())
+        {
+            if(!primaryKeys.contains(entry.getKey()))
+            {
+                strb.append(" `").append(entry.getKey()).append("`=?");
+                fields.add(entry.getValue());
+                if(++counter!=data.size()-keycount)strb.append(",");
+            }
+        }counter=0;
+        strb.append(" where ");
+        for(String key : primaryKeys)
+        {
+            strb.append("`").append(key).append("`").append("=?");
+            if(++counter!=primaryKeys.size())strb.append(" and ");
+        }counter=0;
+        //dml statement generation complete 
+        
+        update_string = strb.toString();
+        
+        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,strb.toString());
+        for(Object field : fields)
+            prpw.setObject(++counter, field);
+        for(Object key : primaryKeys)
+            prpw.setObject(++counter, data.get(key));
+        prpw.executeUpdate();
     }
 }
