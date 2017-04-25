@@ -23,6 +23,7 @@ public class PreparedStatementWrapper
     private dbConcurrent nbconn;
     private Integer ag_key = null;
     private int update_count;
+    int temp;
     
     public PreparedStatementWrapper(dbConcurrent nbconn, String query)
     {
