@@ -81,6 +81,23 @@ public class PreparedStatementWrapper
         return status;
     }
     
+    public ResultSet executeQuery()
+    {
+        ResultSet rs = null;
+        boolean status;
+        try
+        {
+            rs = prp.executeQuery();
+            status = true;
+        }
+        catch (Exception e)
+        {
+            System.out.println("error executing query via psWrapper\n" + e);
+            status = false;
+        }
+        return rs;
+    }
+    
     public Integer getGeneratedKeys()
     {
         return ag_key;

@@ -5,6 +5,7 @@
  */
 package core;
 
+import java.time.LocalDate;
 import java.util.Map;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -85,5 +86,22 @@ public class Manipulator
         }
         if(!match)
             toggle.setSelected(true);
+    }
+    
+    public static Class translateClass(String classstr)
+    {
+        switch(classstr)
+        {
+            case "int":
+                return Integer.class;
+            case "varchar":
+                return String.class;
+            case "double":
+                return Double.class;
+            case "date":
+                return LocalDate.class;
+            default:
+                return null;
+        }
     }
 }

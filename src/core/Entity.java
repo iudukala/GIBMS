@@ -42,7 +42,17 @@ public class Entity
     //public <E> void add(String key, E value)
     public void add(String key, Object value)
     {
-        data.put(key,value);
+        if(value == null)
+        {
+            if(getType(key).equals(String.class))
+                data.put(key, "");
+            else if(getType(key).equals(Double.class) || getType(key).equals(Integer.class))
+                data.put(key, 0);
+            else if(getType(key).equals(LocalDate.class))
+                data.put(key,LocalDate.now());
+        }
+        else
+            data.put(key,value);
     }
     
     private Object get(String key, Class reqClass)
@@ -51,11 +61,15 @@ public class Entity
             return data.get(key);
         else
         {
-            System.out.println("Requesting <" + Manipulator.getClassStr(reqClass) + "> cast to <" + Manipulator.getClassStr(data.get(key).getClass()) + ">");
+            System.out.print("Requesting <" + Manipulator.getClassStr(reqClass) + "> cast on <" + Manipulator.getClassStr(data.get(key).getClass()) + ">");
+            System.out.println(" - Key\t: " + key + "\tValue\t: " + data.get(key));
             return null;
         }
     }
-    
+    public String getAsString(String key)
+    {
+        return data.get(key).toString();
+    }
     public String getString(String key)
     {
         return (String)get(key,String.class);
@@ -164,7 +178,7 @@ public class Entity
         }
     }
     
-    public String parseConsolidateStatement(List<Object> fields)
+    private String parseConsolidateStatement(List<Object> fields)
     {
         StringBuilder strb1 = new StringBuilder("insert into ").append(tablename).append("(");
         StringBuilder strb2 = new StringBuilder(") values(");
@@ -293,7 +307,6 @@ public class Entity
         //resetting the RS incase next() has been called on it before being passed
         try{rs.beforeFirst();}catch(SQLException e){System.out.println("Error in passed resultset\n" + e);}
         
-        final String strclass = String.class.getName();
         List<Entity> entities = new ArrayList<>();
         String newtable = null;
         
@@ -307,6 +320,14 @@ public class Entity
                 {
                     String col_class = rs.getMetaData().getColumnClassName(i+1);
                     String column_name = rs.getMetaData().getColumnName(i+1);
+                    
+                    if(rs.getString(column_name) == null)
+                    {
+                        temp_entity.add(column_name, null);
+                        continue;
+                    }
+                    
+                    //if not null
                     if(col_class.equals(String.class.getName()))
                         temp_entity.add(column_name, rs.getString(column_name));
                     else if(col_class.equals(java.sql.Date.class.getName()))
@@ -321,7 +342,7 @@ public class Entity
         }
         catch(SQLException e)
         {
-            System.out.println("Error encountered while parsing Entities [" + newtable + "[");
+            System.out.println("Error encountered while parsing Entities [" + newtable + "]");
         }
         return entities;
     }
@@ -424,5 +445,27 @@ public class Entity
         for(Object key : primaryKeys)
             prpw.setObject(++counter, data.get(key));
         prpw.executeUpdate();
+    }
+    
+    private Class getType(String key)
+    {
+        String type = null;
+        for(List list : fetchTableStructure())
+        {
+            if(list.get(0).equals(key))
+            {
+                type = list.get(1).toString();
+                break;
+            }
+        }
+        return Manipulator.translateClass(type);
+    }
+    
+    public List<String> getColumnNames()
+    {
+        List<String> columns = new ArrayList<>();
+        for(List list : fetchTableStructure())
+            columns.add(list.get(0).toString());
+        return columns;
     }
 }

@@ -28,11 +28,17 @@ import core.Integrator;
 import core.Validator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
+import guiMediators.tableViewHandler;
 import handlers.ValidationHandler;
 import handlers.ValidationHandler.PhoneValidator;
 import handlers.dbConcurrent;
+import java.sql.ResultSet;
+import java.util.Set;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.TableView;
 /**
  * FXML Controller class
  *
@@ -136,9 +142,18 @@ public class CustomerController implements Initializable
     private JFXRadioButton rb_permanent;
     @FXML
     private JFXRadioButton rb_temporary;
+    @FXML
+    private TableView<Entity> table_customer_search;
+    @FXML
+    private JFXButton btn_custsearch;
     
+    
+    
+    //dummy function as seperator between @FXML tags and code
     private void seperatorFunc(){}
+    
     private EntityControls personControls,customerControls, spouseControls;
+    private tableViewHandler custable_handle;
     private dbConcurrent nbconn;
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -180,25 +195,6 @@ public class CustomerController implements Initializable
 //                    dialog.setTranslateY(-500);
 //                    dialog.show(stack_add);
         }
-    }
-    
-    
-    private void initializeNodes()
-    {
-        scroll_add.setPrefHeight(580);
-        Integrator.integrate(anchor_customer, tabpane_customer);
-        JFXDepthManager.setDepth(scroll_add, 2);
-        
-        JFXButton addButton = new Commons.subAnchorButton().getButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
-        
-        addButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-                
-            }
-        });
     }
     
     public Entity getPersonInputs()
@@ -313,5 +309,46 @@ public class CustomerController implements Initializable
         
         rb_permanent.setUserData("P");
         rb_temporary.setUserData("T");
+    }
+    
+    private void initializeNodes()
+    {
+        scroll_add.setPrefHeight(580);
+        JFXTabPane jfxtabpane_customer = Integrator.integrate(anchor_customer, tabpane_customer);
+        JFXDepthManager.setDepth(scroll_add, 2);
+        
+        JFXButton addButton = new Commons.subAnchorButton().getButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
+        
+        addButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                customer_add_button();
+            }
+        });
+        
+        //setting up customer search table
+        custable_handle = new tableViewHandler(table_customer_search, nbconn);
+        jfxtabpane_customer.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+            {
+                //second tab has search
+                if((int)newValue == 1)
+                    custable_handle.writeToTable("select * from customer_view");
+            }
+        });
+        
+        btn_custsearch.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                personControls.setValues(custable_handle.getSelection("person", "NIC"));
+                customerControls.setValues(custable_handle.getSelection("customer_state", "NIC"));
+            }
+        });
     }
 }

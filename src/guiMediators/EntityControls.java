@@ -88,7 +88,7 @@ public class EntityControls
             if(entry.getValue().getClass().equals(ToggleGroup.class))
                 Manipulator.setToggleSelection((ToggleGroup)control, entity.getString(key));
             else if(control.getClass().equals(JFXTextField.class))
-                ((JFXTextField)control).setText(entity.getString(key));
+                ((JFXTextField)control).setText(entity.getAsString(key));
             else if(control.getClass().equals(JFXDatePicker.class))
                 ((JFXDatePicker)control).setValue(entity.getLocalDate(key));
         }
@@ -110,7 +110,6 @@ public class EntityControls
             {
                 JFXTextField textField = (JFXTextField)control;
                 
-                //System.out.println(textField + " empty? " + textField.getText().equals("") + "----" + TABLE_NAME);
                 if(! (textField.getValidators().isEmpty()) )
                 {
                     valid = (textField.validate() && !textField.getText().equals(""));
