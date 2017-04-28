@@ -115,7 +115,7 @@ public class ShareManagementController implements Initializable {
     {
         nbconn = new dbConcurrent();
         
-        Integrator.integrate(anchor_shareholder, tabpane_shareholder);
+        Integrator.integrate(anchor_shareholder);
         
         
         initializePersonInputs();

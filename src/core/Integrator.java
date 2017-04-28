@@ -16,7 +16,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
@@ -32,9 +34,13 @@ public class Integrator
 {
     private final static int DRAWER_WIDTH = 300;
     
-    public static JFXTabPane integrate(AnchorPane anchor, TabPane tabpane)
+    public static JFXTabPane integrate(AnchorPane anchor)
     {
-        //generate tabpane
+        //fetching current tabpane
+        System.out.println(anchor.getChildren());
+        TabPane tabpane = (TabPane)anchor.getChildren().get(0);
+        
+        //generating replacement tabpane jfxtabpane
         JFXTabPane jfx_tp = new JFXTabPane();
         for(Tab tab : tabpane.getTabs())
             jfx_tp.getTabs().add(tab);
@@ -55,6 +61,8 @@ public class Integrator
                     drawer.close();
             }
         });
+        
+        applyMods(jfx_tp);
         return jfx_tp;
     }
     
@@ -135,6 +143,23 @@ public class Integrator
             }
         });
         return button;
+    }
+    
+    private static void applyMods(JFXTabPane jfxtp)
+    {
+        for(Tab tab : jfxtp.getTabs())
+        {
+            for(Node node : ((AnchorPane)tab.getContent()).getChildren())
+            {
+                if(node.getClass().equals(ScrollPane.class))
+                {
+                    ScrollPane scrollpane = (ScrollPane)node;
+                    JFXDepthManager.setDepth(scrollpane, 2);
+                    scrollpane.setPrefHeight(615);
+                    scrollpane.setLayoutY(15);
+                }
+            }
+        }
     }
 }
 

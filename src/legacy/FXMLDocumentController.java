@@ -131,7 +131,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Integrator.integrate(anchorpane_shares, tabpane_shares);
+        Integrator.integrate(anchorpane_shares);
         
        conn = handlers.dbConcurrent.connect();
        DynamicTable.getColumns(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +

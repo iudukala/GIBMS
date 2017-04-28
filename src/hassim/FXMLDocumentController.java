@@ -175,7 +175,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        core.Integrator.integrate(anchor_hr, tabpane_hr);
+        core.Integrator.integrate(anchor_hr);
         nbconn=new dbConcurrent();
     }    
 

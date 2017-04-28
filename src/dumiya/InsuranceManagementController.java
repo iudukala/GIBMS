@@ -31,6 +31,6 @@ public class InsuranceManagementController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Integrator.integrate(anchorpane, tabpane);
+        Integrator.integrate(anchorpane);
     }
 }

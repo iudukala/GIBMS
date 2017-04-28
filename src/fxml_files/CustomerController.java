@@ -273,6 +273,8 @@ public class CustomerController implements Initializable
         
         customerControls.add("account_branch", text_accbranch);
         
+        customerControls.add("account_bank", text_accbank);
+        
         ValidationHandler.DoubleValidator.register(text_earncareer);
         customerControls.add("earn_career", text_earncareer);
         
@@ -313,9 +315,7 @@ public class CustomerController implements Initializable
     
     private void initializeNodes()
     {
-        scroll_add.setPrefHeight(580);
-        JFXTabPane jfxtabpane_customer = Integrator.integrate(anchor_customer, tabpane_customer);
-        JFXDepthManager.setDepth(scroll_add, 2);
+        JFXTabPane jfxtabpane_customer = Integrator.integrate(anchor_customer);
         
         JFXButton addButton = new Commons.subAnchorButton().getButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
         
@@ -348,6 +348,7 @@ public class CustomerController implements Initializable
             {
                 personControls.setValues(custable_handle.getSelection("person", "NIC"));
                 customerControls.setValues(custable_handle.getSelection("customer_state", "NIC"));
+                jfxtabpane_customer.getSelectionModel().select(0);
             }
         });
     }

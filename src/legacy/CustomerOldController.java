@@ -349,7 +349,7 @@ public class CustomerOldController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Integrator.integrate(anchorP, tabpane_customer);
+        Integrator.integrate(anchorP);
         
         conn=dbConcurrent.connect();
         DynamicTable.getColumns(conn, "select * from customer_view", table_search);

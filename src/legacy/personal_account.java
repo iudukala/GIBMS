@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package paniya;
+package legacy;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,24 +16,23 @@ import core.Manipulator;
  *
  * @author Isuru Udukala
  */
-public class cashbook
+public class personal_account
 {
-    public String cashbook_id,serial_no,br_no,bank_slip_no,receipt_voucher,transaction_code,transaction_name,nic,resource_id,name,description;
-    public Double withdrawals,deposits,balance,commercial_bank,sampath_bank;
+    public String account_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description;
+    public Double withdrawals,deposits,balance;
     public LocalDate date;
 
-    public cashbook(LocalDate date,String cashbook_id,String serial_no,String br_no,String bank_slip_no,
-            String receipt_voucher,String transation_code,String transation_name,String nic,String resource_id,
-            String name,String description,Double  withdrawals,Double  deposits,Double  balance,Double  commeriacal_bank,Double sampath_bank)
+     public personal_account (LocalDate date,String account_id,String serial_no,String br_no,String bank_slip_no,String receipt_voucher,
+            String transaction_code,String transaction_name,String nic,String resource_id,String name,String description,Double withdrawals,Double deposits,Double balance)
     {
         this.date = date ;
-        this.cashbook_id = cashbook_id;
+        this.account_id = account_id;
         this.serial_no = serial_no;
         this.br_no = br_no;
         this.bank_slip_no = bank_slip_no;
-        this.receipt_voucher = receipt_voucher;
-        this.transaction_code = transation_code;
-        this.transaction_name = transation_name;
+        
+        this.transaction_code = transaction_code;
+        this.transaction_name = transaction_name;
         this.nic = nic;
         this.resource_id = resource_id;
         this.name = name;
@@ -43,7 +42,7 @@ public class cashbook
         this.balance = balance;
     }
 
-    cashbook(String cashbook_id, String serial_no, String br_no, String bank_slip_no, String transaction_code, String transaction_name, String nic, String resource_id, String name, String description, Double withdrawals, Double deposits, Double balance, Double commercial_bank, Double sampath_bank) {
+    personal_account(String account_id, String serial_no, String br_no, String bank_slip_no, String transaction_code, String transaction_name, String nic, String resource_id, String name, String description, Double withdrawals, Double deposits, Double balance) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -52,11 +51,11 @@ public class cashbook
     {
         StringBuilder string =new StringBuilder();
         string.append("\ndate\t :  ").append(date.toString());
-        string.append("\ncashbook_id\t :  ").append(cashbook_id);
+        string.append("\naccount_id\t :  ").append(account_id);
         string.append("\nserial_no\t :  ").append(serial_no);
         string.append("\nbr_no\t :  ").append(br_no);
         string.append("\nbank_slip_no\t :  ").append(bank_slip_no);
-        string.append("\nreceipt_voucher\t :  ").append(receipt_voucher);
+        
       
         string.append("\ntransaction_code\t :  ").append(transaction_code);
         string.append("\ntransaction_name\t :  ").append(transaction_name);
@@ -68,47 +67,45 @@ public class cashbook
         string.append("\nwithdrawals\t :  ").append(withdrawals);
         string.append("\ndeposits\t :  ").append(deposits);
         string.append("\nbalance\t :  ").append(balance);
-        string.append("\ncommercial_bank\t :  ").append(commercial_bank);
-        string.append("\nsampath_bank\t :  ").append(sampath_bank);
-        
       
         
         
         return string.toString();
     }
-    public void consolidate(Connection conn) throws SQLException
-            
+    
+    public void consolidate(Connection conn)
     {
         try
         {
-            String query = "insert into cashbook (date,cashbook_id,serial_no,br_no,bank_slip_no,receipt_voucher,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance,commercial_bank,sampath_bank)";
-                    
+            String query = "insert into personal_account(date,account_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance)";
             PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, date.toString());
-            prp.setString(2,cashbook_id);
+            prp.setString(2,account_id);
             prp.setString(3,serial_no);
             prp.setString(4,br_no);
             prp.setString(5,bank_slip_no);
-            prp.setString(6, receipt_voucher);
-            prp.setString(7, transaction_code);
-            prp.setString(8, transaction_name);
-            prp.setString(9, nic);
-            prp.setString(10, resource_id);
-            prp.setString(11, name);
-            prp.setString(12, description);
-            prp.setDouble(13, withdrawals);
-            prp.setDouble(14, deposits);
-            prp.setDouble(15, balance);
-            prp.setDouble(16, commercial_bank);
-            prp.setDouble(17, sampath_bank);
+           
+            prp.setString(6, transaction_code);
+            prp.setString(7, transaction_name);
+            prp.setString(8, nic);
+            prp.setString(9, resource_id);
+            prp.setString(10, name);
+            prp.setString(11, description);
+            prp.setDouble(12, withdrawals);
+            prp.setDouble(13, deposits);
+            prp.setDouble(14, balance);
             prp.executeUpdate();
         }
         catch(SQLException e)
         {
-            System.out.println("Consolidation error[cashbook]:\n" + e);
+            System.out.println("Consolidation error[personal_account]:\n" + e);
         }
     }
 }
+
+
+
+
 
 
 

@@ -43,12 +43,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button search;
     @FXML
-    private Button edit;
-    @FXML
-    private Button list;
-    @FXML
-    private Rectangle lDate;
     private TextField name;
+    @FXML
     private TextField customerId;
     @FXML
     private DatePicker dDate;
@@ -64,31 +60,30 @@ public class FXMLDocumentController implements Initializable {
     private DatePicker lastPayedDate;
     @FXML
     private TableView<?> table2;
-    @FXML
-    private Button report;
-    @FXML
-    private Button send;
-    @FXML
     private DatePicker ldate;
     private TextField lname;
-    @FXML
-    private TextField text_employeeId;
-    @FXML
     private TextField text_nic;
-    @FXML
     private TextField text_customerId;
-    @FXML
     private TextField text_fname;
-    @FXML
     private TextField text_outstanding;
-    @FXML
     private TextField text_loanAmount;
-    @FXML
     private TextField text_address;
-    @FXML
     private TextField text_lastPayment;
-    @FXML
     private TextField text_lname;
+    @FXML
+    private TextField employeeId;
+    @FXML
+    private TextField nic_add;
+    @FXML
+    private TextField nic_edit;
+    @FXML
+    private TextField loanAmount;
+    @FXML
+    private TextField outstanding;
+    @FXML
+    private TextField addrees;
+    @FXML
+    private TextField lastPayment;
     
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -105,19 +100,7 @@ public class FXMLDocumentController implements Initializable {
         
     }    
 
-    @FXML
-    private void search(ActionEvent event) {
-    }
 
-    @FXML
-    private void edit(ActionEvent event) {
-    }
-
-    @FXML
-    private void list(ActionEvent event) {
-    }
-
-    @FXML
     private void add(ActionEvent event) {
         
         try
@@ -144,24 +127,5 @@ public class FXMLDocumentController implements Initializable {
 	}
 }
 
-    @FXML
-    private void update(ActionEvent event) {
-    }
-
-    @FXML
-    private void delete(ActionEvent event) {
-    }
-
-    @FXML
-    private void back(ActionEvent event) {
-    }
-
-    @FXML
-    private void report(ActionEvent event) {
-    }
-
-    @FXML
-    private void send(ActionEvent event) {
-    }
     
 }

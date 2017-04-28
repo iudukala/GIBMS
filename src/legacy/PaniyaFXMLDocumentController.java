@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package paniya;
+package legacy;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -26,7 +26,7 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author PNJ
  */
-public class FXMLDocumentController implements Initializable {
+public class PaniyaFXMLDocumentController implements Initializable {
     
     private Label label;
     @FXML
