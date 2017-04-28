@@ -274,7 +274,6 @@ public class ShareManagementController implements Initializable {
             catch(Exception ex)
             {
             System.out.println("nullpointer no inputs");
-            updateButton.setStyle("-fx-background-color: #CB503F");
                 
                 
                 

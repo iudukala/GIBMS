@@ -38,7 +38,7 @@ public class Navigator
         TREE_LIST.add(new ArrayList(Arrays.asList("/kiriya/ShareManagement.fxml","Share management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/janiya/FXMLDocument.fxml", "External bank fund management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/battibois/ResourceFXML.fxml", "Resource management")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/FXMLDocument.fxml", "Arrears management")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/Arrears_interface.fxml", "Arrears management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/dumiya/InsuranceManagement.fxml", "Insurance management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/hassim/FXMLTemplate.fxml", "HR & payroll management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/CustomerOld.fxml","Customer & loan plan old")));
