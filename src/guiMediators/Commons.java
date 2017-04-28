@@ -23,9 +23,17 @@ public class Commons
     public static final String LIST_GLYPH = "M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z";
     public static final String DELETE_GLYPH = "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z";
     
+    public static final String BTNSTYLE_1 = "buttonGR";
+    public static final String BTNSTYLE_2 = "buttonS2";
+    
     public static class subAnchorButton
     {
-        Integer button_length = null, button_height = null, glyph_width = null, xcoord = null, ycoord = null;
+        Integer button_length = null;
+        Integer button_height = null;
+        Integer glyph_width = null;
+        Integer xcoord = null, ycoord = null;
+        
+        String style = null;
         String glyphID = null;
         JFXButton button = null;
         
@@ -36,6 +44,8 @@ public class Commons
             if(ycoord == null)ycoord = 600;
             if(button_length == null)button_length = 180;
             if(button_height == null)button_height = 50;
+            if(style == null)style = BTNSTYLE_1;
+            
             
             button = new JFXButton(btext);
             if(glyphID!=null)
@@ -48,7 +58,7 @@ public class Commons
             button.setPrefSize(button_length,button_height);
             button.setTranslateX(xcoord);
             button.setTranslateY(ycoord);
-            button.getStyleClass().add("addbutton");
+            button.getStyleClass().add(style);
             subanchor.getChildren().add(button);
             JFXDepthManager.setDepth(button, 5);
             

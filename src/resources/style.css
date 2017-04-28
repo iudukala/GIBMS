@@ -160,7 +160,7 @@ and open the template in the editor.
     -fx-font-family: "Roboto condensed";
 }
 
-.addbutton{
+.buttonGR{
     -fx-background-color:#68bf5f;
     /*-fx-background-radius:0;*/
     
@@ -169,7 +169,20 @@ and open the template in the editor.
     -fx-text-fill: WHITE;
 }
 
-.addbutton:hover{
+.addbuttonGR:hover{
+    -fx-background-color:#7ddb74;
+}
+
+.buttonS2{
+    -fx-background-color: -fx-tabhover-base;
+    -fx-background-radius:0;
+    
+    -fx-font-family: "Roboto condensed";
+    -fx-font-size: 16;
+    -fx-text-fill: WHITE;
+}
+
+.addbuttonS2:hover{
     -fx-background-color:#7ddb74;
 }
 
@@ -230,6 +243,55 @@ and open the template in the editor.
     -fx-background-color: -fx-tab-base;
     -fx-background-radius: 0;
 }
+
+
+/*
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#131313 0%, #424141 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+
+
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;  0   
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background, 
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+
+
+
+.table-view > .virtual-flow > .scroll-bar > .increment-button, 
+.table-view > .virtual-flow > .scroll-bar > .decrement-button {
+    -fx-opacity: 0;
+}**/
 
 /*
  The main scrollbar **track** CSS class  

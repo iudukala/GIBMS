@@ -32,9 +32,9 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
-                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="50.0" maxHeight="580.0" prefHeight="580.0" prefWidth="939.0">
                                       <columnConstraints>
@@ -116,9 +116,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
-                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
@@ -184,9 +184,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
-                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
@@ -234,9 +234,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
-                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
@@ -279,9 +279,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
-                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>

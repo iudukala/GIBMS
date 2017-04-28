@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package legacy;
+package legacyFXML;
 
-import legacy.Vehicle;
-import legacy.Other;
-import legacy.Building;
-import legacy.Bill;
+import legacyEntities.Vehicle;
+import legacyEntities.Other;
+import legacyEntities.Building;
+import legacyEntities.Bill;
 import handlers.DynamicTable;
 import java.net.URL;
 import java.util.ResourceBundle;

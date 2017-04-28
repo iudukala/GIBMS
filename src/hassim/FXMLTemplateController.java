@@ -62,6 +62,5 @@ public class FXMLTemplateController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         core.Integrator.integrate(anchorpane);
-    }    
-    
+    }
 }

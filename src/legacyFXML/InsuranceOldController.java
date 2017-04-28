@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dumiya;
+package legacyFXML;
 
+import legacyEntities.Insurance_Claim;
+import legacyEntities.Insurance_Fund;
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -21,7 +23,7 @@ import javafx.scene.control.TextField;
  *
  * @author Dumintha Wijesekara
  */
-public class FXMLDocumentController implements Initializable {
+public class InsuranceOldController implements Initializable {
     
     
     @FXML
@@ -100,7 +102,7 @@ public class FXMLDocumentController implements Initializable {
             
         Insurance_Fund Insurance_Fund_Object = new Insurance_Fund(Customer_ID,Insurance_Fee,Date_Issued,Expiry_Date,Payed_Amount,Due_Amount);
         Insurance_Fund_Object.toString();
-        Insurance_Fund_Object.consolidate(conn);
+        //Insurance_Fund_Object.consolidate(conn);
         
         }
         catch(Exception e){
@@ -141,7 +143,7 @@ public class FXMLDocumentController implements Initializable {
             
         Insurance_Claim Insurance_Claim_Object = new Insurance_Claim(Claim_Number,Claim_Status,Claim_Type,Open_Date,Closed_Date,Description);
         Insurance_Claim_Object.toString();
-        Insurance_Claim_Object.consolidate(conn);
+        //Insurance_Claim_Object.consolidate(conn);
         
         }
         catch(Exception e){

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package legacy;
+package legacyEntities;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,18 +16,20 @@ import core.Manipulator;
  *
  * @author Isuru Udukala
  */
-public class bank_reconciliation
+public class general_ledger
 {
-    public String br_no,description;
+    public String transaction_code,transaction_name,description;
     public Double withdrawals,deposits,balance;
     public LocalDate date;
-
-     public bank_reconciliation(LocalDate date,String br_no,String description,Double withdrawals,Double deposits,Double balance)
+    
+    public general_ledger(LocalDate date,String transaction_code,String transaction_name,String description,
+            Double withdrawals,Double deposits,Double balance)
     {
-        
-        
-        this.br_no = br_no;
         this.date = date ;
+        
+        this.transaction_code = transaction_code;
+        this.transaction_name = transaction_name;
+       
         this.description = description;
         this.withdrawals = withdrawals;
         this.deposits = deposits;
@@ -36,17 +38,17 @@ public class bank_reconciliation
 
     }
 
-    bank_reconciliation(String br_no, LocalDate date, String description, Double withdrawals, Double deposits, Double balance) {
+    general_ledger(LocalDate date, String transaction_code, String transaction_name, Double assets, Double liabilities, Double balance) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     
     @Override
     public String toString()
     {
         StringBuilder string =new StringBuilder();
-        string.append("\ndate\t :  ").append(date);
-        string.append("\nbr_no\t :  ").append(br_no);
+        string.append("\ndate\t :  ").append(date.toString());
+        string.append("\ntransaction_code\t :  ").append(transaction_code);
+        string.append("\ntransaction_name\t :  ").append(transaction_name);
         string.append("\ndescription\t :  ").append(description);
         string.append("\nwithdrawals\t :  ").append(withdrawals);
         string.append("\ndeposits\t :  ").append(deposits);
@@ -56,23 +58,27 @@ public class bank_reconciliation
         
         return string.toString();
     }
+   
     public void consolidate(Connection conn)
     {
         try
         {
-            String query = "insert into bank_reconciliation(date,br_no,description,withdrawals,deposits,balance)";
+            String query = "insert into general_ledger(date,transaction_code,transaction_name,description,withdrawals,deposits,balance)";
             PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, date.toString());
-            prp.setString(2,br_no);
-            prp.setString(3, description);
-            prp.setDouble(4, withdrawals);
-            prp.setDouble(5, deposits);
-            prp.setDouble(6, balance);
+            
+            prp.setString(2, transaction_code);
+            prp.setString(3, transaction_name);
+            
+            prp.setString(4, description);
+            prp.setDouble(5, withdrawals);
+            prp.setDouble(6, deposits);
+            prp.setDouble(7, balance);
             prp.executeUpdate();
         }
         catch(SQLException e)
         {
-            System.out.println("Consolidation error[bank_reconciliation]:\n" + e);
+            System.out.println("Consolidation error[general_ledger]:\n" + e);
         }
     }
 }

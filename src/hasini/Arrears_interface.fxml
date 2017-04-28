@@ -25,9 +25,9 @@
             <Insets />
          </opaqueInsets>
          <tabs>
-            <Tab text="tab name">
+            <Tab text="Arrears Search">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="anchor_man" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
@@ -60,7 +60,7 @@
                                           <JFXButton fx:id="e_search" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                           <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                                              <children>
-                                                <TableView prefHeight="200.0" prefWidth="200.0">
+                                                <TableView fx:id="man_table" prefHeight="200.0" prefWidth="200.0">
                                                   <columns>
                                                     <TableColumn prefWidth="75.0" text="C1" />
                                                     <TableColumn prefWidth="75.0" text="C2" />
@@ -81,9 +81,9 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="tab name">
+            <Tab text="Arrears Edit">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="anchor_edit" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
@@ -133,9 +133,9 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="tab name">
+            <Tab text="Arrears List &amp; Letters">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="anchor_list" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>

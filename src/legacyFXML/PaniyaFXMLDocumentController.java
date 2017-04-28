@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package legacy;
+package legacyFXML;
 
+import legacyEntities.bank_receipt_voucher;
+import legacyEntities.bank_slip;
+import legacyEntities.general_ledger;
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -15,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -436,9 +438,9 @@ public class PaniyaFXMLDocumentController implements Initializable {
             LocalDate cheque_date = txt_cheque_date_bvr.getValue();
              try
         {
-           bank_receipt_voucher  bank_receipt_voucher_object = new  bank_receipt_voucher(serial_no,date,transaction_code,transaction_name,nic,resource_id,name,description,amount,total_amount,payment_type,cheque_no,cheque_date);
-                      bank_receipt_voucher_object.toString();
-            bank_receipt_voucher_object.consolidate(conn);
+//           bank_receipt_voucher  bank_receipt_voucher_object = new  bank_receipt_voucher(serial_no,date,transaction_code,transaction_name,nic,resource_id,name,description,amount,total_amount,payment_type,cheque_no,cheque_date);
+//                      bank_receipt_voucher_object.toString();
+//            bank_receipt_voucher_object.consolidate(conn);
             
         
         }
@@ -475,9 +477,9 @@ public class PaniyaFXMLDocumentController implements Initializable {
            try
         {
             
-                      bank_reconciliation  bank_reconciliation_object = new  bank_reconciliation(br_no,date,description,withdrawals,deposits,balance);          
-                bank_reconciliation_object.toString();
-                  bank_reconciliation_object.consolidate(conn);
+//                      legacyEntities.bank_reconciliation  bank_reconciliation_object = new  bank_reconciliation(br_no,date,description,withdrawals,deposits,balance);          
+//                bank_reconciliation_object.toString();
+//                  bank_reconciliation_object.consolidate(conn);
             
         
         }
@@ -516,10 +518,10 @@ public class PaniyaFXMLDocumentController implements Initializable {
              try
         {
 //            
-          bank_slip  bank_slip_object = new  bank_slip(bank_slip_no,date,description,withdrawals,deposits,balance);           
-          
-          bank_slip_object.toString();
-          bank_slip_object.consolidate(conn);
+//          bank_slip  bank_slip_object = new  bank_slip(bank_slip_no,date,description,withdrawals,deposits,balance);           
+//          
+//          bank_slip_object.toString();
+//          bank_slip_object.consolidate(conn);
             
         
         }
@@ -571,9 +573,9 @@ public class PaniyaFXMLDocumentController implements Initializable {
         try
         {
            
-          cashbook  cashbook_object = new  cashbook(cashbook_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance,commercial_bank,sampath_bank);
-                     cashbook_object.toString();
-          cashbook_object.consolidate(conn);
+//          cashbook  cashbook_object = new  cashbook(cashbook_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance,commercial_bank,sampath_bank);
+//                     cashbook_object.toString();
+//          cashbook_object.consolidate(conn);
             
         
         }
@@ -611,10 +613,10 @@ public class PaniyaFXMLDocumentController implements Initializable {
            
        try
         {
-         personal_account  personal_account_object = new  personal_account(account_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance);
-        
-         personal_account_object.toString();
-         personal_account_object.consolidate(conn);
+//         personal_account  personal_account_object = new  personal_account(account_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance);
+//        
+//         personal_account_object.toString();
+//         personal_account_object.consolidate(conn);
             
         
         }
@@ -695,11 +697,11 @@ public class PaniyaFXMLDocumentController implements Initializable {
            
             
 //            
-          general_ledger  general_ledger_object = new  general_ledger(date,transaction_code,transaction_name,assets,liabilities,balance);
-           
-           general_ledger_object.toString();
-           general_ledger_object.consolidate(conn);
-            
+//          general_ledger  general_ledger_object = new  general_ledger(date,transaction_code,transaction_name,assets,liabilities,balance);
+//           
+//           general_ledger_object.toString();
+//           general_ledger_object.consolidate(conn);
+//            
         
         }
         catch(Exception e)

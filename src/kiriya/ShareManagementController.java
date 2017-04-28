@@ -27,9 +27,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import legacy.Person;
-import legacy.shareholder;
-import legacy.shareholder_search;
+import legacyEntities.Person;
+import legacyEntities.shareholder;
+import legacyFXML.shareholder_search;
 
 /**
  * FXML Controller class
@@ -308,7 +308,7 @@ public class ShareManagementController implements Initializable {
                 u_nic.setDisable(true);
                 
                 shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic,nbconn.get());
-                Person person_object = legacy.customer_search.personFromSQL(nic, nbconn.get());
+                Person person_object = legacyEntities.customer_search.personFromSQL(nic, nbconn.get());
                 
                 u_nic.setText(person_object.nic);
                 u_fullname.setText(person_object.name);

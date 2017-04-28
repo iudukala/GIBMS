@@ -155,7 +155,7 @@ public class Integrator
                 {
                     ScrollPane scrollpane = (ScrollPane)node;
                     JFXDepthManager.setDepth(scrollpane, 2);
-                    scrollpane.setPrefHeight(615);
+                    scrollpane.setPrefHeight(610);
                     scrollpane.setLayoutY(15);
                 }
             }

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package legacy;
+package legacyFXML;
 
+import legacyEntities.Person;
+import legacyEntities.Customer;
 import core.Entity;
 import core.Validator;
 import handlers.DynamicTable;
@@ -256,8 +258,8 @@ public class CustomerOldController implements Initializable
         String x=table_search.getItems().get(index).toString();
         String nic = x.split(",")[0].substring(1);
         
-        Person person = legacy.customer_search.personFromSQL(nic, conn);
-        Customer customer= legacy.customer_search.customerFromSQL(nic, conn);
+        Person person = legacyEntities.customer_search.personFromSQL(nic, conn);
+        Customer customer= legacyEntities.customer_search.customerFromSQL(nic, conn);
         
         //person
         text_nic.setText(person.nic);

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package legacy;
+package legacyFXML;
 
-import legacy.Person;
+import legacyEntities.shareholder;
+import legacyEntities.Person;
 import handlers.DynamicTable;
 import java.net.URL;
 import java.sql.Connection;
@@ -148,7 +149,7 @@ public class FXMLDocumentController implements Initializable {
                 unic.setDisable(true);
                 
                 shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic, conn);
-                Person person_object = legacy.customer_search.personFromSQL(nic, conn);
+                Person person_object = legacyEntities.customer_search.personFromSQL(nic, conn);
                 
                 unic.setText(person_object.nic);
                 uname.setText(person_object.name);
@@ -213,7 +214,7 @@ public class FXMLDocumentController implements Initializable {
             String description = descriptio.getText();
             System.out.println(description);
             
-            legacy.add_btn.display("info","shares added successfully");
+            legacyEntities.add_btn.display("info","shares added successfully");
        try
        {
            Person person_object = new Person (name,nic,dob,personal_phone,home_address,'.','.',email);
@@ -222,7 +223,7 @@ public class FXMLDocumentController implements Initializable {
             
             shareholder shareholder_object = new shareholder(nic,bank_name,account_no,share_amount,share_price,share_range_start,share_range_close,description);
             shareholder_object.toString();
-            shareholder_object.consolidate(conn);
+            //shareholder_object.consolidate(conn);
             } 
             catch(Exception e)
             {
