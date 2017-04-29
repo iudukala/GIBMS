@@ -42,6 +42,8 @@ public class Entity
     //public <E> void add(String key, E value)
     public void add(String key, Object value)
     {
+        //avoiding case conflicts on hashmap keys
+        key = key.toLowerCase();
         if(value == null)
         {
             if(getType(key).equals(String.class))
@@ -57,6 +59,7 @@ public class Entity
     
     private Object get(String key, Class reqClass)
     {
+        key = key.toLowerCase();
         if(data.get(key).getClass().equals(reqClass))
             return data.get(key);
         else
@@ -68,6 +71,7 @@ public class Entity
     }
     public String getAsString(String key)
     {
+        key = key.toLowerCase();
         return data.get(key).toString();
     }
     public String getString(String key)

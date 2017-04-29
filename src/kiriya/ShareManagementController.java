@@ -41,6 +41,9 @@ public class ShareManagementController implements Initializable {
 
     EntityControls personCont;
     EntityControls shareholderCont;
+    EntityControls search_cont;
+    JFXTabPane jfxtabpane_shareholder;
+    
     private tableViewHandler custable_handle;
     
     dbConcurrent nbconn;
@@ -119,20 +122,19 @@ public class ShareManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         nbconn = new dbConcurrent();
-        
-        //JFXTabPane jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);
-        
+        jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);
+        custable_handle = new tableViewHandler(u_table, nbconn);
         
         initializePersonInputs();
         initializeShareholderInputs();
         initializeButton();
-        setmethod();
+        //setmethod();
                
-       DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-"from person p ,shareholder s where p.nic=s.nic" , u_table);
-       
-              DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name, p.phone , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-"from person p ,shareholder s where p.nic=s.nic" , view_table);
+//       DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
+//"from person p ,shareholder s where p.nic=s.nic" , u_table);
+//       
+//              DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name, p.phone , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
+//"from person p ,shareholder s where p.nic=s.nic" , view_table);
     }
     
     public Entity getPersonInputs()
@@ -300,34 +302,34 @@ public class ShareManagementController implements Initializable {
         JFXButton deleteButton=usab.getButton(anchor_view, "DELETE", Commons.DELETE_GLYPH);
 
      }
-     public void setmethod()
-     {
-       //u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
-        //{
-          JFXTabPane jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);  
-          
-         custable_handle = new tableViewHandler(u_table, nbconn);
-        jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
-            {
-               
-                if((int)newValue == 1)
-                custable_handle.writeToTable("select * from person , shareholder");
-            }
-        });
-        
-        selectButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                personCont.setValues(custable_handle.getSelection("person", "NIC"));
-                shareholderCont.setValues(custable_handle.getSelection("shareholder", "NIC"));
-                jfxtabpane_shareholder.getSelectionModel().select(0);
-            }
-        });
+//     public void setmethod()
+//     {
+//       //u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
+//        //{
+//          JFXTabPane jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);  
+//          
+//         custable_handle = new tableViewHandler(u_table, nbconn);
+//        jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+//        {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+//            {
+//               
+//                if((int)newValue == 1)
+//                custable_handle.writeToTable("select * from person , shareholder");
+//            }
+//        });
+//        
+//        selectButton.setOnAction(new EventHandler<ActionEvent>()
+//        {
+//            @Override
+//            public void handle(ActionEvent event)
+//            {
+////                personCont.setValues(custable_handle.getSelection("person", "NIC"));
+////                shareholderCont.setValues(custable_handle.getSelection("shareholder", "NIC"));
+////                jfxtabpane_shareholder.getSelectionModel().select(0);
+//            }
+//        });
 //            if (newSelection != null)
 //            {
 //                int index=u_table.getSelectionModel().getSelectedIndex();
@@ -357,10 +359,78 @@ public class ShareManagementController implements Initializable {
 //            }
         //});
 //     
-     }
+     //}
 
     @FXML
-    private void selectbutton(ActionEvent event) {
-    }
+    private void selectbutton(ActionEvent event)
+    {
+        
+            
+       //u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
+        //{
+          
+          
+         custable_handle = new tableViewHandler(u_table, nbconn);
+        jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+            {
+               
+                if((int)newValue == 1)
+                custable_handle.writeToTable("select * from person , shareholder");
+            }
+        });
+        
+        selectButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                tableViewHandler tvh=new tableViewHandler(u_table,nbconn);
+                search_cont = new EntityControls("person",nbconn);
+                search_cont = new EntityControls("shareholder",nbconn);
+       
+        search_cont.add("nic", u_nic);
+        
+        search_cont.add("full_name", u_fullname);
+        
+       
+        search_cont.add("email", u_email);
+        
+        search_cont.add("dob", u_dob);
+        
+       
+        search_cont.add("phone", u_phone);
+        
+        search_cont.add("address", u_address);
+        
+        search_cont.add("nic", a_nic);
+        
+        
+        search_cont.add("share_amount", u_shareamount);
+        
+        search_cont.add("share_price", u_shareprice);
+        
+        search_cont.add("account_no", u_accountno);
+        
+        search_cont.add("bank_name", u_bankname);
+        
+        search_cont.add("share_range_start", u_dateofissue);
+        
+        search_cont.add("share_range_close", u_dateofexpire);
+
+                
+                
+        search_cont.setValues(tvh.getSelection("person", "NIC"));
+        search_cont.setValues(tvh.getSelection("shareholder", "NIC"));
+//                jfxtabpane_shareholder.getSelectionModel().select(0);
+            }
+        });
+    
      
+    }
+
+
+
 }

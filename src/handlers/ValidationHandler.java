@@ -32,7 +32,7 @@ public class ValidationHandler
         });
     }
     
-    public static class NICValidator extends ValidatorBase
+    public static class NICValidator extends ValidatorBase implements ValidationInterface
     {
         @Override
         public void eval()
@@ -48,15 +48,20 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
-        public static void register(JFXTextField textField)
+        @Override
+        public void register(JFXTextField textField)
         {
-            ValidationHandler.register(new NICValidator() , textField);
+            ValidationHandler.register(this, textField);
         }
     }
     
-    public static class ExistingNICValidator extends ValidatorBase
+    public static class ExistingNICValidator extends ValidatorBase implements ValidationInterface
     {
-        static dbConcurrent nbconn = null;
+        private dbConcurrent nbconn = null;
+        public ExistingNICValidator(dbConcurrent nbconn)
+        {
+            this.nbconn = nbconn;
+        }
         @Override
         public void eval()
         {
@@ -71,14 +76,14 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
-        public static void register(JFXTextField textField, dbConcurrent a_nbconn)
+        //public void register(JFXTextField textField, dbConcurrent p_nbconn)
+        public void register(JFXTextField textField)
         {
-            nbconn = a_nbconn;
-            ValidationHandler.register(new ExistingNICValidator() , textField);
+            ValidationHandler.register(this, textField);
         }
     }
     
-    public static class PhoneValidator extends ValidatorBase
+    public static class PhoneValidator extends ValidatorBase implements ValidationInterface
     {
         @Override
         public void eval()
@@ -94,13 +99,14 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
-        public static void register(JFXTextField textField)
+        @Override
+        public void register(JFXTextField textField)
         {
-            ValidationHandler.register(new PhoneValidator() , textField);
+            ValidationHandler.register(this, textField);
         }
     }
     
-    public static class EmailValidator extends ValidatorBase
+    public static class EmailValidator extends ValidatorBase implements ValidationInterface
     {
         @Override
         public void eval()
@@ -116,13 +122,14 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
-        public static void register(JFXTextField textField)
+        @Override
+        public void register(JFXTextField textField)
         {
-            ValidationHandler.register(new EmailValidator() , textField);
+            ValidationHandler.register(this, textField);
         }
     }
     
-    public static class IntegerValidator extends ValidatorBase
+    public static class IntegerValidator extends ValidatorBase implements ValidationInterface
     {
         @Override
         public void eval()
@@ -138,13 +145,14 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
-        public static void register(JFXTextField textField)
+        @Override
+        public void register(JFXTextField textField)
         {
-            ValidationHandler.register(new IntegerValidator() , textField);
+            ValidationHandler.register(this, textField);
         }
     }
     
-    public static class DoubleValidator extends ValidatorBase
+    public static class DoubleValidator extends ValidatorBase implements ValidationInterface
     {
         @Override
         public void eval()
@@ -160,9 +168,10 @@ public class ValidationHandler
                 fieldInvalid(icon, hasErrors);
             }
         }
-        public static void register(JFXTextField textField)
+        @Override
+        public void register(JFXTextField textField)
         {
-            ValidationHandler.register(new DoubleValidator() , textField);
+            ValidationHandler.register(this, textField);
         }
     }
     

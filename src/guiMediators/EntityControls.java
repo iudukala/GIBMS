@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Manipulator;
+import handlers.ValidationInterface;
 import handlers.dbConcurrent;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,16 @@ public class EntityControls
     public void add(String key, Object obj)
     {
         nodeList.put(key, obj);
+    }
+    
+    public <E extends ValidationInterface> void add(String key, Object obj, E validator)
+    {
+        nodeList.put(key, obj);
+        
+        if(obj.getClass().equals(JFXTextField.class))
+            validator.register((JFXTextField)obj);
+        else
+            System.out.println("Error: attempting to register validator to invalid control");
     }
     
     public Entity getValues()
