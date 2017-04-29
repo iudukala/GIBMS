@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hasini;
+package legacyFXML;
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.SQLException;
 
 
 import handlers.dbConcurrent;
+import legacyEntities.arrears_entity;
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -29,7 +30,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Hasini Subasinghe
  */
-public class FXMLDocumentController implements Initializable {
+public class ArreasOldController implements Initializable {
     
        Connection conn=null;
     
