@@ -207,7 +207,7 @@
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="80.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
@@ -216,19 +216,20 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Textfield" GridPane.rowIndex="1" />
                                           <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.valignment="BOTTOM">
                                              <GridPane.margin>
                                                 <Insets bottom="20.0" />
                                              </GridPane.margin>
                                           </Line>
-                                          <TableView fx:id="table_customer_search" prefHeight="466.0" prefWidth="960.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+                                          <TableView fx:id="table_customer_search" prefHeight="466.0" prefWidth="902.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
                                              <columns>
-                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                <TableColumn prefWidth="75.0" text="C2" />
+                                                <TableColumn prefWidth="92.0" text="C1" />
+                                                <TableColumn minWidth="0.0" prefWidth="293.0" text="C2" />
                                              </columns>
                                           </TableView>
-                                          <JFXButton fx:id="btn_custsearch" buttonType="RAISED" prefHeight="44.0" prefWidth="94.0" styleClass="buttonS2" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="text_csnic" promptText="Search via NIC" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="text_csname" promptText="Search via name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXButton fx:id="btn_custsearch" buttonType="RAISED" prefHeight="38.0" prefWidth="94.0" styleClass="buttonS2" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                        </children>
                                        <padding>
                                           <Insets left="20.0" right="20.0" />

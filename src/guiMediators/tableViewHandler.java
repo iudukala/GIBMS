@@ -67,6 +67,7 @@ public class tableViewHandler
             column_list.add(column);
         }
         
+        
         table.getColumns().clear();
         table.getColumns().addAll(column_list);
         ObservableList<Entity> items = FXCollections.observableArrayList(entity_list);

@@ -159,7 +159,6 @@
                                           <JFXTextField fx:id="u_shareprice" promptText="Share price" GridPane.rowIndex="3" />
                                           <JFXTextField fx:id="u_bankname" promptText="Bank name" GridPane.rowIndex="2" />
                                           <JFXTextField fx:id="u_shareamount" promptText="Share amount" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXButton text="select" textFill="#fcfafa" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                                           <TableView fx:id="u_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
@@ -175,6 +174,7 @@
                               </StackPane>
                            </content>
                         </ScrollPane>
+                        <JFXButton fx:id="selectButton" layoutX="487.0" layoutY="619.0" onAction="#selectbutton" text="select" textFill="#f50b0b" />
                      </children>
                   </AnchorPane>
                </content>

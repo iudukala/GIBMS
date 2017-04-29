@@ -7,12 +7,14 @@ package kiriya;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Integrator;
 import core.Validator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
+import guiMediators.tableViewHandler;
 import handlers.DynamicTable;
 import handlers.ValidationHandler;
 import handlers.dbConcurrent;
@@ -20,6 +22,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,9 +31,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import legacyEntities.Person;
-import legacyEntities.shareholder;
-import legacyFXML.shareholder_search;
 
 /**
  * FXML Controller class
@@ -40,6 +41,8 @@ public class ShareManagementController implements Initializable {
 
     EntityControls personCont;
     EntityControls shareholderCont;
+    private tableViewHandler custable_handle;
+    
     dbConcurrent nbconn;
     
     @FXML
@@ -106,6 +109,8 @@ public class ShareManagementController implements Initializable {
     private AnchorPane anchor_view;
     @FXML
     private TableView<?> view_table;
+    @FXML
+    private JFXButton selectButton;
 
     /**
      * Initializes the controller class.
@@ -115,7 +120,7 @@ public class ShareManagementController implements Initializable {
     {
         nbconn = new dbConcurrent();
         
-        Integrator.integrate(anchor_shareholder);
+        //JFXTabPane jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);
         
         
         initializePersonInputs();
@@ -274,6 +279,7 @@ public class ShareManagementController implements Initializable {
             catch(Exception ex)
             {
             System.out.println("nullpointer no inputs");
+            updateButton.setStyle("-fx-background-color: #CB503F");
                 
                 
                 
@@ -296,37 +302,65 @@ public class ShareManagementController implements Initializable {
      }
      public void setmethod()
      {
-       u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
+       //u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
+        //{
+          JFXTabPane jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);  
+          
+         custable_handle = new tableViewHandler(u_table, nbconn);
+        jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
         {
-            if (newSelection != null)
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
             {
-                int index=u_table.getSelectionModel().getSelectedIndex();
-                String x=u_table.getItems().get(index).toString();
-                String nic = x.split(",")[0].substring(1);
-                System.out.println(nic);
-                u_nic.setDisable(true);
-                
-                shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic,nbconn.get());
-                Person person_object = legacyEntities.customer_search.personFromSQL(nic, nbconn.get());
-                
-                u_nic.setText(person_object.nic);
-                u_fullname.setText(person_object.name);
-                u_email.setText(person_object.email);
-                u_phone.setText(person_object.personal_phone);
-                u_address.setText(person_object.home_address);
-                u_dob.setValue(LocalDate.parse(person_object.dob,DateTimeFormatter.ISO_DATE));
-                
-                u_nic.setText(shareholder_object.nic);
-                u_bankname.setText(shareholder_object.bank_name);
-                u_accountno.setText(Integer.toString(shareholder_object.account_no));
-                u_shareamount.setText(Integer.toString(shareholder_object.share_amount));
-                u_shareprice.setText(Double.toString(shareholder_object.share_price));
-                u_dateofissue.setValue(shareholder_object.share_range_start);
-                u_dateofexpire.setValue(shareholder_object.share_range_close);
-                //udescription.setText(shareholder_object.description);
+               
+                if((int)newValue == 1)
+                custable_handle.writeToTable("select * from person , shareholder");
             }
         });
-     
+        
+        selectButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                personCont.setValues(custable_handle.getSelection("person", "NIC"));
+                shareholderCont.setValues(custable_handle.getSelection("shareholder", "NIC"));
+                jfxtabpane_shareholder.getSelectionModel().select(0);
+            }
+        });
+//            if (newSelection != null)
+//            {
+//                int index=u_table.getSelectionModel().getSelectedIndex();
+//                String x=u_table.getItems().get(index).toString();
+//                String nic = x.split(",")[0].substring(1);
+//                System.out.println(nic);
+//                u_nic.setDisable(true);
+//                
+//                shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic,nbconn.get());
+//                Person person_object = legacy.customer_search.personFromSQL(nic, nbconn.get());
+//                
+//                u_nic.setText(person_object.nic);
+//                u_fullname.setText(person_object.name);
+//                u_email.setText(person_object.email);
+//                u_phone.setText(person_object.personal_phone);
+//                u_address.setText(person_object.home_address);
+//                u_dob.setValue(LocalDate.parse(person_object.dob,DateTimeFormatter.ISO_DATE));
+//                
+//                u_nic.setText(shareholder_object.nic);
+//                u_bankname.setText(shareholder_object.bank_name);
+//                u_accountno.setText(Integer.toString(shareholder_object.account_no));
+//                u_shareamount.setText(Integer.toString(shareholder_object.share_amount));
+//                u_shareprice.setText(Double.toString(shareholder_object.share_price));
+//                u_dateofissue.setValue(shareholder_object.share_range_start);
+//                u_dateofexpire.setValue(shareholder_object.share_range_close);
+//                //udescription.setText(shareholder_object.description);
+//            }
+        //});
+//     
      }
+
+    @FXML
+    private void selectbutton(ActionEvent event) {
+    }
      
 }
