@@ -30,6 +30,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Toggle;
 /**
  * FXML Controller class
  *
@@ -247,8 +248,6 @@ public class CustomerController implements Initializable
         customerControls.add("earn_houses", text_earnhouses, new IntegerValidator());
         customerControls.add("earn_vehicles", text_earnvehicles, new IntegerValidator());
         customerControls.add("earn_land", text_earnland, new IntegerValidator());
-        
-        //tgroup_marital.selectedToggleProperty().addListener(listener);
     }
     private void initializeSpouseInputs()
     {
@@ -263,6 +262,19 @@ public class CustomerController implements Initializable
         spouseControls.add("earn_houses", text_sphouses, new IntegerValidator());
         spouseControls.add("earn_vehicles", text_spvehicles, new IntegerValidator());
         spouseControls.add("earn_land", text_spland, new IntegerValidator());
+        
+        spouseControls.disable();
+        tgroup_marital.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue)
+            {
+                if(newValue.getUserData().equals("M"))
+                    spouseControls.enable();
+                else
+                    spouseControls.disable();
+            }
+        });
     }
     private void initializeRadioButtons()
     {
@@ -280,11 +292,6 @@ public class CustomerController implements Initializable
         rb_temporary.setUserData("T");
     }
     
-    private void disableSpouseControls()
-    {
-        
-    }
-    
     private void initializeNodes()
     {
         JFXTabPane jfxtabpane_customer = Integrator.integrate(anchor_customer);
@@ -293,8 +300,6 @@ public class CustomerController implements Initializable
         casab.setButtonLength(160);
         JFXButton addButton = casab.getButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
         addButton.setDisable(true);
-
-        //JFXButton addButton = new Commons.subAnchorButton().getButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -326,8 +331,8 @@ public class CustomerController implements Initializable
                 String snic = text_csnic.getText();
                 String sname = text_csname.getText();
                 
-                personControls.setValues(custable_handle.getSelection("person", "NIC"));
-                customerControls.setValues(custable_handle.getSelection("customer_state", "NIC"));
+                personControls.setValues(custable_handle.getSelection("person", "nic"));
+                customerControls.setValues(custable_handle.getSelection("customer_state", "nic"));
                 jfxtabpane_customer.getSelectionModel().select(0);
             }
         });

@@ -154,4 +154,20 @@ public class EntityControls
             }
         }
     }
+    
+    public void disable()
+    {
+        for(Entry<String,Object> entry : nodeList.entrySet())
+        {
+            ((Control)entry.getValue()).setDisable(true);
+        }
+    }
+    
+    public void enable()
+    {
+        for(Entry<String,Object> entry : nodeList.entrySet())
+        {
+            ((Control)entry.getValue()).setDisable(false);
+        }
+    }
 }

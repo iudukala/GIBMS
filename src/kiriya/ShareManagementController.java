@@ -165,17 +165,17 @@ public class ShareManagementController implements Initializable {
     {
         personCont= new EntityControls("person", nbconn);
         
-        ValidationHandler.NICValidator.register(a_nic);
+        
         personCont.add("nic", a_nic);
         
         personCont.add("full_name", a_fullname);
         
-        ValidationHandler.EmailValidator.register(a_email);
+        
         personCont.add("email", a_email);
         
         personCont.add("dob", a_dob);
         
-        ValidationHandler.PhoneValidator.register(a_phone);
+        
         personCont.add("phone", a_phone);
         
         personCont.add("address", a_address);
@@ -186,17 +186,17 @@ public class ShareManagementController implements Initializable {
      {
         shareholderCont = new EntityControls("shareholder",nbconn);
         
-        ValidationHandler.NICValidator.register(a_nic);
+        
         shareholderCont.add("nic", a_nic);
         
-        ValidationHandler.IntegerValidator.register(a_shareamount);
+        
         shareholderCont.add("share_amount", a_shareamount);
         
         
-        ValidationHandler.DoubleValidator.register(a_shareprice);
+        
         shareholderCont.add("share_price", a_shareprice);
         
-        ValidationHandler.IntegerValidator.register(a_accountno);
+        
         shareholderCont.add("account_no", a_accountno);
         
         shareholderCont.add("bank_name", a_bankname);
@@ -211,8 +211,7 @@ public class ShareManagementController implements Initializable {
         Commons.subAnchorButton asab = new Commons.subAnchorButton();
         asab.setButtonLength(200);
         JFXButton addButton = asab.getButton(anchor_shares, "ADD SHAREHOLDER", Commons.ADD_PERSON_GLYPH);
-        
-        addButton.setOnAction(new EventHandler<ActionEvent>()
+               addButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
@@ -387,7 +386,7 @@ public class ShareManagementController implements Initializable {
             @Override
             public void handle(ActionEvent event)
             {
-                tableViewHandler tvh=new tableViewHandler(u_table,nbconn);
+                tableViewHandler tvh=new tableViewHandler(u_table ,nbconn);
                 search_cont = new EntityControls("person",nbconn);
                 search_cont = new EntityControls("shareholder",nbconn);
        

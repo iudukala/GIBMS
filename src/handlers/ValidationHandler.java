@@ -66,7 +66,7 @@ public class ValidationHandler
         public void eval()
         {
             TextInputControl textField = (TextInputControl) srcControl.get();
-            if (!Validator.isExistingNIC(textField.getText(), nbconn))
+            if (!Validator.isExistingNIC(textField.getText(), nbconn) || textField.getText().equals(""))
             {
                 hasErrors.set(false);
             }

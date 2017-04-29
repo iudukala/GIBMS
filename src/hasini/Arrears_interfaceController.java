@@ -147,7 +147,7 @@ public class Arrears_interfaceController implements Initializable {
         
          arrearsCont = new EntityControls("arrears",nbconn);
          
-         ValidationHandler.NICValidator.register(e_nic);
+         //ValidationHandler.NICValidator.register(e_nic);
         arrearsCont.add("nic", e_nic);
         
     }
@@ -156,7 +156,7 @@ public class Arrears_interfaceController implements Initializable {
         
         personCont= new EntityControls("person", nbconn);
         
-        ValidationHandler.NICValidator.register(e_nic);
+        //ValidationHandler.NICValidator.register(e_nic);
         personCont.add("nic", e_nic);
         
         personCont.add("full_name", e_lname);

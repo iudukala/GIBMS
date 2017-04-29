@@ -37,7 +37,6 @@ public class Integrator
     public static JFXTabPane integrate(AnchorPane anchor)
     {
         //fetching current tabpane
-        System.out.println(anchor.getChildren());
         TabPane tabpane = (TabPane)anchor.getChildren().get(0);
         
         //generating replacement tabpane jfxtabpane
@@ -62,7 +61,7 @@ public class Integrator
             }
         });
         
-        applyMods(jfx_tp);
+        applyModifications(jfx_tp);
         return jfx_tp;
     }
     
@@ -145,7 +144,7 @@ public class Integrator
         return button;
     }
     
-    private static void applyMods(JFXTabPane jfxtp)
+    private static void applyModifications(JFXTabPane jfxtp)
     {
         for(Tab tab : jfxtp.getTabs())
         {
