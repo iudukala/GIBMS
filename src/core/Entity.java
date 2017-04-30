@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -71,21 +72,7 @@ public class Entity
     }
     public String getAsString(String key)
     {
-        //testingmarker
-        try
-        {
-             String test = data.get(key).toString();
-             return test;
-        }
-        catch (Exception e)
-        {
-            System.out.println(tablename + "\t-" + key);
-            System.out.println(data);
-            System.out.println(e);
-            return null;
-        }
-        
-       
+        return data.get(key).toString();
     }
     public String getString(String key)
     {
@@ -148,6 +135,25 @@ public class Entity
         return tdata;
     }
     
+    public List<String> getColumnNamesFromDB()
+    {
+        List<String> columns = new ArrayList<>();
+        for(List list : fetchTableStructure())
+            columns.add(list.get(0).toString());
+        return columns;
+    }
+    
+    public List<String> getColumnNamesFromEntity()
+    {
+        List<String> columns = new ArrayList<>();
+        for (Iterator<Entry<String, Object>> it = data.entrySet().iterator(); it.hasNext();)
+        {
+            Entry<String,Object> entry = it.next();
+            columns.add(entry.getKey());
+        }
+        return columns;
+    }
+    
     public int consolidate(Boolean verbose)
     {
         List<Object> fields = new ArrayList<>();
@@ -156,7 +162,7 @@ public class Entity
         StringBuilder strb = new StringBuilder();
         
         if(!validate(false) && verbose)
-            System.out.println("Warning:\nConsolidating to database with validation failure for [" + tablename + "].");
+            System.out.println("Warning: Consolidating to database with validation failure on [" + tablename + "].");
         
         try
         {
@@ -180,7 +186,7 @@ public class Entity
             if(ag_key!=null)
                 strb.append(ag_key).append(" on ").append(ag_column).append("\n");
             else
-                strb.append("none\n");
+                strb.append("none");
             
             if(verbose)
                 System.out.println(strb);
@@ -242,12 +248,11 @@ public class Entity
             List<String> tables = new ArrayList<>();
             while(rs.next())
             {
-                tables.add(rs.getString(1).toLowerCase());
-                rs.next();
+                tables.add(rs.getString(1));
             }
             if(!tables.contains(tablename))
             {
-                strb.append("Validation failure\nTable [").append(tablename).append("] not found in database.");
+                strb.append("Validation failure: - [").append(tablename).append("] not found in database.");
                 table_valid = false;
             }
         }
@@ -492,21 +497,5 @@ public class Entity
             }
         }
         return Manipulator.translateClass(type);
-    }
-    
-    public List<String> getColumnNamesFromDB()
-    {
-        List<String> columns = new ArrayList<>();
-        for(List list : fetchTableStructure())
-            columns.add(list.get(0).toString());
-        return columns;
-    }
-    
-    public List<String> getColumnNamesFromEntity()
-    {
-        List<String> columns = new ArrayList<>();
-        for(Entry<String,Object> entry : data.entrySet())
-            columns.add(entry.getKey());
-        return columns;
     }
 }

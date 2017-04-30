@@ -37,12 +37,14 @@ public class EntityControls
     
     public void add(String key, Object obj)
     {
+        key = key.toLowerCase();
         nodeList.put(key, obj);
     }
     
     public <E extends ValidationInterface> void add(String key, Object obj, E validator)
     {
-        nodeList.put(key, obj);
+        //nodeList.put(key, obj);
+        add(key, obj);
         
         if(obj.getClass().equals(JFXTextField.class))
             validator.register((JFXTextField)obj);
@@ -77,6 +79,7 @@ public class EntityControls
                 
                 for(List list : tdata)
                     for(int i=0;i<list.size();i++)
+                    {
                         if(list.get(0).equals(key))
                         {
                             if(list.get(1).equals("varchar"))
@@ -86,6 +89,7 @@ public class EntityControls
                             else if(list.get(1).equals("int"))
                                 entity.add(key, Integer.parseInt(value));
                         }
+                    }
             }
         }
         return entity;

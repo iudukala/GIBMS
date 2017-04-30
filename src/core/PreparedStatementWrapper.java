@@ -75,6 +75,7 @@ public class PreparedStatementWrapper
         }
         catch (Exception e)
         {
+            
             System.out.println("error executing psWrapper\n" + e);
             status = false;
         }
