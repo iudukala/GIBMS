@@ -71,8 +71,6 @@ public class Entity
     }
     public String getAsString(String key)
     {
-        //testingmarker
-        key = key.toLowerCase();
         System.out.println(key);
         return data.get(key).toString();
     }
