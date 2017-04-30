@@ -29,8 +29,8 @@ public class Entity
     private final String tablename;
     private String ag_column=null;
     private Integer ag_key=null;
-    String consolidate_string=null;
-    String update_string=null;
+    private String consolidate_string=null;
+    private String update_string=null;
     
     
     public Entity(String tablename, dbConcurrent nbconn)
@@ -91,7 +91,7 @@ public class Entity
         return (LocalDate)get(key,LocalDate.class);
     }
     
-    public int getAGKey()
+    public Integer getAGKey()
     {
         return ag_key;
     }
@@ -139,6 +139,9 @@ public class Entity
     {
         List<Object> fields = new ArrayList<>();
         String sql = parseConsolidateStatement(fields);
+        
+        StringBuilder strb = new StringBuilder();
+        
         if(!validate(false) && verbose)
             System.out.println("Warning:\nConsolidating to database with validation failure for [" + tablename + "].");
         
@@ -150,16 +153,24 @@ public class Entity
                 prpw.setObject(++counter, field);
             prpw.executeUpdate();
             
-            if(prpw.getGeneratedKeys()!=null)
+            if(prpw.getGeneratedKey()!=null)
             {
+                ag_key = prpw.getGeneratedKey();
+                
                 ResultSet ag_rs=nbconn.get().createStatement().executeQuery("show columns from `" + tablename + "` where `Extra`='auto_increment';");
                 ag_rs.next();
                 ag_column = ag_rs.getString("Field");
                 data.put(ag_column,ag_key);
             }
             
+            strb.append("Consolidation successful : [").append(tablename).append("] -  AG data : ");
+            if(ag_key!=null)
+                strb.append(ag_key).append(" on ").append(ag_column).append("\n");
+            else
+                strb.append("none\n");
+            
             if(verbose)
-                System.out.println("Consolidation successful in : " + tablename);
+                System.out.println(strb);
             return 0;
         }
         catch(MySQLIntegrityConstraintViolationException e)
@@ -284,11 +295,13 @@ public class Entity
                     }
                 }
             }
+            
             int totalinvalid = typeMismatches.size() + columnMismatches.size() + sizeMismatches.size();
-            strb.append("[").append(tablename).append("] \n")
-                    .append(data.size() - totalinvalid).append(" field(s) valid, ")
-                    .append(totalinvalid).append(" field(s) invalid");
             data_valid = (typeMismatches.isEmpty() && columnMismatches.isEmpty() && sizeMismatches.isEmpty());
+            
+            strb.append("Field verification : [").append(tablename).append("] - ")
+                    .append(data.size() - totalinvalid).append(" valid, ")
+                    .append(totalinvalid).append(" invalid");
             if(!data_valid)
             {
                 strb.append("\nType mismatches\t\t: ").append(typeMismatches);

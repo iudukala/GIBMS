@@ -98,7 +98,7 @@ public class PreparedStatementWrapper
         return rs;
     }
     
-    public Integer getGeneratedKeys()
+    public Integer getGeneratedKey()
     {
         return ag_key;
     }

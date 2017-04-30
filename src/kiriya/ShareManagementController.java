@@ -15,12 +15,8 @@ import core.Validator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
-import handlers.DynamicTable;
-import handlers.ValidationHandler;
 import handlers.dbConcurrent;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -218,15 +214,13 @@ public class ShareManagementController implements Initializable {
             {
                
                 Entity person = getPersonInputs();
-                System.out.println(person.validate(true));
+                person.validate(true);
                 person.consolidate();
                 
                 
                 Entity shareholder = getShareholderInputs();
-                System.out.println(shareholder.validate(true));
+                shareholder.validate(true);
                 shareholder.consolidate();
-                
-                
             }
         });
         
@@ -266,8 +260,6 @@ public class ShareManagementController implements Initializable {
         @Override
             public void handle(ActionEvent e)
             {
-                
-                System.out.println(Validator.isExistingNIC(u_nic.getText(), nbconn));
                 Entity person ,shareholder;
                 
              
@@ -280,7 +272,6 @@ public class ShareManagementController implements Initializable {
             catch(Exception ex)
             {
             System.out.println("nullpointer no inputs");
-            updateButton.setStyle("-fx-background-color: #CB503F");
                 
                 
                 

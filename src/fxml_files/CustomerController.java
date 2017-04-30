@@ -19,6 +19,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -154,24 +155,32 @@ public class CustomerController implements Initializable
     
     public void customer_add_button()
     {
-        System.out.println(Validator.isExistingNIC(text_nic.getText(), nbconn));
-        Entity person ,customer;
+        Entity person ,customer, spouse;
         try
         {
-            person = getPersonInputs();
-            customer = getCustomerInputs();
+            person = personControls.getValues();
+            customer = customerControls.getValues();
+            spouse = spouseControls.getValues();
             
-            System.out.println(person);
-            System.out.println(person.validate(true));
+            person.validate(true);
+            customer.validate(true);
+            spouse.validate(true);
 
-            System.out.println(customer);
-            System.out.println(customer.validate(true));
-
-            person.consolidate();
-            customer.consolidate();
-
-            personControls.clearControls();
-            customerControls.clearControls();
+            int p = person.consolidate();
+            int c = customer.consolidate();
+            
+            spouse.add("customer_id", customer.getAGKey());
+            int s = spouse.consolidate();
+            
+            if(p == 0 && c == 0 && s ==0)
+            {
+                
+                
+                
+                personControls.clearControls();
+                customerControls.clearControls();
+                spouseControls.clearControls();
+            }
         }
         catch(NullPointerException exc)
         {
@@ -181,32 +190,6 @@ public class CustomerController implements Initializable
 //                    dialog.setTranslateY(-500);
 //                    dialog.show(stack_add);
         }
-    }
-    
-    public Entity getPersonInputs()
-    {
-        return personControls.getValues();
-    }
-    public void setPersonInputs(Entity person)
-    {
-        personControls.setValues(person);
-    }
-    public boolean validatePersonInputs()
-    {
-        return personControls.validateValues();
-    }
-    
-    public Entity getCustomerInputs()
-    {
-        return customerControls.getValues();
-    }
-    public void setCustomerInputs(Entity customer)
-    {
-        customerControls.setValues(customer);
-    }
-    public boolean validateCustomerInputs()
-    {
-        return customerControls.validateValues();
     }
     
     public void initializePersonInputs()
@@ -299,7 +282,6 @@ public class CustomerController implements Initializable
         Commons.subAnchorButton casab = new Commons.subAnchorButton();
         casab.setButtonLength(160);
         JFXButton addButton = casab.getButton(subanchor_tca, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
-        addButton.setDisable(true);
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {

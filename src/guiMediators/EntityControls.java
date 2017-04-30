@@ -25,8 +25,9 @@ import javafx.scene.control.ToggleGroup;
 public class EntityControls
 {
     public final String TABLE_NAME;
-    public final dbConcurrent nbconn;
-    final Map<String,Object> nodeList = new HashMap<>();
+    private final dbConcurrent nbconn;
+    private final Map<String,Object> nodeList = new HashMap<>();
+    private Entity entity;
     
     public EntityControls(String tablename, dbConcurrent nbconn)
     {
@@ -51,7 +52,7 @@ public class EntityControls
     
     public Entity getValues()
     {
-        Entity entity = new Entity(TABLE_NAME, nbconn);
+        entity = new Entity(TABLE_NAME, nbconn);
         for(Entry<String,Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();
@@ -88,6 +89,11 @@ public class EntityControls
             }
         }
         return entity;
+    }
+    
+    public void addToEntity(String key, Object value)
+    {
+        entity.add(key, value);
     }
     
     public void setValues(Entity entity)
@@ -158,16 +164,17 @@ public class EntityControls
     public void disable()
     {
         for(Entry<String,Object> entry : nodeList.entrySet())
-        {
             ((Control)entry.getValue()).setDisable(true);
-        }
     }
     
     public void enable()
     {
         for(Entry<String,Object> entry : nodeList.entrySet())
-        {
             ((Control)entry.getValue()).setDisable(false);
-        }
+    }
+    
+    public int getAGKey()
+    {
+        return entity.getAGKey();
     }
 }
