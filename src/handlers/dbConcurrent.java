@@ -21,7 +21,7 @@ import java.util.concurrent.Future;
 public class dbConcurrent
 {
     Future<Connection> dbFuture = null;
-    boolean T,V;
+    private final boolean T,V;
     
     public dbConcurrent(Boolean T, Boolean V)
     {

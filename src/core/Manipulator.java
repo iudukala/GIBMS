@@ -90,6 +90,8 @@ public class Manipulator
     
     public static Class translateClass(String classstr)
     {
+        if(classstr == null)
+            return null;
         switch(classstr)
         {
             case "int":

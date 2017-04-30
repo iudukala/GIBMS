@@ -310,11 +310,11 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
-                String snic = text_csnic.getText();
-                String sname = text_csname.getText();
+                //String snic = text_csnic.getText();
+                //String sname = text_csname.getText();
                 
-                personControls.setValues(custable_handle.getSelection("person", "nic"));
-                customerControls.setValues(custable_handle.getSelection("customer_state", "nic"));
+                personControls.setValues(custable_handle.getSelection("person", "NIC"));
+                customerControls.setValues(custable_handle.getSelection("customer_state", "NIC"));
                 jfxtabpane_customer.getSelectionModel().select(0);
             }
         });

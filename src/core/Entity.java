@@ -110,7 +110,7 @@ public class Entity
             for(int i=0;rs.next();i++)
             {
                 tdata.add(new ArrayList<>());
-                tdata.get(i).add(rs.getString("Field"));
+                tdata.get(i).add(rs.getString("Field").toLowerCase());
                 String typestr = rs.getString("Type").toLowerCase();
                 if(typestr.contains("("))
                     tdata.get(i).add(typestr.substring(0,typestr.indexOf("(")));
@@ -326,6 +326,7 @@ public class Entity
         
         List<Entity> entities = new ArrayList<>();
         String newtable = null;
+        int count = 0;
         
         try
         {
@@ -336,7 +337,7 @@ public class Entity
                 for(int i=0;i<rs.getMetaData().getColumnCount();i++)
                 {
                     String col_class = rs.getMetaData().getColumnClassName(i+1);
-                    String column_name = rs.getMetaData().getColumnName(i+1);
+                    String column_name = rs.getMetaData().getColumnName(i+1).toLowerCase();
                     
                     if(rs.getString(column_name) == null)
                     {
@@ -355,7 +356,9 @@ public class Entity
                         temp_entity.add(column_name, rs.getInt(column_name));
                 }
                 entities.add(temp_entity);
+                System.out.print("\rFetching [" + newtable + "] records.. " + (count++) + " records parsed");
             }
+            System.out.println("\r[" + newtable + "] : parsed " + count + " records.");
         }
         catch(SQLException e)
         {
