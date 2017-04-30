@@ -139,29 +139,30 @@ public class ShareManagementController implements Initializable
 //    
     }
     
-    public Entity getPersonInputs()
-    {
-        personCont.clearControls();
-        return personCont.getValues();
-    }
+    //-------------------DELETE KARAPAN-------------
+//    public Entity getPersonInputs()
+//    {
+//        personCont.clearControls();
+//        return personCont.getValues();
+//    }
+//    public Entity getShareholderInputs()
+//    {
+//        shareholderCont.clearControls();
+//        return shareholderCont.getValues();
+//    }
+//     public void setPersonInputs(Entity person)
+//    {
+//        personCont.setValues(person);
+//    }
+//     public void setCustomerInputs(Entity shareholder)
+//    {
+//        shareholderCont.setValues(shareholder);
+//    }
+//     public boolean validatePersonInputs()
+//    {
+//        return personCont.validateValues();
+//    }//---------------------------------------------------------------  
     
-     public Entity getShareholderInputs()
-    {
-        shareholderCont.clearControls();
-        return shareholderCont.getValues();
-    }
-     public void setPersonInputs(Entity person)
-    {
-        personCont.setValues(person);
-    }
-     public void setCustomerInputs(Entity shareholder)
-    {
-        shareholderCont.setValues(shareholder);
-    }
-     public boolean validatePersonInputs()
-    {
-        return personCont.validateValues();
-    }
     
      public void initializePersonInputs()
     {
@@ -213,18 +214,18 @@ public class ShareManagementController implements Initializable
         Commons.subAnchorButton asab = new Commons.subAnchorButton();
         asab.setButtonLength(200);
         JFXButton addButton = asab.getButton(anchor_shares, "ADD SHAREHOLDER", Commons.ADD_PERSON_GLYPH);
-               addButton.setOnAction(new EventHandler<ActionEvent>()
+        
+        addButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-               
-                Entity person = getPersonInputs();
+                Entity person = personCont.getValues();
                 person.validate(true);
                 person.consolidate();
                 
                 
-                Entity shareholder = getShareholderInputs();
+                Entity shareholder = shareholderCont.getValues();
                 shareholder.validate(true);
                 shareholder.consolidate();
             }
@@ -250,8 +251,8 @@ public class ShareManagementController implements Initializable
             public void handle(ActionEvent e)
             {    
                 String search = u_search.getText();
-                handlers.DynamicTable.buildData(nbconn.get(), "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-"from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, u_table);   
+//                handlers.DynamicTable.buildData(nbconn.get(), "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
+//"from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, u_table);   
             }    
                 });
          
@@ -272,8 +273,8 @@ public class ShareManagementController implements Initializable
             
             try{
             
-                person = getPersonInputs();
-                shareholder=getShareholderInputs();
+                person = personCont.getValues();
+                shareholder=shareholderCont.getValues();
                 }
             catch(Exception ex)
             {
@@ -373,8 +374,7 @@ public class ShareManagementController implements Initializable
             {
                
                 if((int)newValue == 1)
-                custable_handle.writeToTable("select p.nic, p.address, p.dob, p.full_name, p.email ,s.account_no, s.bank_name ,"
-                + " s.share_amount , s.share_price, s.share_range_close, s.share_range_start from person p inner join shareholder s on p.nic=s.nic;");
+                    custable_handle.writeToTable("select p.nic, p.address, p.dob, p.full_name, p.email ,s.account_no, s.bank_name , s.share_amount , s.share_price, s.share_range_close, s.share_range_start from person p inner join shareholder s on p.nic=s.nic;");
             }
         });
         

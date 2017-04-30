@@ -71,7 +71,9 @@ public class Entity
     }
     public String getAsString(String key)
     {
+        //testingmarker
         key = key.toLowerCase();
+        System.out.println(key);
         return data.get(key).toString();
     }
     public String getString(String key)
@@ -315,7 +317,6 @@ public class Entity
         }
         if(verbose)
             System.out.println(strb);
-        
         return table_valid && data_valid;
     }
     
