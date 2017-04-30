@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Integrator;
-import core.Validator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
@@ -33,11 +32,13 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author ASUS-PC
  */
-public class ShareManagementController implements Initializable {
+public class ShareManagementController implements Initializable
+{
 
     EntityControls personCont;
     EntityControls shareholderCont;
     EntityControls search_cont;
+    EntityControls searchShareCont;
     JFXTabPane jfxtabpane_shareholder;
     
     private tableViewHandler custable_handle;
@@ -121,16 +122,21 @@ public class ShareManagementController implements Initializable {
         jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);
         custable_handle = new tableViewHandler(u_table, nbconn);
         
+        
         initializePersonInputs();
         initializeShareholderInputs();
         initializeButton();
-        //setmethod();
+        selectButton();
+        setshareholderInput();
+        setPersonInput();
+//        setmethod();
                
 //       DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
 //"from person p ,shareholder s where p.nic=s.nic" , u_table);
 //       
 //              DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name, p.phone , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
 //"from person p ,shareholder s where p.nic=s.nic" , view_table);
+//    
     }
     
     public Entity getPersonInputs()
@@ -351,14 +357,13 @@ public class ShareManagementController implements Initializable {
 //     
      //}
 
-    @FXML
-    private void selectbutton(ActionEvent event)
+    private void selectButton()
     {
         
             
        //u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
         //{
-          
+          tableViewHandler tvh=new tableViewHandler(u_table ,nbconn);
           
          custable_handle = new tableViewHandler(u_table, nbconn);
         jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
@@ -368,7 +373,8 @@ public class ShareManagementController implements Initializable {
             {
                
                 if((int)newValue == 1)
-                custable_handle.writeToTable("select * from person , shareholder");
+                custable_handle.writeToTable("select p.nic, p.address, p.dob, p.full_name, p.email ,s.account_no, s.bank_name ,"
+                + " s.share_amount , s.share_price, s.share_range_close, s.share_range_start from person p inner join shareholder s on p.nic=s.nic;");
             }
         });
         
@@ -377,50 +383,34 @@ public class ShareManagementController implements Initializable {
             @Override
             public void handle(ActionEvent event)
             {
-                tableViewHandler tvh=new tableViewHandler(u_table ,nbconn);
-                search_cont = new EntityControls("person",nbconn);
-                search_cont = new EntityControls("shareholder",nbconn);
-       
-        search_cont.add("nic", u_nic);
-        
-        search_cont.add("full_name", u_fullname);
-        
-       
-        search_cont.add("email", u_email);
-        
-        search_cont.add("dob", u_dob);
-        
-       
-        search_cont.add("phone", u_phone);
-        
-        search_cont.add("address", u_address);
-        
-        search_cont.add("nic", a_nic);
-        
-        
-        search_cont.add("share_amount", u_shareamount);
-        
-        search_cont.add("share_price", u_shareprice);
-        
-        search_cont.add("account_no", u_accountno);
-        
-        search_cont.add("bank_name", u_bankname);
-        
-        search_cont.add("share_range_start", u_dateofissue);
-        
-        search_cont.add("share_range_close", u_dateofexpire);
-
-                
-                
-        search_cont.setValues(tvh.getSelection("person", "NIC"));
-        search_cont.setValues(tvh.getSelection("shareholder", "NIC"));
+                search_cont.setValues(tvh.getSelection("person", "NIC"));
+                search_cont.setValues(tvh.getSelection("shareholder", "NIC"));
 //                jfxtabpane_shareholder.getSelectionModel().select(0);
             }
         });
-    
-     
     }
+       public void setPersonInput()
+       {
+            search_cont = new EntityControls("person",nbconn);
 
+            search_cont.add("nic", u_nic);
+            search_cont.add("full_name", u_fullname);
+            search_cont.add("email", u_email);
+            search_cont.add("dob", u_dob);
+            search_cont.add("phone", u_phone);
+            search_cont.add("address", u_address);
+            search_cont.add("nic", a_nic);
+        
+       }
+       public void setshareholderInput()
+       {
+            searchShareCont = new EntityControls("shareholder",nbconn);
 
-
+            searchShareCont.add("share_amount", u_shareamount);
+            searchShareCont.add("share_price", u_shareprice);
+            searchShareCont.add("account_no", u_accountno);
+            searchShareCont.add("bank_name", u_bankname);
+            searchShareCont.add("share_range_start", u_dateofissue);
+            searchShareCont.add("share_range_close", u_dateofexpire);
+       }
 }

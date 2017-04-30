@@ -106,4 +106,9 @@ public class Manipulator
                 return null;
         }
     }
+    
+    public static String toSentenceCase(String str)
+    {
+        return str.toLowerCase().replaceFirst(Character.toString(str.charAt(0)), Character.toString(str.charAt(0)).toUpperCase());
+    }
 }

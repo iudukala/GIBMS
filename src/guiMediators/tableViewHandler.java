@@ -6,6 +6,7 @@
 package guiMediators;
 
 import core.Entity;
+import core.Manipulator;
 import core.PreparedStatementWrapper;
 import handlers.dbConcurrent;
 import java.sql.ResultSet;
