@@ -71,8 +71,21 @@ public class Entity
     }
     public String getAsString(String key)
     {
-        System.out.println(key);
-        return data.get(key).toString();
+        //testingmarker
+        try
+        {
+             String test = data.get(key).toString();
+             return test;
+        }
+        catch (Exception e)
+        {
+            System.out.println(tablename + "\t-" + key);
+            System.out.println(data);
+            System.out.println(e);
+            return null;
+        }
+        
+       
     }
     public String getString(String key)
     {
@@ -320,7 +333,7 @@ public class Entity
     
     public static List<Entity> parseFromRS(ResultSet rs, dbConcurrent nbconn)
     {
-        //resetting the RS incase next() has been called on it before being passed
+        //resetting RS incase next() has been called before being passed
         try{rs.beforeFirst();}catch(SQLException e){System.out.println("Error in passed resultset\n" + e);}
         
         List<Entity> entities = new ArrayList<>();
@@ -355,6 +368,7 @@ public class Entity
                         temp_entity.add(column_name, rs.getInt(column_name));
                 }
                 entities.add(temp_entity);
+                
                 System.out.print("\rFetching [" + newtable + "] records.. " + (count++) + " records parsed");
             }
             System.out.println("\r[" + newtable + "] : parsed " + count + " records.");
@@ -480,11 +494,19 @@ public class Entity
         return Manipulator.translateClass(type);
     }
     
-    public List<String> getColumnNames()
+    public List<String> getColumnNamesFromDB()
     {
         List<String> columns = new ArrayList<>();
         for(List list : fetchTableStructure())
             columns.add(list.get(0).toString());
+        return columns;
+    }
+    
+    public List<String> getColumnNamesFromEntity()
+    {
+        List<String> columns = new ArrayList<>();
+        for(Entry<String,Object> entry : data.entrySet())
+            columns.add(entry.getKey());
         return columns;
     }
 }

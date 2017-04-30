@@ -54,7 +54,7 @@ public class tableViewHandler
         
         List<TableColumn<Entity,String>> column_list = new ArrayList<>();
         
-        for(String colname : entity_list.get(0).getColumnNames())
+        for(String colname : entity_list.get(0).getColumnNamesFromEntity())
         {
             TableColumn<Entity,String> column = new TableColumn<>(colname.toUpperCase());
             column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Entity, String>, ObservableValue<String>>()

@@ -373,7 +373,7 @@ public class ShareManagementController implements Initializable
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
             {
                
-                if((int)newValue == 1)
+                if((int)newValue == 2)
                     custable_handle.writeToTable("select p.nic, p.address, p.dob, p.full_name, p.email ,s.account_no, s.bank_name , s.share_amount , s.share_price, s.share_range_close, s.share_range_start from person p inner join shareholder s on p.nic=s.nic;");
             }
         });
