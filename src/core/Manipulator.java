@@ -6,6 +6,7 @@
 package core;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -110,5 +111,17 @@ public class Manipulator
     public static String toSentenceCase(String str)
     {
         return str.toLowerCase().replaceFirst(Character.toString(str.charAt(0)), Character.toString(str.charAt(0)).toUpperCase());
+    }
+    
+    public static LocalDate parseISODate(String datestr)
+    {
+        LocalDate date;
+        try{
+            date = LocalDate.parse(datestr, DateTimeFormatter.ISO_DATE);
+        }
+        catch(Exception e){
+            date = null;
+        }
+        return date;
     }
 }

@@ -52,7 +52,7 @@
                                              </font>
                                           </Label>
                                           <JFXTextField fx:id="nic_cs" promptText="NIC" GridPane.rowIndex="1" />
-                                          <TableView fx:id="table_cs" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="3">
+                                          <TableView fx:id="table_cs" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />

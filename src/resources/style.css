@@ -85,6 +85,11 @@ and open the template in the editor.
     -fx-pref-width: 1000;   
 }
 
+.sublabel{
+    -fx-text-fill: -fx-font-base;
+    -fx-font-family: "Roboto";
+}
+
 .jfx-date-picker{
     -jfx-default-color: -fx-font-base;
     -fx-font-family: "Roboto";
@@ -127,6 +132,10 @@ and open the template in the editor.
     -fx-max-width: 45;
     -fx-min-height: 45;
     -fx-min-width: 45;
+}
+
+.menubutton:hover{
+    -fx-background-color:#FFD54F;
 }
 
 .jfx-list-cell{
@@ -245,13 +254,13 @@ and open the template in the editor.
     -fx-background-radius: 0;
 }
 
-
-
 /*
+
+
 .table-cell {
 	-fx-border-color: transparent;
 	-fx-border-width: 5;
-        -fx-padding: 11px;
+        -fx-padding: 10px;
 }
 
 .table-view{
@@ -259,8 +268,6 @@ and open the template in the editor.
     -fx-border-color: transparent;
 }
 .table-view .column-header{
-    -fx-background-color: white;
-    -fx-border-width: 0;
     -fx-size: 40px;
 }
 .table-view .column-header .label{
@@ -278,6 +285,7 @@ and open the template in the editor.
 }
 */
 
+/*-------------------------------------------------------------------------------*/
 /*
 
 .table-view .filler{}
@@ -290,7 +298,15 @@ and open the template in the editor.
     -fx-cell-size: 45px;
     -fx-background-color:white;
 }
-
+.table-view .column-header .label{
+    -fx-border-width: 0;
+    -fx-size: 40px;
+    
+    -fx-font-family: "Roboto condensed";
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+    -fx-font-weight: normal;
+}
 .table-view, .tree-table-view {
 	 Constants used throughout the tableview. 
         -fx-table-backgroundset: white;

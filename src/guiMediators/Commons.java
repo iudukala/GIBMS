@@ -55,6 +55,7 @@ public class Commons
                 button.setGraphicTextGap(10);
                 button.setGraphic(glyph);
             }
+            
             button.setPrefSize(button_length,button_height);
             button.setTranslateX(xcoord);
             button.setTranslateY(ycoord);
@@ -68,5 +69,6 @@ public class Commons
         public void setButtonHeigth(int height){button_height = height;}
         public void setGlyphWidth(int width){glyph_width = width;}
         public void setCoordinates(int x, int y){xcoord = x; ycoord = y;}
+        public void setStyle(String style){this.style = style;}
     }
 }

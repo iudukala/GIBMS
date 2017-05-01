@@ -9,6 +9,7 @@ import handlers.dbConcurrent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +35,7 @@ public class Validator
         }
         return valid;
     }
+    
     public static boolean isEmail(String str)
     {
         List<Character> allowed=new ArrayList<>(Arrays.asList('@','.'));
@@ -55,6 +57,7 @@ public class Validator
         }
         return valid;
     }
+    
     public static boolean isNIC(String str)
     {
         boolean valid;
@@ -75,6 +78,7 @@ public class Validator
         else
             return false;
     }
+    
     public static boolean isInteger(String str)
     {
         boolean valid=true;
@@ -88,6 +92,7 @@ public class Validator
         }
         return valid;
     }
+    
     public static boolean isDouble(String str)
     {
         List<Character> allowed=new ArrayList<>(Arrays.asList('.'));
@@ -103,6 +108,7 @@ public class Validator
         }
         return valid;
     }
+    
     public static boolean isExistingNIC(String str, dbConcurrent nbconn)
     {
         boolean valid = true;
@@ -118,5 +124,19 @@ public class Validator
             System.out.println("Error checking NIC existence\n" + e);
         }
         return valid;
+    }
+    
+    public static boolean isValidBirthday(String datestr)
+    {
+        LocalDate date = Manipulator.parseISODate(datestr);
+        if(date == null)return false;
+        return LocalDate.now().minusYears(date.getYear()).getYear() > 17;
+    }
+    
+    public static boolean isPastDate(String datestr)
+    {
+        LocalDate date = Manipulator.parseISODate(datestr);
+        if(date == null)return false;
+        return LocalDate.now().compareTo(date) > -1;
     }
 }

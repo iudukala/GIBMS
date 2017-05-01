@@ -61,7 +61,7 @@ public class Entity
     private Object get(String key, Class reqClass)
     {
         key = key.toLowerCase();
-        if(data.get(key).getClass().equals(reqClass))
+        if(data.get(key).getClass().equals(reqClass) && data.containsKey(key))
             return data.get(key);
         else
         {
@@ -72,7 +72,10 @@ public class Entity
     }
     public String getAsString(String key)
     {
-        return data.get(key).toString();
+        if(data.containsKey(key))
+            return data.get(key).toString();
+        else
+            return null;
     }
     public String getString(String key)
     {

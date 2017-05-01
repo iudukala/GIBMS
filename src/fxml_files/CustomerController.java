@@ -20,6 +20,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
+import handlers.ValidationHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -32,6 +33,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Toggle;
+import javafx.scene.layout.GridPane;
 /**
  * FXML Controller class
  *
@@ -159,28 +161,29 @@ public class CustomerController implements Initializable
         try
         {
             person = personControls.getValues();
-            customer = customerControls.getValues();
-            spouse = spouseControls.getValues();
-            
-            person.validate(true);
-            customer.validate(true);
-            spouse.validate(true);
-
-            int p = person.consolidate();
-            int c = customer.consolidate();
-            
-            spouse.add("customer_id", customer.getAGKey());
-            int s = spouse.consolidate();
-            
-            if(p == 0 && c == 0 && s ==0)
-            {
-                
-                
-                
-                personControls.clearControls();
-                customerControls.clearControls();
-                spouseControls.clearControls();
-            }
+            System.out.println(personControls.validateValues());
+//            customer = customerControls.getValues();
+//            spouse = spouseControls.getValues();
+//            
+//            person.validate(true);
+//            customer.validate(true);
+//            spouse.validate(true);
+//
+//            int p = person.consolidate();
+//            int c = customer.consolidate();
+//            
+//            spouse.add("customer_id", customer.getAGKey());
+//            int s = spouse.consolidate();
+//            
+//            if(p == 0 && c == 0 && s ==0)
+//            {
+//                
+//                
+//                
+//                personControls.clearControls();
+//                customerControls.clearControls();
+//                spouseControls.clearControls();
+//            }
         }
         catch(NullPointerException exc)
         {
@@ -201,7 +204,7 @@ public class CustomerController implements Initializable
         
         personControls.add("full_name", text_fullname);
         personControls.add("email", text_email, new EmailValidator());
-        personControls.add("dob", date_dob);
+        personControls.add("dob", date_dob, new birthdayValidator());
         personControls.add("phone", text_pphone, new PhoneValidator());
         personControls.add("address", text_haddress);
         
@@ -219,7 +222,7 @@ public class CustomerController implements Initializable
         customerControls.add("company", text_company);
         customerControls.add("position", text_position);
         
-        customerControls.add("emp_startdate", date_empl_start);
+        customerControls.add("emp_startdate", date_empl_start, new pastDateValidator());
         customerControls.add("service_nature",tgroup_servicetype);
         customerControls.add("profession", text_profession);
         customerControls.add("account_num", text_accnum);
@@ -278,6 +281,18 @@ public class CustomerController implements Initializable
     private void initializeNodes()
     {
         JFXTabPane jfxtabpane_customer = Integrator.integrate(anchor_customer);
+        
+        //testingmarker
+//        JFXDatePicker datepicker = date_empl_start;
+//        JFXTextField vtf = new JFXTextField();
+//        GridPane grid = (GridPane)datepicker.getParent();
+//        new ValidationHandler.NICValidator().register(vtf);
+//        vtf.setText("XXXXXX");
+//        vtf.validate();
+//        System.out.println(GridPane.getColumnIndex(datepicker));
+//        grid.add(vtf, 0, 7);
+//            grid.add(vtf, GridPane.getColumnIndex(datepicker)-1, GridPane.getRowIndex(datepicker));
+        //System.out.println(GridPane.getColumnIndex(text_accbank));
         
         Commons.subAnchorButton casab = new Commons.subAnchorButton();
         casab.setButtonLength(160);

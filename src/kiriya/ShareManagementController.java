@@ -14,6 +14,7 @@ import core.Integrator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
+import handlers.ValidationHandler. *;
 import handlers.dbConcurrent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -42,6 +44,7 @@ public class ShareManagementController implements Initializable
     JFXTabPane jfxtabpane_shareholder;
     
     private tableViewHandler custable_handle;
+    private tableViewHandler viewTable;
     
     dbConcurrent nbconn;
     
@@ -111,6 +114,9 @@ public class ShareManagementController implements Initializable
     private TableView<?> view_table;
     @FXML
     private JFXButton selectButton;
+    private TreeTableView<?> apply_table;
+    @FXML
+    private TableView<?> app_table;
 
     /**
      * Initializes the controller class.
@@ -129,84 +135,33 @@ public class ShareManagementController implements Initializable
         selectButton();
         setshareholderInput();
         setPersonInput();
-//        setmethod();
-               
-//       DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-//"from person p ,shareholder s where p.nic=s.nic" , u_table);
-//       
-//              DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name, p.phone , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-//"from person p ,shareholder s where p.nic=s.nic" , view_table);
-//    
+        tabPane();
+        
+        
+   
+   
     }
-    
-    //-------------------DELETE KARAPAN-------------
-//    public Entity getPersonInputs()
-//    {
-//        personCont.clearControls();
-//        return personCont.getValues();
-//    }
-//    public Entity getShareholderInputs()
-//    {
-//        shareholderCont.clearControls();
-//        return shareholderCont.getValues();
-//    }
-//     public void setPersonInputs(Entity person)
-//    {
-//        personCont.setValues(person);
-//    }
-//     public void setCustomerInputs(Entity shareholder)
-//    {
-//        shareholderCont.setValues(shareholder);
-//    }
-//     public boolean validatePersonInputs()
-//    {
-//        return personCont.validateValues();
-//    }//---------------------------------------------------------------  
-    
-    
+ 
      public void initializePersonInputs()
     {
         personCont= new EntityControls("person", nbconn);
-        
-        
-        personCont.add("nic", a_nic);
-        
+        personCont.add("nic", a_nic, new NICValidator());
         personCont.add("full_name", a_fullname);
-        
-        
-        personCont.add("email", a_email);
-        
+        personCont.add("email", a_email, new EmailValidator());
         personCont.add("dob", a_dob);
-        
-        
-        personCont.add("phone", a_phone);
-        
+        personCont.add("phone", a_phone, new PhoneValidator());
         personCont.add("address", a_address);
-        
-    
     }
      public void initializeShareholderInputs()
      {
         shareholderCont = new EntityControls("shareholder",nbconn);
-        
-        
-        shareholderCont.add("nic", a_nic);
-        
-        
-        shareholderCont.add("share_amount", a_shareamount);
-        
-        
-        
-        shareholderCont.add("share_price", a_shareprice);
-        
-        
-        shareholderCont.add("account_no", a_accountno);
-        
+        shareholderCont.add("nic", a_nic, new NICValidator());
+        shareholderCont.add("share_amount", a_shareamount, new IntegerValidator());
+        shareholderCont.add("share_price", a_shareprice, new DoubleValidator());
+        shareholderCont.add("account_no", a_accountno,new IntegerValidator());
         shareholderCont.add("bank_name", a_bankname);
-        
-        shareholderCont.add("share_range_start", a_dateofissue);
-        
-        shareholderCont.add("share_range_close", a_dateofexpire);
+        shareholderCont.add("issue_date", a_dateofissue);
+        shareholderCont.add("expiry_date", a_dateofexpire);
      }
      public void initializeButton()
      {
@@ -222,12 +177,21 @@ public class ShareManagementController implements Initializable
             {
                 Entity person = personCont.getValues();
                 person.validate(true);
-                person.consolidate();
+                int p=person.consolidate();
                 
                 
                 Entity shareholder = shareholderCont.getValues();
                 shareholder.validate(true);
-                shareholder.consolidate();
+                int s=shareholder.consolidate();
+                
+             if(p == 0 && s ==0)
+                {
+                
+                personCont.clearControls();
+                shareholderCont.clearControls();
+                
+                }
+             
             }
         });
         
@@ -236,7 +200,30 @@ public class ShareManagementController implements Initializable
         usab.setGlyphWidth(20);
         usab.setCoordinates(670, 550);
         JFXButton updateButton = usab.getButton(anchor_update, "UPDATE SHAREHOLDER", Commons.UPDATE_GLYPH);
-
+//               
+//        updateButton.setOnAction(new EventHandler<ActionEvent>()
+//        {
+//        @Override
+//            public void handle(ActionEvent e)
+//            {
+//                Entity person ,shareholder;
+//                
+//             
+//            
+//            try{
+//            
+//                person = personCont.getValues();
+//                shareholder=shareholderCont.getValues();
+//                }
+//            catch(Exception ex)
+//            {
+//            System.out.println("nullpointer no inputs");
+//               
+//            }
+//            
+//            }
+//        });
+//          
 
         usab.setButtonLength(110);
         usab.setButtonHeigth(20);
@@ -249,8 +236,11 @@ public class ShareManagementController implements Initializable
                 {
             @Override
             public void handle(ActionEvent e)
-            {    
+            {   custable_handle.writeToTable("select p.nic, p.full_name,s.share_amount , s.share_price ,"
+                    + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic");
                 String search = u_search.getText();
+                custable_handle.getSelection("select p.nic, p.full_name,s.share_amount , s.share_price ,"
+                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic like ?");
 //                handlers.DynamicTable.buildData(nbconn.get(), "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
 //"from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, u_table);   
             }    
@@ -258,39 +248,32 @@ public class ShareManagementController implements Initializable
          
         usab.setButtonLength(100);
         usab.setButtonHeigth(20);
-        usab.setGlyphWidth(20);
+        usab.setGlyphWidth(20); 
         usab.setCoordinates(800, 550);
         JFXButton viewButton=usab.getButton(anchor_view, "VIEW", Commons.LIST_GLYPH);
         
-        viewButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-        @Override
-            public void handle(ActionEvent e)
-            {
-                Entity person ,shareholder;
-                
-             
-            
-            try{
-            
-                person = personCont.getValues();
-                shareholder=shareholderCont.getValues();
-                }
-            catch(Exception ex)
-            {
-            System.out.println("nullpointer no inputs");
-                
-                
-                
-            
-            }
-            
-            }
-        });
-        
-        
-        
-        
+//        viewButton.setOnAction(new EventHandler<ActionEvent>()
+//        {
+//        @Override
+//            public void handle(ActionEvent e)
+//            {
+//                Entity person ,shareholder;
+//                
+//             
+//            
+//            try{
+//            
+//                person = personCont.getValues();
+//                shareholder=shareholderCont.getValues();
+//                }
+//            catch(Exception ex)
+//            {
+//            System.out.println("nullpointer no inputs");
+//               
+//            }
+//            
+//            }
+//        });
         
         usab.setButtonLength(110);
         usab.setButtonHeigth(20);
@@ -299,84 +282,14 @@ public class ShareManagementController implements Initializable
         JFXButton deleteButton=usab.getButton(anchor_view, "DELETE", Commons.DELETE_GLYPH);
 
      }
-//     public void setmethod()
-//     {
-//       //u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
-//        //{
-//          JFXTabPane jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);  
-//          
-//         custable_handle = new tableViewHandler(u_table, nbconn);
-//        jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-//        {
-//            @Override
-//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
-//            {
-//               
-//                if((int)newValue == 1)
-//                custable_handle.writeToTable("select * from person , shareholder");
-//            }
-//        });
-//        
-//        selectButton.setOnAction(new EventHandler<ActionEvent>()
-//        {
-//            @Override
-//            public void handle(ActionEvent event)
-//            {
-////                personCont.setValues(custable_handle.getSelection("person", "NIC"));
-////                shareholderCont.setValues(custable_handle.getSelection("shareholder", "NIC"));
-////                jfxtabpane_shareholder.getSelectionModel().select(0);
-//            }
-//        });
-//            if (newSelection != null)
-//            {
-//                int index=u_table.getSelectionModel().getSelectedIndex();
-//                String x=u_table.getItems().get(index).toString();
-//                String nic = x.split(",")[0].substring(1);
-//                System.out.println(nic);
-//                u_nic.setDisable(true);
-//                
-//                shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic,nbconn.get());
-//                Person person_object = legacy.customer_search.personFromSQL(nic, nbconn.get());
-//                
-//                u_nic.setText(person_object.nic);
-//                u_fullname.setText(person_object.name);
-//                u_email.setText(person_object.email);
-//                u_phone.setText(person_object.personal_phone);
-//                u_address.setText(person_object.home_address);
-//                u_dob.setValue(LocalDate.parse(person_object.dob,DateTimeFormatter.ISO_DATE));
-//                
-//                u_nic.setText(shareholder_object.nic);
-//                u_bankname.setText(shareholder_object.bank_name);
-//                u_accountno.setText(Integer.toString(shareholder_object.account_no));
-//                u_shareamount.setText(Integer.toString(shareholder_object.share_amount));
-//                u_shareprice.setText(Double.toString(shareholder_object.share_price));
-//                u_dateofissue.setValue(shareholder_object.share_range_start);
-//                u_dateofexpire.setValue(shareholder_object.share_range_close);
-//                //udescription.setText(shareholder_object.description);
-//            }
-        //});
-//     
-     //}
 
     private void selectButton()
     {
-        
-            
-       //u_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
-        //{
+
           tableViewHandler tvh=new tableViewHandler(u_table ,nbconn);
           
          custable_handle = new tableViewHandler(u_table, nbconn);
-        jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
-            {
-               
-                if((int)newValue == 2)
-                    custable_handle.writeToTable("select p.nic, p.address, p.dob, p.full_name, p.email ,s.account_no, s.bank_name , s.share_amount , s.share_price, s.share_range_close, s.share_range_start from person p inner join shareholder s on p.nic=s.nic;");
-            }
-        });
+
         
         selectButton.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -384,11 +297,30 @@ public class ShareManagementController implements Initializable
             public void handle(ActionEvent event)
             {
                 search_cont.setValues(tvh.getSelection("person", "NIC"));
-                search_cont.setValues(tvh.getSelection("shareholder", "NIC"));
-//                jfxtabpane_shareholder.getSelectionModel().select(0);
+                searchShareCont.setValues(tvh.getSelection("shareholder", "NIC"));
+
             }
         });
     }
+    
+    public void tabPane()
+    {
+        viewTable = new tableViewHandler(app_table, nbconn);
+        jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+            {
+                //second tab has search
+                if((int)newValue == 1)
+                    viewTable.writeToTable("select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
+                            + "s.account_no,s.share_amount , s.share_price ,"
+                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic ");
+            }
+        });
+    }
+    
+    
        public void setPersonInput()
        {
             search_cont = new EntityControls("person",nbconn);
@@ -406,11 +338,12 @@ public class ShareManagementController implements Initializable
        {
             searchShareCont = new EntityControls("shareholder",nbconn);
 
+            searchShareCont.add("nic", u_nic);
             searchShareCont.add("share_amount", u_shareamount);
             searchShareCont.add("share_price", u_shareprice);
             searchShareCont.add("account_no", u_accountno);
             searchShareCont.add("bank_name", u_bankname);
-            searchShareCont.add("share_range_start", u_dateofissue);
-            searchShareCont.add("share_range_close", u_dateofexpire);
+            searchShareCont.add("issue_date", u_dateofissue);
+            searchShareCont.add("expiry_date", u_dateofexpire);
        }
 }

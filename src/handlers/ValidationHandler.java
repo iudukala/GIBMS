@@ -32,6 +32,15 @@ public class ValidationHandler
         });
     }
     
+    private static void fieldInvalid(SimpleObjectProperty<Node> icon, ReadOnlyBooleanWrapper hasErrors)
+    {
+        SVGGlyph glyphError = new SVGGlyph(1,"menuicon","M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",Color.valueOf("#CB503F"));
+        glyphError.setTranslateY(3);
+        glyphError.setSize(15, 15);
+        icon.set(glyphError);// = (SimpleObjectProperty<Node>)glyph;
+        hasErrors.set(true);
+    }
+    
     public static class NICValidator extends ValidatorBase implements ValidationInterface
     {
         @Override
@@ -175,12 +184,49 @@ public class ValidationHandler
         }
     }
     
-    private static void fieldInvalid(SimpleObjectProperty<Node> icon, ReadOnlyBooleanWrapper hasErrors)
+    public static class birthdayValidator extends ValidatorBase implements ValidationInterface
     {
-        SVGGlyph glyphError = new SVGGlyph(1,"menuicon","M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",Color.valueOf("#CB503F"));
-        glyphError.setTranslateY(3);
-        glyphError.setSize(15, 15);
-        icon.set(glyphError);// = (SimpleObjectProperty<Node>)glyph;
-        hasErrors.set(true);
+        @Override
+        public void eval()
+        {
+            TextInputControl textField = (TextInputControl) srcControl.get();
+            if (Validator.isValidBirthday(textField.getText()) || textField.getText().equals(""))
+            {
+                hasErrors.set(false);
+            }
+            else
+            {
+                message.set("Applicant must be over 18");
+                fieldInvalid(icon, hasErrors);
+            }
+        }
+        @Override
+        public void register(JFXTextField textField)
+        {
+            ValidationHandler.register(this, textField);
+        }
+    }
+    
+    public static class pastDateValidator extends ValidatorBase implements ValidationInterface
+    {
+        @Override
+        public void eval()
+        {
+            TextInputControl textField = (TextInputControl) srcControl.get();
+            if (Validator.isPastDate(textField.getText()) || textField.getText().equals(""))
+            {
+                hasErrors.set(false);
+            }
+            else
+            {
+                message.set("Cannot be a future date");
+                fieldInvalid(icon, hasErrors);
+            }
+        }
+        @Override
+        public void register(JFXTextField textField)
+        {
+            ValidationHandler.register(this, textField);
+        }
     }
 }

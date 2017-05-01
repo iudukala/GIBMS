@@ -11,12 +11,17 @@ import core.Entity;
 import core.Manipulator;
 import handlers.ValidationInterface;
 import handlers.dbConcurrent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Control;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -27,6 +32,8 @@ public class EntityControls
     public final String TABLE_NAME;
     private final dbConcurrent nbconn;
     private final Map<String,Object> nodeList = new HashMap<>();
+    private int dyn_val_count = 0;
+    private final String VALIDATION_IDENTIFIER = "EXCLUSION-VAL-";
     private Entity entity;
     
     public EntityControls(String tablename, dbConcurrent nbconn)
@@ -48,6 +55,43 @@ public class EntityControls
         
         if(obj.getClass().equals(JFXTextField.class))
             validator.register((JFXTextField)obj);
+        else if(obj.getClass().equals(JFXDatePicker.class))
+        {
+            //strong gridpane assumption
+            JFXDatePicker datepicker = (JFXDatePicker)obj;
+            GridPane grid = (GridPane)datepicker.getParent();
+            
+            JFXTextField vtf = new JFXTextField();
+            
+            //adding to entityControl with identifier
+            String ec_val_key = VALIDATION_IDENTIFIER + dyn_val_count++;
+            this.add(ec_val_key, vtf);
+            
+            vtf.setStyle("-jfx-focus-color: transparent; -jfx-unfocus-color: transparent; -fx-text-fill: transparent;");
+            
+            validator.register(vtf);
+            datepicker.valueProperty().addListener(new ChangeListener<LocalDate>()
+            {
+                @Override
+                public void changed(ObservableValue<? extends LocalDate> ov, LocalDate oldValue, LocalDate newValue)
+                {
+                    vtf.setText(newValue.format(DateTimeFormatter.ISO_DATE));
+                    vtf.validate();
+                }
+            });
+            
+            Integer column = GridPane.getColumnIndex(datepicker), row = GridPane.getRowIndex(datepicker);
+            if(column == null){
+                column = 0;
+                System.out.println("Validator warning : null on column - " + datepicker);
+            }
+            if(row == null){
+                row = 0;
+                System.out.println("Validator warning : null on row - " + datepicker);
+            }
+            grid.add(vtf, column, row);
+            datepicker.toFront();
+        }
         else
             System.out.println("Error: attempting to register validator to invalid control");
     }
@@ -180,5 +224,18 @@ public class EntityControls
     public int getAGKey()
     {
         return entity.getAGKey();
+    }
+    
+    @Override
+    public String toString()
+    {
+        StringBuilder strb = new StringBuilder();
+        strb.append("-----[").append(TABLE_NAME).append("] EntityControls-------------\n");
+        for(Entry<String,Object> entry : nodeList.entrySet())
+        {
+            strb.append(Manipulator.formatTabs(entry.getKey(),3,true))
+                    .append(" - ").append(entry.getValue()).append("\n");
+        }
+        return strb.toString();
     }
 }

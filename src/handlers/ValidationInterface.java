@@ -14,5 +14,5 @@ import com.jfoenix.controls.JFXTextField;
 public interface ValidationInterface
 {
     public void eval();
-    public void register(JFXTextField textfield);
+    public void register(JFXTextField textField);
 }

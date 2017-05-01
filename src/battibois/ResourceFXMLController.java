@@ -117,15 +117,23 @@ public class ResourceFXMLController implements Initializable
     
     private void initializeNodes()
     {
-        core.Integrator.integrate(anchor_resource);
+        //core.Integrator.integrate(anchor_resource);
+        Commons.subAnchorButton usab = new Commons.subAnchorButton();       
+        usab.setButtonLength(110);
+        usab.setButtonHeigth(20);
+        usab.setGlyphWidth(20);
+        usab.setCoordinates(650, 450);
+
         JFXButton add_vehicle = new Commons.subAnchorButton().getButton(subanchor_vehicle, "ADD VEHICLE", Commons.ADD_PERSON_GLYPH);
         JFXButton add_building = new Commons.subAnchorButton().getButton(subanchor_building, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
 
         add_vehicle.setOnAction(new EventHandler<ActionEvent>()
+        
         {
             @Override
             public void handle(ActionEvent e)
             {
+             {
                 Entity vehicle;
                 try
                 {
@@ -138,8 +146,8 @@ public class ResourceFXMLController implements Initializable
                 {
                     System.out.println("nullpointer no inputs");
                 }
-            }
-            {    
+             }
+             {    
                 Entity building;
                 try
                 {
@@ -152,6 +160,7 @@ public class ResourceFXMLController implements Initializable
                 {
                     System.out.println("nullpointer no inputs");
                 }
+             }
             }
         });
     }
