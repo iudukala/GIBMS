@@ -171,6 +171,7 @@
                                               <TableColumn prefWidth="75.0" text="C2" />
                                             </columns>
                                           </TableView>
+                                          <JFXButton fx:id="selectButton" text="select" textFill="#f50b0b" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -180,7 +181,6 @@
                               </StackPane>
                            </content>
                         </ScrollPane>
-                        <JFXButton fx:id="selectButton" layoutX="487.0" layoutY="619.0" text="select" textFill="#f50b0b" />
                      </children>
                   </AnchorPane>
                </content>

@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="1800.0" prefWidth="1000.0" stylesheets="@../Downloads/GIBMS-master/GIBMS-master/src/resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane fx:id="tabpane" layoutX="182.0" layoutY="83.0" prefHeight="700.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <opaqueInsets>
@@ -30,9 +30,9 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0" prefHeight="1500.0" prefWidth="942.0">
                            <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="1500.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                       <columnConstraints>
@@ -48,31 +48,20 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Add Employee" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
                                           <JFXTextField promptText="Employee ID" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="Job title" GridPane.rowIndex="4" />
+                                          <JFXTextField promptText="Job title" GridPane.rowIndex="6" />
                                           <JFXTextField promptText="Employee name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <JFXTextField promptText="NIC" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="Email" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Address" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <JFXDatePicker fx:id="date_dob" prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
+                                          <JFXTextField promptText="Email" GridPane.rowIndex="4" />
+                                          <JFXTextField promptText="Address" GridPane.rowIndex="3" />
+                                          <JFXDatePicker fx:id="date_dob" prefHeight="28.0" prefWidth="277.0" promptText="Date of birth" GridPane.rowIndex="2" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_married1" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Married">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_marital1" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_notmarried1" text="Not married" toggleGroup="$tgroup_marital1" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <children>
                                                 <JFXRadioButton fx:id="rb_married11" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Male">
                                                    <toggleGroup>
@@ -82,12 +71,35 @@
                                                 <JFXRadioButton fx:id="rb_notmarried11" text="Female" toggleGroup="$tgroup_marital11" />
                                              </children>
                                           </HBox>
-                                          <JFXTextField promptText="Bank name" GridPane.rowIndex="6" />
-                                          <JFXTextField promptText="Account holder" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <JFXTextField promptText="Personal phone 1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Personal phone 2" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <JFXTextField promptText="Account number" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                          <JFXDatePicker fx:id="date_dob2" prefHeight="19.0" prefWidth="280.0" promptText="Joining date" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Bank name" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                          <JFXTextField promptText="Account holder" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <JFXTextField promptText="Personal phone 1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Personal phone 2" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Account number" GridPane.rowIndex="7" />
+                                          <JFXDatePicker fx:id="date_dob2" prefHeight="19.0" prefWidth="280.0" promptText="Joining date" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <children>
+                                                <JFXRadioButton fx:id="rb_married1" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Married">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="tgroup_marital1" />
+                                                   </toggleGroup>
+                                                </JFXRadioButton>
+                                                <JFXRadioButton fx:id="rb_notmarried1" text="Not married" toggleGroup="$tgroup_marital1" />
+                                             </children>
+                                          </HBox>
+                                          <JFXTextField promptText="Department" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="PERSONAL INFORMATION" textFill="WHITE">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXTextField promptText="Insuarance number" GridPane.rowIndex="8" />
+                                          <JFXTextField promptText="Insuarance company" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="OFFICIAL INFORMATION" textFill="WHITE" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -101,13 +113,13 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="tab name">
+            <Tab text="Update Employee">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
@@ -176,13 +188,13 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="tab name">
+            <Tab text="Attendence">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0" prefHeight="1500.0" prefWidth="942.0">
                            <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="1500.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
@@ -206,17 +218,20 @@
                                              </font>
                                           </Label>
                                           <JFXTextField promptText="Employee ID" GridPane.rowIndex="1" />
-                                          <Label text="Name" textFill="#f5f2f2" GridPane.rowIndex="2" />
-                                          <Label text="Job title" textFill="#f2f0f0" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="In time" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Out time" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="3">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                          </TableView>
-                                          <JFXTextField promptText="time" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="Name" textFill="#f5f2f2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="Job title" textFill="#f2f0f0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField promptText="Check in" GridPane.rowIndex="3" />
+                                          <JFXTextField promptText="Check out" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXDatePicker prefHeight="28.0" prefWidth="271.0" promptText="Date" GridPane.rowIndex="2" />
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Leave Booking" textFill="WHITE" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXTextField promptText="Time" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <JFXTextField promptText="Reason" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <JFXTextField promptText="Type" GridPane.rowIndex="5" />
+                                          <JFXDatePicker prefHeight="28.0" prefWidth="272.0" promptText="Leave date" GridPane.rowIndex="6" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -230,18 +245,19 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="tab name">
+            <Tab text="View/Delete Employee">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                        </columnConstraints>
                                        <rowConstraints>
@@ -260,16 +276,13 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
-                                             <children>
-                                                <TableView prefHeight="200.0" prefWidth="200.0">
-                                                  <columns>
-                                                    <TableColumn prefWidth="75.0" text="C1" />
-                                                    <TableColumn prefWidth="75.0" text="C2" />
-                                                  </columns>
-                                                </TableView>
-                                             </children></HBox>
                                           <JFXTextField promptText="Employee ID" GridPane.rowIndex="3" />
+                                          <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="4" GridPane.rowSpan="3">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -283,13 +296,13 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="tab name">
+            <Tab text="Payroll">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
                            <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="1500.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
@@ -306,6 +319,8 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Payroll" textFill="WHITE" GridPane.rowIndex="2">
@@ -315,18 +330,28 @@
                                           </Label>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                                              <children>
-                                                <JFXTextField promptText="Basic salary" />
+                                                <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Allowances" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Roboto Condensed Regular" size="21.0" />
+                                                   </font>
+                                                </Label>
                                              </children>
                                           </HBox>
-                                          <JFXTextField promptText="Overtime" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Employee ID" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                          <JFXTextField promptText="Privilages" GridPane.rowIndex="7" />
-                                          <JFXTextField promptText="Other" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <JFXTextField promptText="Tax" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <JFXTextField promptText="Loan" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <JFXTextField promptText="Provident fund" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Medical" GridPane.rowIndex="6" />
-                                          <JFXTextField promptText="Bonus" GridPane.rowIndex="5" />
+                                          <JFXTextField promptText="Overtime" GridPane.rowIndex="5" />
+                                          <JFXTextField promptText="Privilages" GridPane.rowIndex="8" />
+                                          <JFXTextField promptText="Other" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <JFXTextField promptText="Tax" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <JFXTextField promptText="Loan" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <JFXTextField promptText="Provident fund" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <JFXTextField promptText="Medical" GridPane.rowIndex="7" />
+                                          <JFXTextField promptText="Bonus" GridPane.rowIndex="6" />
+                                          <JFXTextField promptText="Employee ID" GridPane.rowIndex="3" />
+                                          <JFXTextField prefWidth="265.0" promptText="Basic salary" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Deductions" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

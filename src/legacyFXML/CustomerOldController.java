@@ -354,7 +354,7 @@ public class CustomerOldController implements Initializable
         Integrator.integrate(anchorP);
         
         conn=dbConcurrent.connect();
-        DynamicTable.getColumns(conn, "select * from customer_view", table_search);
+        //DynamicTable.getColumns(conn, "select * from customer_view", table_search);
         
         text_addinvalid.setVisible(false);
         

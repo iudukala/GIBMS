@@ -13,6 +13,8 @@ import javafx.scene.control.TextInputControl;
 import core.Validator;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
@@ -22,22 +24,27 @@ import javafx.scene.paint.Color;
  */
 public class ValidationHandler 
 {
+    private static final SVGGlyph GLYPH_ERROR = new SVGGlyph(1,"menuicon","M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",Color.valueOf("#CB503F"));
+    
     private static <T extends ValidatorBase> void register(T validator, JFXTextField textField)
     {
         textField.getValidators().add(validator);
-        textField.focusedProperty().addListener((o,oldVal,newVal)->
+        textField.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
-            if(!newVal)
-                textField.validate();
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue)
+            {
+                if(!newValue)
+                    textField.validate();
+            }
         });
     }
     
     private static void fieldInvalid(SimpleObjectProperty<Node> icon, ReadOnlyBooleanWrapper hasErrors)
     {
-        SVGGlyph glyphError = new SVGGlyph(1,"menuicon","M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z",Color.valueOf("#CB503F"));
-        glyphError.setTranslateY(3);
-        glyphError.setSize(15, 15);
-        icon.set(glyphError);// = (SimpleObjectProperty<Node>)glyph;
+        GLYPH_ERROR.setTranslateY(3);
+        GLYPH_ERROR.setSize(15, 15);
+        icon.set(GLYPH_ERROR);
         hasErrors.set(true);
     }
     
@@ -167,7 +174,7 @@ public class ValidationHandler
         public void eval()
         {
             TextInputControl textField = (TextInputControl) srcControl.get();
-            if (Validator.isDouble(textField.getText()) || textField.getText().equals(""))
+            if(Validator.isDouble(textField.getText()) || textField.getText().equals(""))
             {
                 hasErrors.set(false);
             }

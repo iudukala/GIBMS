@@ -35,11 +35,13 @@ public class EntityControls
     private int dyn_val_count = 0;
     private final String VALIDATION_IDENTIFIER = "EXCLUSION-VAL-";
     private Entity entity;
+    private boolean disabled;
     
     public EntityControls(String tablename, dbConcurrent nbconn)
     {
         TABLE_NAME = tablename;
         this.nbconn = nbconn;
+        disabled = false;
     }
     
     public void add(String key, Object obj)
@@ -75,25 +77,29 @@ public class EntityControls
                 @Override
                 public void changed(ObservableValue<? extends LocalDate> ov, LocalDate oldValue, LocalDate newValue)
                 {
-                    vtf.setText(newValue.format(DateTimeFormatter.ISO_DATE));
-                    vtf.validate();
+                    try
+                    {
+                        vtf.setText(newValue.format(DateTimeFormatter.ISO_DATE));
+                        vtf.validate();
+                    }
+                    catch(Exception e){}
                 }
             });
             
             Integer column = GridPane.getColumnIndex(datepicker), row = GridPane.getRowIndex(datepicker);
             if(column == null){
                 column = 0;
-                System.out.println("Validator warning : null on column - " + datepicker);
+                //System.out.println("Date validator registration warning : null on column - " + datepicker);
             }
             if(row == null){
                 row = 0;
-                System.out.println("Validator warning : null on row - " + datepicker);
+                //System.out.println("Date validator registration warning : null on row - " + datepicker);
             }
             grid.add(vtf, column, row);
             datepicker.toFront();
         }
         else
-            System.out.println("Error: attempting to register validator to invalid control");
+            System.out.println("Error: attempting to register validator to invalid control : \nControl : " + obj + "\nValidator : " + validator);
     }
     
     public Entity getValues()
@@ -107,34 +113,39 @@ public class EntityControls
             if(control.getClass().equals(JFXTextField.class) || control.getClass().equals(JFXDatePicker.class))
                 if(((Control)control).isDisabled())
                     continue;
-            
-            if(entry.getValue().getClass().equals(ToggleGroup.class))
+            try
             {
-                ToggleGroup tg = (ToggleGroup)control;
-                entity.add(key, tg.getSelectedToggle().getUserData());
-            }
-            else if(control.getClass().equals(JFXDatePicker.class))
-                entity.add(key,((JFXDatePicker)control).getValue());
-            else if(control.getClass().equals(JFXTextField.class))
-            {
-                String value = ((JFXTextField)control).getText();
-                
-                List<List> tdata = entity.fetchTableStructure();
-                
-                for(List list : tdata)
-                    for(int i=0;i<list.size();i++)
-                    {
-                        if(list.get(0).equals(key))
+                if(entry.getValue().getClass().equals(ToggleGroup.class))
+                {
+                    ToggleGroup tg = (ToggleGroup)control;
+                    entity.add(key, tg.getSelectedToggle().getUserData());
+                }
+                else if(control.getClass().equals(JFXDatePicker.class))
+                    entity.add(key,((JFXDatePicker)control).getValue());
+                else if(control.getClass().equals(JFXTextField.class))
+                {
+                    String value = ((JFXTextField)control).getText();
+
+                    List<List> tdata = entity.fetchTableStructure();
+
+                    for(List list : tdata)
+                        for(int i=0;i<list.size();i++)
                         {
-                            if(list.get(1).equals("varchar"))
-                                entity.add(key, value);
-                            else if(list.get(1).equals("double"))
-                                entity.add(key, Double.parseDouble(value));
-                            else if(list.get(1).equals("int"))
-                                entity.add(key, Integer.parseInt(value));
+                            if(list.get(0).equals(key))
+                            {
+                                if(list.get(1).equals("varchar"))
+                                    entity.add(key, value);
+                                else if(list.get(1).equals("double"))
+                                    entity.add(key, Double.parseDouble(value));
+                                else if(list.get(1).equals("int"))
+                                    entity.add(key, Integer.parseInt(value));
+                            }
                         }
-                    }
+                }
             }
+            catch(Exception e){
+                entity.add(key, null);
+            } 
         }
         return entity;
     }
@@ -213,12 +224,19 @@ public class EntityControls
     {
         for(Entry<String,Object> entry : nodeList.entrySet())
             ((Control)entry.getValue()).setDisable(true);
+        disabled = true;
     }
     
     public void enable()
     {
         for(Entry<String,Object> entry : nodeList.entrySet())
             ((Control)entry.getValue()).setDisable(false);
+        disabled = false;
+    }
+    
+    public boolean isDisabled()
+    {
+        return disabled;
     }
     
     public int getAGKey()

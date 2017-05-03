@@ -18,11 +18,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import jdk.nashorn.internal.parser.TokenType;
 
 /**
  *
  * @author Isuru Udukala
  */
+
+class OverrideString{}
+
 public class Entity
 {
     private final dbConcurrent nbconn;
@@ -45,37 +49,36 @@ public class Entity
     {
         //avoiding case conflicts on hashmap keys
         key = key.toLowerCase();
-        if(value == null)
-        {
-            if(getType(key).equals(String.class))
-                data.put(key, "");
-            else if(getType(key).equals(Double.class) || getType(key).equals(Integer.class))
-                data.put(key, 0);
-            else if(getType(key).equals(LocalDate.class))
-                data.put(key,LocalDate.now());
-        }
-        else
+        if(value!=null)
             data.put(key,value);
     }
     
     private Object get(String key, Class reqClass)
     {
         key = key.toLowerCase();
-        if(data.get(key).getClass().equals(reqClass) && data.containsKey(key))
-            return data.get(key);
-        else
+        if(data.containsKey(key))
         {
-            System.out.print("Requesting <" + Manipulator.getClassStr(reqClass) + "> cast on <" + Manipulator.getClassStr(data.get(key).getClass()) + ">");
-            System.out.println(" - Key\t: " + key + "\tValue\t: " + data.get(key));
-            return null;
+            if(reqClass.equals(OverrideString.class))
+                return data.get(key).toString();
+            else if(data.get(key).getClass().equals(reqClass))
+                return data.get(key);
+            else
+            {
+                System.out.print("Requesting <" + Manipulator.getClassStr(reqClass) + "> cast on <" + Manipulator.getClassStr(data.get(key).getClass()) + ">");
+                System.out.println("{Key : " + key + " - Value : " + data.get(key));
+            }
         }
+        return null;
     }
+    
+    
     public String getAsString(String key)
     {
-        if(data.containsKey(key))
-            return data.get(key).toString();
-        else
-            return null;
+        return (String)get(key,OverrideString.class);
+    }
+    public Object getObject(String key)
+    {
+        return get(key, Object.class);
     }
     public String getString(String key)
     {
@@ -129,21 +132,12 @@ public class Entity
                     tdata.get(i).add(0);
             }
             //end datafetch
-            
         }
         catch(Exception e)
         {
             System.out.println("error fetching table data\n" + e);
         }
         return tdata;
-    }
-    
-    public List<String> getColumnNamesFromDB()
-    {
-        List<String> columns = new ArrayList<>();
-        for(List list : fetchTableStructure())
-            columns.add(list.get(0).toString());
-        return columns;
     }
     
     public List<String> getColumnNamesFromEntity()
@@ -167,52 +161,52 @@ public class Entity
         if(!validate(false) && verbose)
             System.out.println("Warning: Consolidating to database with validation failure on [" + tablename + "].");
         
+        
+        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,sql);
+        int counter=0;
+        for(Object field : fields)
+            prpw.setObject(++counter, field);
+        
+        String failure_str = "Consolidation failure ["+tablename+"] : ";
         try
         {
-            PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,sql);
-            int counter=0;
-            for(Object field : fields)
-                prpw.setObject(++counter, field);
             prpw.executeUpdate();
-            
-            if(prpw.getGeneratedKey()!=null)
-            {
-                ag_key = prpw.getGeneratedKey();
-                
-                ResultSet ag_rs=nbconn.get().createStatement().executeQuery("show columns from `" + tablename + "` where `Extra`='auto_increment';");
-                ag_rs.next();
-                ag_column = ag_rs.getString("Field");
-                data.put(ag_column,ag_key);
-            }
-            
-            strb.append("Consolidation successful : [").append(tablename).append("] -  AG data : ");
-            if(ag_key!=null)
-                strb.append(ag_key).append(" on ").append(ag_column).append("\n");
-            else
-                strb.append("none");
-            
-            if(verbose)
-                System.out.println(strb);
-            return 0;
         }
         catch(MySQLIntegrityConstraintViolationException e)
         {
             if(verbose)
-                System.out.println("Integrity constraint violation\n" + e);
+                System.out.println(failure_str + "Integrity constraint violation\n" + e);
             return 1;
         }
         catch(MySQLSyntaxErrorException e)
         {
             if(verbose)
-                System.out.println("Syntax error\n" + e);
+                System.out.println(failure_str + "Syntax error\n" + e);
             return 2;
         }
         catch(SQLException e)
         {
             if(verbose)
-                System.out.println(tablename + " consolidation error\n" + e);
-            return 2;
+                System.out.println(failure_str + "\n" + e);
+            return 3;
         }
+
+        if(prpw.getGeneratedKey()!=null)
+        {
+            ag_key = prpw.getGeneratedKey();
+            ag_column = fetchQueryColumnList("show columns from `" + tablename + "` where `Extra`='auto_increment';").get(0);
+            data.put(ag_column,ag_key);
+        }
+
+        strb.append("Consolidation successful : [").append(tablename).append("] -  AG data : ");
+        if(ag_key!=null)
+            strb.append(ag_key).append(" on ").append(ag_column).append("\n");
+        else
+            strb.append("none");
+
+        if(verbose)
+            System.out.println(strb);
+        return 0;
     }
     
     private String parseConsolidateStatement(List<Object> fields)
@@ -356,24 +350,20 @@ public class Entity
                 Entity temp_entity = new Entity(newtable, nbconn);
                 for(int i=0;i<rs.getMetaData().getColumnCount();i++)
                 {
-                    String col_class = rs.getMetaData().getColumnClassName(i+1);
+                    Class col_class = null;
+                    try{
+                        col_class = Class.forName(rs.getMetaData().getColumnClassName(i+1));
+                    }
+                    catch(ClassNotFoundException e){
+                        System.out.println("parseFromRS error : " + e);
+                    }
                     String column_name = rs.getMetaData().getColumnName(i+1).toLowerCase();
                     
+                    //null handling
                     if(rs.getString(column_name) == null)
-                    {
-                        temp_entity.add(column_name, null);
                         continue;
-                    }
                     
-                    //if not null
-                    if(col_class.equals(String.class.getName()))
-                        temp_entity.add(column_name, rs.getString(column_name));
-                    else if(col_class.equals(java.sql.Date.class.getName()))
-                        temp_entity.add(column_name, rs.getDate(column_name).toLocalDate());
-                    else if(col_class.equals(Double.class.getName()))
-                        temp_entity.add(column_name, rs.getDouble(column_name));
-                    else if(col_class.equals(Integer.class.getName()))
-                        temp_entity.add(column_name, rs.getInt(column_name));
+                    temp_entity.add(column_name, getRecastedSQLObject(rs.getObject(column_name)));
                 }
                 entities.add(temp_entity);
                 
@@ -388,6 +378,24 @@ public class Entity
         return entities;
     }
     
+    private static Object getRecastedSQLObject(Object obj)
+    {
+        if(obj.getClass().equals(String.class))
+            return obj.toString();
+        else if(obj.getClass().equals(java.sql.Date.class))
+            return ((java.sql.Date)obj).toLocalDate();
+        else if(obj.getClass().equals(Integer.class))
+            return (Integer)obj;
+        else if(obj.getClass().equals(Double.class))
+            return (Double)obj;
+        else if(obj.getClass().equals(Long.class))
+            return (Long)obj;
+        else
+        {
+            System.out.println("Unexpected type encoutered while recasting : " + obj.getClass());
+            return null;
+        }
+    }
     @Override
     public String toString()
     {
@@ -441,23 +449,31 @@ public class Entity
         return strb.append("\n").toString();
     }
     
-    public void update()
+    private List<String> fetchQueryColumnList(String query)
     {
-        List<String> primaryKeys = new ArrayList<>();
+        List<String> column_list = new ArrayList<>();
         try
         {
-            ResultSet pkrs=nbconn.get().createStatement().executeQuery("show columns from `" + tablename + "` where `key`='pri';");
-            while(pkrs.next())
-                primaryKeys.add(pkrs.getString("Field"));
+            ResultSet rs = nbconn.get().createStatement().executeQuery(query);
+            while(rs.next())
+                column_list.add(rs.getString("Field").toLowerCase());
         }
-        catch(SQLException e){
-            System.out.println("Error fetching primary key(s)\n" + e);
+        catch(Exception e)
+        {
+            System.out.println("Error fetching column list\n" + e);
         }
-        
+        return column_list;
+    }
+    
+    public void update()
+    {
+        List<String> primaryKeys = fetchQueryColumnList("show columns from `" + tablename + "` where `key`='pri';");
         List<Object> fields = new ArrayList<>();
+        
+        //getting primarykey count in entity object
         int keycount=0;
-        //getting primarykey count
         for(Entry<String,Object> entry : data.entrySet())if(primaryKeys.contains(entry.getKey()))keycount++;
+        
         //generating update dml statement
         StringBuilder strb = new StringBuilder("update ").append(tablename).append(" set");
         int counter=0;
@@ -470,22 +486,40 @@ public class Entity
                 if(++counter!=data.size()-keycount)strb.append(",");
             }
         }counter=0;
-        strb.append(" where ");
-        for(String key : primaryKeys)
-        {
-            strb.append("`").append(key).append("`").append("=?");
-            if(++counter!=primaryKeys.size())strb.append(" and ");
-        }counter=0;
+        strb.append(synthesizeWhereClause(primaryKeys));
         //dml statement generation complete 
-        
         update_string = strb.toString();
         
-        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,strb.toString());
+        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,update_string);
         for(Object field : fields)
             prpw.setObject(++counter, field);
         for(Object key : primaryKeys)
             prpw.setObject(++counter, data.get(key));
-        prpw.executeUpdate();
+        
+        strb = new StringBuilder("[" + tablename + "] update ");
+        try{
+            prpw.executeUpdate();
+            strb.append("executed successfully\nPrimary keyset : ");
+            for(Object key : primaryKeys)
+                strb.append("{ ").append(key).append(" : ").append(data.get(key).toString()).append(" }\t");
+            System.out.println(strb);
+        }
+        catch(SQLException e){
+            strb.append("failure \n").append(e);
+            System.out.println(strb);
+        }
+    }
+    
+    private String synthesizeWhereClause(List<String> keylist)
+    {
+        StringBuilder strb = new StringBuilder(" where ");
+        int counter=0;
+        for(String key : keylist)
+        {
+            strb.append("`").append(key).append("`").append("=?");
+            if(++counter!=keylist.size())strb.append(" and ");
+        }
+        return strb.toString();
     }
     
     private Class getType(String key)
@@ -500,5 +534,45 @@ public class Entity
             }
         }
         return Manipulator.translateClass(type);
+    }
+    
+    private List<String> getLocalFieldList()
+    {
+        List<String> fields = new ArrayList<>();
+        for(Entry<String,Object> entry : data.entrySet())
+            fields.add(entry.getKey());
+        
+        return fields;
+    }
+    
+    public String executeAsSearch()
+    {
+        List<String> searchFields = getLocalFieldList();
+        for(Iterator<String> iter = searchFields.listIterator(); iter.hasNext();)
+        {
+            String field = iter.next();
+            if(data.get(field).equals(""))
+                iter.remove();
+        }
+        
+        StringBuilder strb = new StringBuilder();
+        if(tablename.toLowerCase().startsWith("select "))
+            strb.append(tablename).append(synthesizeWhereClause(searchFields));
+        strb.append(";");
+        
+        System.out.println("Searchfields : " + searchFields);
+        System.out.println("strb : " + strb.toString());
+        
+        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,strb.toString());
+        
+        int counter = 0;
+        for(Iterator<String> iter = searchFields.listIterator(); iter.hasNext();)
+        {
+            String field = iter.next();
+            prpw.setObject(++counter, data.get(field));
+        }
+//        //prpw.executeQuery();
+        
+        return strb.toString();
     }
 }

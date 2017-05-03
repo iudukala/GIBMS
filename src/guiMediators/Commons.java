@@ -22,22 +22,34 @@ public class Commons
     public static final String UPDATE_GLYPH = "M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79 2.73 2.71 7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58 3.51-3.47 9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z";
     public static final String LIST_GLYPH = "M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z";
     public static final String DELETE_GLYPH = "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z";
+    public static final String NAVIGATION_GLYPH = "M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z";
     
     public static final String BTNSTYLE_1 = "buttonGR";
     public static final String BTNSTYLE_2 = "buttonS2";
     
     public static class subAnchorButton
     {
+        final AnchorPane subanchor;
+        final String btext;
+        final String glyphID;
+        
         Integer button_length = null;
         Integer button_height = null;
         Integer glyph_width = null;
         Integer xcoord = null, ycoord = null;
         
         String style = null;
-        String glyphID = null;
         JFXButton button = null;
         
-        public JFXButton getButton(AnchorPane subanchor, String btext, String glyphID)
+        public subAnchorButton(AnchorPane subanchor, String btext, String glyphID)
+        {
+            this.subanchor = subanchor;
+            this.btext = btext;
+            this.glyphID = glyphID;
+        }
+                
+        
+        public JFXButton getButton()
         {
             if(glyph_width == null)glyph_width = 15;
             if(xcoord == null)xcoord = 400;

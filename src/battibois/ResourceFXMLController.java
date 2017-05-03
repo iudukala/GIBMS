@@ -1,41 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package battibois;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
+import core.Integrator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 
 
 import guiMediators.Commons;
 import guiMediators.EntityControls;
+import guiMediators.tableViewHandler;
 import handlers.dbConcurrent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
-/**
- * FXML Controller class
- *
- * @author Isuru Udukala
- */
+
+
+
+
 public class ResourceFXMLController implements Initializable
 {
     @FXML
     private AnchorPane anchor_resource;
-    @FXML
-    private TabPane tabpane_resource;
     @FXML
     private JFXTextField text_license;
     @FXML
@@ -98,35 +93,41 @@ public class ResourceFXMLController implements Initializable
     @FXML
     private JFXTextField text_nic3;
     
+    
     private dbConcurrent nbconn;
     EntityControls vehicleControls;
     EntityControls buildingControls;
+    private tableViewHandler tablevehi_handle;
+    JFXTabPane tabpane_resource;
+    @FXML
+    private JFXButton add_vehicle;
+    @FXML
+    private TableView<?> table_vehi;
+    @FXML
+    private JFXButton btn_searchvehi;
+    @FXML
+    private JFXButton btn_selectvehi;
+    @FXML
+    private JFXButton btn_upvehi;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        //initiailizing database connection
-        nbconn = new dbConcurrent();
-//        //initializing gui
+          nbconn = new dbConcurrent();
+
         initializeNodes();
-//       // initializeRadioButtons();
         initializeVehicleInputs();
         initializeBuildingInputs();
+        initializeButton();
     }
     
     
     private void initializeNodes()
-    {
-        //core.Integrator.integrate(anchor_resource);
-        Commons.subAnchorButton usab = new Commons.subAnchorButton();       
-        usab.setButtonLength(110);
-        usab.setButtonHeigth(20);
-        usab.setGlyphWidth(20);
-        usab.setCoordinates(650, 450);
-
-        JFXButton add_vehicle = new Commons.subAnchorButton().getButton(subanchor_vehicle, "ADD VEHICLE", Commons.ADD_PERSON_GLYPH);
-        JFXButton add_building = new Commons.subAnchorButton().getButton(subanchor_building, "ADD PERSON", Commons.ADD_PERSON_GLYPH);
-
+    { 
+        tabpane_resource = Integrator.integrate(anchor_resource);
+        
+        //usab.setGlyphWidth(20);
+        //usab.setCoordinates(300, 450);
         add_vehicle.setOnAction(new EventHandler<ActionEvent>()
         
         {
@@ -140,21 +141,35 @@ public class ResourceFXMLController implements Initializable
                     vehicle = getVehicleInputs();
                     System.out.println(vehicle);
                     System.out.println(vehicle.validate(true));
-                    vehicle.consolidate();
+                   int v= vehicle.consolidate();
+                   
+                   if(v == 0)
+                {
+                vehicleControls.clearControls();
+                }
                 }
                 catch(NullPointerException exc)
                 {
                     System.out.println("nullpointer no inputs");
                 }
+              
+                
+             
              }
+             
              {    
                 Entity building;
                 try
                 {
-                    building = getBuildingInputs();
+                    building = buildingControls.getValues();
                     System.out.println(building);
                     System.out.println(building.validate(true));
-                    building.consolidate();
+                    int b= building.consolidate();
+                    
+                 if(b == 0)
+                    {
+                        buildingControls.clearControls();
+                    }
                 }
                 catch(NullPointerException exc)
                 {
@@ -178,10 +193,6 @@ public class ResourceFXMLController implements Initializable
         return vehicleControls.validateValues();
     }
     
-    public Entity getBuildingInputs()
-    {
-        return buildingControls.getValues();
-    }
     public void setBuildingInputs(Entity building)
     {
         buildingControls.setValues(building);
@@ -227,4 +238,54 @@ public class ResourceFXMLController implements Initializable
         buildingControls.add("description", build_des  );
         
     }
+    public void initializeButton()
+    {
+       
+        btn_searchvehi.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                 tablevehi_handle = new tableViewHandler(table_vehi,"select * from vehicle;",nbconn);
+                    tablevehi_handle.writeToTable();       
+            }         
+               
+                
+        });   
+                btn_upvehi.setOnAction(new EventHandler<ActionEvent>()
+        {
+        @Override
+            public void handle(ActionEvent e)
+            {
+            
+                Entity vehicle;
+            try{
+                vehicle = vehicleControls.getValues();
+                vehicle.update();
+                }
+            catch(Exception ex)
+            {
+            System.out.println("nullpointer no inputs");
+               
+            }
+            }
+        });
+                
+        
+                   btn_selectvehi.setOnAction(new EventHandler<ActionEvent>()
+                   {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                vehicleControls.setValues(tablevehi_handle.getSelection());//"vehicle", "license"));
+            }
+        });
+
+
+         
 }
+   
+}
+     
+    
+

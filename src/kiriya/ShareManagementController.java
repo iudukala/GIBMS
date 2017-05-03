@@ -126,17 +126,17 @@ public class ShareManagementController implements Initializable
     {
         nbconn = new dbConcurrent();
         jfxtabpane_shareholder=Integrator.integrate(anchor_shareholder);
-        custable_handle = new tableViewHandler(u_table, nbconn);
+      //  custable_handle = new tableViewHandler(u_table, nbconn);
         
         
         initializePersonInputs();
         initializeShareholderInputs();
         initializeButton();
-        selectButton();
+       // selectButton();
         setshareholderInput();
         setPersonInput();
         tabPane();
-        
+        buttonStyle2();
         
    
    
@@ -148,7 +148,7 @@ public class ShareManagementController implements Initializable
         personCont.add("nic", a_nic, new NICValidator());
         personCont.add("full_name", a_fullname);
         personCont.add("email", a_email, new EmailValidator());
-        personCont.add("dob", a_dob);
+        personCont.add("dob", a_dob, new birthdayValidator());
         personCont.add("phone", a_phone, new PhoneValidator());
         personCont.add("address", a_address);
     }
@@ -160,15 +160,15 @@ public class ShareManagementController implements Initializable
         shareholderCont.add("share_price", a_shareprice, new DoubleValidator());
         shareholderCont.add("account_no", a_accountno,new IntegerValidator());
         shareholderCont.add("bank_name", a_bankname);
-        shareholderCont.add("issue_date", a_dateofissue);
+        shareholderCont.add("issue_date", a_dateofissue, new pastDateValidator()); 
         shareholderCont.add("expiry_date", a_dateofexpire);
      }
+     
      public void initializeButton()
      {
-     
-        Commons.subAnchorButton asab = new Commons.subAnchorButton();
+        Commons.subAnchorButton asab = new Commons.subAnchorButton(anchor_shares, "ADD SHAREHOLDER", Commons.ADD_PERSON_GLYPH);
         asab.setButtonLength(200);
-        JFXButton addButton = asab.getButton(anchor_shares, "ADD SHAREHOLDER", Commons.ADD_PERSON_GLYPH);
+        JFXButton addButton = asab.getButton();
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -195,117 +195,133 @@ public class ShareManagementController implements Initializable
             }
         });
         
-        Commons.subAnchorButton usab = new Commons.subAnchorButton();
+        Commons.subAnchorButton usab = new Commons.subAnchorButton(anchor_update, "UPDATE SHAREHOLDER", Commons.UPDATE_GLYPH);
         usab.setButtonLength(180);
-        usab.setGlyphWidth(20);
-        usab.setCoordinates(670, 550);
-        JFXButton updateButton = usab.getButton(anchor_update, "UPDATE SHAREHOLDER", Commons.UPDATE_GLYPH);
+      
+        JFXButton updateButton = usab.getButton();
 //               
-//        updateButton.setOnAction(new EventHandler<ActionEvent>()
-//        {
-//        @Override
-//            public void handle(ActionEvent e)
-//            {
-//                Entity person ,shareholder;
+        updateButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+        @Override
+            public void handle(ActionEvent e)
+            {
+            
+                Entity person ,shareholder;
+                
+            
+            try{
+            
+                
+                
+                person = search_cont.getValues();
+                person.update();
+                
+                shareholder=searchShareCont.getValues();
+                shareholder.update();
+                }
+            catch(Exception ex)
+            {
+            System.out.println("nullpointer no inputs");
+               
+            }
+//                  if(person == 0 && shareholder ==0)
+//                {
 //                
-//             
-//            
-//            try{
-//            
-//                person = personCont.getValues();
-//                shareholder=shareholderCont.getValues();
+//                search_cont.clearControls();
+//                searchShareCont.clearControls();
+//                
 //                }
-//            catch(Exception ex)
+            }
+        });
+          
+
+         
+        
+
+//        usab.setButtonLength(110);
+
+        Commons.subAnchorButton acd = new Commons.subAnchorButton(anchor_view, "DELETE SHAREHOLDER", Commons.DELETE_GLYPH);
+        
+        JFXButton deleteButton=acd.getButton();
+
+     }
+
+//    private void selectButton()
+//    {
+//
+//         // tableViewHandler tvh=new tableViewHandler(u_table ,nbconn);
+//          
+//         //custable_handle = new tableViewHandler(u_table, nbconn);
+//
+//        
+//        selectButton.setOnAction(new EventHandler<ActionEvent>()
+//        {
+//            @Override
+//            public void handle(ActionEvent event)
 //            {
-//            System.out.println("nullpointer no inputs");
-//               
-//            }
-//            
+//                search_cont.setValues(custable_handle.getSelection("person", "NIC"));
+//                searchShareCont.setValues(custable_handle.getSelection("shareholder", "NIC"));
+//
 //            }
 //        });
-//          
-
-        usab.setButtonLength(110);
-        usab.setButtonHeigth(20);
-        usab.setGlyphWidth(20);
-        usab.setCoordinates(650, 450);
-        JFXButton searchButton=usab.getButton(anchor_update, "SEARCH", Commons.UPDATE_GLYPH);
+//    }
+    public void buttonStyle2()
+    {
+        Commons.subAnchorButton abc = new Commons.subAnchorButton(anchor_update, "SEARCH", Commons.UPDATE_GLYPH);
+        
+        abc.setButtonLength(110);
+        abc.setButtonHeigth(20);
+        abc.setGlyphWidth(20); 
+        abc.setCoordinates(650, 450);
+        abc.setStyle(Commons.BTNSTYLE_2);
+        JFXButton searchButton=abc.getButton();
      
         
          searchButton.setOnAction(new EventHandler<ActionEvent>()
                 {
             @Override
             public void handle(ActionEvent e)
-            {   custable_handle.writeToTable("select p.nic, p.full_name,s.share_amount , s.share_price ,"
-                    + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic");
-                String search = u_search.getText();
-                custable_handle.getSelection("select p.nic, p.full_name,s.share_amount , s.share_price ,"
-                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic like ?");
+            {   
+            
+           custable_handle = new tableViewHandler(u_table,"select p.nic, p.full_name,s.share_amount , s.share_price ,"
+                    + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic",nbconn);
+                    custable_handle.writeToTable();
+//                String search = u_search.getText();
+//                custable_handle.getSelection("select p.nic, p.full_name,s.share_amount , s.share_price ,"
+//                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic like ?");
 //                handlers.DynamicTable.buildData(nbconn.get(), "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
 //"from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, u_table);   
             }    
                 });
-         
-        usab.setButtonLength(100);
-        usab.setButtonHeigth(20);
-        usab.setGlyphWidth(20); 
-        usab.setCoordinates(800, 550);
-        JFXButton viewButton=usab.getButton(anchor_view, "VIEW", Commons.LIST_GLYPH);
+         Commons.subAnchorButton zxc = new Commons.subAnchorButton(anchor_update, "SELECT", Commons.UPDATE_GLYPH);
         
-//        viewButton.setOnAction(new EventHandler<ActionEvent>()
-//        {
-//        @Override
-//            public void handle(ActionEvent e)
-//            {
-//                Entity person ,shareholder;
-//                
-//             
-//            
-//            try{
-//            
-//                person = personCont.getValues();
-//                shareholder=shareholderCont.getValues();
-//                }
-//            catch(Exception ex)
-//            {
-//            System.out.println("nullpointer no inputs");
-//               
-//            }
-//            
-//            }
-//        });
-        
-        usab.setButtonLength(110);
-        usab.setButtonHeigth(20);
-        usab.setGlyphWidth(20);
-        usab.setCoordinates(100, 550);
-        JFXButton deleteButton=usab.getButton(anchor_view, "DELETE", Commons.DELETE_GLYPH);
-
-     }
-
-    private void selectButton()
-    {
-
-          tableViewHandler tvh=new tableViewHandler(u_table ,nbconn);
-          
-         custable_handle = new tableViewHandler(u_table, nbconn);
-
+        zxc.setButtonLength(110);
+        zxc.setButtonHeigth(20);
+        zxc.setGlyphWidth(20); 
+        zxc.setCoordinates(650, 550);
+        zxc.setStyle(Commons.BTNSTYLE_2);
+        JFXButton selctButton=zxc.getButton();
         
         selectButton.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
             {
-                search_cont.setValues(tvh.getSelection("person", "NIC"));
-                searchShareCont.setValues(tvh.getSelection("shareholder", "NIC"));
+                search_cont.setValues(custable_handle.getSelection());//"person", "NIC"));
+                searchShareCont.setValues(custable_handle.getSelection());//"shareholder", "NIC"));
 
             }
-        });
-    }
+            
+               });
+                
     
+    
+    }
     public void tabPane()
     {
-        viewTable = new tableViewHandler(app_table, nbconn);
+        viewTable = new tableViewHandler(app_table, "select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
+                            + "s.account_no,s.share_amount , s.share_price ,"
+                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic ",nbconn);
         jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
         {
             @Override
@@ -313,9 +329,7 @@ public class ShareManagementController implements Initializable
             {
                 //second tab has search
                 if((int)newValue == 1)
-                    viewTable.writeToTable("select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
-                            + "s.account_no,s.share_amount , s.share_price ,"
-                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic ");
+                    viewTable.writeToTable();
             }
         });
     }

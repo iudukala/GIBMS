@@ -87,8 +87,6 @@ public class Integrator
                 {
                     System.out.println(e);
                 }
-                System.out.println(oldValue);
-                System.out.println(newValue);
             }
         });
         
@@ -97,7 +95,7 @@ public class Integrator
         Label dlabel = new Label("NAVIGATOR");
         dlabel.setPrefHeight(80);
         dlabel.setPadding(new Insets(10,10,10,60));
-        dlabel.setStyle("-fx-font-size: 21; -fx-text-fill:" + headerColor);
+        dlabel.setStyle("-fx-font-size: 22; -fx-text-fill:" + headerColor);
         SVGGlyph glyph = new SVGGlyph(1,"navigation","M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z",Color.valueOf(headerColor));
         
         glyph.setSize(20,25);

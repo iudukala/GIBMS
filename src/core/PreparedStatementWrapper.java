@@ -29,9 +29,9 @@ public class PreparedStatementWrapper
         try
         {
             this.nbconn = nbconn;
-            prp = nbconn.get().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            prp = nbconn.get().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         }
-        catch(SQLException e)
+        catch(Exception e)
         {
             System.out.println("prepared statement wrapper error\n" + e);
         }
@@ -59,42 +59,26 @@ public class PreparedStatementWrapper
         return status;
     }
     
-    public boolean executeUpdate()
+    public void executeUpdate() throws SQLException
     {
-        boolean status;
-        try
+        update_count = prp.executeUpdate();
+        ResultSet rs = prp.getGeneratedKeys();
+        if(rs.next())
         {
-            update_count = prp.executeUpdate();
-            ResultSet rs = prp.getGeneratedKeys();
-            if(rs.next())
-            {
-                ag_key = rs.getInt(1);
-                rs.close();
-            }
-            status = true;
+            ag_key = rs.getInt(1);
+            rs.close();
         }
-        catch (Exception e)
-        {
-            
-            System.out.println("error executing psWrapper\n" + e);
-            status = false;
-        }
-        return status;
     }
     
     public ResultSet executeQuery()
     {
         ResultSet rs = null;
         boolean status;
-        try
-        {
+        try{
             rs = prp.executeQuery();
-            status = true;
         }
-        catch (Exception e)
-        {
+        catch (Exception e){
             System.out.println("error executing query via psWrapper\n" + e);
-            status = false;
         }
         return rs;
     }

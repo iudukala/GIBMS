@@ -7,7 +7,6 @@ package core;
 
 import com.jfoenix.controls.JFXListView;
 import handlers.dbConcurrent;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,17 +40,8 @@ public class Navigator
         TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/Arrears_interface.fxml", "Arrears management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/dumiya/InsuranceManagement.fxml", "Insurance management")));
         TREE_LIST.add(new ArrayList(Arrays.asList("/hassim/FXMLTemplate.fxml", "HR & payroll management")));
-        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/CustomerOld.fxml","Customer & loan plan old")));
+        TREE_LIST.add(new ArrayList(Arrays.asList("/legacyFXML/CustomerOld.fxml","Customer & loan plan old")));
         
-        
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/paniya/FXMLDocument.fxml","Cashflow management","<Placeholder>")));
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/fxml_files/customer.fxml","Customer & loan plan","Add customer", "Search customers")));
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/kiriya/FXMLDocument.fxml","Share management","<Placeholder>")));
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/janiya/FXMLDocument.fxml", "External bank fund management","<Placeholder>")));
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/battibois/FXMLDocument.fxml", "Resource management","<Placeholder>")));
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/hasini/FXMLDocument.fxml", "Arrears management","<Placeholder>")));
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/dumiya/FXMLDocument.fxml", "Insurance management","<Placeholder>")));
-//        TREE_LIST.add(new ArrayList(Arrays.asList("/hassim/FXMLDocument.fxml", "HR & payroll management","<Placeholder>")));
         return TREE_LIST;
     }
     
@@ -62,8 +52,8 @@ public class Navigator
         
         for(int i=0;i<TREE_LIST.size();i++)
         {
-            Label catLabel = new Label(TREE_LIST.get(i).get(1));//.toUpperCase());
-            catLabel.setStyle("-fx-font-size:14; -fx-font-family: \"Roboto\";");
+            Label catLabel = new Label(TREE_LIST.get(i).get(1).toUpperCase());//.toUpperCase());
+            catLabel.setStyle("-fx-font-size:14.5; -fx-font-family: \"Roboto Condensed\";");
             //catLabel.setFont(Font.font(8));
             list.getItems().add(catLabel);
         }
@@ -95,13 +85,13 @@ public class Navigator
         if(index>-1 && index<TREE_LIST.size())
         {
             Parent parent = null;
-            //anchor.getChildren().clear();
+            anchor.getChildren().clear();
+            
             try
             {
-                //anchor.getChildren().add(FXMLLoader.load(Navigator.class.getResource("/fxml_files/Customer.fxml")));
-                parent = FXMLLoader.load(Navigator.class.getResource(TREE_LIST.get(index).get(0)));
+                parent = FXMLLoader.<Parent>load(Navigator.class.getResource(TREE_LIST.get(index).get(0)));
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 System.out.println("Form switch error\n" + e);
             }
@@ -113,14 +103,6 @@ public class Navigator
             stage.setScene(scene);
             stage.show();
         }
-//        switch(index)
-//        {
-//            case 0:
-//                anchor.getChildren().add(FXMLLoader.load(Navigator.class.getResource("testrun.fxml")));
-//                break;
-//            case 1:
-//                anchor.getChildren().add(FXMLLoader.load(Navigator.class.getResource("testrun.fxml")));
-//        }
     }
     
     //deprecated

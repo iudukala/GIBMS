@@ -7,7 +7,6 @@ package dumiya;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Integrator;
@@ -17,8 +16,6 @@ import guiMediators.tableViewHandler;
 import handlers.dbConcurrent;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,11 +32,16 @@ import javafx.scene.layout.AnchorPane;
 public class InsuranceManagementController implements Initializable
 {
     dbConcurrent nbconn;
-    EntityControls personCont;
+
     EntityControls insuranceFundCont;
     EntityControls insuranceClaimCont;
     
-    private tableViewHandler custTableHandle;
+    EntityControls searchInsuranceFundCont;
+    EntityControls searchInsuranceClaimCont;
+    
+    private tableViewHandler customerSearchTableHandle;
+    private tableViewHandler insuranceFundTableHandle;
+    private tableViewHandler insuranceClaimTableHandle;
     
     @FXML
     private AnchorPane anchorpane;
@@ -94,78 +96,39 @@ public class InsuranceManagementController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
         nbconn = new dbConcurrent();
         
-        JFXTabPane jfxtabpane_customer =Integrator.integrate(anchorpane);
+        Integrator.integrate(anchorpane);
         initializeButton();
-        
-        initializePersonInputs();
+        tableHandler();
         initializeInsuranceFundInputs();
         initializeInsuranceClaimInputs();
-        
-        custTableHandle = new tableViewHandler(table_cs, nbconn);
-        custTableHandle.writeToTable("select * from customer_view");
-        
+        setInsuranceFundInputs(); 
+        setInsuranceClaimInputs();
     }
     
     public void initializeButton()
     {
-        Commons.subAnchorButton search_cs = new Commons.subAnchorButton();
-        search_cs.setButtonLength(200);
-        search_cs.setCoordinates(400, 150);
-        JFXButton searchbutton_cs = search_cs.getButton(anchor_customer_search, "SEARCH", Commons.LIST_GLYPH);
+        Commons.subAnchorButton search_cs = new Commons.subAnchorButton(anchor_customer_search, "SEARCH", Commons.LIST_GLYPH);
+        search_cs.setButtonLength(110);
+        search_cs.setButtonHeigth(20);
+        search_cs.setGlyphWidth(20); 
+        search_cs.setCoordinates(400, 138);
+        search_cs.setStyle(Commons.BTNSTYLE_2);
+        JFXButton searchbutton_cs = search_cs.getButton();
         
-        Commons.subAnchorButton add_if = new Commons.subAnchorButton();
-        add_if.setButtonLength(200);
-        add_if.setCoordinates(150, 600);
-        JFXButton addbutton_if = add_if.getButton(anchor_insurance_fund, "ADD", Commons.ADD_PERSON_GLYPH);
-        
-        Commons.subAnchorButton update_if = new Commons.subAnchorButton();
-        update_if.setButtonLength(200);
-        update_if.setCoordinates(400, 600);
-        JFXButton updatebutton_if = update_if.getButton(anchor_insurance_fund, "UPDATE", Commons.UPDATE_GLYPH);
-        
-        Commons.subAnchorButton delete_if = new Commons.subAnchorButton();
-        delete_if.setButtonLength(200);
-        delete_if.setCoordinates(650, 600);
-        JFXButton deletebutton_if = delete_if.getButton(anchor_insurance_fund, "DELETE", Commons.DELETE_GLYPH);
-        
-        Commons.subAnchorButton search_if = new Commons.subAnchorButton();
-        search_if.setButtonLength(200);
-        search_if.setCoordinates(400, 300);
-        JFXButton searchbutton_if = search_if.getButton(anchor_insurance_fund, "SEARCH", Commons.LIST_GLYPH);
-        
-        Commons.subAnchorButton add_ic = new Commons.subAnchorButton();
-        add_ic.setButtonLength(200);
-        add_ic.setCoordinates(150, 600);
-        JFXButton addbutton_ic = add_ic.getButton(anchor_insurance_claim, "ADD", Commons.ADD_PERSON_GLYPH);
-        
-        Commons.subAnchorButton update_ic = new Commons.subAnchorButton();
-        update_ic.setButtonLength(200);
-        update_ic.setCoordinates(400, 600);
-        JFXButton updatebutton_ic = update_ic.getButton(anchor_insurance_claim, "UPDATE", Commons.UPDATE_GLYPH);
-        
-        Commons.subAnchorButton delete_ic = new Commons.subAnchorButton();
-        delete_ic.setButtonLength(200);
-        delete_ic.setCoordinates(650, 600);
-        JFXButton deletebutton_ic = delete_ic.getButton(anchor_insurance_claim, "DELETE", Commons.DELETE_GLYPH);
-        
-        Commons.subAnchorButton search_ic = new Commons.subAnchorButton();
-        search_ic.setButtonLength(200);
-        search_ic.setCoordinates(400, 300);
-        JFXButton searchbutton_ic = search_ic.getButton(anchor_insurance_claim, "SEARCH", Commons.LIST_GLYPH);
+        Commons.subAnchorButton add_if = new Commons.subAnchorButton(anchor_insurance_fund, "ADD", Commons.ADD_PERSON_GLYPH);
+        add_if.setButtonLength(110);
+        add_if.setButtonHeigth(20);
+        add_if.setGlyphWidth(20); 
+        add_if.setCoordinates(150, 610);
+        JFXButton addbutton_if = add_if.getButton();
         
         addbutton_if.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-              
-                Entity person = personCont.getValues();
-                System.out.println(person);
-                person.validate(true);
-                person.consolidate();
                 
                 Entity Insurance_Fund = insuranceFundCont.getValues();
                 System.out.println(Insurance_Fund);
@@ -175,27 +138,161 @@ public class InsuranceManagementController implements Initializable
             }
         });
         
+        Commons.subAnchorButton update_if = new Commons.subAnchorButton(anchor_insurance_fund, "UPDATE", Commons.UPDATE_GLYPH);
+        update_if.setButtonLength(110);
+        update_if.setButtonHeigth(20);
+        update_if.setGlyphWidth(20); 
+        update_if.setCoordinates(400, 610);
+        JFXButton updatebutton_if = update_if.getButton();
+        
+        updatebutton_if.setOnAction(new EventHandler<ActionEvent>()
+        {
+        @Override
+            public void handle(ActionEvent e)
+            {
+            
+                Entity Insurance_Fund;
+                
+            
+                try{
+
+                    Insurance_Fund=searchInsuranceFundCont.getValues();
+                    System.out.println(Insurance_Fund);
+                    Insurance_Fund.update();
+
+                    }
+                catch(Exception ex)
+                {
+
+                    System.out.println("nullpointer no inputs");
+
+                }
+
+            }
+        });
+        
+        Commons.subAnchorButton delete_if = new Commons.subAnchorButton(anchor_insurance_fund, "DELETE", Commons.DELETE_GLYPH);
+        delete_if.setButtonLength(110);
+        delete_if.setButtonHeigth(20);
+        delete_if.setGlyphWidth(20);
+        delete_if.setCoordinates(650, 610);
+        JFXButton deletebutton_if = delete_if.getButton();
+        
+        Commons.subAnchorButton search_if = new Commons.subAnchorButton(anchor_insurance_fund, "SEARCH", Commons.LIST_GLYPH);
+        search_if.setButtonLength(110);
+        search_if.setButtonHeigth(20);
+        search_if.setGlyphWidth(20); 
+        search_if.setCoordinates(400, 300);
+        search_if.setStyle(Commons.BTNSTYLE_2);
+        JFXButton searchbutton_if = search_if.getButton();
+        
+        Commons.subAnchorButton select_if = new Commons.subAnchorButton(anchor_insurance_fund, "SELECT", Commons.UPDATE_GLYPH);       
+        select_if.setButtonLength(110);
+        select_if.setButtonHeigth(20);
+        select_if.setGlyphWidth(20); 
+        select_if.setCoordinates(750, 300);
+        select_if.setStyle(Commons.BTNSTYLE_2);
+        JFXButton selectbutton_if=select_if.getButton();
+        
+        selectbutton_if.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                
+                //searchInsuranceFundCont.setValues(insuranceFundTableHandle.getSelection("Insurance_Fund", "NIC"));
+                searchInsuranceFundCont.setValues(insuranceFundTableHandle.getSelection());
+
+            }
+        });
+        
+        Commons.subAnchorButton add_ic = new Commons.subAnchorButton(anchor_insurance_claim, "ADD", Commons.ADD_PERSON_GLYPH);
+        add_ic.setButtonLength(110);
+        add_ic.setButtonHeigth(20);
+        add_ic.setGlyphWidth(20);
+        add_ic.setCoordinates(150, 610);
+        JFXButton addbutton_ic = add_ic.getButton();
+        
         addbutton_ic.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-                
                 Entity Insurance_Claim = insuranceClaimCont.getValues();
                 System.out.println(Insurance_Claim);
                 Insurance_Claim.validate(true);
                 Insurance_Claim.consolidate();
-                
             }
         });
         
-    }
-    
-    public void initializePersonInputs()
-    {
-        personCont= new EntityControls("person", nbconn);
-        personCont.add("nic", nic_if);  
-    
+        Commons.subAnchorButton update_ic = new Commons.subAnchorButton(anchor_insurance_claim, "UPDATE", Commons.UPDATE_GLYPH);
+        update_ic.setButtonLength(110);
+        update_ic.setButtonHeigth(20);
+        update_ic.setGlyphWidth(20);
+        update_ic.setCoordinates(400, 610);
+        JFXButton updatebutton_ic = update_ic.getButton();
+        
+        updatebutton_ic.setOnAction(new EventHandler<ActionEvent>()
+        {
+        @Override
+            public void handle(ActionEvent e)
+            {
+            
+                Entity Insurance_Claim;
+                
+            
+                try{
+
+                    Insurance_Claim=searchInsuranceClaimCont.getValues();
+                    System.out.println(Insurance_Claim);
+                    Insurance_Claim.update();
+
+                    }
+                catch(Exception ex)
+                {
+
+                    System.out.println("nullpointer no inputs");
+
+                }
+
+            }
+        });
+        
+        Commons.subAnchorButton delete_ic = new Commons.subAnchorButton(anchor_insurance_claim, "DELETE", Commons.DELETE_GLYPH);
+        delete_ic.setButtonLength(110);
+        delete_ic.setButtonHeigth(20);
+        delete_ic.setGlyphWidth(20);
+        delete_ic.setCoordinates(650, 610);
+        JFXButton deletebutton_ic = delete_ic.getButton();
+        
+        Commons.subAnchorButton search_ic = new Commons.subAnchorButton(anchor_insurance_claim, "SEARCH", Commons.LIST_GLYPH);
+        search_ic.setButtonLength(110);
+        search_ic.setButtonHeigth(20);
+        search_ic.setGlyphWidth(20); 
+        search_ic.setCoordinates(400, 300);
+        search_ic.setStyle(Commons.BTNSTYLE_2);
+        JFXButton searchbutton_ic = search_ic.getButton();
+        
+        Commons.subAnchorButton select_ic = new Commons.subAnchorButton(anchor_insurance_claim, "SELECT", Commons.UPDATE_GLYPH);       
+        select_ic.setButtonLength(110);
+        select_ic.setButtonHeigth(20);
+        select_ic.setGlyphWidth(20); 
+        select_ic.setCoordinates(750, 300);
+        select_ic.setStyle(Commons.BTNSTYLE_2);
+        JFXButton selectbutton_ic=select_ic.getButton();
+        
+        selectbutton_ic.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                
+                //searchInsuranceClaimCont.setValues(insuranceClaimTableHandle.getSelection("Insurance_Claim", "Claim_Number"));
+                searchInsuranceClaimCont.setValues(insuranceClaimTableHandle.getSelection());
+
+            }
+        });
+            
     }
  
     public void initializeInsuranceFundInputs()
@@ -232,5 +329,57 @@ public class InsuranceManagementController implements Initializable
         insuranceClaimCont.add("Closed_Date", closed_date_ic);
         
         insuranceClaimCont.add("Description", description_ic);
+    }
+    
+    public void tableHandler()
+    {
+        
+        customerSearchTableHandle = new tableViewHandler(table_cs,"select * from customer_view",nbconn);
+        customerSearchTableHandle.writeToTable();
+        
+        insuranceFundTableHandle = new tableViewHandler(table_if,"select * from Insurance_Fund", nbconn);
+        insuranceFundTableHandle.writeToTable();
+        
+        insuranceClaimTableHandle = new tableViewHandler(table_ic,"select * from Insurance_Claim",nbconn);
+        insuranceClaimTableHandle.writeToTable();
+    
+    }
+    
+    public void setInsuranceFundInputs()
+    {
+        
+        searchInsuranceFundCont = new EntityControls("Insurance_Fund",nbconn);
+
+        searchInsuranceFundCont.add("NIC", nic_if);
+        
+        searchInsuranceFundCont.add("Insurance_Fee", insurance_fee_if);
+        
+        searchInsuranceFundCont.add("Date_Issued", date_issued_if);
+        
+        searchInsuranceFundCont.add("Expiry_Date", expiry_date_if);
+        
+        searchInsuranceFundCont.add("Payed_Amount", payed_amount_if);
+        
+        searchInsuranceFundCont.add("Due_Amount", due_amount_if);
+        
+    }
+    
+    public void setInsuranceClaimInputs()
+    {
+        
+        searchInsuranceClaimCont = new EntityControls("Insurance_Claim",nbconn);
+        
+        searchInsuranceClaimCont.add("Claim_Number", claim_number_ic);
+        
+        searchInsuranceClaimCont.add("Claim_Status", claim_status_ic);
+        
+        searchInsuranceClaimCont.add("Claim_Type", claim_type_ic);
+        
+        searchInsuranceClaimCont.add("Open_Date", open_date_ic);
+        
+        searchInsuranceClaimCont.add("Closed_Date", closed_date_ic);
+        
+        searchInsuranceClaimCont.add("Description", description_ic);
+        
     }
 }

@@ -120,27 +120,27 @@ public class Arrears_interfaceController implements Initializable {
     private void initializeButton() {
         
         
-        Commons.subAnchorButton asab = new Commons.subAnchorButton();
-        asab.setButtonLength(200);
-        JFXButton addButton = asab.getButton(anchor_edit, "ADD Arrears", Commons.ADD_PERSON_GLYPH);
-        
-           addButton.setOnAction(new EventHandler<ActionEvent>() {
-               
-               
-            @Override
-            public void handle(ActionEvent event) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                
-                Entity person = getPersonInputs();
-                System.out.println(person.validate(true));
-                person.consolidate();
-                
-                
-                Entity arrears = getarrearsInputs();
-                System.out.println(arrears.validate(true));
-                arrears.consolidate();
-            }  
-        });
+//        Commons.subAnchorButton asab = new Commons.subAnchorButton();
+//        asab.setButtonLength(200);
+//        JFXButton addButton = asab.getButton(anchor_edit, "ADD Arrears", Commons.ADD_PERSON_GLYPH);
+//        
+//           addButton.setOnAction(new EventHandler<ActionEvent>() {
+//               
+//               
+//            @Override
+//            public void handle(ActionEvent event) {
+//                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                
+//                Entity person = getPersonInputs();
+//                System.out.println(person.validate(true));
+//                person.consolidate();
+//                
+//                
+//                Entity arrears = getarrearsInputs();
+//                System.out.println(arrears.validate(true));
+//                arrears.consolidate();
+//            }  
+//        });
     }
 
     private void initializeArrearsInputs() {

@@ -81,32 +81,50 @@ public class Validator
     
     public static boolean isInteger(String str)
     {
-        boolean valid=true;
-        for(int i=0; i<str.length(); i++)
+//        boolean valid=true;
+//        for(int i=0; i<str.length(); i++)
+//        {
+//            if(! (Character.isDigit(str.charAt(i))))
+//            {
+//                valid=false;
+//                break;
+//            }
+//        }
+        try
         {
-            if(! (Character.isDigit(str.charAt(i))))
-            {
-                valid=false;
-                break;
-            }
+            Integer.parseInt(str);
+            return true;
         }
-        return valid;
+        catch(Exception e)
+        {
+            return false;   
+        }
+//        return valid;
     }
     
     public static boolean isDouble(String str)
     {
-        List<Character> allowed=new ArrayList<>(Arrays.asList('.'));
-        
-        boolean valid=true;
-        for(int i=0; i<str.length(); i++)
+//        List<Character> allowed=new ArrayList<>(Arrays.asList('.'));
+//        
+//        boolean valid=true;
+//        for(int i=0; i<str.length(); i++)
+//        {
+//            if(! (Character.isDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
+//            {
+//                valid=false;
+//                break;
+//            }
+//        }
+//        return valid;
+        try
         {
-            if(! (Character.isDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
-            {
-                valid=false;
-                break;
-            }
+            Double.parseDouble(str);
+            return true;
         }
-        return valid;
+        catch(Exception e)
+        {
+            return false;   
+        }
     }
     
     public static boolean isExistingNIC(String str, dbConcurrent nbconn)
@@ -119,9 +137,10 @@ public class Validator
             ResultSet rs = prp.executeQuery();
             valid = rs.next();
         } 
-        catch (SQLException e)
+        catch (Exception e)
         {
             System.out.println("Error checking NIC existence\n" + e);
+            valid = false;
         }
         return valid;
     }
