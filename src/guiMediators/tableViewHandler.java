@@ -6,8 +6,8 @@
 package guiMediators;
 
 import core.Entity;
-import core.PreparedStatementWrapper;
 import handlers.dbConcurrent;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,27 +41,43 @@ public class tableViewHandler
     
     public void writeToTable()
     {
-        List<Entity> entity_list = null;
-        try
+        if(nbconn.get() == null)
         {
+            table.getItems().clear();
+            return;
+        }
+        
+        List<Entity> entity_list = null;
+        try{
             ResultSet rs = nbconn.get().createStatement().executeQuery(query);
             table_name = rs.getMetaData().getTableName(1);
             entity_list = Entity.parseFromRS(rs, nbconn);
         }
-        
-        catch (SQLException e)
-        {
+        catch (SQLException e){
             System.out.println("Error executing SQL statement in writeToTable()\n" + e);
+        }
+        System.out.println(entity_list.get(0));
+        writeData(entity_list);
+    }
+    
+    public void writeToTable(ResultSet rs)
+    {
+        writeData(Entity.parseFromRS(rs, nbconn));
+    }
+    
+    private void writeData(List<Entity> entity_list)
+    {
+        if(entity_list.isEmpty() || nbconn.get() == null)
+        {
+            table.getItems().clear();
+            return;
         }
         
         List<TableColumn<Entity,String>> column_list = new ArrayList<>();
-        //testingmarker
-        //System.out.println( entity_list.get(0));
         
         for(String colname : entity_list.get(0).getColumnNamesFromEntity())
         {
-            //testingmarker
-            //System.out.println("Collist : " + colname);
+            System.out.println(colname);
             TableColumn<Entity,String> column = new TableColumn<>(colname.toUpperCase());
             column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Entity, String>, ObservableValue<String>>()
             {
@@ -77,17 +93,33 @@ public class tableViewHandler
         table.getColumns().clear();
         table.getColumns().addAll(column_list);
         ObservableList<Entity> items = FXCollections.observableArrayList(entity_list);
+        table.getItems().clear();
         table.setItems(items);
     }
     
     public Entity fetchExtendedSelection(String ovr_searchtable, String ovr_pkey)
     {
         String exsearch_query = "select * from `" + ovr_searchtable + "` where `" + ovr_pkey + "` = ?";
-        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn, exsearch_query);
+        PreparedStatement prp;
         
-        Object identifier = table.getSelectionModel().getSelectedItem().getAsString(ovr_pkey);
-        prpw.setObject(1, identifier);
-        Entity selected_entity = Entity.parseFromRS(prpw.executeQuery(), nbconn).get(0);
+        Object identifier;
+        try{
+            identifier = table.getSelectionModel().getSelectedItem().getAsString(ovr_pkey);
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+        Entity selected_entity;
+        try{
+            prp = nbconn.get().prepareStatement(exsearch_query);
+            prp.setObject(1, Entity.recastJavaObject(identifier));
+            selected_entity = Entity.parseFromRS(prp.executeQuery(), nbconn).get(0);
+        }
+        catch(SQLException e){
+            System.out.println("Failed to fetch extended selection data from DB :\n" + e);
+            return null;
+        }
         
         return selected_entity;
     }
@@ -100,10 +132,5 @@ public class tableViewHandler
     public Entity getSelection(String pkeyName)
     {
         return fetchExtendedSelection(table_name, pkeyName);
-    }
-    
-    public void executeSearch()
-    {
-        
     }
 }

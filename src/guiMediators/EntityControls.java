@@ -50,9 +50,19 @@ public class EntityControls
         nodeList.put(key, obj);
     }
     
+    public void add(Object entries[][])
+    {
+        for(int i=0;i<entries.length;i++)
+        {
+            Object key = entries[i][0];
+            Object control = entries[i][1];
+            
+            add(key.toString(), control);
+        }
+    }
+    
     public <E extends ValidationInterface> void add(String key, Object obj, E validator)
     {
-        //nodeList.put(key, obj);
         add(key, obj);
         
         if(obj.getClass().equals(JFXTextField.class))
@@ -157,6 +167,8 @@ public class EntityControls
     
     public void setValues(Entity entity)
     {
+        if(entity == null)
+            return;
         for(Entry<String,Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();

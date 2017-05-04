@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootAnchor" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/loginStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_files.LoginController">
    <children>
-      <StackPane fx:id="stackpane" layoutX="327.0" layoutY="107.0" prefHeight="487.0" prefWidth="347.0" style="-fx-background-color: #333333;">
+      <StackPane fx:id="stackpane" layoutX="327.0" layoutY="107.0" prefHeight="487.0" prefWidth="347.0" styleClass="stackpane">
          <children>
             <GridPane prefHeight="486.0" prefWidth="347.0">
               <columnConstraints>
@@ -30,7 +30,7 @@
                 <RowConstraints maxHeight="157.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0" text="Authentication portal" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0" styleClass="subheading" text="Authentication portal" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -57,7 +57,7 @@
                      </font>
                   </JFXButton>
                   <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="347.0" text="Label" textFill="WHITE" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0" text="Graduate Investment" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0" styleClass="header" text="GRADUATE INVESTMENT" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>

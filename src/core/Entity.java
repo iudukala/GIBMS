@@ -5,6 +5,7 @@
  */
 package core;
 
+import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import handlers.dbConcurrent;
@@ -18,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import jdk.nashorn.internal.parser.TokenType;
 
 /**
  *
@@ -51,6 +51,17 @@ public class Entity
         key = key.toLowerCase();
         if(value!=null)
             data.put(key,value);
+    }
+    
+    public void add(Object entries[][])
+    {
+        for(int i=0;i<entries.length;i++)
+        {
+            Object key = entries[i][0];
+            Object value = entries[i][1];
+            
+            add(key.toString(), value);
+        }
     }
     
     private Object get(String key, Class reqClass)
@@ -101,10 +112,17 @@ public class Entity
     {
         return ag_key;
     }
-    public int consolidate()
+    public String getConsolidateString()
     {
-        return consolidate(true);
+        parseConsolidateStatement(new ArrayList<>());
+        return consolidate_string;
     }
+    public String getUpdateString()
+    {
+        return update_string;
+    }
+    
+    
     
     public List<List> fetchTableStructure()
     {
@@ -145,6 +163,7 @@ public class Entity
         List<String> columns = new ArrayList<>();
         for (Iterator<Entry<String, Object>> it = data.entrySet().iterator(); it.hasNext();)
         {
+            System.out.println();
             Entry<String,Object> entry = it.next();
             columns.add(entry.getKey());
         }
@@ -153,60 +172,79 @@ public class Entity
     
     public int consolidate(Boolean verbose)
     {
+        boolean successful = true;
         List<Object> fields = new ArrayList<>();
         String sql = parseConsolidateStatement(fields);
-        
-        StringBuilder strb = new StringBuilder();
         
         if(!validate(false) && verbose)
             System.out.println("Warning: Consolidating to database with validation failure on [" + tablename + "].");
         
-        
-        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,sql);
-        int counter=0;
-        for(Object field : fields)
-            prpw.setObject(++counter, field);
-        
         String failure_str = "Consolidation failure ["+tablename+"] : ";
+        PreparedStatement prp;
         try
         {
-            prpw.executeUpdate();
+            prp = nbconn.get().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int counter=0;
+            for(Object field : fields)
+                prp.setObject(++counter, recastJavaObject(field));
+            prp.executeUpdate();
         }
         catch(MySQLIntegrityConstraintViolationException e)
         {
+            successful = false;
             if(verbose)
                 System.out.println(failure_str + "Integrity constraint violation\n" + e);
             return 1;
         }
         catch(MySQLSyntaxErrorException e)
         {
+            successful = false;
             if(verbose)
                 System.out.println(failure_str + "Syntax error\n" + e);
             return 2;
         }
         catch(SQLException e)
         {
+            successful = false;
             if(verbose)
                 System.out.println(failure_str + "\n" + e);
             return 3;
         }
-
-        if(prpw.getGeneratedKey()!=null)
+        
+        try
         {
-            ag_key = prpw.getGeneratedKey();
-            ag_column = fetchQueryColumnList("show columns from `" + tablename + "` where `Extra`='auto_increment';").get(0);
-            data.put(ag_column,ag_key);
-        }
+            ResultSet rs = prp.getGeneratedKeys();
+            if(rs.next())
+            {
+                ag_key = rs.getInt(1);
+                rs.close();
 
+                ag_column = fetchQueryColumnList("show columns from `" + tablename + "` where `Extra`='auto_increment';").get(0);
+                data.put(ag_column,ag_key);
+            }
+        }
+        catch (Exception e){
+            successful = false;
+            System.out.println("Error encountered while fetching auto generated values : \n" + e);
+            ag_key=null;
+            ag_column=null;
+        }
+        
+        StringBuilder strb = new StringBuilder();
         strb.append("Consolidation successful : [").append(tablename).append("] -  AG data : ");
         if(ag_key!=null)
             strb.append(ag_key).append(" on ").append(ag_column).append("\n");
         else
             strb.append("none");
 
-        if(verbose)
+        if(verbose && successful)
             System.out.println(strb);
         return 0;
+    }
+    
+    public int consolidate()
+    {
+        return consolidate(true);
     }
     
     private String parseConsolidateStatement(List<Object> fields)
@@ -363,7 +401,7 @@ public class Entity
                     if(rs.getString(column_name) == null)
                         continue;
                     
-                    temp_entity.add(column_name, getRecastedSQLObject(rs.getObject(column_name)));
+                    temp_entity.add(column_name, recastSQLObject(rs.getObject(column_name)));
                 }
                 entities.add(temp_entity);
                 
@@ -378,7 +416,7 @@ public class Entity
         return entities;
     }
     
-    private static Object getRecastedSQLObject(Object obj)
+    private static Object recastSQLObject(Object obj)
     {
         if(obj.getClass().equals(String.class))
             return obj.toString();
@@ -486,37 +524,61 @@ public class Entity
                 if(++counter!=data.size()-keycount)strb.append(",");
             }
         }counter=0;
-        strb.append(synthesizeWhereClause(primaryKeys));
+        strb.append(synthesizeWhereClause(primaryKeys,false));
         //dml statement generation complete 
         update_string = strb.toString();
         
-        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,update_string);
-        for(Object field : fields)
-            prpw.setObject(++counter, field);
-        for(Object key : primaryKeys)
-            prpw.setObject(++counter, data.get(key));
-        
         strb = new StringBuilder("[" + tablename + "] update ");
-        try{
-            prpw.executeUpdate();
+        PreparedStatement prp;
+        try
+        {
+            prp = nbconn.get().prepareStatement(update_string);
+            for(Iterator<Object> iterator = fields.iterator(); iterator.hasNext();)
+                prp.setObject(++counter, recastJavaObject(iterator.next()));
+            for(Iterator<String> iterator = primaryKeys.iterator(); iterator.hasNext();)
+                prp.setObject(++counter, recastJavaObject(data.get(iterator.next())));
+            prp.executeUpdate();
+            
             strb.append("executed successfully\nPrimary keyset : ");
             for(Object key : primaryKeys)
                 strb.append("{ ").append(key).append(" : ").append(data.get(key).toString()).append(" }\t");
-            System.out.println(strb);
         }
-        catch(SQLException e){
+        catch(Exception e){
+            System.out.println("Error assigning objects to preparedStatement");
             strb.append("failure \n").append(e);
-            System.out.println(strb);
+        }
+        
+        System.out.println(strb);
+    }
+    
+    public static Object recastJavaObject(Object obj)
+    {
+        if(obj.getClass().equals(LocalDate.class))
+            return java.sql.Date.valueOf((LocalDate)obj);
+        else if(obj.getClass().equals(String.class))
+            return obj;
+        else if(obj.getClass().equals(Integer.class))
+            return obj;
+        else if(obj.getClass().equals(Double.class))
+            return obj;
+        else if(obj.getClass().equals(Long.class))
+            return obj;
+        else
+        {
+            System.out.println("Unexpected type encoutered in recastJO");
+            return null;
         }
     }
     
-    private String synthesizeWhereClause(List<String> keylist)
+    private String synthesizeWhereClause(List<String> keylist, boolean wildcards)
     {
+        String search_op = wildcards?" like ":" = ";
         StringBuilder strb = new StringBuilder(" where ");
+        
         int counter=0;
         for(String key : keylist)
         {
-            strb.append("`").append(key).append("`").append("=?");
+            strb.append("`").append(key).append("`").append(search_op).append("?");
             if(++counter!=keylist.size())strb.append(" and ");
         }
         return strb.toString();
@@ -545,7 +607,7 @@ public class Entity
         return fields;
     }
     
-    public String executeAsSearch()
+    public ResultSet executeAsSearch()
     {
         List<String> searchFields = getLocalFieldList();
         for(Iterator<String> iter = searchFields.listIterator(); iter.hasNext();)
@@ -555,24 +617,35 @@ public class Entity
                 iter.remove();
         }
         
+        for(Entry<String,Object> entry : data.entrySet())
+        {
+            data.put(entry.getKey(), "%" + entry.getValue() + "%");
+        }
+        
         StringBuilder strb = new StringBuilder();
         if(tablename.toLowerCase().startsWith("select "))
-            strb.append(tablename).append(synthesizeWhereClause(searchFields));
+            strb.append(tablename).append(synthesizeWhereClause(searchFields, true));
         strb.append(";");
         
         System.out.println("Searchfields : " + searchFields);
         System.out.println("strb : " + strb.toString());
         
-        PreparedStatementWrapper prpw = new PreparedStatementWrapper(nbconn,strb.toString());
-        
-        int counter = 0;
-        for(Iterator<String> iter = searchFields.listIterator(); iter.hasNext();)
+        try 
         {
-            String field = iter.next();
-            prpw.setObject(++counter, data.get(field));
+            PreparedStatement prp = nbconn.get().prepareStatement(strb.toString());
+            int counter = 0;
+            for(Iterator<String> iter = searchFields.listIterator(); iter.hasNext();)
+            {
+                String field = iter.next();
+                prp.setObject(++counter, recastJavaObject(data.get(field)));
+            }
+            ResultSet rs = prp.executeQuery();
+            return rs;
         }
-//        //prpw.executeQuery();
-        
-        return strb.toString();
+        catch(Exception e)
+        {
+            System.out.println("Error executing search for query : " + strb.toString());
+            return null;
+        }
     }
 }

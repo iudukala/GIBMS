@@ -8,24 +8,45 @@ and open the template in the editor.
     Author     : Isuru Udukala
 */
 
+
 @font-face {
     src: url("RobotoTTF/Roboto-Light.ttf");
 }
+@font-face {
+    src: url("RobotoTTF/RobotoCondensed-Regular.ttf");
+}
+@font-face {
+    src: url("RobotoTTF/RobotoCondensed-Bold.ttf");
+}
+@font-face {
+    src: url("BebasNeueOTF/BebasNeue-Regular.otf");
+}
+
 
 *{
     /*-fx-font-base: #D1C4E9;*/
     -fx-font-base: #D3D3D3;
+    -fx-outer-base : #37455A; 
+    -fx-inner-base: #333333;
 }
 
 
 .root{
-    /*-fx-background-color:#7E57C2;*/
-    -fx-background-color:#37455A;
+    -fx-background-color: -fx-outer-base;
 }
 
-.label{
+.stackpane{
+    -fx-background-color: -fx-inner-base;
+}
+
+.header{
+    -fx-font-size: 40;
+    -fx-font-family: "Bebas neue";
+    /*-fx-font-weight : regular;*/
+}
+
+.subheading{
     -fx-font-family: "Roboto";
-    /*-fx-font-weight: Light;*/
 }
 .jfx-text-field, .jfx-password-field{
     -jfx-focus-color: -fx-font-base;
@@ -35,11 +56,9 @@ and open the template in the editor.
     -fx-font-family: "Roboto";
     -fx-font-size: 15;
     -fx-pref-height: 20;
-    /*-fx-font-weight: Light;*/
 }
 
 .button{
-/*    -fx-background-color:#5EB355;;*/
     -fx-background-radius:0;
     
     -fx-font-family: "Roboto";
