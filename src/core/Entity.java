@@ -662,4 +662,33 @@ public class Entity
             return null;
         }
     }
+    
+    public boolean deleteFromDB()
+    {
+        List<String> primaryKeys = fetchQueryColumnList("show columns from `" + tablename + "` where `key`='pri';");
+        StringBuilder strb = new StringBuilder("delete from " + tablename);
+        strb.append(synthesizeWhereClause(primaryKeys, false));
+        
+        int counter = 0;
+        try
+        {
+            PreparedStatement prp = nbconn.get().prepareStatement(strb.toString());
+            for(Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext();)
+                prp.setObject(++counter, recastJavaObject(data.get(iterator.next())));
+            
+            prp.executeUpdate();
+            
+            strb = new StringBuilder("[" + tablename + "] Record deleted successfully: ");
+            for(Object key : primaryKeys)
+                strb.append("{").append(key).append(" : ").append(data.get(key)).append("}\t");
+            System.out.println(strb);
+            
+            return true;
+        }
+        catch(SQLException e)
+        {
+            System.err.println(e);
+            return false;
+        }
+    }
 }

@@ -52,8 +52,8 @@ public class Navigator
         
         for(int i=0;i<TREE_LIST.size();i++)
         {
-            Label catLabel = new Label(TREE_LIST.get(i).get(1).toUpperCase());//.toUpperCase());
-            catLabel.setStyle("-fx-font-size:14.5; -fx-font-family: \"Roboto Condensed\";");
+            Label catLabel = new Label(TREE_LIST.get(i).get(1).toUpperCase());
+            catLabel.setStyle("-fx-font-size:14; -fx-font-family: \"Roboto Condensed\";");
             //catLabel.setFont(Font.font(8));
             list.getItems().add(catLabel);
         }

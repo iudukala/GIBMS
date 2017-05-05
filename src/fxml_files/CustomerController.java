@@ -233,25 +233,26 @@ public class CustomerController implements Initializable
             @Override
             public void handle(WorkerStateEvent event)
             {
-                int task_status = task_addperson.getValue();
-                System.out.println(task_status);
-//                if(task_status == 0)
+//                int task_status = task_addperson.getValue();
+//                switch (task_status)
 //                {
-//                    try{dialog.close();}catch(Exception ex){}
-//                    dialog = initializeDialog(1, ContentFactory.getDialog("CONSOLIDATION SUCESSFUL", "Customer record added to database successfully", 1));
-//                    dialog.show();
-//                }
-//                else if(task_status == 1)
-//                {
-//                    try{dialog.close();}catch(Exception ex){}
-//                    dialog = initializeDialog(1, ContentFactory.getDialog("REQUIRED FIELDS EMPTY", "Please fill out all required fields before adding a new record", 2));
-//                    dialog.show();
-//                }
-//                else if(task_status == 2)
-//                {
-//                    try{dialog.close();}catch(Exception ex){}
-//                    dialog = initializeDialog(1, ContentFactory.getDialog("CONSOLIDATION FAILED", "New record addition failed due to an internal error", 2));
-//                    dialog.show();
+//                    case 0:
+//                        try{dialog.close();}catch(Exception ex){}
+//                        dialog = initializeDialog(1, ContentFactory.getDialog("CONSOLIDATION SUCESSFUL", "Customer record added to database successfully", 1));
+//                        dialog.show();
+//                        break;
+//                    case 1:
+//                        try{dialog.close();}catch(Exception ex){}
+//                        dialog = initializeDialog(1, ContentFactory.getDialog("REQUIRED FIELDS EMPTY", "Please fill out all required fields before adding a new record", 2));
+//                        dialog.show();
+//                        break;
+//                    case 2:
+//                        try{dialog.close();}catch(Exception ex){}
+//                        dialog = initializeDialog(1, ContentFactory.getDialog("CONSOLIDATION FAILED", "New record addition failed due to an internal error", 2));
+//                        dialog.show();
+//                        break;
+//                    default:
+//                        break;
 //                }
             }
         });
@@ -398,18 +399,8 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent e)
             {
-//                addpersonButton.setText("");
-//                addpersonButton.setGraphic(null);
-//                
-//                JFXSpinner spinner = new JFXSpinner();
-//                subanchor_tca.getChildren().add(spinner);
-//                System.out.println(spinner.getMinWidth());
-//                spinner.setTranslateX(addpersonButton.getTranslateX() + addpersonButton.getWidth()/2 - spinner.getMinWidth()/2);
-//                spinner.setTranslateY(addpersonButton.getTranslateY() + addpersonButton.getHeight()/2 - spinner.getMinHeight()/2);
-//                System.out.println(task_addperson.isRunning());
-                
                 Thread thread = new Thread(task_addperson);
-                thread.setDaemon(false);
+                thread.setDaemon(true);
                 thread.start();
             }
         });
@@ -432,7 +423,10 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
-                
+                Entity x = custable_handle.fetchExtendedSelection("customer_state", "NIC");
+                x.deleteFromDB();
+                custable_handle.writeToTable();
+                        
                 //String snic = text_csnic.getText();
                 //String sname = text_csname.getText();
 //                Entity x = custable_handle.fetchExtendedSelection("person", "NIC");
@@ -578,5 +572,18 @@ public class CustomerController implements Initializable
         dialog.setTranslateY(translate);
         
         return dialog;
+    }
+    
+    private void toggleSpinner(JFXButton button, AnchorPane subanchor)
+    {
+//        addpersonButton.setText("");
+//                addpersonButton.setGraphic(null);
+//                
+//                JFXSpinner spinner = new JFXSpinner();
+//                subanchor_tca.getChildren().add(spinner);
+//                System.out.println(spinner.getMinWidth());
+//                spinner.setTranslateX(addpersonButton.getTranslateX() + addpersonButton.getWidth()/2 - spinner.getMinWidth()/2);
+//                spinner.setTranslateY(addpersonButton.getTranslateY() + addpersonButton.getHeight()/2 - spinner.getMinHeight()/2);
+//                System.out.println(task_addperson.isRunning());
     }
 }
