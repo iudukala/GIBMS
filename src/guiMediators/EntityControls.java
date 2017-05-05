@@ -56,8 +56,15 @@ public class EntityControls
         {
             Object key = entries[i][0];
             Object control = entries[i][1];
+            if(entries[i].length == 2)
+                add(key.toString(), control);
             
-            add(key.toString(), control);
+            else if(entries[i].length == 3)
+            {
+                Object validator = entries[i][2];
+                if(ValidationInterface.class.isAssignableFrom(validator.getClass()))
+                    add(key.toString(), control, (ValidationInterface)validator);
+            }
         }
     }
     
@@ -114,6 +121,8 @@ public class EntityControls
     
     public Entity getValues()
     {
+        int countx=0;
+        
         entity = new Entity(TABLE_NAME, nbconn);
         for(Entry<String,Object> entry : nodeList.entrySet())
         {
@@ -128,7 +137,8 @@ public class EntityControls
                 if(entry.getValue().getClass().equals(ToggleGroup.class))
                 {
                     ToggleGroup tg = (ToggleGroup)control;
-                    entity.add(key, tg.getSelectedToggle().getUserData());
+                    if(tg.getSelectedToggle()!=null)
+                        entity.add(key, tg.getSelectedToggle().getUserData());
                 }
                 else if(control.getClass().equals(JFXDatePicker.class))
                     entity.add(key,((JFXDatePicker)control).getValue());
@@ -145,17 +155,20 @@ public class EntityControls
                             {
                                 if(list.get(1).equals("varchar"))
                                     entity.add(key, value);
-                                else if(list.get(1).equals("double"))
-                                    entity.add(key, Double.parseDouble(value));
-                                else if(list.get(1).equals("int"))
-                                    entity.add(key, Integer.parseInt(value));
+                                if(!value.equals(""))
+                                {
+                                    if(list.get(1).equals("double"))
+                                        entity.add(key, Double.parseDouble(value));
+                                    else if(list.get(1).equals("int"))
+                                        entity.add(key, Integer.parseInt(value));
+                                    else if(list.get(1).equals("long"))
+                                        entity.add(key, Long.parseLong(value));
+                                }
                             }
                         }
                 }
             }
-            catch(Exception e){
-                entity.add(key, null);
-            } 
+            catch(Exception e){System.out.println(entry.getValue() + "nulhhhl" + countx++);}
         }
         return entity;
     }
@@ -182,14 +195,13 @@ public class EntityControls
         }
     }
     
-    public boolean validateValues()
+    public boolean triggerValidators()
     {
         boolean valid = true;
         for(Entry<String, Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();
             Object control = entry.getValue();
-            
             if(control.getClass().equals(JFXTextField.class) || control.getClass().equals(JFXDatePicker.class))
                 if(((Control)control).isDisabled())
                     continue;
@@ -197,15 +209,15 @@ public class EntityControls
             if(control.getClass().equals(JFXTextField.class))
             {
                 JFXTextField textField = (JFXTextField)control;
-                
                 if(! (textField.getValidators().isEmpty()) )
                 {
-                    valid = (textField.validate() && !textField.getText().equals(""));
+                    valid = (textField.validate());// && !textField.getText().equals(""));
                     if(!valid)
                         return false;
                 }
             }
         }
+        
         return valid;
     }
     

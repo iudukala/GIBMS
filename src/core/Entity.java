@@ -123,7 +123,6 @@ public class Entity
     }
     
     
-    
     public List<List> fetchTableStructure()
     {
         List<List> tdata = new ArrayList<>();
@@ -155,6 +154,7 @@ public class Entity
         {
             System.out.println("error fetching table data\n" + e);
         }
+        
         return tdata;
     }
     
@@ -163,10 +163,10 @@ public class Entity
         List<String> columns = new ArrayList<>();
         for (Iterator<Entry<String, Object>> it = data.entrySet().iterator(); it.hasNext();)
         {
-            System.out.println();
             Entry<String,Object> entry = it.next();
             columns.add(entry.getKey());
         }
+        
         return columns;
     }
     
@@ -371,6 +371,7 @@ public class Entity
         return table_valid && data_valid;
     }
     
+    
     public static List<Entity> parseFromRS(ResultSet rs, dbConcurrent nbconn)
     {
         //resetting RS incase next() has been called before being passed
@@ -414,6 +415,19 @@ public class Entity
             System.out.println("Error encountered while parsing Entities [" + newtable + "]");
         }
         return entities;
+    }
+    
+    public static List<Entity> parseFromQuery(String query, dbConcurrent nbconn)
+    {
+        ResultSet rs=null;
+        try{
+            PreparedStatement prp = nbconn.get().prepareStatement(query);
+            rs = prp.executeQuery();
+        }
+        catch(Exception e){
+            return null;
+        }
+        return parseFromRS(rs, nbconn);
     }
     
     private static Object recastSQLObject(Object obj)

@@ -24,7 +24,7 @@
             <Insets />
          </opaqueInsets>
          <tabs>
-            <Tab text="Add shares">
+            <Tab text="Add shareholder">
               <content>
                 <AnchorPane fx:id="anchor_shares" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -86,7 +86,7 @@
                            <content>
                               <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                    <GridPane fx:id="lable_stock" hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
@@ -115,6 +115,11 @@
                                               <TableColumn prefWidth="75.0" text="C2" />
                                             </columns>
                                           </TableView>
+                                          <Label fx:id="stockss" alignment="BOTTOM_LEFT" prefHeight="32.0" prefWidth="154.0" styleClass="headers" text="AVAILABLE STOCK" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -171,7 +176,7 @@
                                               <TableColumn prefWidth="75.0" text="C2" />
                                             </columns>
                                           </TableView>
-                                          <JFXButton fx:id="selectButton" text="select" textFill="#f50b0b" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <JFXButton fx:id="selectButton" prefHeight="35.0" prefWidth="72.0" styleClass="buttonS2" text="select" textFill="#f50b0b" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -211,17 +216,58 @@
                                        <children>
                                           <JFXButton text="Delete" textFill="#f2f2f2" GridPane.rowIndex="6" />
                                           <JFXButton text="View" textFill="#f8f6f6" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                          <JFXTextField promptText="select date of expire" />
                                           <TableView fx:id="view_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="5">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
                                             </columns>
                                           </TableView>
+                                          <JFXButton fx:id="d_select" prefHeight="28.0" prefWidth="64.0" styleClass="buttonS2" text="select" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                          <JFXDatePicker fx:id="datess" prefHeight="28.0" prefWidth="262.0" GridPane.halignment="RIGHT" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
                                        </padding>
+                                    </GridPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Add shares">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                           <content>
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <GridPane fx:id="lable_stock1" hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <padding>
+                                          <Insets left="40.0" right="40.0" />
+                                       </padding>
+                                       <children>
+                                          <JFXTextField fx:id="add_shares" promptText="Shares" GridPane.rowIndex="3" />
+                                          <JFXButton fx:id="add_btn" prefHeight="45.0" prefWidth="111.0" styleClass="buttonGR" text="Add" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="share_id" promptText="Share ID" GridPane.rowIndex="1" />
+                                       </children>
                                     </GridPane>
                                  </children>
                               </StackPane>

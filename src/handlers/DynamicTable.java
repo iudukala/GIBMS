@@ -25,6 +25,11 @@ public class DynamicTable
 {
     public static void buildData(Connection con, String query, String key, TableView tableview)
     {
+        con = null;
+        query = null;
+        key = null;
+        tableview =null;
+        
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
         tableview.getColumns().clear();
         try
@@ -77,6 +82,10 @@ public class DynamicTable
     
     public static void getColumns(Connection con, String query, TableView tableview)
     {
+        con = null;
+        query = null;
+        tableview = null;
+        
           ObservableList<ObservableList> data = FXCollections.observableArrayList();
           tableview.getColumns().clear();
           try

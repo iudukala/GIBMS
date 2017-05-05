@@ -22,7 +22,7 @@ public class GIBMS extends Application
     public void start(Stage stage) throws Exception
     {   Parent root = FXMLLoader.load(getClass().getResource("/fxml_files/Login.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().clear();new dbConcurrent(true,false);
+        scene.getStylesheets().clear();dbConcurrent.getInstance(true,false);
         
         stage.setTitle("Graduate Investment");
         stage.setResizable(false);

@@ -96,7 +96,7 @@ public class InsuranceManagementController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        nbconn = new dbConcurrent();
+        nbconn = dbConcurrent.getInstance();
         
         Integrator.integrate(anchorpane);
         initializeButton();
@@ -334,14 +334,14 @@ public class InsuranceManagementController implements Initializable
     public void tableHandler()
     {
         
-//        customerSearchTableHandle = new tableViewHandler(table_cs,"select * from customer_view",nbconn);
-//        customerSearchTableHandle.writeToTable();
+        customerSearchTableHandle = new tableViewHandler(table_cs,"select * from customer_view",nbconn);
+        customerSearchTableHandle.writeToTable();
         
         insuranceFundTableHandle = new tableViewHandler(table_if,"select * from Insurance_Fund", nbconn);
         insuranceFundTableHandle.writeToTable();
         
-//        insuranceClaimTableHandle = new tableViewHandler(table_ic,"select * from Insurance_Claim",nbconn);
-//        insuranceClaimTableHandle.writeToTable();
+        insuranceClaimTableHandle = new tableViewHandler(table_ic,"select * from Insurance_Claim",nbconn);
+        insuranceClaimTableHandle.writeToTable();
     
     }
     

@@ -133,7 +133,7 @@ public class FXMLTemplateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        nbconn = new dbConcurrent();
+        nbconn = dbConcurrent.getInstance();
          jfxtabpane_employee = Integrator.integrate(anchorpane);
         
         initializeaddbutton();

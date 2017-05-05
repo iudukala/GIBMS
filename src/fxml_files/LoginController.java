@@ -42,10 +42,6 @@ public class LoginController implements Initializable {
     private JFXButton button_login;
     @FXML
     private AnchorPane rootAnchor;
-    
-    private JFXSnackbar snackbar;
-    @FXML
-    private JFXSpinner spinner;
 
     /**
      * Initializes the controller class.
@@ -59,14 +55,10 @@ public class LoginController implements Initializable {
         label.setText("");
         label.setGraphic(glyph);
         
-        spinner.setVisible(false);
-        
         button_login.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e)
             {
-                spinner.setVisible(true);
-                
                 Navigator.switchForm(rootAnchor, 0);
             }
         });

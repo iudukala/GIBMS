@@ -20,10 +20,11 @@ import java.util.concurrent.Future;
  */
 public class dbConcurrent
 {
+    private static dbConcurrent singleton = null;
     Future<Connection> dbFuture = null;
     private final boolean T,V;
     
-    public dbConcurrent(Boolean T, Boolean V)
+    private dbConcurrent(Boolean T, Boolean V)
     {
         this.T = T;
         this.V = V;
@@ -31,10 +32,23 @@ public class dbConcurrent
         Callable<Connection> connCallable = new dbCallable();
         dbFuture = executor.submit(connCallable);
     }
-    public dbConcurrent()
+    private dbConcurrent()
     {
         this(false,true);
     }
+    
+    public static dbConcurrent getInstance()
+    {
+        if(singleton == null)
+            singleton = new dbConcurrent();
+        return singleton;
+    }
+    
+    public static dbConcurrent getInstance(Boolean T, Boolean V)
+    {
+        return new dbConcurrent(T,V);
+    }
+    
     public Connection get()
     {
         Connection conn = null;

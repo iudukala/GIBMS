@@ -113,7 +113,7 @@ public class ResourceFXMLController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-          nbconn = new dbConcurrent();
+        nbconn = dbConcurrent.getInstance();
 
         initializeNodes();
         initializeVehicleInputs();
@@ -190,7 +190,7 @@ public class ResourceFXMLController implements Initializable
     }
     public boolean validateVehicleInputs()
     {
-        return vehicleControls.validateValues();
+        return vehicleControls.triggerValidators();
     }
     
     public void setBuildingInputs(Entity building)

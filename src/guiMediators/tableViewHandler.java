@@ -56,7 +56,6 @@ public class tableViewHandler
         catch (SQLException e){
             System.out.println("Error executing SQL statement in writeToTable()\n" + e);
         }
-        System.out.println(entity_list.get(0));
         writeData(entity_list);
     }
     
@@ -77,7 +76,6 @@ public class tableViewHandler
         
         for(String colname : entity_list.get(0).getColumnNamesFromEntity())
         {
-            System.out.println(colname);
             TableColumn<Entity,String> column = new TableColumn<>(colname.toUpperCase());
             column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Entity, String>, ObservableValue<String>>()
             {

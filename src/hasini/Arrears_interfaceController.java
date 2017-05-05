@@ -80,7 +80,7 @@ public class Arrears_interfaceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        nbconn=new dbConcurrent();
+        nbconn = dbConcurrent.getInstance();
         
          Integrator.integrate(anchorpane);
          
@@ -114,7 +114,7 @@ public class Arrears_interfaceController implements Initializable {
             }
             
             public boolean validatePersonInputs(){
-                return personCont.validateValues();
+                return personCont.triggerValidators();
             }
 
     private void initializeButton() {

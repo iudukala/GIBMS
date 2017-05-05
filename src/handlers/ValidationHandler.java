@@ -54,9 +54,14 @@ public class ValidationHandler
         public void eval()
         {
             TextInputControl textField = (TextInputControl) srcControl.get();
-            if (Validator.isNIC(textField.getText()) || textField.getText().equals(""))
+            if(Validator.isNIC(textField.getText()))
             {
                 hasErrors.set(false);
+            }
+            else if(textField.getText().equals(""))
+            {
+                message.set("NIC cannot be empty");
+                fieldInvalid(icon, hasErrors);
             }
             else
             {
@@ -147,13 +152,30 @@ public class ValidationHandler
     
     public static class IntegerValidator extends ValidatorBase implements ValidationInterface
     {
+        Integer max = null;
+        public IntegerValidator(){}
+        public IntegerValidator(int max)
+        {
+            this.max = max;
+        }
         @Override
         public void eval()
         {
             TextInputControl textField = (TextInputControl) srcControl.get();
             if (Validator.isInteger(textField.getText()) || textField.getText().equals(""))
             {
-                hasErrors.set(false);
+                if(max == null)
+                    hasErrors.set(false);
+                else
+                {
+                    if(Validator.isInteger(textField.getText()) && (Integer.parseInt(textField.getText()) > max))
+                    {
+                        message.set("Value exceeds maximum allowed");
+                        fieldInvalid(icon, hasErrors);
+                    }
+                    else
+                        hasErrors.set(false);
+                }
             }
             else
             {
