@@ -3,6 +3,7 @@ package battibois;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Integrator;
@@ -19,6 +20,7 @@ import guiMediators.tableViewHandler;
 import handlers.dbConcurrent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
@@ -90,13 +92,12 @@ public class ResourceFXMLController implements Initializable
     private ScrollPane scroll_add3;
     @FXML
     private StackPane stack_add3;
-    @FXML
-    private JFXTextField text_nic3;
     
     
     private dbConcurrent nbconn;
     EntityControls vehicleControls;
     EntityControls buildingControls;
+    EntityControls otherControls;
     private tableViewHandler tablevehi_handle;
     JFXTabPane tabpane_resource;
     @FXML
@@ -109,6 +110,50 @@ public class ResourceFXMLController implements Initializable
     private JFXButton btn_selectvehi;
     @FXML
     private JFXButton btn_upvehi;
+    @FXML
+    private JFXButton btn_searchbul;
+    @FXML
+    private JFXButton btn_upbuilding;
+    @FXML
+    private JFXButton btn_delbul;
+    @FXML
+    private JFXButton add_building;
+    @FXML
+    private JFXTextField other_no;
+    @FXML
+    private JFXTextField other_cat;
+    @FXML
+    private JFXTextField other_price;
+    @FXML
+    private JFXTextField other_use;
+    @FXML
+    private JFXTextField other_qun;
+    @FXML
+    private JFXDatePicker other_date;
+    @FXML
+    private JFXTextArea other_des;
+    @FXML
+    private TableView<?> table_building;
+    @FXML
+    private JFXButton other_search;
+    @FXML
+    private JFXButton other_up;
+    @FXML
+    private JFXButton other_del;
+    @FXML
+    private JFXButton other_add;
+    @FXML
+    private TableView<?> table_other;
+    @FXML
+    private AnchorPane subanchor_other;
+    @FXML
+    private Button btn_selectbuil;
+    @FXML
+    private JFXTextField building_ID;
+    @FXML
+    private Button select_other;
+    @FXML
+    private JFXTextField bill_id;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -118,7 +163,9 @@ public class ResourceFXMLController implements Initializable
         initializeNodes();
         initializeVehicleInputs();
         initializeBuildingInputs();
+//       initializeOtherInputs();
         initializeButton();
+//        initializeButton_building();
     }
     
     
@@ -126,8 +173,6 @@ public class ResourceFXMLController implements Initializable
     { 
         tabpane_resource = Integrator.integrate(anchor_resource);
         
-        //usab.setGlyphWidth(20);
-        //usab.setCoordinates(300, 450);
         add_vehicle.setOnAction(new EventHandler<ActionEvent>()
         
         {
@@ -193,9 +238,19 @@ public class ResourceFXMLController implements Initializable
         return vehicleControls.triggerValidators();
     }
     
+    public Entity getBuildingInputs()
+    {
+        return buildingControls.getValues();
+    }
+    
     public void setBuildingInputs(Entity building)
     {
         buildingControls.setValues(building);
+    }
+    
+    public boolean validateBuildingInputs()
+    {
+        return buildingControls.triggerValidators();
     }
     
     public void initializeVehicleInputs()
@@ -251,7 +306,22 @@ public class ResourceFXMLController implements Initializable
             }         
                
                 
-        });   
+        });
+        
+          /*  public void initializeButton_building()
+            {
+       
+                 btn_searchbul.setOnAction(new EventHandler<ActionEvent>()
+            {
+                @Override
+                public void handle(ActionEvent event)
+                {
+                 table_building_handle = new tableViewHandler(table_building,"select * from building;",nbconn);
+                    tablevehi_handle.writeToTable();       
+                }         
+               
+                
+        });*/     
                 btn_upvehi.setOnAction(new EventHandler<ActionEvent>()
         {
         @Override

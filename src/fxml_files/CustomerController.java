@@ -341,8 +341,9 @@ public class CustomerController implements Initializable
         loanstat = loanplan.consolidate();
         g1stat = guarantor1.consolidate();
         g2stat = guarantor2.consolidate();
-        return 0;
         
+        
+        return 0;
     }
     
     public void initializeCustomerControls()
@@ -587,6 +588,15 @@ public class CustomerController implements Initializable
         alsab.setButtonLength(200);
         JFXButton addloanButton = alsab.getButton();
         
+        addloanButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                add_loan();
+            }
+        });
+        
         //update, delete loan
         Commons.subAnchorButton ulsab = new Commons.subAnchorButton(subanchor_tls, "UPDATE RECORD", Commons.UPDATE_GLYPH);
         ulsab.setButtonDepth(1);
@@ -612,33 +622,16 @@ public class CustomerController implements Initializable
         rlsab.setStyle(Commons.BTNSTYLE_3);
         JFXButton btn_resetloan = rlsab.getButton();
         
-        
-        
-        /*
-        loanid           | int(11)      | NO   | PRI | NULL              | auto_increment |
-| customer_id      | int(11)      | NO   | MUL | NULL              |                |
-| amount           | int(11)      | YES  |     | NULL              |                |
-| interest         | double       | NO   |     | NULL              |                |
-| payback_duration | int(11)      | YES  |     | NULL              |                |
-| payback_method   | varchar(1)   | YES  |     | NULL              |                |
-| bank             | varchar(200) | YES  |     | NULL              |                |
-| branch           | varchar(200) | YES  |     | NULL              |                |
-| account          | varchar(40)  | YES  |     | NULL              |                |
-| guarantor1       | varchar(10)  | YES  |     | NULL              |                |
-| guarantor2       | varchar(10)  | YES  |     | NULL              |                |
-| timestamp        | datetime     | YES  |     | CURRENT_TIMESTAMP |   
-        */
-        
-        
         btn_lcidsearch.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
             {
+                //ContentFactory.getPopOver(nbconn, text_lcid, btn_lcidsearch);
             }
         });
         
-        loantable_handle = new tableViewHandler(table_customer_search, "select * from loanplan", nbconn);
+        loantable_handle = new tableViewHandler(table_loan_search, "select * from loanplan;", nbconn);
     }
     
     private JFXDialog initializeDialog(int tabnum, JFXDialog dialog)

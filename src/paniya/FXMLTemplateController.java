@@ -47,6 +47,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javax.swing.JTable;
@@ -110,8 +111,7 @@ public class FXMLTemplateController implements Initializable {
     private JFXTextField bvr_nic;
     @FXML
     private JFXTextField bvr_description;
-    @FXML
-    private TableView<?> bvr_addmember_table;
+   
     @FXML
     private JFXTextField bvr_serialno;
     @FXML
@@ -167,7 +167,7 @@ public class FXMLTemplateController implements Initializable {
     @FXML
     private JFXTextField bvr_creditamount;
     @FXML
-    private JFXTextArea bvr_narration;
+    private JFXTextField bvr_narration;
     @FXML
     private JFXTextField bvr_companyid;
     @FXML
@@ -185,6 +185,8 @@ public class FXMLTemplateController implements Initializable {
     private JFXTextField tb_debitbdbalance;
     @FXML
     private JFXTextField tb_creditbdbalance;
+    @FXML
+    private TableView<?> bvr_addmember_table;
     
             
     @Override
@@ -299,7 +301,7 @@ public class FXMLTemplateController implements Initializable {
        
          bvr_addmemberControls = new EntityControls("bvr_addmember",nbconn);
          bvr_addmemberControls.add("serial_no", bvr_serialno,new IntegerValidator(maxserialno));
-         bvr_addmemberControls.add("nic", bvr_nic);
+         bvr_addmemberControls.add("nic", bvr_nic,new NICValidator());
          bvr_addmemberControls.add("description",bvr_description);
          bvr_addmemberControls.add("credit_amount",bvr_creditamount,new DoubleValidator() );
          bvr_addmemberControls.add("debit_amount",bvr_debitamount,new DoubleValidator() );

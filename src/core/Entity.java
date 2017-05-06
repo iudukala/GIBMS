@@ -14,8 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,7 +30,7 @@ class OverrideString{}
 public class Entity
 {
     private final dbConcurrent nbconn;
-    private final Map<String,Object> data = new HashMap<>();
+    private final Map<String,Object> data = new LinkedHashMap<>();
     private String tablename;
     private String ag_column=null;
     private Integer ag_key=null;

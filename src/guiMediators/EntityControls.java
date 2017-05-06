@@ -13,7 +13,7 @@ import handlers.ValidationInterface;
 import handlers.dbConcurrent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -31,7 +31,7 @@ public class EntityControls
 {
     public final String TABLE_NAME;
     private final dbConcurrent nbconn;
-    private final Map<String,Object> nodeList = new HashMap<>();
+    private final Map<String,Object> nodeList = new LinkedHashMap<>();
     private int dyn_val_count = 0;
     private final String VALIDATION_IDENTIFIER = "EXCLUSION-VAL-";
     private Entity entity;
