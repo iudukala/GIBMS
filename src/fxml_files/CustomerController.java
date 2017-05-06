@@ -225,6 +225,7 @@ public class CustomerController implements Initializable
     private EntityControls loanControls, guar1Controls, guar2Controls;
     int LOGGED_BRANCH = 1;
     int MAXIMUM_LOAN_PAYBACK_DURATION = 48;
+    JFXTabPane jfxtabpane_customer;
     
     private tableViewHandler custable_handle, loantable_handle;
     private dbConcurrent nbconn;
@@ -237,7 +238,7 @@ public class CustomerController implements Initializable
         initializeCustomerControls();
         initializeLoanControls();
         
-        JFXTabPane jfxtabpane_customer = Integrator.integrate(anchor_customer);
+        jfxtabpane_customer = Integrator.integrate(anchor_customer);
         jfxtabpane_customer.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
         {
             @Override
@@ -446,6 +447,23 @@ public class CustomerController implements Initializable
         ucsab.setStyle(Commons.BTNSTYLE_2);
         JFXButton btn_upcust = ucsab.getButton();
         
+        btn_upcust.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                if(custable_handle.getSelection()!=null)
+                {
+                    Entity personS = custable_handle.fetchExtendedSelection("person", "NIC");
+                    Entity customerS = custable_handle.fetchExtendedSelection("customer_state", "NIC");
+
+                    personControls.setValues(personS);
+                    customerControls.setValues(customerS);
+                    jfxtabpane_customer.getSelectionModel().select(0);
+                }
+            }
+        });
+        
         Commons.subAnchorButton dcsab = new Commons.subAnchorButton(subanchor_tcs, "DELETE RECORD", Commons.DELETE_GLYPH);
         dcsab.setButtonDepth(1);
         dcsab.setGlyphWidth(20);
@@ -488,15 +506,13 @@ public class CustomerController implements Initializable
                 
                 //String snic = text_csnic.getText();
                 //String sname = text_csname.getText();
-//                Entity x = custable_handle.fetchExtendedSelection("person", "NIC");
-//                Entity y = custable_handle.fetchExtendedSelection("customer_state", "NIC");
 //                
 //                
 //                //System.out.println(x);
 //                //System.out.println(y);
 //                personControls.setValues(x);
 //                customerControls.setValues(y);
-//                jfxtabpane_customer.getSelectionModel().select(0);
+//                
 
             }
         });
@@ -605,6 +621,8 @@ public class CustomerController implements Initializable
         ulsab.setCoordinates(200, 605);
         ulsab.setStyle(Commons.BTNSTYLE_2);
         JFXButton btn_uploan = ulsab.getButton();
+        
+        
         
         Commons.subAnchorButton dlsab = new Commons.subAnchorButton(subanchor_tls, "DELETE RECORD", Commons.DELETE_GLYPH);
         dlsab.setButtonDepth(1);

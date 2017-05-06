@@ -692,7 +692,7 @@ public class Entity
         }
     }
     
-    private List<String> fetchPrimaryKeys()
+    public List<String> fetchPrimaryKeys()
     {
         return fetchQueryColumnList("show columns from `" + tablename + "` where `key`='pri';");
     }

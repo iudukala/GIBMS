@@ -13,6 +13,7 @@ import handlers.ValidationInterface;
 import handlers.dbConcurrent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -192,6 +193,15 @@ public class EntityControls
                 ((JFXTextField)control).setText(entity.getAsString(key));
             else if(control.getClass().equals(JFXDatePicker.class))
                 ((JFXDatePicker)control).setValue(entity.getLocalDate(key));
+        }
+        
+        List<String> primaryKeys = entity.fetchPrimaryKeys();
+        for(Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext();)
+        {
+            //System.out.println(nodeList.get(iterator.next()));
+            String key = iterator.next();
+            if(nodeList.get(key)!=null)
+                ((Control)nodeList.get(key)).setDisable(true);
         }
     }
     

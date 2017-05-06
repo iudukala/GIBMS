@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -325,6 +326,15 @@
                                              </children>
                                           </HBox>
                                           <JFXTextField fx:id="text_linterest" promptText="Interest rate" GridPane.rowIndex="2" />
+                                          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label styleClass="sublabel" text="Calculated monthly installment:">
+                                                   <padding>
+                                                      <Insets top="15.0" />
+                                                   </padding>
+                                                </Label>
+                                             </children>
+                                          </VBox>
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
