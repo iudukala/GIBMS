@@ -291,10 +291,11 @@ public class ShareManagementController implements Initializable
                     + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
                custable_handle.writeToTable();
                        
-//                    Entity search=new Entity("select p.nic, p.full_name , s.share_amount, s.share_price, s.issue_date, s.expiry_date \n" +
-//"from person p ,shareholder s where p.nic=s.nic;",nbconn);
-//                    search.add("p.nic",u_search.getText());
-//                    custable_handle.writeToTable(search.executeAsSearch());
+                    Entity search=new Entity("select p.nic, p.full_name , s.share_amount, s.share_price, s.issue_date, s.expiry_date \n" +
+"from person p inner join shareholder s on p.nic=s.nic",nbconn);
+                    search.add("p.nic",u_search.getText());
+                    System.out.println(search);
+                    custable_handle.writeToTable(search.executeAsSearch());
                     
             }    
                 

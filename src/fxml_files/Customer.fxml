@@ -333,6 +333,11 @@
                                                       <Insets top="15.0" />
                                                    </padding>
                                                 </Label>
+                                                <Label styleClass="subheaders" text="Label">
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding>
+                                                </Label>
                                              </children>
                                           </VBox>
                                        </children>

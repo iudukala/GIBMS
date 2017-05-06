@@ -611,6 +611,7 @@ public class Entity
         }
     }
     
+    //execute as search won't work with columns that have 
     private String synthesizeWhereClause(List<String> keylist, boolean wildcards)
     {
         String search_op = wildcards?" like ":" = ";
@@ -619,8 +620,27 @@ public class Entity
         int counter=0;
         for(String key : keylist)
         {
-            strb.append("`").append(key).append("`").append(search_op).append("?");
-            if(++counter!=keylist.size())strb.append(" and ");
+            if(key.contains("."))
+            {
+                boolean found = false;
+                for(char ch : key.toCharArray())
+                {
+                    if(ch == '.' && !found)
+                    {
+                        found = true;
+                        strb.append(".`");
+                    }
+                    else
+                        strb.append(ch);
+                }
+                strb.append('`');
+            }
+            else
+                strb.append("`").append(key).append("`");
+            
+            strb.append(search_op).append("?");
+            if(++counter!=keylist.size())
+                strb.append(" and ");
         }
         return strb.toString();
     }
@@ -687,7 +707,7 @@ public class Entity
         }
         catch(Exception e)
         {
-            System.out.println("Error executing search for query : " + strb.toString());
+            System.err.println("Error executing search for query : " + strb.toString());
             return null;
         }
     }
