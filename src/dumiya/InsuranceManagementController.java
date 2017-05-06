@@ -7,12 +7,17 @@ package dumiya;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Integrator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
+import handlers.ValidationHandler.DoubleValidator;
+import handlers.ValidationHandler.IntegerValidator;
+import handlers.ValidationHandler.NICValidator;
+import handlers.ValidationHandler.pastDateValidator;
 import handlers.dbConcurrent;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,11 +32,13 @@ import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
  *
- * @author Isuru Udukala
+ * @author Dumintha Wijesekara
  */
 public class InsuranceManagementController implements Initializable
 {
     dbConcurrent nbconn;
+    
+    JFXTabPane jfxtabpane_Insurance;
 
     EntityControls insuranceFundCont;
     EntityControls insuranceClaimCont;
@@ -98,7 +105,7 @@ public class InsuranceManagementController implements Initializable
     {
         nbconn = dbConcurrent.getInstance();
         
-        Integrator.integrate(anchorpane);
+        jfxtabpane_Insurance=Integrator.integrate(anchorpane);
         initializeButton();
         tableHandler();
         initializeInsuranceFundInputs();
@@ -116,6 +123,40 @@ public class InsuranceManagementController implements Initializable
         search_cs.setCoordinates(400, 138);
         search_cs.setStyle(Commons.BTNSTYLE_2);
         JFXButton searchbutton_cs = search_cs.getButton();
+        
+        searchbutton_cs.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                
+                Entity search_NIC_cs = new Entity("select * from customer_view ",nbconn);
+                search_NIC_cs.add("nic",nic_cs.getText());
+                customerSearchTableHandle.writeToTable(search_NIC_cs.executeAsSearch());
+                
+            }
+        });
+        
+        Commons.subAnchorButton select_cs = new Commons.subAnchorButton(anchor_customer_search, "SELECT", Commons.UPDATE_GLYPH);       
+        select_cs.setButtonLength(110);
+        select_cs.setButtonHeigth(20);
+        select_cs.setGlyphWidth(20); 
+        select_cs.setCoordinates(750, 138);
+        select_cs.setStyle(Commons.BTNSTYLE_2);
+        JFXButton selectbutton_cs=select_cs.getButton();
+        
+        selectbutton_cs.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+ 
+                Entity customer_search = customerSearchTableHandle.getSelection();
+                nic_if.setText(customer_search.getAsString("nic"));
+                jfxtabpane_Insurance.getSelectionModel().select(1);
+                
+            }
+        });
         
         Commons.subAnchorButton add_if = new Commons.subAnchorButton(anchor_insurance_fund, "ADD", Commons.ADD_PERSON_GLYPH);
         add_if.setButtonLength(110);
@@ -178,6 +219,18 @@ public class InsuranceManagementController implements Initializable
         delete_if.setCoordinates(650, 610);
         JFXButton deletebutton_if = delete_if.getButton();
         
+        deletebutton_if.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                Entity Insurance_Fund = insuranceFundTableHandle.fetchExtendedSelection("Insurance_Fund", "NIC");
+                Insurance_Fund.deleteFromDB();
+                insuranceFundTableHandle.writeToTable();
+                       
+            }
+        });
+        
         Commons.subAnchorButton search_if = new Commons.subAnchorButton(anchor_insurance_fund, "SEARCH", Commons.LIST_GLYPH);
         search_if.setButtonLength(110);
         search_if.setButtonHeigth(20);
@@ -185,6 +238,19 @@ public class InsuranceManagementController implements Initializable
         search_if.setCoordinates(400, 300);
         search_if.setStyle(Commons.BTNSTYLE_2);
         JFXButton searchbutton_if = search_if.getButton();
+        
+        searchbutton_if.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                
+                Entity search_NIC_if = new Entity("select * from Insurance_Fund ",nbconn);
+                search_NIC_if.add("nic",search_bar_if.getText());
+                insuranceFundTableHandle.writeToTable(search_NIC_if.executeAsSearch());
+                
+            }
+        });
         
         Commons.subAnchorButton select_if = new Commons.subAnchorButton(anchor_insurance_fund, "SELECT", Commons.UPDATE_GLYPH);       
         select_if.setButtonLength(110);
@@ -200,7 +266,6 @@ public class InsuranceManagementController implements Initializable
             public void handle(ActionEvent event)
             {
                 
-                //searchInsuranceFundCont.setValues(insuranceFundTableHandle.getSelection("Insurance_Fund", "NIC"));
                 searchInsuranceFundCont.setValues(insuranceFundTableHandle.getSelection());
 
             }
@@ -265,6 +330,18 @@ public class InsuranceManagementController implements Initializable
         delete_ic.setCoordinates(650, 610);
         JFXButton deletebutton_ic = delete_ic.getButton();
         
+        deletebutton_ic.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                Entity Insurance_Claim = insuranceClaimTableHandle.fetchExtendedSelection("Insurance_Claim", "Claim_Number");
+                Insurance_Claim.deleteFromDB();
+                insuranceClaimTableHandle.writeToTable();
+                       
+            }
+        });
+        
         Commons.subAnchorButton search_ic = new Commons.subAnchorButton(anchor_insurance_claim, "SEARCH", Commons.LIST_GLYPH);
         search_ic.setButtonLength(110);
         search_ic.setButtonHeigth(20);
@@ -272,6 +349,19 @@ public class InsuranceManagementController implements Initializable
         search_ic.setCoordinates(400, 300);
         search_ic.setStyle(Commons.BTNSTYLE_2);
         JFXButton searchbutton_ic = search_ic.getButton();
+        
+        searchbutton_ic.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                
+                Entity search_claim_number_ic = new Entity("select * from Insurance_Claim ",nbconn);
+                search_claim_number_ic.add("claim_number",search_bar_ic.getText());
+                insuranceClaimTableHandle.writeToTable(search_claim_number_ic.executeAsSearch());
+                
+            }
+        });
         
         Commons.subAnchorButton select_ic = new Commons.subAnchorButton(anchor_insurance_claim, "SELECT", Commons.UPDATE_GLYPH);       
         select_ic.setButtonLength(110);
@@ -287,7 +377,6 @@ public class InsuranceManagementController implements Initializable
             public void handle(ActionEvent event)
             {
                 
-                //searchInsuranceClaimCont.setValues(insuranceClaimTableHandle.getSelection("Insurance_Claim", "Claim_Number"));
                 searchInsuranceClaimCont.setValues(insuranceClaimTableHandle.getSelection());
 
             }
@@ -300,17 +389,17 @@ public class InsuranceManagementController implements Initializable
          
         insuranceFundCont = new EntityControls("Insurance_Fund",nbconn);
         
-        insuranceFundCont.add("NIC", nic_if);
+        insuranceFundCont.add("NIC", nic_if, new NICValidator());
         
-        insuranceFundCont.add("Insurance_Fee", insurance_fee_if);
+        insuranceFundCont.add("Insurance_Fee", insurance_fee_if, new DoubleValidator());
         
-        insuranceFundCont.add("Date_Issued", date_issued_if);
+        insuranceFundCont.add("Date_Issued", date_issued_if, new pastDateValidator());
         
         insuranceFundCont.add("Expiry_Date", expiry_date_if);
         
-        insuranceFundCont.add("Payed_Amount", payed_amount_if);
+        insuranceFundCont.add("Payed_Amount", payed_amount_if, new DoubleValidator());
         
-        insuranceFundCont.add("Due_Amount", due_amount_if);
+        insuranceFundCont.add("Due_Amount", due_amount_if, new DoubleValidator());
         
     }
         
@@ -318,13 +407,13 @@ public class InsuranceManagementController implements Initializable
     {
         insuranceClaimCont = new EntityControls("Insurance_Claim",nbconn);
         
-        insuranceClaimCont.add("Claim_Number", claim_number_ic);
+        insuranceClaimCont.add("Claim_Number", claim_number_ic, new IntegerValidator());
         
         insuranceClaimCont.add("Claim_Status", claim_status_ic);
         
         insuranceClaimCont.add("Claim_Type", claim_type_ic);
         
-        insuranceClaimCont.add("Open_Date", open_date_ic);
+        insuranceClaimCont.add("Open_Date", open_date_ic, new pastDateValidator());
         
         insuranceClaimCont.add("Closed_Date", closed_date_ic);
         
@@ -350,17 +439,17 @@ public class InsuranceManagementController implements Initializable
         
         searchInsuranceFundCont = new EntityControls("Insurance_Fund",nbconn);
 
-        searchInsuranceFundCont.add("NIC", nic_if);
+        searchInsuranceFundCont.add("NIC", nic_if, new NICValidator());
         
-        searchInsuranceFundCont.add("Insurance_Fee", insurance_fee_if);
+        searchInsuranceFundCont.add("Insurance_Fee", insurance_fee_if, new DoubleValidator());
         
-        searchInsuranceFundCont.add("Date_Issued", date_issued_if);
+        searchInsuranceFundCont.add("Date_Issued", date_issued_if, new pastDateValidator());
         
         searchInsuranceFundCont.add("Expiry_Date", expiry_date_if);
         
-        searchInsuranceFundCont.add("Payed_Amount", payed_amount_if);
+        searchInsuranceFundCont.add("Payed_Amount", payed_amount_if, new DoubleValidator());
         
-        searchInsuranceFundCont.add("Due_Amount", due_amount_if);
+        searchInsuranceFundCont.add("Due_Amount", due_amount_if, new DoubleValidator());
         
     }
     
@@ -369,13 +458,13 @@ public class InsuranceManagementController implements Initializable
         
         searchInsuranceClaimCont = new EntityControls("Insurance_Claim",nbconn);
         
-        searchInsuranceClaimCont.add("Claim_Number", claim_number_ic);
+        searchInsuranceClaimCont.add("Claim_Number", claim_number_ic, new IntegerValidator());
         
         searchInsuranceClaimCont.add("Claim_Status", claim_status_ic);
         
         searchInsuranceClaimCont.add("Claim_Type", claim_type_ic);
         
-        searchInsuranceClaimCont.add("Open_Date", open_date_ic);
+        searchInsuranceClaimCont.add("Open_Date", open_date_ic, new pastDateValidator());
         
         searchInsuranceClaimCont.add("Closed_Date", closed_date_ic);
         

@@ -197,6 +197,19 @@ and open the template in the editor.
     -fx-background-color: #F6933D;
 }
 
+.buttonRound{
+    -fx-background-color:#0C2434;
+    -fx-background-radius:40;
+    -fx-max-height: 45;
+    -fx-max-width: 45;
+    -fx-min-height: 45;
+    -fx-min-width: 45;
+}
+
+.buttonRound:hover{
+    -fx-background-color: #F6933D;
+}
+
 /*list view*/
 
 .navigator .jfx-list-cell{

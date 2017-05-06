@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.effects.JFXDepthManager;
 import com.jfoenix.svg.SVGGlyph;
+import guiMediators.Commons;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -119,7 +120,7 @@ public class Integrator
     private static JFXButton initializeMenuButton(AnchorPane anchor, JFXTabPane tp, JFXDrawer drawer)
     {
         JFXButton button = new JFXButton();
-        SVGGlyph glyph = new SVGGlyph(1,"menuicon","M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z",Color.BLACK);
+        SVGGlyph glyph = new SVGGlyph(1,"menuicon",Commons.HAMBURGER_GLYPH,Color.BLACK);
         glyph.setSize(20,15);
         
         button.setButtonType(JFXButton.ButtonType.RAISED);

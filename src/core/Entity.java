@@ -31,7 +31,7 @@ public class Entity
 {
     private final dbConcurrent nbconn;
     private final Map<String,Object> data = new HashMap<>();
-    private final String tablename;
+    private String tablename;
     private String ag_column=null;
     private Integer ag_key=null;
     private String consolidate_string=null;
@@ -82,6 +82,10 @@ public class Entity
         return null;
     }
     
+    public void overrideTablename(String tablename)
+    {
+        this.tablename = tablename;
+    }
     
     public String getAsString(String key)
     {
@@ -120,6 +124,29 @@ public class Entity
     public String getUpdateString()
     {
         return update_string;
+    }
+    
+    public boolean alreadyExists()
+    {
+        List<String> primaryKeys = fetchPrimaryKeys();
+        StringBuilder strb = new StringBuilder("select * from " + tablename);
+        strb.append(synthesizeWhereClause(primaryKeys, false));
+        
+        try 
+        {
+            int counter = 0;
+            PreparedStatement prp = nbconn.get().prepareStatement(strb.toString());
+            for(Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext();)
+                prp.setObject(++counter, recastJavaObject(data.get(iterator.next())));
+            ResultSet rs = prp.executeQuery();
+            
+            return rs.next();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Encoutered error while checking existence\n + " + e);
+            return false;
+        }   
     }
     
     
@@ -519,7 +546,7 @@ public class Entity
     
     public void update()
     {
-        List<String> primaryKeys = fetchQueryColumnList("show columns from `" + tablename + "` where `key`='pri';");
+        List<String> primaryKeys = fetchPrimaryKeys();
         List<Object> fields = new ArrayList<>();
         
         //getting primarykey count in entity object
@@ -638,7 +665,9 @@ public class Entity
         
         StringBuilder strb = new StringBuilder();
         if(tablename.toLowerCase().startsWith("select "))
-            strb.append(tablename).append(synthesizeWhereClause(searchFields, true));
+            strb.append(tablename);
+        if(!searchFields.isEmpty())
+            strb.append(synthesizeWhereClause(searchFields, true));
         strb.append(";");
         
         System.out.println("Searchfields : " + searchFields);
@@ -663,9 +692,14 @@ public class Entity
         }
     }
     
+    private List<String> fetchPrimaryKeys()
+    {
+        return fetchQueryColumnList("show columns from `" + tablename + "` where `key`='pri';");
+    }
+    
     public boolean deleteFromDB()
     {
-        List<String> primaryKeys = fetchQueryColumnList("show columns from `" + tablename + "` where `key`='pri';");
+        List<String> primaryKeys = fetchPrimaryKeys();
         StringBuilder strb = new StringBuilder("delete from " + tablename);
         strb.append(synthesizeWhereClause(primaryKeys, false));
         

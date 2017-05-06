@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -20,16 +20,16 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paniya.FXMLTemplateController">
+<AnchorPane id="AnchorPane" fx:id="cashflow_anchorpane" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paniya.FXMLTemplateController">
    <children>
-      <TabPane fx:id="tabpane" prefHeight="700.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0">
+      <TabPane fx:id="cashflow_tabpane" prefHeight="700.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <tabs>
             <Tab text="Bank Receipt Voucher">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="bvr_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
@@ -43,61 +43,109 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="355.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="102.0" minHeight="58.0" prefHeight="69.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="102.0" minHeight="35.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="122.0" minHeight="32.0" prefHeight="68.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="151.0" minHeight="16.0" prefHeight="67.0" vgrow="NEVER" />
+                                          <RowConstraints />
+                                          <RowConstraints maxHeight="102.0" minHeight="26.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="102.0" minHeight="47.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="106.0" minHeight="29.0" prefHeight="78.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="122.0" minHeight="32.0" prefHeight="58.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="151.0" minHeight="16.0" prefHeight="78.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="151.0" minHeight="16.0" prefHeight="43.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="234.0" minHeight="24.0" prefHeight="61.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="234.0" minHeight="24.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="234.0" minHeight="24.0" prefHeight="93.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="234.0" minHeight="24.0" prefHeight="58.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="234.0" minHeight="24.0" prefHeight="122.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <JFXDatePicker fx:id="bvr_date" prefHeight="29.0" prefWidth="177.0" promptText="Date :" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                                          <JFXComboBox fx:id="bvr_transactioncode" prefWidth="346.0" promptText="Transaction Code :" GridPane.rowIndex="2" />
-                                          <JFXComboBox fx:id="bvr_transactionname" prefWidth="348.0" promptText="Transaction Name :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXComboBox fx:id="bvr_branchname" prefWidth="345.0" promptText="Branch Name :" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                          <JFXDatePicker fx:id="bvr_date" prefHeight="29.0" prefWidth="177.0" promptText="Date :" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                                          <HBox fx:id="bvr_hbox" alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="179.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                              <children>
                                                 <JFXRadioButton fx:id="bvr_voucher" prefHeight="17.0" prefWidth="80.0" text="Voucher">
                                                    <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_marital" />
+                                                      <ToggleGroup fx:id="bvr_tgroup" />
                                                    </toggleGroup>
                                                 </JFXRadioButton>
-                                                <JFXRadioButton fx:id="bvr_receipt" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Receipt" toggleGroup="$tgroup_marital" />
+                                                <JFXRadioButton fx:id="bvr_receipt" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Receipt" toggleGroup="$bvr_tgroup" />
                                              </children>
                                           </HBox>
-                                          <JFXTextField fx:id="bvr_totalamount" prefWidth="305.0" promptText="Total Amount :" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                          <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="56.0" prefWidth="406.0" styleClass="headers" text="BANK VOUCHER RECEIPT             " textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                          <JFXTextField fx:id="bvr_totalamount" prefWidth="305.0" promptText="Total Amount :" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                          <Label contentDisplay="CENTER" prefHeight="56.0" prefWidth="406.0" styleClass="headers" text="BANK VOUCHER RECEIPT             " textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField fx:id="bvr_amount" promptText="Amount :" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <JFXComboBox fx:id="bvr_branchno" prefHeight="27.0" prefWidth="191.0" promptText="Branch No :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="bvr_chequeno" promptText="Cheque No :" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                          <JFXComboBox fx:id="bvr_paymenttype" prefHeight="27.0" prefWidth="223.0" promptText="Payment Type :" GridPane.rowIndex="8" />
-                                          <JFXDatePicker fx:id="bvr_chequedate" promptText="Cheque Date :" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                          <JFXComboBox fx:id="bvr_companyname" prefWidth="304.0" promptText="Company Name :" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="bvr_nic" promptText="NIC :" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Narration :" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="bvr_description" promptText="Description :" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <TableView fx:id="bvr_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="5" GridPane.rowSpan="2">
+                                          <JFXTextField fx:id="bvr_debitamount" promptText="Debit Amount :" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                          <JFXTextField fx:id="bvr_chequeno" promptText="Cheque No :" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <JFXDatePicker fx:id="bvr_chequedate" promptText="Cheque Date :" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                          <JFXTextField fx:id="bvr_nic" promptText="NIC :" GridPane.rowIndex="5" />
+                                          <JFXTextField fx:id="bvr_description" promptText="Description :" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <TableView fx:id="bvr_addmember_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="7" GridPane.rowSpan="2">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
                                             </columns>
                                           </TableView>
-                                          <Label fx:id="bvr_serialno" alignment="TOP_RIGHT" contentDisplay="CENTER" prefHeight="56.0" prefWidth="406.0" styleClass="headers" text="SERIAL NO : 0000" textFill="WHITE" GridPane.columnIndex="3">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
+                                          <JFXTextField fx:id="bvr_creditamount" promptText="Credit Amount :" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <JFXTextArea fx:id="bvr_narration" prefHeight="37.0" prefWidth="406.0" promptText="Narration :" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                                          <JFXTextField fx:id="bvr_serialno" promptText="Serial No :" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="bvr_branchno" promptText="Branch No :" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="bvr_branchname" promptText="Branch Name :" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="bvr_companyid" promptText="Company ID :" GridPane.rowIndex="4" />
+                                          <JFXTextField fx:id="bvr_companyname" promptText="Company Name :" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <JFXTextField fx:id="bvr_transactioncode" promptText="Transaction Code :" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="bvr_transactionname" promptText="Transaction Name :" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="bvr_paymenttype" promptText="Payment Type :" GridPane.rowIndex="9" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
                                        </padding>
+                                    </GridPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Bank Receipt Voucher List">
+               <content>
+                  <AnchorPane fx:id="bvr_list_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                           <content>
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="136.0" minHeight="75.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="104.0" minHeight="34.0" prefHeight="73.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="105.0" minHeight="45.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="146.0" minHeight="55.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <padding>
+                                          <Insets left="40.0" right="40.0" />
+                                       </padding>
+                                       <children>
+                                          <Label fx:id="bvr_serialno111" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="56.0" prefWidth="406.0" styleClass="headers" text="Bank Receipt Voucher List" textFill="WHITE" GridPane.columnSpan="2">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
+                                          <TableView fx:id="bvr_add_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="5">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
                                     </GridPane>
                                  </children>
                               </StackPane>
@@ -109,7 +157,7 @@
             </Tab>
             <Tab text="CashBook">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="cb_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
@@ -123,43 +171,25 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="27.0" prefHeight="56.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="200.0" minHeight="38.0" prefHeight="67.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="200.0" minHeight="25.0" prefHeight="63.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="269.0" minHeight="18.0" prefHeight="74.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="269.0" minHeight="42.0" prefHeight="89.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="100.0" minHeight="27.0" prefHeight="89.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="200.0" minHeight="38.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="200.0" minHeight="38.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="200.0" minHeight="25.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="269.0" minHeight="18.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="269.0" minHeight="42.0" prefHeight="88.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="269.0" minHeight="33.0" prefHeight="77.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="295.0" minHeight="60.0" prefHeight="91.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label fx:id="cb_id" alignment="TOP_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="CASHBOOK ID : 0000" textFill="WHITE">
+                                          <Label alignment="TOP_LEFT" prefHeight="66.0" prefWidth="134.0" styleClass="headers" text="CASHBOOK" textFill="WHITE" GridPane.columnSpan="2">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField fx:id="cb_openingbalance" prefWidth="175.0" promptText="Opening Balance :" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                          <JFXTextField fx:id="cb_bdbalance" promptText="B/D Balance :" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                          <JFXDatePicker fx:id="cb_date" prefHeight="29.0" prefWidth="205.0" promptText="Date :" GridPane.columnIndex="3" />
-                                          <JFXTextField fx:id="cb_serialno" promptText="Serial No :" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="cb_nic" promptText="NIC :" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="cb_transactioncode" promptText="Transaction Code :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="cb_description" promptText="Description :" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="cb_debit" promptText="Debit :" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="cb_transactionname" promptText="Transaction Name :" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="cb_credit" promptText="Credit :" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                             <children>
-                                                <JFXRadioButton fx:id="cb_voucher" prefHeight="17.0" prefWidth="80.0" text="Voucher">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_marital1" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="cb_receipt" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Receipt" toggleGroup="$tgroup_marital1" />
-                                             </children>
-                                          </HBox>
-                                          <JFXTextField fx:id="cb_companyname" promptText="Company Name :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TableView fx:id="cb_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="5" GridPane.rowSpan="2">
+                                          <JFXTextField fx:id="cb_bdbalance" promptText="B/D Balance :" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                          <JFXDatePicker fx:id="cb_id" prefHeight="29.0" prefWidth="205.0" promptText="CashBook ID :" GridPane.columnIndex="3" />
+                                          <TableView fx:id="cb_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="6">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
@@ -178,9 +208,9 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="gl_table" text="General Ledger">
+            <Tab text="CashBook List">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="cb_list_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
@@ -189,43 +219,85 @@
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="136.0" minHeight="75.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="104.0" minHeight="34.0" prefHeight="73.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="105.0" minHeight="45.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="146.0" minHeight="55.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <padding>
+                                          <Insets left="40.0" right="40.0" />
+                                       </padding>
+                                       <children>
+                                          <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="56.0" prefWidth="406.0" styleClass="headers" text="CASHBOOK LIST" textFill="WHITE">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
+                                          <TableView fx:id="cb_list_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="5">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="General Ledger">
+               <content>
+                  <AnchorPane fx:id="gl_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                           <content>
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <GridPane fx:id="gl_transactioncode" hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="27.0" prefHeight="56.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="200.0" minHeight="38.0" prefHeight="67.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="200.0" minHeight="25.0" prefHeight="63.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="269.0" minHeight="18.0" prefHeight="74.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="100.0" minHeight="27.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="200.0" minHeight="38.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="200.0" minHeight="25.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="269.0" minHeight="18.0" prefHeight="64.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="269.0" minHeight="42.0" prefHeight="89.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="269.0" minHeight="33.0" prefHeight="77.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="295.0" minHeight="60.0" prefHeight="91.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="269.0" minHeight="33.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="295.0" minHeight="60.0" prefHeight="109.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label fx:id="gl_id" alignment="TOP_LEFT" prefHeight="46.0" prefWidth="237.0" styleClass="headers" text="GENERAL LEDGER ID : 0000" textFill="WHITE" GridPane.columnSpan="2">
+                                          <Label alignment="TOP_LEFT" prefHeight="54.0" prefWidth="291.0" styleClass="headers" text="GENERAL LEDGER " textFill="WHITE" GridPane.columnSpan="2">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXDatePicker fx:id="gl_date" prefHeight="29.0" prefWidth="205.0" promptText="Date :" GridPane.columnIndex="3" />
-                                          <JFXTextField promptText="Serial No :" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="gl_nic" promptText="NIC :" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="gl_description" promptText="Description :" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="gl_debit" promptText="Debit :" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="gl_credit" promptText="Credit :" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <JFXComboBox fx:id="gl_transactioncode" prefHeight="27.0" prefWidth="200.0" promptText="Transaction Code :" GridPane.rowIndex="1" />
-                                          <JFXComboBox prefHeight="27.0" prefWidth="211.0" promptText="Transaction Name :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="gl_bdbalance" promptText="B/D Balance :" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                          <JFXTextField fx:id="gl_companyname" promptText="Company  Name :" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="5" GridPane.rowSpan="2">
+                                          <JFXTextField fx:id="gl_debitbdbalance" promptText="Debit B/D Balance :" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                          <TableView fx:id="gl_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="5">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
                                               <TableColumn prefWidth="75.0" text="C2" />
                                             </columns>
                                           </TableView>
+                                          <JFXTextField promptText="Transaction Code :" GridPane.columnIndex="3" />
+                                          <JFXTextField fx:id="gl_creditbdbalance" promptText="Credit B/D Balance :" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -239,9 +311,9 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tb_table" text="Trial Balance">
+            <Tab text="Trial Balance">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="tb_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
@@ -255,32 +327,30 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="79.0" prefHeight="79.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="131.0" minHeight="80.0" prefHeight="131.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="124.0" minHeight="79.0" prefHeight="86.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="124.0" minHeight="38.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="131.0" minHeight="80.0" prefHeight="129.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="110.0" minHeight="64.0" prefHeight="110.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="113.0" minHeight="54.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="39.0" prefHeight="41.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Label fx:id="tb_id" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="223.0" styleClass="headers" text="TRIAL BALANCE ID : 0000" textFill="WHITE" GridPane.columnSpan="2">
+                                          <Label alignment="TOP_LEFT" prefHeight="72.0" prefWidth="185.0" styleClass="headers" text="TRIAL BALANCE " textFill="WHITE" GridPane.columnSpan="2">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXDatePicker fx:id="tb_date" prefHeight="29.0" prefWidth="213.0" promptText="Date :" GridPane.columnIndex="3" />
-                                          <JFXComboBox fx:id="tb_transactioncode" prefWidth="346.0" promptText="Transaction Code :" GridPane.rowIndex="1" />
-                                          <JFXComboBox fx:id="tb_transactionname" prefHeight="27.0" prefWidth="214.0" promptText="Transaction Name :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="tb_assets" promptText="Assets :" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="tb_liabilities" promptText="Liabilities :" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="tb_bdbalance" promptText="B/D Balance :" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                          <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.rowSpan="2">
+                                          <JFXDatePicker fx:id="tb_id" prefHeight="29.0" prefWidth="213.0" promptText="Trial Balance ID :" GridPane.columnIndex="3" />
+                                          <JFXTextField fx:id="tb_debitbdbalance" promptText="Debit B/D Balance :" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                          <TableView fx:id="tb_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="4">
                                             <columns>
                                               <TableColumn minWidth="0.0" prefWidth="141.0" text="C1" />
                                               <TableColumn minWidth="9.0" prefWidth="9.0" text="C2" />
                                             </columns>
                                           </TableView>
+                                          <JFXTextField fx:id="tb_creditbdbalance" promptText="Credit B/D Balance :" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -294,9 +364,9 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Searching Statements">
+            <Tab text="Add Transaction Code">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="tc_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
                            <content>
@@ -310,10 +380,10 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="136.0" minHeight="75.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="104.0" minHeight="34.0" prefHeight="73.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="105.0" minHeight="45.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="146.0" minHeight="55.0" prefHeight="146.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
@@ -321,6 +391,73 @@
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
                                        </padding>
+                                       <children>
+                                          <Label fx:id="bvr_serialno1" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="56.0" prefWidth="406.0" styleClass="headers" text="TRANSACTION  CODES" textFill="WHITE" GridPane.columnSpan="2">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
+                                          <TableView fx:id="tc_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
+                                          <JFXTextField fx:id="tc_transactioncode" promptText="Transaction Code :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="tc_transactionname" promptText="Transaction Name :" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Add Company">
+               <content>
+                  <AnchorPane fx:id="cl_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
+                           <content>
+                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                                 <children>
+                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="136.0" minHeight="75.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="104.0" minHeight="34.0" prefHeight="73.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="105.0" minHeight="45.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="146.0" minHeight="55.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <padding>
+                                          <Insets left="40.0" right="40.0" />
+                                       </padding>
+                                       <children>
+                                          <TableView fx:id="cl_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3">
+                                             <columns>
+                                                <TableColumn prefWidth="75.0" text="C1" />
+                                                <TableColumn prefWidth="75.0" text="C2" />
+                                             </columns>
+                                          </TableView>
+                                          <JFXTextField fx:id="cl_companyid" promptText="Company ID :" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="cl_companyname" promptText="Company Name :" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="cl_branchno" promptText="Branch No :" GridPane.rowIndex="1" />
+                                          <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="56.0" prefWidth="150.0" styleClass="headers" text="COMPANY LIST" textFill="WHITE">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
                                     </GridPane>
                                  </children>
                               </StackPane>
