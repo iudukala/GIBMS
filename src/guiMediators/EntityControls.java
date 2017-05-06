@@ -198,7 +198,6 @@ public class EntityControls
         List<String> primaryKeys = entity.fetchPrimaryKeys();
         for(Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext();)
         {
-            //System.out.println(nodeList.get(iterator.next()));
             String key = iterator.next();
             if(nodeList.get(key)!=null)
                 ((Control)nodeList.get(key)).setDisable(true);
