@@ -622,6 +622,25 @@ public class CustomerController implements Initializable
         ulsab.setStyle(Commons.BTNSTYLE_2);
         JFXButton btn_uploan = ulsab.getButton();
         
+        btn_uploan.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                if(loantable_handle.getSelection()!=null)
+                {
+                    Entity loanS = loantable_handle.fetchExtendedSelection("loanplan", "loanid");
+                    Entity guar1S = loantable_handle.fetchExtendedSelection("person", "NIC");
+                    Entity guar2S = loantable_handle.fetchExtendedSelection("person", "NIC");
+
+                    loanControls.setValues(loanS);
+                    guar1Controls.setValues(guar1S);
+                    guar2Controls.setValues(guar2S);
+                    jfxtabpane_customer.getSelectionModel().select(1);
+                }
+            }
+        });
+        
         
         
         Commons.subAnchorButton dlsab = new Commons.subAnchorButton(subanchor_tls, "DELETE RECORD", Commons.DELETE_GLYPH);

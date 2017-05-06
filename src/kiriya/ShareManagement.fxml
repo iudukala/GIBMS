@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -109,7 +108,7 @@
                                              </font>
                                           </Label>
                                           <JFXButton fx:id="approve_share" styleClass="buttonS2" text="Confirm" textFill="#f2f2f2" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-                                          <JFXButton prefHeight="28.0" prefWidth="65.0" styleClass="buttonS2" text="Reject" textFill="#f8f6f6" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <JFXButton fx:id="reject_share" prefHeight="28.0" prefWidth="65.0" styleClass="buttonS2" text="Reject" textFill="#f8f6f6" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                           <TableView fx:id="app_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="5">
                                             <columns>
                                               <TableColumn prefWidth="75.0" text="C1" />
@@ -121,8 +120,6 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXRadioButton fx:id="r_confirm" prefHeight="30.0" prefWidth="95.0" styleClass="buttonS2" text="Confirm" GridPane.rowIndex="6" />
-                                          <JFXRadioButton fx:id="r_reject" prefHeight="32.0" prefWidth="90.0" styleClass="buttonS2" text="Reject" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

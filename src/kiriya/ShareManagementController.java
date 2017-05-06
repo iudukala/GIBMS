@@ -7,7 +7,6 @@ package kiriya;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
@@ -148,9 +147,7 @@ public class ShareManagementController implements Initializable
     @FXML
     private JFXButton approve_share;
     @FXML
-    private JFXRadioButton r_confirm;
-    @FXML
-    private JFXRadioButton r_reject;
+    private JFXButton reject_share;
 
     /**
      * Initializes the controller class.
@@ -291,7 +288,7 @@ public class ShareManagementController implements Initializable
             {   
             
            custable_handle = new tableViewHandler(u_table,"select p.nic, p.full_name,p.dob,p.address,p.phone,p.email,s.share_amount , s.share_price ,"
-                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no from person p inner join shareholder s on p.nic=s.nic",nbconn);
+                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
                custable_handle.writeToTable();
                        
 //                    Entity search=new Entity("select p.nic, p.full_name , s.share_amount, s.share_price, s.issue_date, s.expiry_date \n" +
@@ -336,15 +333,38 @@ public class ShareManagementController implements Initializable
                 Entity shareholder_approval = viewTable.fetchExtendedSelection("shareholder", "nic");
                 shareholder_approval.add("approval", "approved");
                 shareholder_approval.update();
+                   
+                viewTable = new tableViewHandler(app_table, "select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
+                            + "s.account_no,s.share_amount , s.share_price,s.approval ,"
+                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic  where approval != 'approved' and approval != 'rejected' or approval is null",nbconn);
+ 
+                 viewTable.writeToTable();   
             }
+        });
+        
+        reject_share.setOnAction(
+        new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                Entity shareholder_reject = viewTable.fetchExtendedSelection("shareholder", "nic");
+                shareholder_reject.add("approval", "rejected");
+                shareholder_reject.update();
+          
+                viewTable = new tableViewHandler(app_table, "select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
+                            + "s.account_no,s.share_amount , s.share_price,s.approval ,"
+                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic  where approval != 'approved' and approval != 'rejected' or approval is null",nbconn);
+ 
+                 viewTable.writeToTable();
+            }
+        
+        
         });
     }
     
     public void tabPane()
     {
-        viewTable = new tableViewHandler(app_table, "select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
-                            + "s.account_no,s.share_amount , s.share_price ,"
-                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic ",nbconn);
         jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
         {
             
@@ -352,7 +372,13 @@ public class ShareManagementController implements Initializable
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
             {
+                
+                 viewTable = new tableViewHandler(app_table, "select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
+                            + "s.account_no,s.share_amount , s.share_price,s.approval ,"
+                        + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic  where approval != 'approved' and approval != 'rejected' or approval is null",nbconn);
+       
                 viewTable.writeToTable();
+                
 //                if((int)newValue == 1)
 //                {
                     stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));
@@ -393,7 +419,7 @@ public class ShareManagementController implements Initializable
             search_cont.add("dob", u_dob, new birthdayValidator());
             search_cont.add("phone", u_phone, new PhoneValidator());
             search_cont.add("address", u_address);
-            search_cont.add("nic", a_nic);
+            //search_cont.add("nic", a_nic);
         
        }
        public void setshareholderInput()
