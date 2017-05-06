@@ -670,6 +670,7 @@ public class Entity
     
     public ResultSet executeAsSearch()
     {
+        tablename = tablename.replace(';', ' ');
         List<String> searchFields = getLocalFieldList();
         for(Iterator<String> iter = searchFields.listIterator(); iter.hasNext();)
         {

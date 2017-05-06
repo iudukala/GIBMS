@@ -288,11 +288,11 @@ public class ShareManagementController implements Initializable
             {   
             
            custable_handle = new tableViewHandler(u_table,"select p.nic, p.full_name,p.dob,p.address,p.phone,p.email,s.share_amount , s.share_price ,"
-                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
+                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic;",nbconn);
                custable_handle.writeToTable();
                        
                     Entity search=new Entity("select p.nic, p.full_name , s.share_amount, s.share_price, s.issue_date, s.expiry_date \n" +
-"from person p inner join shareholder s on p.nic=s.nic",nbconn);
+"from person p inner join shareholder s on p.nic=s.nic;",nbconn);
                     search.add("p.nic",u_search.getText());
                     System.out.println(search);
                     custable_handle.writeToTable(search.executeAsSearch());

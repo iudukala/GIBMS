@@ -157,11 +157,11 @@
                                              </font>
                                           </Label>
                                           <JFXTextField fx:id="claim_number_ic" promptText="Claim number" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="claim_status_ic" promptText="Claim status" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="claim_type_ic" promptText="Claim type" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="description_ic" promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXDatePicker fx:id="open_date_ic" prefHeight="28.0" prefWidth="268.0" promptText="Open date" GridPane.rowIndex="2" />
-                                          <JFXDatePicker fx:id="closed_date_ic" prefHeight="28.0" prefWidth="297.0" promptText="Closed date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="total_claim_amount_ic" promptText="Total Claim Amount" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="issued_claim_amount_ic" promptText="Issued Claim Amount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="remaining_claim_amount_ic" promptText="Remaining Claim Amount" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <JFXDatePicker fx:id="open_date_ic" prefHeight="28.0" prefWidth="268.0" promptText="Open date" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXDatePicker fx:id="closed_date_ic" prefHeight="28.0" prefWidth="297.0" promptText="Closed date" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                           <JFXTextField fx:id="search_bar_ic" promptText="Search" GridPane.rowIndex="3" />
                                           <TableView fx:id="table_ic" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="4" GridPane.rowSpan="3">
                                             <columns>

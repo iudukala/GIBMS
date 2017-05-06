@@ -158,6 +158,7 @@ public class ValidationHandler
         {
             this.max = max;
         }
+        
         @Override
         public void eval()
         {
@@ -192,13 +193,29 @@ public class ValidationHandler
     
     public static class DoubleValidator extends ValidatorBase implements ValidationInterface
     {
+        Double max = null;
+        
+        public DoubleValidator(){}
+        public DoubleValidator(double max){this.max = max;}
+        
         @Override
         public void eval()
         {
             TextInputControl textField = (TextInputControl) srcControl.get();
             if(Validator.isDouble(textField.getText()) || textField.getText().equals(""))
             {
-                hasErrors.set(false);
+                if(max == null)
+                    hasErrors.set(false);
+                else
+                {
+                    if(Validator.isDouble(textField.getText()) && (Double.parseDouble(textField.getText()) > max))
+                    {
+                        message.set("Value exceeds maximum allowed");
+                        fieldInvalid(icon, hasErrors);
+                    }
+                    else
+                        hasErrors.set(false);
+                }
             }
             else
             {

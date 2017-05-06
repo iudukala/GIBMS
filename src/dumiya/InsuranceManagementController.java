@@ -83,15 +83,15 @@ public class InsuranceManagementController implements Initializable
     @FXML
     private JFXTextField claim_number_ic;
     @FXML
-    private JFXTextField claim_status_ic;
-    @FXML
-    private JFXTextField claim_type_ic;
-    @FXML
-    private JFXTextField description_ic;
-    @FXML
     private JFXDatePicker open_date_ic;
     @FXML
     private JFXDatePicker closed_date_ic;
+    @FXML
+    private JFXTextField total_claim_amount_ic;
+    @FXML
+    private JFXTextField issued_claim_amount_ic;
+    @FXML
+    private JFXTextField remaining_claim_amount_ic;
     @FXML
     private JFXTextField search_bar_ic;
     @FXML
@@ -150,11 +150,9 @@ public class InsuranceManagementController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
- 
                 Entity customer_search = customerSearchTableHandle.getSelection();
                 nic_if.setText(customer_search.getAsString("nic"));
                 jfxtabpane_Insurance.getSelectionModel().select(1);
-                
             }
         });
         
@@ -175,6 +173,7 @@ public class InsuranceManagementController implements Initializable
                 System.out.println(Insurance_Fund);
                 Insurance_Fund.validate(true);
                 Insurance_Fund.consolidate();
+                insuranceFundTableHandle.writeToTable();
                 
             }
         });
@@ -200,6 +199,7 @@ public class InsuranceManagementController implements Initializable
                     Insurance_Fund=searchInsuranceFundCont.getValues();
                     System.out.println(Insurance_Fund);
                     Insurance_Fund.update();
+                    insuranceFundTableHandle.writeToTable();
 
                     }
                 catch(Exception ex)
@@ -224,6 +224,7 @@ public class InsuranceManagementController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
+                
                 Entity Insurance_Fund = insuranceFundTableHandle.fetchExtendedSelection("Insurance_Fund", "NIC");
                 Insurance_Fund.deleteFromDB();
                 insuranceFundTableHandle.writeToTable();
@@ -283,10 +284,13 @@ public class InsuranceManagementController implements Initializable
             @Override
             public void handle(ActionEvent e)
             {
+                
                 Entity Insurance_Claim = insuranceClaimCont.getValues();
                 System.out.println(Insurance_Claim);
                 Insurance_Claim.validate(true);
                 Insurance_Claim.consolidate();
+                insuranceClaimTableHandle.writeToTable();
+                
             }
         });
         
@@ -311,6 +315,7 @@ public class InsuranceManagementController implements Initializable
                     Insurance_Claim=searchInsuranceClaimCont.getValues();
                     System.out.println(Insurance_Claim);
                     Insurance_Claim.update();
+                    insuranceClaimTableHandle.writeToTable();
 
                     }
                 catch(Exception ex)
@@ -335,6 +340,7 @@ public class InsuranceManagementController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
+                
                 Entity Insurance_Claim = insuranceClaimTableHandle.fetchExtendedSelection("Insurance_Claim", "Claim_Number");
                 Insurance_Claim.deleteFromDB();
                 insuranceClaimTableHandle.writeToTable();
@@ -409,15 +415,15 @@ public class InsuranceManagementController implements Initializable
         
         insuranceClaimCont.add("Claim_Number", claim_number_ic, new IntegerValidator());
         
-        insuranceClaimCont.add("Claim_Status", claim_status_ic);
-        
-        insuranceClaimCont.add("Claim_Type", claim_type_ic);
-        
         insuranceClaimCont.add("Open_Date", open_date_ic, new pastDateValidator());
         
         insuranceClaimCont.add("Closed_Date", closed_date_ic);
         
-        insuranceClaimCont.add("Description", description_ic);
+        insuranceClaimCont.add("Total_Claim_Amount", total_claim_amount_ic, new DoubleValidator());
+        
+        insuranceClaimCont.add("Issued_Claim_Amount", issued_claim_amount_ic, new DoubleValidator());
+        
+        insuranceClaimCont.add("Remaining_Claim_Amount", remaining_claim_amount_ic, new DoubleValidator());
     }
     
     public void tableHandler()
@@ -460,15 +466,15 @@ public class InsuranceManagementController implements Initializable
         
         searchInsuranceClaimCont.add("Claim_Number", claim_number_ic, new IntegerValidator());
         
-        searchInsuranceClaimCont.add("Claim_Status", claim_status_ic);
-        
-        searchInsuranceClaimCont.add("Claim_Type", claim_type_ic);
-        
         searchInsuranceClaimCont.add("Open_Date", open_date_ic, new pastDateValidator());
         
         searchInsuranceClaimCont.add("Closed_Date", closed_date_ic);
         
-        searchInsuranceClaimCont.add("Description", description_ic);
+        searchInsuranceClaimCont.add("Total_Claim_Amount", total_claim_amount_ic, new DoubleValidator());
+        
+        searchInsuranceClaimCont.add("Issued_Claim_Amount", issued_claim_amount_ic, new DoubleValidator());
+        
+        searchInsuranceClaimCont.add("Remaining_Claim_Amount", remaining_claim_amount_ic, new DoubleValidator());
         
     }
 }

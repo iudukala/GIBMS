@@ -333,9 +333,9 @@
                                                       <Insets top="15.0" />
                                                    </padding>
                                                 </Label>
-                                                <Label styleClass="subheaders" text="Label">
+                                                <Label fx:id="lbl_interest" prefHeight="29.0" prefWidth="224.0" text="Unavailable" textFill="#fcfafa">
                                                    <padding>
-                                                      <Insets top="10.0" />
+                                                      <Insets top="15.0" />
                                                    </padding>
                                                 </Label>
                                              </children>
