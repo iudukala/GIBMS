@@ -439,7 +439,7 @@ public class Entity
         }
         catch(SQLException e)
         {
-            System.out.println("Error encountered while parsing Entities [" + newtable + "]");
+            System.out.println("Error encountered while parsing Entities [" + newtable + "] :\n" + e);
         }
         return entities;
     }
@@ -469,6 +469,8 @@ public class Entity
             return (Double)obj;
         else if(obj.getClass().equals(Long.class))
             return (Long)obj;
+        else if(obj.getClass().equals(java.sql.Timestamp.class))
+            return ((java.sql.Timestamp)obj).toLocalDateTime().toLocalDate();
         else
         {
             System.out.println("Unexpected type encoutered while recasting : " + obj.getClass());
@@ -544,8 +546,10 @@ public class Entity
         return column_list;
     }
     
-    public void update()
+    public boolean update()
     {
+        boolean status;
+        
         List<String> primaryKeys = fetchPrimaryKeys();
         List<Object> fields = new ArrayList<>();
         
@@ -583,13 +587,17 @@ public class Entity
             strb.append("executed successfully\nPrimary keyset : ");
             for(Object key : primaryKeys)
                 strb.append("{ ").append(key).append(" : ").append(data.get(key).toString()).append(" }\t");
+            
+            status = true;
         }
         catch(Exception e){
             System.out.println("Error assigning objects to preparedStatement");
             strb.append("failure \n").append(e);
+            status = false;
         }
         
         System.out.println(strb);
+        return status;
     }
     
     public static Object recastJavaObject(Object obj)

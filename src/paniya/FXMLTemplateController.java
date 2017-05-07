@@ -68,9 +68,9 @@ public class FXMLTemplateController implements Initializable {
     private tableViewHandler bvr_addmember_handle,bvr_add_handle, cashbook_handle,cashbook_list_handle, general_ledger_handle, trial_balance_handle, transaction_code_handle, company_list_handle ;
     private dbConcurrent nbconn;
     JFXTabPane jfxcashflow_tabpane;
-    PreparedStatement pst= null;
-    ResultSet rs = null;
-    final ObservableList options = FXCollections.observableArrayList();
+    //PreparedStatement pst= null;
+    //ResultSet rs = null;
+    //final ObservableList options = FXCollections.observableArrayList();
     
     @FXML
     private AnchorPane cashflow_anchorpane;
@@ -315,14 +315,14 @@ public class FXMLTemplateController implements Initializable {
         
         cashbookControls = new EntityControls("cashbook", nbconn);
         cashbookControls.add("cashbook_id",cb_id);
-        cashbookControls.add("bd_balance",cb_bdbalance);
+        cashbookControls.add("b/d_balance",cb_bdbalance);
          
     }
 
     private void initializegeneral_ledgerInputs() {
         
         general_ledgerControls = new EntityControls("general_ledger", nbconn);
-        general_ledgerControls.add("transaction_code",gl_transactioncode);
+        general_ledgerControls.add("transaction_code",gl_transactioncode,new IntegerValidator(max_tc));
         general_ledgerControls.add("credit_b/d_balance",gl_creditbdbalance);
         general_ledgerControls.add("debit_b/d_balance",gl_debitbdbalance);
          
@@ -357,7 +357,7 @@ public class FXMLTemplateController implements Initializable {
         
          Commons.subAnchorButton tc = new Commons.subAnchorButton(tc_anchorpane, "ADD CODES", Commons.ADD_PERSON_GLYPH);
          tc.setCoordinates(750, 120);
-         tc.setButtonLength(200);
+         tc.setButtonLength(160);
          JFXButton addButton = tc.getButton();
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
@@ -386,7 +386,7 @@ public class FXMLTemplateController implements Initializable {
         
          Commons.subAnchorButton cl = new Commons.subAnchorButton(cl_anchorpane, "ADD COMPANY", Commons.ADD_PERSON_GLYPH);
          cl.setCoordinates(750, 120);
-         cl.setButtonLength(200);
+         cl.setButtonLength(180);
          JFXButton addButton = cl.getButton();
         
         addButton.setOnAction(new EventHandler<ActionEvent>()
@@ -414,7 +414,8 @@ public class FXMLTemplateController implements Initializable {
     private void initializebvr_addButtons() {
         
         Commons.subAnchorButton bvr_add = new Commons.subAnchorButton(bvr_anchorpane, "SAVE", Commons.ADD_PERSON_GLYPH);
-         //bvr_add.setCoordinates(750, 120);
+         bvr_add.setCoordinates(390, 610);
+         bvr_add.setButtonHeigth(20);
          bvr_add.setButtonLength(200);
          JFXButton addButton = bvr_add.getButton();
          
@@ -427,11 +428,11 @@ public class FXMLTemplateController implements Initializable {
                 pnj.validate(true);
                 int p=pnj.consolidate();
                 
-               bvr_addControls.clearControls();
+               //bvr_addControls.clearControls();
                
                bvr_add_handle = new tableViewHandler(bvr_add_table,"select* from bvr_add",nbconn);
                     bvr_add_handle.writeToTable();
-                    
+               jfxcashflow_tabpane.getSelectionModel().select(1);     
                     
             }
         });
@@ -445,9 +446,9 @@ public class FXMLTemplateController implements Initializable {
     private void initializebvr_addmemberButtons() {
         
          Commons.subAnchorButton cb = new Commons.subAnchorButton(bvr_anchorpane, "ADD MEMBER", Commons.ADD_PERSON_GLYPH);
-         cb.setCoordinates(550, 315);
-         cb.setButtonHeigth(17);
-         cb.setGlyphWidth(20);
+         cb.setCoordinates(565, 330);
+         cb.setButtonHeigth(10);
+         cb.setGlyphWidth(15);
          cb.setButtonLength(180);
          JFXButton addButton = cb.getButton();
          
@@ -474,9 +475,9 @@ public class FXMLTemplateController implements Initializable {
         });
          
        Commons.subAnchorButton dl = new Commons.subAnchorButton(bvr_anchorpane, "DELETE", Commons.DELETE_GLYPH);
-         dl.setCoordinates(740, 315);
-         dl.setButtonHeigth(17);
-         dl.setGlyphWidth(20);
+         dl.setCoordinates(750, 330);
+         dl.setButtonHeigth(10);
+         dl.setGlyphWidth(15);
          dl.setButtonLength(180);
          JFXButton deleteButton = dl.getButton();  
        
@@ -487,26 +488,21 @@ public class FXMLTemplateController implements Initializable {
     private void initializecbButtons() {
         Commons.subAnchorButton cb = new Commons.subAnchorButton(cb_anchorpane, "SAVE", Commons.ADD_PERSON_GLYPH);
          //cb.setCoordinates(750, 120);
-         cb.setButtonLength(200);
+         cb.setButtonLength(150);
          JFXButton addButton = cb.getButton();
          
          
-        addButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-                Entity pnj = cashbookControls.getValues();
-                pnj.validate(true);
-                int p=pnj.consolidate();
-                
-               cashbookControls.clearControls();
-               
-               cashbook_list_handle = new tableViewHandler(cb_list_table,"select* from cashbook",nbconn);
-                    cashbook_list_handle.writeToTable();
-                    
-                    
-            }
+        addButton.setOnAction((ActionEvent e) -> {
+            Entity pnj = cashbookControls.getValues();
+            pnj.validate(true);
+            int p=pnj.consolidate();
+            
+            cashbookControls.clearControls();
+            
+            cashbook_list_handle = new tableViewHandler(cb_list_table,"select* from cashbook",nbconn);
+            cashbook_list_handle.writeToTable();
+            jfxcashflow_tabpane.getSelectionModel().select(3);
+            
         });
         
     }
@@ -514,7 +510,7 @@ public class FXMLTemplateController implements Initializable {
     private void initializetbButtons() {
         Commons.subAnchorButton tb = new Commons.subAnchorButton(tb_anchorpane, "SAVE", Commons.ADD_PERSON_GLYPH);
          //tb.setCoordinates(750, 120);
-         tb.setButtonLength(200);
+         tb.setButtonLength(150);
          JFXButton addButton = tb.getButton();
          
        
@@ -525,7 +521,7 @@ public class FXMLTemplateController implements Initializable {
     private void initializeglButtons() {
         Commons.subAnchorButton gl = new Commons.subAnchorButton(gl_anchorpane, "SAVE", Commons.ADD_PERSON_GLYPH);
          //gl.setCoordinates(750, 120);
-         gl.setButtonLength(200);
+         gl.setButtonLength(150);
          JFXButton addButton = gl.getButton();
          
            addButton.setOnAction(new EventHandler<ActionEvent>()
@@ -541,6 +537,7 @@ public class FXMLTemplateController implements Initializable {
                
                trial_balance_handle = new tableViewHandler(tb_table,"select* from general_ledger",nbconn);
                     trial_balance_handle.writeToTable();
+                    jfxcashflow_tabpane.getSelectionModel().select(5);
                     
                     
             }
@@ -563,8 +560,8 @@ public class FXMLTemplateController implements Initializable {
     private void initializecashbookButtons() {
         
         Commons.subAnchorButton gl = new Commons.subAnchorButton(bvr_anchorpane, "ADD CASHBOOK", Commons.ADD_PERSON_GLYPH);
-         gl.setCoordinates(600,600 );
-         //gl.setButtonHeigth(20);
+         gl.setCoordinates(595,610 );
+         gl.setButtonHeigth(20);
          //gl.setGlyphWidth(20); 
          gl.setButtonLength(200);
          JFXButton addButton = gl.getButton();
@@ -592,7 +589,7 @@ public class FXMLTemplateController implements Initializable {
                 }
              cashbook_handle = new tableViewHandler(cb_table,"select a.serial_no,a.date,a.branch_name,a.transaction_name,a.narration,b.nic,b.description,a.payment_type,b.credit_amount,b.debit_amount from bvr_add a inner join bvr_addmember b on a.serial_no =b.serial_no",nbconn);
                     cashbook_handle.writeToTable();
-             
+             jfxcashflow_tabpane.getSelectionModel().select(2);
             }
         });
         
@@ -601,10 +598,10 @@ public class FXMLTemplateController implements Initializable {
     private void initializegoglButtons() {
         
         Commons.subAnchorButton gl = new Commons.subAnchorButton(bvr_anchorpane, "ADD GENERAL LEDGER", Commons.ADD_PERSON_GLYPH);
-         gl.setCoordinates(190,600 );
-         //gl.setButtonHeigth(20);
+         gl.setCoordinates(145,610 );
+         gl.setButtonHeigth(20);
          gl.setGlyphWidth(15); 
-         gl.setButtonLength(250);
+         gl.setButtonLength(240);
          JFXButton addButton = gl.getButton();
          
          addButton.setOnAction(new EventHandler<ActionEvent>()
@@ -631,6 +628,7 @@ public class FXMLTemplateController implements Initializable {
              general_ledger_handle = new tableViewHandler(gl_table,"select a.transaction_code,a.transaction_name,a.date,a.branch_no,a.serial_no,a.narration,a.company_name,a.voucher_receipt,b.nic,b.description,b.credit_amount,b.debit_amount from bvr_add a inner join bvr_addmember b on a.serial_no =b.serial_no;",nbconn);
                 general_ledger_handle.writeToTable();
              
+                jfxcashflow_tabpane.getSelectionModel().select(4);
             }
         });
         

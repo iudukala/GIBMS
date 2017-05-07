@@ -2,11 +2,13 @@ package battibois;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Integrator;
+import fxml_files.ContentFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -14,13 +16,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
 
-import guiMediators.Commons;
 import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
+import handlers.ValidationHandler.IntegerValidator;
 import handlers.dbConcurrent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
@@ -93,13 +98,6 @@ public class ResourceFXMLController implements Initializable
     @FXML
     private StackPane stack_add3;
     
-    
-    private dbConcurrent nbconn;
-    EntityControls vehicleControls;
-    EntityControls buildingControls;
-    EntityControls otherControls;
-    private tableViewHandler tablevehi_handle;
-    JFXTabPane tabpane_resource;
     @FXML
     private JFXButton add_vehicle;
     @FXML
@@ -154,208 +152,252 @@ public class ResourceFXMLController implements Initializable
     private Button select_other;
     @FXML
     private JFXTextField bill_id;
+    @FXML
+    private JFXTextField text_vsearch;
+    @FXML
+    private JFXButton btn_delvehicle;
+    
+    
+    private void seperatorFunction(){}
+    
+    private JFXTabPane tabpane_resource;
+    private JFXDialog dialog;
+    
+    private dbConcurrent nbconn;
+    
+    private EntityControls vehicleControls;
+    private EntityControls buildingControls;
+    private EntityControls otherControls;
+    
+    private tableViewHandler tableVehicle_handle;
+    private tableViewHandler tableBuilding_handle;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         nbconn = dbConcurrent.getInstance();
-
-        initializeNodes();
-        initializeVehicleInputs();
-        initializeBuildingInputs();
-//       initializeOtherInputs();
-        initializeButton();
-//        initializeButton_building();
-    }
-    
-    
-    private void initializeNodes()
-    { 
         tabpane_resource = Integrator.integrate(anchor_resource);
         
-        add_vehicle.setOnAction(new EventHandler<ActionEvent>()
+        initializeVehicleInputs();
+        initializeBuildingInputs();
         
+        tableVehicle_handle.writeToTable();
+        tabpane_resource.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
         {
             @Override
-            public void handle(ActionEvent e)
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
             {
-             {
-                Entity vehicle;
-                try
-                {
-                    vehicle = getVehicleInputs();
-                    System.out.println(vehicle);
-                    System.out.println(vehicle.validate(true));
-                   int v= vehicle.consolidate();
-                   
-                   if(v == 0)
-                {
-                vehicleControls.clearControls();
-                }
-                }
-                catch(NullPointerException exc)
-                {
-                    System.out.println("nullpointer no inputs");
-                }
-              
-                
-             
-             }
-             
-             {    
-                Entity building;
-                try
-                {
-                    building = buildingControls.getValues();
-                    System.out.println(building);
-                    System.out.println(building.validate(true));
-                    int b= building.consolidate();
-                    
-                 if(b == 0)
-                    {
-                        buildingControls.clearControls();
-                    }
-                }
-                catch(NullPointerException exc)
-                {
-                    System.out.println("nullpointer no inputs");
-                }
-             }
+                if((int)newValue == 0)
+                    tableVehicle_handle.writeToTable();
+                else if((int)newValue == 1)
+                    tableBuilding_handle.writeToTable();
             }
         });
     }
     
-    public Entity getVehicleInputs()
-    {
-        return vehicleControls.getValues();
-    }
-    public void setVehicleInputs(Entity vehicle)
-    {
-        vehicleControls.setValues(vehicle);
-    }
-    public boolean validateVehicleInputs()
-    {
-        return vehicleControls.triggerValidators();
-    }
-    
-    public Entity getBuildingInputs()
-    {
-        return buildingControls.getValues();
-    }
-    
-    public void setBuildingInputs(Entity building)
-    {
-        buildingControls.setValues(building);
-    }
-    
-    public boolean validateBuildingInputs()
-    {
-        return buildingControls.triggerValidators();
-    }
-    
     public void initializeVehicleInputs()
     {
+        tableVehicle_handle = new tableViewHandler(table_vehi,"select * from vehicle;",nbconn);
+        
         vehicleControls = new EntityControls("vehicle",nbconn);
+        vehicleControls.add(new Object[][]
+        {
+            {"license", text_license},
+            {"brand", text_brand},
+            {"year",text_year, new IntegerValidator(2018)},
+            {"model",text_model},
+            {"colour", text_colour},
+            {"engine_no",text_engine},
+            {"seat_count", text_seat, new IntegerValidator(50)}
+        });
         
+        add_vehicle.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity vehicle = null;
+                if(vehicleControls.triggerValidators())
+                {
+                    vehicle = vehicleControls.getValues();
+                }
+                else
+                {
+                    displayDialog(1, "vehicle", 1);
+                }
+                try
+                {
+                    int vehicleStatus=vehicle.consolidate();
+                    if(vehicleStatus == 0)
+                    {
+                        vehicleControls.clearControls();
+                        displayDialog(0, "vehicle", 1);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    displayDialog(1, "vehicle", 1);
+                }
+            }
+        });
         
-        vehicleControls.add("license", text_license);
-        
-        vehicleControls.add("brand", text_brand);
-        
-        vehicleControls.add("year",text_year );
-        
-        vehicleControls.add("model",text_model );
-        
-        vehicleControls.add("colour", text_colour );
-        
-        vehicleControls.add("engine_no",text_engine );
-        
-        vehicleControls.add("seat_count", text_seat );
-       
-    }
-    
-    public void initializeBuildingInputs()
-    {
-        buildingControls = new EntityControls("building",nbconn);
-    
-        buildingControls.add("address", build_address);
-        
-        buildingControls.add("floor", floor  );
-        
-        buildingControls.add("rent_date", rent  );
-        
-        buildingControls.add("condition", build_con  );
-        
-        buildingControls.add("rent_value", build_value  );
-        
-        buildingControls.add("end_date", end  );
-        
-        buildingControls.add("description", build_des  );
-        
-    }
-    public void initializeButton()
-    {
-       
         btn_searchvehi.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
             {
-                 tablevehi_handle = new tableViewHandler(table_vehi,"select * from vehicle;",nbconn);
-                    tablevehi_handle.writeToTable();       
-            }         
-               
-                
+                Entity vsearch = new Entity("select * from vehicle", nbconn);
+                vsearch.add("license", text_vsearch.getText());
+                tableVehicle_handle.writeToTable(vsearch.executeAsSearch());       
+            }
         });
         
-          /*  public void initializeButton_building()
-            {
-       
-                 btn_searchbul.setOnAction(new EventHandler<ActionEvent>()
-            {
-                @Override
-                public void handle(ActionEvent event)
-                {
-                 table_building_handle = new tableViewHandler(table_building,"select * from building;",nbconn);
-                    tablevehi_handle.writeToTable();       
-                }         
-               
-                
-        });*/     
-                btn_upvehi.setOnAction(new EventHandler<ActionEvent>()
+        btn_selectvehi.setOnAction(new EventHandler<ActionEvent>()
         {
-        @Override
+            @Override
             public void handle(ActionEvent e)
             {
-            
-                Entity vehicle;
-            try{
-                vehicle = vehicleControls.getValues();
-                vehicle.update();
-                }
-            catch(Exception ex)
-            {
-            System.out.println("nullpointer no inputs");
-               
-            }
+                vehicleControls.setValues(tableVehicle_handle.getSelection());
             }
         });
-                
         
-                   btn_selectvehi.setOnAction(new EventHandler<ActionEvent>()
-                   {
+        btn_upvehi.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event)
+            public void handle(ActionEvent e)
             {
-                vehicleControls.setValues(tablevehi_handle.getSelection());//"vehicle", "license"));
+                Entity vehicle;
+                if(vehicleControls.triggerValidators())
+                {
+                    vehicle = vehicleControls.getValues();
+                }
+                else
+                {
+                    displayDialog(1, "vehicle", 2);
+                    return;
+                }
+                
+                if(vehicle.update())
+                {
+                    displayDialog(0, "vehicle", 2);
+                }
             }
         });
-
-
-         
-}
-   
-}
-     
+        
+        btn_delvehicle.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                if(tableVehicle_handle.getSelection().deleteFromDB())
+                {
+                    displayDialog(0, "vehicle", 3);
+                }
+                tableVehicle_handle.writeToTable();
+            }
+        });
+        
+    }
     
-
+    public void initializeBuildingInputs()
+    {
+        tableBuilding_handle = new tableViewHandler(table_building,"select * from building;",nbconn);
+        
+        buildingControls = new EntityControls("building",nbconn);
+        buildingControls.add(new Object[][]
+        {
+            {"address", build_address},
+            {"floor", floor, new IntegerValidator()},
+            {"rent_date", rent},
+            {"condition", build_con},
+            {"rent_value", build_value},
+            {"end_date", end},
+            {"description", build_des},
+        });
+        
+        add_building.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity building = null;
+                if(buildingControls.triggerValidators())
+                {
+                    building = buildingControls.getValues();
+                }
+                try
+                {
+                    int buildingStatus=building.consolidate();
+                    if(buildingStatus == 0)
+                    {
+                        buildingControls.clearControls();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    System.out.println("nullpointer no inputs");
+                }
+            }
+        });
+    }
+    
+    public void displayDialog(int status, String recordtype, int optype)
+    {
+        String operation;
+        switch (optype)
+        {
+            case 1:
+                operation = "CONSOLIDATION";
+                break;
+            case 2:
+                operation = "UPDATE";
+                break;
+            case 3:
+                operation = "DELETE";
+                break;
+            default:
+                return;
+        }
+        
+        switch (status)
+        {
+            case 0:
+                try{dialog.close();}catch(Exception ex){}
+                dialog = initializeDialog(1, ContentFactory.getDialog(operation + " SUCESSFUL", recordtype + " record added to database successfully", 1));
+                dialog.show();
+                break;
+            case 1:
+                try{dialog.close();}catch(Exception ex){}
+                dialog = initializeDialog(1, ContentFactory.getDialog("FIELDS EMPTY/INVALID", "Please fill out all required fields correctly", 2));
+                dialog.show();
+                break;
+            case 2:
+                try{dialog.close();}catch(Exception ex){}
+                dialog = initializeDialog(1, ContentFactory.getDialog(operation + " FAILED", "failed due to an internal error", 2));
+                dialog.show();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private JFXDialog initializeDialog(int tabnum, JFXDialog dialog)
+    {
+        Control control;
+        switch(tabnum)
+        {
+            case 1:
+                control = text_license;
+                break;
+            case 2:
+                control = build_address;
+                break;
+            default:
+                return null;
+        }
+        dialog.setDialogContainer((StackPane)control.getParent().getParent());
+        
+        return dialog;
+    }
+}

@@ -95,14 +95,14 @@ public class tableViewHandler
         table.setItems(items);
     }
     
-    public Entity fetchExtendedSelection(String ovr_searchtable, String ovr_pkey)
+    public Entity fetchExtendedSelection(String ovr_searchtable, String over_tvpkey, String ovr_dbpkey)
     {
-        String exsearch_query = "select * from `" + ovr_searchtable + "` where `" + ovr_pkey + "` = ?";
+        String exsearch_query = "select * from `" + ovr_searchtable + "` where `" + ovr_dbpkey + "` = ?";
         PreparedStatement prp;
         
         Object identifier;
         try{
-            identifier = table.getSelectionModel().getSelectedItem().getAsString(ovr_pkey);
+            identifier = table.getSelectionModel().getSelectedItem().getAsString(over_tvpkey);
         }
         catch(Exception e){
             return null;
@@ -115,12 +115,18 @@ public class tableViewHandler
             selected_entity = Entity.parseFromRS(prp.executeQuery(), nbconn).get(0);
         }
         catch(SQLException e){
-            System.out.println("Failed to fetch extended selection data from DB :\n" + e);
+            System.out.println("Failed to fetch extended table-selection data from DB :\n" + e);
             return null;
         }
         
         return selected_entity;
     }
+    
+    public Entity fetchExtendedSelection(String ovr_searchtable, String ovr_pkey)
+    {
+        return fetchExtendedSelection(ovr_searchtable, ovr_pkey, ovr_pkey);
+    }
+    
     
     public Entity getSelection()
     {

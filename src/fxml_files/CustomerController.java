@@ -340,8 +340,14 @@ public class CustomerController implements Initializable
         if(loanControls.triggerValidators() && guar1Controls.triggerValidators() && guar2Controls.triggerValidators())
         {
             loanplan = loanControls.getValues();
+            loanplan.add("monthly_installment", calculate_interest());
             guarantor1 = guar1Controls.getValues();
+            
+            System.out.println(guarantor1);
+            
             guarantor2 = guar2Controls.getValues();
+            
+            System.out.println(guarantor2);
         }
         else
             return 1;
@@ -374,7 +380,7 @@ public class CustomerController implements Initializable
         new ExistingNICValidator(nbconn).register(text_nic);
         personControls.add(new Object[][]
         {
-            {"nic", text_nic, new NICValidator()},
+            {"nic", text_nic, new NICDOBCrossValidator(date_dob)},
             {"full_name", text_fullname},
             {"email", text_email, new EmailValidator()},
             {"dob", date_dob, new birthdayValidator()},
@@ -435,14 +441,19 @@ public class CustomerController implements Initializable
             }
         });
         
-        
-        
         //add person button
         Commons.subAnchorButton apsab = new Commons.subAnchorButton(subanchor_tca, "ADD CUSTOMER", Commons.ADD_PERSON_GLYPH);
         apsab.setButtonLength(160);
         JFXButton addpersonButton = apsab.getButton();
         
-        
+        addpersonButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                add_person();
+            }
+        });
         
         
         //update, delete customer
@@ -479,6 +490,29 @@ public class CustomerController implements Initializable
         dcsab.setStyle(Commons.BTNSTYLE_2);
         JFXButton btn_delcust = dcsab.getButton();
         
+        btn_delcust.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                if(custable_handle.getSelection()!=null)
+                {
+                    if(custable_handle.fetchExtendedSelection("customer_state", "NIC").deleteFromDB())
+                    {
+                        try{dialog.close();}catch(Exception ex){}
+                        dialog = initializeDialog(1, ContentFactory.getDialog("SUCESSFULLY DELETED", "Record was successfully removed from the sysetem", 1));
+                        dialog.show();
+                    }
+                    else
+                    {
+                        try{dialog.close();}catch(Exception ex){}
+                        dialog = initializeDialog(1, ContentFactory.getDialog("DELETING RECORD FAILED", "Internal error encountered while deleting records", 2));
+                        dialog.show();
+                    }
+                }
+            }
+        });
+        
         Commons.subAnchorButton rcsab = new Commons.subAnchorButton(subanchor_tcs, null, Commons.RESET_GLYPH);
         rcsab.setButtonDepth(1);
         rcsab.setGlyphSize(18,15);
@@ -486,17 +520,6 @@ public class CustomerController implements Initializable
         rcsab.setButtonTooltip("Reset table");
         rcsab.setStyle(Commons.BTNSTYLE_3);
         JFXButton btn_resetcust = rcsab.getButton();
-        
-        
-        
-        addpersonButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-                add_person();
-            }
-        });
         
         //setting up customer search table
         custable_handle = new tableViewHandler(table_customer_search, "select * from customer_view", nbconn);
@@ -550,7 +573,7 @@ public class CustomerController implements Initializable
             {"account", text_laccount},
             {"guarantor1", text_lg1nic},
             {"guarantor1_income", text_lg1income, new DoubleValidator()},
-            {"guarantor2", text_lg1nic},
+            {"guarantor2", text_lg2nic},
             {"guarantor2_income", text_lg2income, new DoubleValidator()},
             {"branch_id", LOGGED_BRANCH}
         });
@@ -558,9 +581,9 @@ public class CustomerController implements Initializable
         guar1Controls = new EntityControls("person", nbconn);
         guar1Controls.add(new Object[][]
         {
-            {"nic", text_lg1nic, new NICValidator()},
+            {"nic", text_lg1nic, new NICDOBCrossValidator(date_lg1dob)},
             {"full_name", text_lg1name},
-            {"dob", date_lg1dob},
+            {"dob", date_lg1dob, new birthdayValidator()},
             {"phone", text_lg1phone, new PhoneValidator()},
             {"address", text_lg1address},
             {"gender", tgroup_lg1gender}
@@ -569,9 +592,9 @@ public class CustomerController implements Initializable
         guar2Controls = new EntityControls("person", nbconn);
         guar2Controls.add(new Object[][]
         {
-            {"nic", text_lg2nic, new NICValidator()},
+            {"nic", text_lg2nic, new NICDOBCrossValidator(date_lg2dob)},
             {"full_name", text_lg2name},
-            {"dob", date_lg2dob},
+            {"dob", date_lg2dob, new birthdayValidator()},
             {"phone", text_lg2phone, new PhoneValidator()},
             {"address", text_lg2address},
             {"gender", tgroup_lg2gender}
@@ -606,7 +629,8 @@ public class CustomerController implements Initializable
             }
         });
         
-        lbl_interest.setStyle("-fx-font-family: \"Roboto condensed\"; -fx-font-size: 18px; -fx-text-fill: #CB503F; -fx-font-weight: Normal;");
+        
+        lbl_interest.setStyle("-fx-font-family: \"Roboto condensed\"; -fx-font-size: 24px; -fx-font-weight: Normal;");
         text_lamount.focusedProperty().addListener(new ChangeListener<Boolean>(){
             @Override public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue){
                 if(newValue)calculate_interest();
@@ -624,6 +648,8 @@ public class CustomerController implements Initializable
                 if(newValue)calculate_interest();
             }
         });
+        
+        calculate_interest();
         
         
         Commons.subAnchorButton alsab = new Commons.subAnchorButton(subanchor_tla, "ADD LOAN REQUEST", Commons.ADD_PERSON_GLYPH);
@@ -656,8 +682,12 @@ public class CustomerController implements Initializable
                 if(loantable_handle.getSelection()!=null)
                 {
                     Entity loanS = loantable_handle.fetchExtendedSelection("loanplan", "loanid");
-                    Entity guar1S = loantable_handle.fetchExtendedSelection("person", "NIC");
-                    Entity guar2S = loantable_handle.fetchExtendedSelection("person", "NIC");
+                    Entity guar1S = loantable_handle.fetchExtendedSelection("person", "guarantor1", "nic");
+                    Entity guar2S = loantable_handle.fetchExtendedSelection("person", "guarantor2", "nic");
+                    
+                    System.out.println(guar1S);
+                    
+                    System.out.println(guar2S);
 
                     loanControls.setValues(loanS);
                     guar1Controls.setValues(guar1S);
@@ -690,31 +720,41 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
-                //ContentFactory.getPopOver(nbconn, text_lcid, btn_lcidsearch);
+                ContentFactory.getPopOver(nbconn, text_lcid, btn_lcidsearch);
             }
         });
         
         loantable_handle = new tableViewHandler(table_loan_search, "select * from loanplan;", nbconn);
     }
     
-    private void calculate_interest()
+    private Double calculate_interest()
     {
+        Double installment = null;
         try 
         {
-            double amount = Double.parseDouble(text_lamount.getText());
-            double interest = Double.parseDouble(text_linterest.getText());
-            int months = Integer.parseInt(text_lexppayback.getText());
-            
-            double installment = amount/months + amount * interest;
-            
-            lbl_interest.setText(String.format("%.2f",installment));
-            lbl_interest.setTextFill(Paint.valueOf("#68bf5f"));
+            if(text_lamount.validate() && text_linterest.validate() && text_lexppayback.validate())
+            {
+                double amount = Double.parseDouble(text_lamount.getText());
+                double interest = Double.parseDouble(text_linterest.getText())/100;
+                int months = Integer.parseInt(text_lexppayback.getText());
+
+                installment = amount/months + amount * interest;
+
+                lbl_interest.setText(String.format("Rs. %.2f",installment));
+                lbl_interest.setTextFill(Paint.valueOf("#68bf5f"));
+            }
+            else
+            {
+                lbl_interest.setText("Unavailable");
+                lbl_interest.setTextFill(Paint.valueOf("#CB503F"));
+            }
         }
         catch (Exception e)
         {
             lbl_interest.setText("Unavailable");
             lbl_interest.setTextFill(Paint.valueOf("#CB503F"));
         }
+        return installment;
     }
     
     private JFXDialog initializeDialog(int tabnum, JFXDialog dialog)
@@ -739,7 +779,6 @@ public class CustomerController implements Initializable
         }
         dialog.setDialogContainer((StackPane)control.getParent().getParent());
         dialog.setTranslateY(translate);
-        
         
         return dialog;
     }

@@ -12,7 +12,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -45,11 +44,11 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="50.0" prefHeight="94.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="76.0" minHeight="50.0" prefHeight="54.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="76.0" minHeight="50.0" prefHeight="54.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="76.0" minHeight="50.0" prefHeight="54.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="76.0" minHeight="50.0" prefHeight="54.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="80.0" minHeight="50.0" prefHeight="80.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="76.0" minHeight="50.0" prefHeight="54.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="76.0" minHeight="50.0" prefHeight="54.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="76.0" minHeight="50.0" prefHeight="54.0" vgrow="NEVER" />
@@ -68,12 +67,7 @@
                                           <JFXTextField fx:id="text_engine" promptText="Engine no" GridPane.rowIndex="6" />
                                           <JFXTextField fx:id="text_seat" promptText="No of seats" GridPane.rowIndex="7" />
                                           <JFXTextField fx:id="text_year" prefWidth="287.0" promptText="Year" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Vehicle ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <TextArea minHeight="57.0" prefHeight="95.0" prefWidth="280.0" promptText="                  Result console" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font name="System Bold" size="14.0" />
-                                             </font>
-                                          </TextArea>
+                                          <JFXTextField fx:id="text_vsearch" promptText="License filter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <JFXButton prefHeight="25.0" prefWidth="135.0" text="Button" GridPane.rowIndex="8" />
                                           <JFXButton fx:id="add_vehicle" buttonType="RAISED" styleClass="buttonS2" text="Add vehicle" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
                                           <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -98,7 +92,7 @@
                                                       </LinearGradient>
                                                    </textFill>
                                                 </JFXButton>
-                                                <JFXButton alignment="CENTER" buttonType="RAISED" styleClass="buttonS2" text="Delete">
+                                                <JFXButton fx:id="btn_delvehicle" alignment="CENTER" buttonType="RAISED" styleClass="buttonS2" text="Delete">
                                                    <textFill>
                                                       <LinearGradient endX="1.0" endY="1.0">
                                                          <stops>
@@ -130,7 +124,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="tab_customer_add1" text="Building details">
+            <Tab text="Building details">
                <content>
                   <AnchorPane fx:id="subanchor_building" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -198,7 +192,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab_customer_add2" text="Bills details">
+            <Tab text="Bills details">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -278,7 +272,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="tab_customer_add3" text="Vehicle details">
+            <Tab text="Vehicle details">
                <content>
                   <AnchorPane fx:id="subanchor_other" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

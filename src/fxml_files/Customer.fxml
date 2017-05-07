@@ -333,11 +333,7 @@
                                                       <Insets top="15.0" />
                                                    </padding>
                                                 </Label>
-                                                <Label fx:id="lbl_interest" prefHeight="29.0" prefWidth="224.0" text="Unavailable" textFill="#fcfafa">
-                                                   <padding>
-                                                      <Insets top="15.0" />
-                                                   </padding>
-                                                </Label>
+                                                <Label fx:id="lbl_interest" prefHeight="38.0" prefWidth="224.0" text="Unavailable" textFill="WHITE" />
                                              </children>
                                           </VBox>
                                        </children>

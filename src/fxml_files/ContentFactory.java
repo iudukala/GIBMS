@@ -125,7 +125,7 @@ public class ContentFactory
         layout.setBody(body);
         layout.setStyle("-fx-background-color: #424242;");
 
-        JFXButton button = new JFXButton("Confirm");
+        JFXButton button = new JFXButton("Okay");
         button.setStyle("-fx-font-family: \"Roboto condensed\"; -fx-font-size: 16; -fx-text-fill: WHITE;");
         layout.setActions(button);
         

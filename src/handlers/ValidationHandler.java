@@ -5,12 +5,15 @@
  */
 package handlers;
 
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.svg.SVGGlyph;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.TextInputControl;
 
 import core.Validator;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -104,6 +107,60 @@ public class ValidationHandler
         }
     }
     
+    public static class NICDOBCrossValidator extends ValidatorBase implements ValidationInterface
+    {
+        final JFXDatePicker datepicker;
+
+        public NICDOBCrossValidator(JFXDatePicker datepicker)
+        {
+            this.datepicker = datepicker;
+            datepicker.valueProperty().addListener(new ChangeListener<LocalDate>()
+            {
+                @Override
+                public void changed(ObservableValue<? extends LocalDate> ov, LocalDate oldValue, LocalDate newValue)
+                {
+                    try{
+                        ((JFXTextField)srcControl.get()).validate();
+                    }
+                    catch(Exception e){}
+                }
+            });
+        }
+        
+        @Override
+        public void eval()
+        {
+            TextInputControl textField = (TextInputControl)srcControl.get();
+            if(!Validator.isNIC(textField.getText()))
+            {
+                message.set("Invalid NIC. (eg : 9595959595V)");
+                fieldInvalid(icon, hasErrors);
+                return;
+            }
+            else if(textField.getText().equals(""))
+            {
+                message.set("NIC cannot be empty");
+                fieldInvalid(icon, hasErrors);
+                return;
+            }
+            else if(datepicker.getValue()!=null)
+            {
+                if(!Validator.isValidDOBNIC(textField.getText(), datepicker.getValue()))
+                {
+                    message.set("NIC inconsistent with DOB");
+                    fieldInvalid(icon, hasErrors);
+                    return;
+                }
+            }
+            hasErrors.set(false);
+        }
+        @Override
+        public void register(JFXTextField textField)
+        {
+            ValidationHandler.register(this, textField);
+        }
+        
+    }
     public static class PhoneValidator extends ValidatorBase implements ValidationInterface
     {
         @Override

@@ -34,7 +34,7 @@
                            <content>
                               <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
-                                    <GridPane hgap="10.0" maxHeight="617.0" prefHeight="617.0" prefWidth="939.0">
+                                    <GridPane hgap="15.0" maxHeight="617.0" prefHeight="617.0" prefWidth="939.0">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="0.0" prefWidth="357.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="0.0" prefWidth="357.0" />
@@ -42,18 +42,18 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="355.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="102.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="102.0" minHeight="6.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="109.0" minHeight="29.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="134.0" minHeight="69.0" prefHeight="69.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="166.0" minHeight="71.0" prefHeight="73.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="167.0" minHeight="25.0" prefHeight="68.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="127.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="234.0" minHeight="24.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="102.0" minHeight="0.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="102.0" minHeight="6.0" prefHeight="68.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="109.0" minHeight="29.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="134.0" minHeight="56.0" prefHeight="56.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="166.0" minHeight="71.0" prefHeight="77.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="167.0" minHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="144.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="234.0" minHeight="24.0" prefHeight="106.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <JFXDatePicker fx:id="bvr_date" prefHeight="29.0" prefWidth="177.0" promptText="Date :" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                                          <HBox fx:id="bvr_hbox" alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="179.0" GridPane.columnIndex="3">
+                                          <JFXDatePicker fx:id="bvr_date" prefHeight="29.0" prefWidth="209.0" promptText="Date :" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                          <HBox fx:id="bvr_hbox" alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="179.0" GridPane.columnIndex="3">
                                              <children>
                                                 <JFXRadioButton fx:id="bvr_voucher" prefHeight="17.0" prefWidth="80.0" text="Voucher">
                                                    <toggleGroup>
@@ -64,7 +64,7 @@
                                              </children>
                                           </HBox>
                                           <JFXTextField fx:id="bvr_totalamount" prefWidth="305.0" promptText="Total Amount :" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                          <Label contentDisplay="CENTER" prefHeight="56.0" prefWidth="406.0" styleClass="headers" text="BANK VOUCHER RECEIPT             " textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                          <Label contentDisplay="TOP" prefHeight="37.0" prefWidth="406.0" styleClass="headers" text="BANK VOUCHER RECEIPT             " textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
@@ -81,7 +81,7 @@
                                           <JFXTextField fx:id="bvr_companyname" promptText="Company Name :" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <JFXTextField fx:id="bvr_transactioncode" promptText="Transaction Code :" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                           <JFXTextField fx:id="bvr_transactionname" promptText="Transaction Name :" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="bvr_paymenttype" promptText="Payment Type :" GridPane.rowIndex="7" />
+                                          <JFXTextField fx:id="bvr_paymenttype" promptText="Payment Type :" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                                           <JFXTextField fx:id="bvr_nic" promptText="NIC :" GridPane.rowIndex="4" />
                                           <JFXTextField fx:id="bvr_narration" promptText="Narration :" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                                           <TableView fx:id="bvr_addmember_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="6">

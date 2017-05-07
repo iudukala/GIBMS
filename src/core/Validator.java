@@ -8,8 +8,8 @@ package core;
 import handlers.dbConcurrent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -81,15 +81,6 @@ public class Validator
     
     public static boolean isInteger(String str)
     {
-//        boolean valid=true;
-//        for(int i=0; i<str.length(); i++)
-//        {
-//            if(! (Character.isDigit(str.charAt(i))))
-//            {
-//                valid=false;
-//                break;
-//            }
-//        }
         try
         {
             Integer.parseInt(str);
@@ -99,23 +90,10 @@ public class Validator
         {
             return false;   
         }
-//        return valid;
     }
     
     public static boolean isDouble(String str)
     {
-//        List<Character> allowed=new ArrayList<>(Arrays.asList('.'));
-//        
-//        boolean valid=true;
-//        for(int i=0; i<str.length(); i++)
-//        {
-//            if(! (Character.isDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
-//            {
-//                valid=false;
-//                break;
-//            }
-//        }
-//        return valid;
         try
         {
             Double.parseDouble(str);
@@ -157,5 +135,12 @@ public class Validator
         LocalDate date = Manipulator.parseISODate(datestr);
         if(date == null)return false;
         return LocalDate.now().compareTo(date) > -1;
+    }
+    
+    public static boolean isValidDOBNIC(String nic, LocalDate dob)
+    {
+        int year = (dob.getYear() % 1000) % 100;
+        boolean valid = nic.startsWith(Integer.toString(year));
+        return valid;
     }
 }

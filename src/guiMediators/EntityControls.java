@@ -9,10 +9,12 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import core.Entity;
 import core.Manipulator;
+import handlers.ValidationHandler;
 import handlers.ValidationInterface;
 import handlers.dbConcurrent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -53,6 +55,7 @@ public class EntityControls
     
     public void add(Object entries[][])
     {
+        List<Control> nic_dob = new ArrayList<>();
         for(int i=0;i<entries.length;i++)
         {
             Object key = entries[i][0];
@@ -65,6 +68,8 @@ public class EntityControls
                 Object validator = entries[i][2];
                 if(ValidationInterface.class.isAssignableFrom(validator.getClass()))
                     add(key.toString(), control, (ValidationInterface)validator);
+                if(validator.getClass().equals(ValidationHandler.NICValidator.class))
+                    nic_dob.add(0, (Control)control);
             }
         }
     }
