@@ -17,31 +17,24 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
+import core.AGData;
 import handlers.ValidationHandler.PhoneValidator;
-import hassim.task;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Toggle;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 /**
@@ -311,6 +304,9 @@ public class CustomerController implements Initializable
         {
             up_person = personControls.getValues();
             up_customer = customerControls.getValues();
+            
+            AGData agd = AGData.getInstance();
+            up_customer.add("customer_id", agd.get("customer_id"));
         }
         else
         {
@@ -520,6 +516,9 @@ public class CustomerController implements Initializable
                 {
                     Entity personS = custable_handle.fetchExtendedSelection("person", "NIC");
                     Entity customerS = custable_handle.fetchExtendedSelection("customer_state", "NIC");
+                    
+                    AGData agd = AGData.getInstance();
+                    agd.add("customer_id", customerS.getObject("customer_id"));
 
                     personControls.setValues(personS);
                     customerControls.setValues(customerS);
@@ -531,6 +530,8 @@ public class CustomerController implements Initializable
                 }
             }
         });
+        
+        
         
         Commons.subAnchorButton dcsab = new Commons.subAnchorButton(subanchor_tcs, "DELETE RECORD", Commons.DELETE_GLYPH);
         dcsab.setButtonDepth(1);

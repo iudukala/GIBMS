@@ -26,6 +26,7 @@ import java.util.Map.Entry;
  */
 
 class OverrideString{}
+class OverrideObject{}
 
 public class Entity
 {
@@ -69,7 +70,9 @@ public class Entity
         key = key.toLowerCase();
         if(data.containsKey(key))
         {
-            if(reqClass.equals(OverrideString.class))
+            if(reqClass.equals(OverrideObject.class))
+                return data.get(key);
+            else if(reqClass.equals(OverrideString.class))
                 return data.get(key).toString();
             else if(data.get(key).getClass().equals(reqClass))
                 return data.get(key);
@@ -93,7 +96,7 @@ public class Entity
     }
     public Object getObject(String key)
     {
-        return get(key, Object.class);
+        return get(key, OverrideObject.class);
     }
     public String getString(String key)
     {
