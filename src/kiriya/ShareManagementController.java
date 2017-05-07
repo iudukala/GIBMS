@@ -45,6 +45,7 @@ public class ShareManagementController implements Initializable
     EntityControls searchShareCont;
     EntityControls addShareCont;
     EntityControls labelCont;
+    EntityControls stockShareCont;
     
     
     JFXTabPane jfxtabpane_shareholder;
@@ -151,6 +152,8 @@ public class ShareManagementController implements Initializable
     private JFXButton approve_share;
     @FXML
     private JFXButton reject_share;
+    @FXML
+    private JFXButton share_btn;
 
     /**
      * Initializes the controller class.
@@ -171,7 +174,7 @@ public class ShareManagementController implements Initializable
         setPersonInput();
         tabPane();
         addShares();
-        
+        btndisable();
    
    
     }
@@ -227,46 +230,52 @@ public class ShareManagementController implements Initializable
   
                 person = search_cont.getValues();
                 person.update();
-                //search_cont.clearControls();
+                search_cont.clearControls();
                 
                 shareholder=searchShareCont.getValues();
                 shareholder.update();
-                //searchShareCont.clearControls();
+                searchShareCont.clearControls();
                 }
             catch(Exception ex)
             {
             System.out.println("nullpointer no inputs");
                
             }
-//            custable_handle = new tableViewHandler(u_table,"select p.nic, p.full_name,p.dob,p.address,p.phone,p.email,s.share_amount , s.share_price ,"
-//                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
-//               custable_handle.writeToTable();
-//            
+            custable_handle = new tableViewHandler(u_table,"select p.nic, p.full_name,p.dob,p.address,p.phone,p.email,s.share_amount , s.share_price ,"
+                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
+               custable_handle.writeToTable();
+            
 
             }
         });
         
-        Commons.subAnchorButton zvb = new Commons.subAnchorButton(achor_add_shares, "ADD SHARES", Commons.ADD_PERSON_GLYPH);
-     
-        zvb.setCoordinates(530, 230);
-        JFXButton addSharesBtn=zvb.getButton();
-     
-           addSharesBtn.setOnAction(new EventHandler<ActionEvent>()
+       share_btn.setOnAction(new EventHandler<ActionEvent>()
                 {
             @Override
             public void handle(ActionEvent e)
             {   
-                Entity share = addShareCont.getValues();
-                share.validate(true);
-                share.consolidate(); 
-                addShareCont.clearControls();
+             
                 
+                Entity shares;
+    
+            try
+            {
+  
+                shares = addShareCont.getValues();
+                shares.update();
+                addShareCont.clearControls();
+            }
+            catch(Exception ex)
+            {
+                
+                
+          }      
             }   
                 
             });
          
         Commons.subAnchorButton abcc = new Commons.subAnchorButton(anchor_view, "DELETE SHARES", Commons.DELETE_GLYPH);
-        
+        abcc.setGlyphWidth(20);
         JFXButton deleteButton=abcc.getButton();
         
         deleteButton.setOnAction(new EventHandler<ActionEvent>()
@@ -337,10 +346,7 @@ public class ShareManagementController implements Initializable
             {
                 int share_amount = Integer.parseInt(viewTable.getSelection().getAsString("share_amount"));
                 System.out.println(share_amount);
-                //viewTable=new tableViewHandler(app_table,"update shareholder set share_amount",nbconn);
-//                Entity.parseFromQuery("update shares set shares= share_amount - "+share_amount,nbconn);
-//                Entity.parseFromQuery("select share_amount from shareholer",nbconn).get(0).getAsString("share_amount");
-//                
+     
                 
                 
                 Entity shareholder_approval = viewTable.fetchExtendedSelection("shareholder", "nic");
@@ -363,36 +369,7 @@ public class ShareManagementController implements Initializable
                  update_shares.add("shares",amt);
                  update_shares.update();
                  
-                 stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));
-//                 String query =  "update shares set shares= shares - "+share_amount+" where share_id = '1'";
-//                 System.out.print(query);
-//               Entity.parseFromQuery(query,nbconn);
-
-                 /*
-                 Entity update_shares=new Entity("shares",nbconn);
-                 update_shares.add("share_id",1);
-                 update_shares.add("shares","shares - "+share_amount);
-                 update_shares.update();
-*/
-           //    stockss.setText(Entity.parseFromQuery("select share_amount from shareholer",nbconn).get(0).getAsString("share_amount"));
-
-
-                // stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));    
-//               Entity sha=viewTable.fetchExtendedSelection("shareholder", "share_amount");
-//               Entity saha=viewTable.fetchExtendedSelection("shares", "shares");
-//               //int z=saha-sha;
-               
-//                 
-//            
-//        int x=Integer.parseInt(a_shareamount.getText());
-//        int y=Integer.parseInt(stockss.getText());
-//        
-//        int z=y-x;
-//        System.out.println(z);
-        
-        //Entity.parseFromQuery("select share_amount from shareholer",nbconn).get(0).getAsString("share_amount");
-
-            
+                 stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));  
             }
         });
         
@@ -436,14 +413,49 @@ public class ShareManagementController implements Initializable
 //                {
                     stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));
 //                }
-                    
+             
+
+            
             }
         });
+    }
+    public void btndisable()
+    {
+          jfxtabpane_shareholder.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
+        {
+            
+             
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
+            {
+                
+                if(newValue!=null)
+                {
+                    int asd = Integer.parseInt(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));
+                    
+                     
+                    if(asd!=0)
+                    
+                    {
+                       share_btn.setDisable(true);
+                       
+                    }
+                     else 
+                    {
+                       share_btn.setDisable(false);
+                       
+                    }
+                    
+               
+                }
+            }
+        });
+    
     }
       public void initializePersonInputs()
     {
         personCont= new EntityControls("person", nbconn);
-        personCont.add("nic", a_nic, new NICValidator());
+        personCont.add("nic", a_nic, new NICDOBCrossValidator(a_dob));
         personCont.add("full_name", a_fullname);
         personCont.add("email", a_email, new EmailValidator());
         personCont.add("dob", a_dob, new birthdayValidator());
@@ -455,7 +467,7 @@ public class ShareManagementController implements Initializable
         shareholderCont = new EntityControls("shareholder",nbconn);
         shareholderCont.add("nic", a_nic, new NICValidator());
         shareholderCont.add("share_amount", a_shareamount, new IntegerValidator(maximum_share_amount));
-        shareholderCont.add("share_price", a_shareprice, new DoubleValidator());
+        shareholderCont.add("share_price", a_shareprice, new DoubleValidator(maximum_share_price));
         shareholderCont.add("account_no", a_accountno);
         shareholderCont.add("bank_name", a_bankname);
         shareholderCont.add("issue_date", a_dateofissue, new pastDateValidator());
@@ -467,7 +479,7 @@ public class ShareManagementController implements Initializable
        {
             search_cont = new EntityControls("person",nbconn);
 
-            search_cont.add("nic", u_nic,new NICValidator() );
+            search_cont.add("nic", u_nic, new NICDOBCrossValidator(u_dob) );
             search_cont.add("full_name", u_fullname);
             search_cont.add("email", u_email, new EmailValidator());
             search_cont.add("dob", u_dob, new birthdayValidator());
@@ -481,8 +493,8 @@ public class ShareManagementController implements Initializable
             searchShareCont = new EntityControls("shareholder",nbconn);
 
             searchShareCont.add("nic", u_nic,new NICValidator());
-            searchShareCont.add("share_amount", u_shareamount,new IntegerValidator());
-            searchShareCont.add("share_price", u_shareprice, new DoubleValidator());
+            searchShareCont.add("share_amount", u_shareamount,new IntegerValidator(maximum_share_amount));
+            searchShareCont.add("share_price", u_shareprice, new DoubleValidator(maximum_share_price));
             searchShareCont.add("account_no", u_accountno);
             searchShareCont.add("bank_name", u_bankname);
             searchShareCont.add("issue_date", u_dateofissue, new pastDateValidator());

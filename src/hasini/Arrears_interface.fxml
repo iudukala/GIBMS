@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -45,6 +44,7 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Arrears Management" textFill="WHITE">
@@ -52,22 +52,15 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXDatePicker promptText="Loan Date" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="First Name" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXTextField promptText="Loan Amount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="s_nic" promptText="NIC" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="s_fname" promptText="Full Name" GridPane.rowIndex="2" />
                                           <JFXButton fx:id="e_search" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-                                             <children>
-                                                <TableView fx:id="man_table" prefHeight="200.0" prefWidth="200.0">
-                                                  <columns>
-                                                    <TableColumn prefWidth="75.0" text="C1" />
-                                                    <TableColumn prefWidth="75.0" text="C2" />
-                                                  </columns>
-                                                </TableView>
-                                             </children>
-                                          </HBox>
+                                          <TableView fx:id="man_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -96,12 +89,17 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="127.0" minHeight="83.0" prefHeight="102.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="97.0" minHeight="53.0" prefHeight="78.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="127.0" minHeight="67.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="138.0" minHeight="43.0" prefHeight="47.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="175.0" minHeight="42.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="212.0" minHeight="34.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="248.0" minHeight="35.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="276.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="285.0" minHeight="80.0" prefHeight="94.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="285.0" minHeight="38.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="285.0" minHeight="33.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="285.0" minHeight="0.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="285.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Arrears Edit" textFill="WHITE">
@@ -119,6 +117,12 @@
                                           <JFXDatePicker fx:id="e_lastPaymentDate" promptText="Last Payment Date" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                           <JFXTextField fx:id="e_lastPaymentAmount" promptText="Last Payment Amount" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <JFXTextField fx:id="e_outstandingAmount" promptText="Outstanding Amount" GridPane.rowIndex="4" />
+                                          <TableView fx:id="e_table" prefHeight="241.0" prefWidth="857.0" GridPane.columnSpan="3" GridPane.rowIndex="6" GridPane.rowSpan="4">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

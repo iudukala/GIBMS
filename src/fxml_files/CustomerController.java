@@ -21,6 +21,7 @@ import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import core.AGData;
 import handlers.ValidationHandler.PhoneValidator;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -37,6 +38,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  * FXML Controller class
  *
@@ -281,6 +287,9 @@ public class CustomerController implements Initializable
             return;
         }
         
+        System.out.println(person);
+        System.out.println(customer);
+        
         if(!spouseControls.isDisabled())
         {
             spouse = spouseControls.getValues();
@@ -288,15 +297,15 @@ public class CustomerController implements Initializable
             {
                 spouse.add("customer_id", customer.getAGKey());
                 spouse.validate(true);
-                spouse_stat = spouse.consolidate();
+                //spouse_stat = spouse.consolidate();
+                if(spouse.getAGKey()!=null)
+                    customer.add("spouse_id", spouse.getAGKey());
             }
         }
         else
             spouse_stat = 0;
 
         person_stat = person.consolidate();
-        if(spouse.getAGKey()!=null)
-            customer.add("spouse_id", spouse.getAGKey());
         customer_stat = customer.consolidate();
 
         if(person_stat == 0 && customer_stat == 0 && spouse_stat ==0)
@@ -632,6 +641,26 @@ public class CustomerController implements Initializable
     
     private void initializeLoanControls()
     {
+        //ireportmarker
+        btn_loansearch.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/isuru1.jrxml";
+                    JasperReport jr =JasperCompileManager.compileReport(path);
+                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
+        
         rb_lmonthly.setUserData("M");
         rb_lpaycheck.setUserData("P");
         rb_lbank.setUserData("B");
@@ -845,26 +874,26 @@ public class CustomerController implements Initializable
     
     private JFXDialog initializeDialog(int tabnum, JFXDialog dialog)
     {
-        Control control;
-        int translate = 0;
-        switch(tabnum)
-        {
-            case 1:
-                control = text_nic;
-                translate = -445;
-                break;
-            case 2:
-                control = text_lcid;
-                translate = -445;
-                break;
-            case 3:
-                control = text_csname;
-                break;
-            default:
-                return null;
-        }
-        dialog.setDialogContainer((StackPane)control.getParent().getParent());
-        dialog.setTranslateY(translate);
+//        Control control;
+//        int translate = 0;
+//        switch(tabnum)
+//        {
+//            case 1:
+//                control = text_nic;
+//                translate = -445;
+//                break;
+//            case 2:
+//                control = text_lcid;
+//                translate = -445;
+//                break;
+//            case 3:
+//                control = text_csname;
+//                break;
+//            default:
+//                return null;
+//        }
+//        dialog.setDialogContainer((StackPane)control.getParent().getParent());
+//        dialog.setTranslateY(translate);
         
         return dialog;
     }
