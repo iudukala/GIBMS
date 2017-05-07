@@ -524,7 +524,7 @@ public class Entity
                 strb.append(Manipulator.formatTabs(counter++,COL_COUNTER,true));
             
             strb.append(Manipulator.formatTabs("| " + entry.getKey(),COL1,true))
-                    .append(Manipulator.formatTabs(Manipulator.getClassStr(entry),COL2,true))
+                    .append(Manipulator.formatTabs(Manipulator.getClassStr(entry.getValue()),COL2,true))
                     .append(entry.getValue());   
         }
         return strb.append("\n").toString();
@@ -577,11 +577,22 @@ public class Entity
         PreparedStatement prp;
         try
         {
+            //testingmarker
+            System.out.println(strb.toString());
+            System.out.println(this.toString());
             prp = nbconn.get().prepareStatement(update_string);
             for(Iterator<Object> iterator = fields.iterator(); iterator.hasNext();)
-                prp.setObject(++counter, recastJavaObject(iterator.next()));
+            {
+                //testingmarker
+                Object nextobj = iterator.next();
+                prp.setObject(++counter, recastJavaObject(nextobj));
+            }
             for(Iterator<String> iterator = primaryKeys.iterator(); iterator.hasNext();)
-                prp.setObject(++counter, recastJavaObject(data.get(iterator.next())));
+            {
+                //testingmarker
+                Object nextobj = iterator.next();
+                prp.setObject(++counter, recastJavaObject(data.get(nextobj)));
+            }
             prp.executeUpdate();
             
             strb.append("executed successfully\nPrimary keyset : ");

@@ -125,7 +125,6 @@
                                              </children>
                                           </HBox>
                                           <JFXDatePicker fx:id="date_empl_start" prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />
-                                          <JFXTextField fx:id="text_profession" promptText="Profession (if self employed)" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="297.0" styleClass="headers" text="FINANCIAL INFORMATION" textFill="WHITE" GridPane.rowIndex="8">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />

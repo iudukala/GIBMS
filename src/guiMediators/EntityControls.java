@@ -127,16 +127,24 @@ public class EntityControls
     
     public Entity getValues()
     {
-        int countx=0;
-        
         entity = new Entity(TABLE_NAME, nbconn);
+        List<String> primaryKeys = entity.fetchPrimaryKeys();
+        
         for(Entry<String,Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();
             Object control = entry.getValue();
             
+            boolean disabled_pkey = false;
+            for(Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext();)
+            {
+                String pkey = iterator.next();
+                if(key.equals(pkey))
+                    disabled_pkey = true;
+            }
+            
             if(control.getClass().equals(JFXTextField.class) || control.getClass().equals(JFXDatePicker.class))
-                if(((Control)control).isDisabled())
+                if(((Control)control).isDisabled() && !disabled_pkey)
                     continue;
             try
             {
@@ -174,7 +182,10 @@ public class EntityControls
                         }
                 }
             }
-            catch(Exception e){System.out.println(entry.getValue() + "nulhhhl" + countx++);}
+            catch(Exception e)
+            {
+                System.out.println("Nullvalue detected: " + entry.getKey() + " - " + entry.getValue());
+            }
         }
         return entity;
     }

@@ -130,8 +130,6 @@ public class CustomerController implements Initializable
     @FXML
     private JFXTextField text_spland;
     @FXML
-    private JFXTextField text_profession;
-    @FXML
     private JFXRadioButton rb_permanent;
     @FXML
     private JFXRadioButton rb_temporary;
@@ -411,7 +409,6 @@ public class CustomerController implements Initializable
             {"position", text_position},
             {"emp_startdate", date_empl_start, new pastDateValidator()},
             {"service_nature",tgroup_servicetype},
-            {"profession", text_profession},
             {"account_num", text_accnum},
             {"account_branch", text_accbranch},
             {"account_bank", text_accbank},
