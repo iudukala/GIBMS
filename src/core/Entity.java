@@ -758,6 +758,7 @@ public class Entity
             strb = new StringBuilder("[" + tablename + "] Record deleted successfully: ");
             for(Object key : primaryKeys)
                 strb.append("{").append(key).append(" : ").append(data.get(key)).append("}\t");
+            //testingmarker
             System.out.println(strb);
             
             return true;

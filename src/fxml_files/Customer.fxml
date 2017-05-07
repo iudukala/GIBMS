@@ -364,11 +364,13 @@
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
                                           <Label alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="249.0" styleClass="headers" text="CUSTOMER SEARCH " textFill="WHITE">
@@ -381,8 +383,8 @@
                                                 <Insets bottom="20.0" />
                                              </GridPane.margin>
                                           </Line>
-                                          <JFXTextField fx:id="text_csnic" promptText="Search via NIC" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="text_csname" promptText="Search via name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="text_csnic" promptText="NIC" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="text_csname" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <JFXButton fx:id="btn_custsearch" buttonType="RAISED" prefHeight="38.0" prefWidth="94.0" styleClass="buttonS2" text="SEARCH" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets />
@@ -397,6 +399,12 @@
                                                 <Insets bottom="20.0" />
                                              </GridPane.margin>
                                           </Line>
+                                          <JFXTextField fx:id="text_cscompany" promptText="Company" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="text_csaddress" promptText="Address" GridPane.rowIndex="2" />
+                                          <Label styleClass="subheaders" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                                          <Label styleClass="subheaders" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                                          <Label styleClass="subheaders" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+                                          <JFXButton fx:id="btn_loansearch" buttonType="RAISED" prefHeight="38.0" prefWidth="94.0" styleClass="buttonS2" text="SEARCH" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
                                        </children>
                                        <padding>
                                           <Insets left="20.0" right="20.0" />

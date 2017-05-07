@@ -131,15 +131,15 @@ public class ValidationHandler
         public void eval()
         {
             TextInputControl textField = (TextInputControl)srcControl.get();
-            if(!Validator.isNIC(textField.getText()))
+            if(textField.getText().equals(""))
             {
-                message.set("Invalid NIC. (eg : 9595959595V)");
+                message.set("NIC cannot be empty");
                 fieldInvalid(icon, hasErrors);
                 return;
             }
-            else if(textField.getText().equals(""))
+            else if(!Validator.isNIC(textField.getText()))
             {
-                message.set("NIC cannot be empty");
+                message.set("Invalid NIC. (eg : 9595959595V)");
                 fieldInvalid(icon, hasErrors);
                 return;
             }

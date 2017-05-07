@@ -111,7 +111,7 @@ public class tableViewHandler
         }
         
         //testingmarker
-        System.out.println(exsearch_query);
+        System.out.println("Search query: " + exsearch_query);
         Entity selected_entity;
         try{
             prp = nbconn.get().prepareStatement(exsearch_query);

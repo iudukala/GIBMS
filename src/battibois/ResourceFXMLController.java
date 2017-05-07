@@ -78,21 +78,15 @@ public class ResourceFXMLController implements Initializable
     @FXML
     private StackPane stack_add;
     @FXML
-    private Tab tab_customer_add1;
-    @FXML
     private ScrollPane scroll_add1;
     @FXML
     private StackPane stack_add1;
-    @FXML
-    private Tab tab_customer_add2;
     @FXML
     private ScrollPane scroll_add2;
     @FXML
     private StackPane stack_add2;
     @FXML
     private JFXTextField text_nic2;
-    @FXML
-    private Tab tab_customer_add3;
     @FXML
     private ScrollPane scroll_add3;
     @FXML
@@ -171,6 +165,7 @@ public class ResourceFXMLController implements Initializable
     
     private tableViewHandler tableVehicle_handle;
     private tableViewHandler tableBuilding_handle;
+    private tableViewHandler tableOther_handle;
     
     
     @Override
@@ -181,8 +176,11 @@ public class ResourceFXMLController implements Initializable
         
         initializeVehicleInputs();
         initializeBuildingInputs();
+        initializeOtherInputs();
         
         tableVehicle_handle.writeToTable();
+        tableBuilding_handle.writeToTable();
+        tableOther_handle.writeToTable();
         tabpane_resource.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>()
         {
             @Override
@@ -192,6 +190,8 @@ public class ResourceFXMLController implements Initializable
                     tableVehicle_handle.writeToTable();
                 else if((int)newValue == 1)
                     tableBuilding_handle.writeToTable();
+                else if((int)newValue == 2)
+                    tableOther_handle.writeToTable();
             }
         });
     }
@@ -340,6 +340,167 @@ public class ResourceFXMLController implements Initializable
                 }
             }
         });
+        
+         btn_searchbul.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                Entity builsearch = new Entity("select * from building", nbconn);
+                builsearch.add("", building_ID.getText());
+               // tableVehicle_handle.writeToTable(vsearch.executeAsSearch());       
+            }
+        });
+        
+        btn_selectbuil.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                buildingControls.setValues(tableBuilding_handle.getSelection());
+            }
+        });
+        
+        btn_upbuilding.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity building;
+                if(buildingControls.triggerValidators())
+                {
+                    building = buildingControls.getValues();
+                }
+                else
+                {
+                    displayDialog(1, "building", 2);
+                    return;
+                }
+                
+                if(building.update())
+                {
+                    displayDialog(0, "building", 2);
+                }
+            }
+        });
+        
+        btn_delbul.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                if(tableBuilding_handle.getSelection().deleteFromDB())
+                {
+                    displayDialog(0, "building", 3);
+                }
+                tableBuilding_handle.writeToTable();
+            }
+        });
+    }
+    
+    public void initializeOtherInputs()
+    {
+        tableOther_handle = new tableViewHandler(table_other,"select * from other_bill;",nbconn);
+        
+        otherControls = new EntityControls("other",nbconn);
+        otherControls.add(new Object[][]
+        {
+            {"bill no", other_no},
+            {"category", other_cat},
+            {"date", other_date},
+            {"price", other_price},
+            {"usage", other_use},
+            {"quantity", other_qun},
+            {"description", other_des},
+
+        });
+        
+        other_add.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity other = null;
+                if(otherControls.triggerValidators())
+                {
+                    other = otherControls.getValues();
+                }
+                else
+                {
+                    displayDialog(1, "other", 1);
+                }
+                try
+                {
+                    int otherStatus=other.consolidate();
+                    if(otherStatus == 0)
+                    {
+                        otherControls.clearControls();
+                        displayDialog(0, "other", 1);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    displayDialog(1, "other", 1);
+                }
+            }
+        });
+        
+        other_search.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                Entity osearch = new Entity("select * from other", nbconn);
+                osearch.add("bill_ID", text_vsearch.getText());
+                tableOther_handle.writeToTable(osearch.executeAsSearch());       
+            }
+        });
+        
+        select_other.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                otherControls.setValues(tableOther_handle.getSelection());
+            }
+        });
+        
+        other_up.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity other;
+                if(otherControls.triggerValidators())
+                {
+                    other = otherControls.getValues();
+                }
+                else
+                {
+                    displayDialog(1, "other", 2);
+                    return;
+                }
+                
+                if(other.update())
+                {
+                    displayDialog(0, "other", 2);
+                }
+            }
+        });
+        
+        other_del.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                if(tableOther_handle.getSelection().deleteFromDB())
+                {
+                    displayDialog(0, "other", 3);
+                }
+                tableOther_handle.writeToTable();
+            }
+        });
+        
     }
     
     public void displayDialog(int status, String recordtype, int optype)
@@ -392,6 +553,9 @@ public class ResourceFXMLController implements Initializable
                 break;
             case 2:
                 control = build_address;
+                break;
+            case 3:
+                control = other_no;
                 break;
             default:
                 return null;
