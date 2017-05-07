@@ -96,8 +96,8 @@
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
+                                          <RowConstraints maxHeight="127.0" minHeight="83.0" prefHeight="102.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="97.0" minHeight="53.0" prefHeight="78.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
@@ -109,17 +109,16 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField fx:id="e_nic" promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="e_customerID" promptText="Customer ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="e_fname" promptText="First Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="e_lname" promptText="Last Name" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="e_address" promptText="Address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="e_loanAmount" promptText="Loan Amount" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXDatePicker fx:id="e_loanDate" promptText="Loan Date" GridPane.rowIndex="3" />
-                                          <JFXDatePicker fx:id="e_dueDate" promptText="Due Date" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <JFXDatePicker fx:id="e_lastPaymentDate" promptText="Last Payment Date" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <JFXTextField fx:id="e_lastPaymentAmount" promptText="Last Payment Amount" GridPane.rowIndex="4" />
-                                          <JFXTextField fx:id="e_outstandingAmount" promptText="Outstanding Amount" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <JFXTextField fx:id="e_nic" promptText="NIC" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="e_customerID" promptText="Customer ID" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="e_fname" promptText="Full Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="e_address" promptText="Address" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="e_loanAmount" promptText="Loan Amount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <JFXDatePicker fx:id="e_loanDate" promptText="Loan Date" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <JFXDatePicker fx:id="e_dueDate" promptText="Due Date" GridPane.rowIndex="3" />
+                                          <JFXDatePicker fx:id="e_lastPaymentDate" promptText="Last Payment Date" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="e_lastPaymentAmount" promptText="Last Payment Amount" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="e_outstandingAmount" promptText="Outstanding Amount" GridPane.rowIndex="4" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

@@ -12,7 +12,6 @@ import core.Entity;
 import core.Integrator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
-import handlers.DynamicTable;
 import handlers.ValidationHandler;
 import handlers.dbConcurrent;
 import java.net.URL;
@@ -34,47 +33,68 @@ public class Arrears_interfaceController implements Initializable {
     
     EntityControls personCont;
     EntityControls arrearsCont;
+    EntityControls search_cont;
+    EntityControls searchArrearsCont;
+    EntityControls addArreasCont;
+    EntityControls labelCont;
+    
+    //private tableViewHandler man_table;
     
     dbConcurrent nbconn;
 
     @FXML
     private AnchorPane anchorpane;
+    
     @FXML
     private TabPane tabpane;
+    
     @FXML
     private JFXButton e_search;
+    
     @FXML
     private JFXTextField e_nic;
+    
     @FXML
     private JFXTextField e_customerID;
+    
     @FXML
     private JFXTextField e_fname;
-    @FXML
-    private JFXTextField e_lname;
+    
     @FXML
     private JFXTextField e_address;
+    
     @FXML
     private JFXTextField e_loanAmount;
+    
     @FXML
     private JFXDatePicker e_loanDate;
+    
     @FXML
     private JFXDatePicker e_dueDate;
+    
     @FXML
     private JFXDatePicker e_lastPaymentDate;
+    
     @FXML
     private JFXTextField e_lastPaymentAmount;
+    
     @FXML
     private JFXTextField e_outstandingAmount;
+    
     @FXML
     private AnchorPane anchor_man;
+    
     @FXML
     private AnchorPane anchor_edit;
+    
     @FXML
     private AnchorPane anchor_list;
+    
     @FXML
     private TableView<?> man_table;
+    
 
-    /**
+   /**
      * Initializes the controller class.
      */
     @Override
@@ -82,16 +102,19 @@ public class Arrears_interfaceController implements Initializable {
         
         nbconn = dbConcurrent.getInstance();
         
+        
          Integrator.integrate(anchorpane);
          
-        //initializeNodes();
-        //initializeRadioButtons();
+        initializeNodes();
+        initializeRadioButtons();
         initializePersonInputs();
         initializeArrearsInputs();
         initializeButton();
-        
-     /*   DynamicTable.getColumns(nbconn.get() , "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-"from person p ,shareholder s where p.nic=s.nic" , man_table);*/
+        initializeLoanControls();
+        //setarrearsInput();
+       // setPersonInput();
+        tabPane();
+       
          
     }    
     
@@ -116,55 +139,85 @@ public class Arrears_interfaceController implements Initializable {
             public boolean validatePersonInputs(){
                 return personCont.triggerValidators();
             }
+            private EntityControls loanControls;
 
     private void initializeButton() {
         
         
-//        Commons.subAnchorButton asab = new Commons.subAnchorButton();
-//        asab.setButtonLength(200);
-//        JFXButton addButton = asab.getButton(anchor_edit, "ADD Arrears", Commons.ADD_PERSON_GLYPH);
-//        
-//           addButton.setOnAction(new EventHandler<ActionEvent>() {
-//               
-//               
-//            @Override
-//            public void handle(ActionEvent event) {
-//                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                
-//                Entity person = getPersonInputs();
-//                System.out.println(person.validate(true));
-//                person.consolidate();
-//                
-//                
-//                Entity arrears = getarrearsInputs();
-//                System.out.println(arrears.validate(true));
-//                arrears.consolidate();
-//            }  
-//        });
+        Commons.subAnchorButton asab = new Commons.subAnchorButton(anchor_edit, "ADD Arrears", Commons.ADD_PERSON_GLYPH);
+        asab.setButtonLength(200);
+        JFXButton addButton = asab.getButton();
+        
+           addButton.setOnAction(new EventHandler<ActionEvent>() {
+               
+               
+            @Override
+            public void handle(ActionEvent event) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
+               Entity person = personCont.getValues();
+                person.validate(true);
+                int p=person.consolidate();
+                
+                Entity arrears = arrearsCont.getValues();
+                arrears.validate(true);
+                int a=arrears.consolidate();
+                
+                if(p == 0 && a ==0)
+                {
+                
+                personCont.clearControls();
+                arrearsCont.clearControls();
+                
+                }
+            }  
+        });
     }
 
     private void initializeArrearsInputs() {
         
-         arrearsCont = new EntityControls("arrears",nbconn);
-         
-         //ValidationHandler.NICValidator.register(e_nic);
-        arrearsCont.add("nic", e_nic);
+         arrearsCont = new EntityControls("arrears_edit",nbconn);
+         new ValidationHandler.ExistingNICValidator(nbconn).register(e_nic);
+     
+        arrearsCont.add("customer_id",e_customerID);
+        arrearsCont.add("nic", e_nic, new ValidationHandler.NICValidator());
+        arrearsCont.add("full_name", e_fname);
+        arrearsCont.add("address", e_address);
+        arrearsCont.add("loan_amount",e_loanAmount);
+        arrearsCont.add("loan_date",e_loanDate);
+        arrearsCont.add("due_date",e_dueDate);
+        arrearsCont.add("last_payment_date",e_lastPaymentDate);
+        arrearsCont.add("last_payment_amount",e_lastPaymentAmount);
+        arrearsCont.add("outstanding_amount",e_outstandingAmount);
         
     }
 
     private void initializePersonInputs() {
         
         personCont= new EntityControls("person", nbconn);
-        
-        //ValidationHandler.NICValidator.register(e_nic);
-        personCont.add("nic", e_nic);
-        
-        personCont.add("full_name", e_lname);
-     
-        //ValidationHandler.PhoneValidator.register(a_phone);
-        //personCont.add("phone", a_phone);
-        
+        personCont.add("nic", e_nic, new ValidationHandler.NICValidator());
+        personCont.add("full_name", e_fname);
         personCont.add("address", e_address);
     }
-    
+
+    private void initializeLoanControls() {
+        loanControls = new EntityControls("loanplan", nbconn);
+        loanControls.add(new Object[][]
+        {
+            {"customer_id", e_customerID},
+            {"amount", e_loanAmount},
+    });
+    }
+
+    private void initializeNodes() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void initializeRadioButtons() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void tabPane() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
