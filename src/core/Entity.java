@@ -581,8 +581,8 @@ public class Entity
         try
         {
             //testingmarker
-            System.out.println(strb.toString());
-            System.out.println(this.toString());
+            //System.out.println(strb.toString());
+            //System.out.println(this.toString());
             prp = nbconn.get().prepareStatement(update_string);
             for(Iterator<Object> iterator = fields.iterator(); iterator.hasNext();)
             {
