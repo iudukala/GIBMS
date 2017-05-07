@@ -316,6 +316,7 @@ public class ValidationHandler
         public void eval()
         {
             TextInputControl textField = (TextInputControl) srcControl.get();
+            System.out.println(textField.getText());
             if (Validator.isPastDate(textField.getText()) || textField.getText().equals(""))
             {
                 hasErrors.set(false);

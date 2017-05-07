@@ -259,41 +259,9 @@ public class CustomerController implements Initializable
             }
         });
     }
-        
-//        task_addperson.setOnSucceeded(new EventHandler<WorkerStateEvent>()
-//        {
-//            @Override
-//            public void handle(WorkerStateEvent event)
-        public void displayDialog(int status, int type)
-        {
-            String recordtype = (type==1)?"Customer ":"Loan ";
-            switch (status)
-            {
-                case 0:
-                    try{dialog.close();}catch(Exception ex){}
-                    dialog = initializeDialog(1, ContentFactory.getDialog("CONSOLIDATION SUCESSFUL", recordtype + "record added to database successfully", 1));
-                    dialog.show();
-                    break;
-                case 1:
-                    try{dialog.close();}catch(Exception ex){}
-                    dialog = initializeDialog(1, ContentFactory.getDialog("REQUIRED FIELDS EMPTY", "Please fill out all required fields before adding a new record", 2));
-                    dialog.show();
-                    break;
-                case 2:
-                    try{dialog.close();}catch(Exception ex){}
-                    dialog = initializeDialog(1, ContentFactory.getDialog("CONSOLIDATION FAILED", "New record addition failed due to an internal error", 2));
-                    dialog.show();
-                    break;
-                default:
-                    break;
-            }
-        }
     
-//    Task<Integer> task_addperson = new Task<Integer>()
-//    {
-//        @Override
-//        protected Integer call() throws Exception
-    private int add_person()
+    
+    private void add_person()
     {
         int person_stat = -1, customer_stat = -1, spouse_stat = -1;
         Entity person ,customer, spouse;
@@ -304,7 +272,10 @@ public class CustomerController implements Initializable
             customer = customerControls.getValues();
         }
         else
-            return 1;
+        {
+            displayDialog(1, "customer", 1);
+            return;
+        }
 
         person_stat = person.consolidate();
         customer_stat = customer.consolidate();
@@ -327,13 +298,51 @@ public class CustomerController implements Initializable
             personControls.clearControls();
             customerControls.clearControls();
             spouseControls.clearControls();
-            return 0;
+            
+            displayDialog(0, "customer", 1);
         }
         else
-            return 2;
-     }
+            displayDialog(1, "customer", 1);
+    }
+    
+    private void update_customer()
+    {
+        Entity up_person ,up_customer, up_spouse;
 
-    private int add_loan()
+        if(personControls.triggerValidators() && customerControls.triggerValidators())
+        {
+            up_person = personControls.getValues();
+            up_customer = customerControls.getValues();
+        }
+        else
+        {
+            displayDialog(1, "customer", 2);
+            return;
+        }
+
+        up_person.update();
+        up_customer.update();
+
+//        if(!spouseControls.isDisabled())
+//        {
+//            up_spouse = spouseControls.getValues();
+//            if(spouseControls.triggerValidators())
+//            {
+//                //up_spouse.add("customer_id", up_customer.getAGKey());
+//                up_spouse.validate(true);
+//                up_spouse.update();
+//            }
+//        }
+        
+        personControls.clearControls();
+        customerControls.clearControls();
+        spouseControls.clearControls();
+
+        displayDialog(0, "customer", 2);
+    }
+    
+    
+    private void add_loan()
     {
         Entity loanplan, guarantor1, guarantor2;
         int loanstat, g1stat, g2stat;
@@ -341,27 +350,28 @@ public class CustomerController implements Initializable
         {
             loanplan = loanControls.getValues();
             loanplan.add("monthly_installment", calculate_interest());
+            
             guarantor1 = guar1Controls.getValues();
-            
-            System.out.println(guarantor1);
-            
             guarantor2 = guar2Controls.getValues();
-            
-            System.out.println(guarantor2);
         }
         else
-            return 1;
+        {
+            displayDialog(1, "loan", 1);
+            return;
+        }
         
         loanstat = loanplan.consolidate();
         g1stat = guarantor1.consolidate();
         g2stat = guarantor2.consolidate();
         
-        
-        return 0;
+        displayDialog(0, "loan", 1);
     }
     
     public void initializeCustomerControls()
     {
+        custable_handle = new tableViewHandler(table_customer_search, "select * from customer_view", nbconn);
+        
+        
         rb_male.setUserData("M");
         rb_female.setUserData("F");
         
@@ -455,6 +465,45 @@ public class CustomerController implements Initializable
             }
         });
         
+        Commons.subAnchorButton upd_sab = new Commons.subAnchorButton(subanchor_tca, "UPDATE CUSTOMER", Commons.ADD_PERSON_GLYPH);
+        upd_sab.setButtonLength(200);
+        JFXButton btn_updatecustomer = upd_sab.getButton();
+        btn_updatecustomer.setVisible(false);
+        
+        btn_updatecustomer.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                update_customer();
+            }
+        });
+        
+        
+        Commons.subAnchorButton reset_custsab = new Commons.subAnchorButton(subanchor_tca, null, Commons.RESET_GLYPH);
+        reset_custsab.setButtonDepth(1);
+        reset_custsab.setGlyphSize(18,15);
+        reset_custsab.setCoordinates(930, 595);
+        reset_custsab.setButtonTooltip("Reset table");
+        reset_custsab.setStyle(Commons.BTNSTYLE_3);
+        JFXButton btn_resetcustfields = reset_custsab.getButton();
+        btn_resetcustfields.setVisible(false);
+        
+        btn_resetcustfields.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                btn_updatecustomer.setVisible(false);
+                addpersonButton.setVisible(true);
+                btn_resetcustfields.setVisible(false);
+                
+                personControls.clearControls();
+                customerControls.clearControls();
+                spouseControls.clearControls();
+            }
+        });
+        
         
         //update, delete customer
         Commons.subAnchorButton ucsab = new Commons.subAnchorButton(subanchor_tcs, "UPDATE RECORD", Commons.UPDATE_GLYPH);
@@ -478,6 +527,10 @@ public class CustomerController implements Initializable
                     personControls.setValues(personS);
                     customerControls.setValues(customerS);
                     jfxtabpane_customer.getSelectionModel().select(0);
+                    
+                    addpersonButton.setVisible(false);
+                    btn_updatecustomer.setVisible(true);
+                    btn_resetcustfields.setVisible(true);
                 }
             }
         });
@@ -521,8 +574,14 @@ public class CustomerController implements Initializable
         rcsab.setStyle(Commons.BTNSTYLE_3);
         JFXButton btn_resetcust = rcsab.getButton();
         
-        //setting up customer search table
-        custable_handle = new tableViewHandler(table_customer_search, "select * from customer_view", nbconn);
+        btn_resetcust.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                custable_handle.writeToTable();
+            }
+        });
         
         
         btn_custsearch.setOnAction(new EventHandler<ActionEvent>()
@@ -650,8 +709,6 @@ public class CustomerController implements Initializable
         });
         
         calculate_interest();
-        
-        
         Commons.subAnchorButton alsab = new Commons.subAnchorButton(subanchor_tla, "ADD LOAN REQUEST", Commons.ADD_PERSON_GLYPH);
         alsab.setButtonLength(200);
         JFXButton addloanButton = alsab.getButton();
@@ -783,16 +840,43 @@ public class CustomerController implements Initializable
         return dialog;
     }
     
-    private void toggleSpinner(JFXButton button, AnchorPane subanchor)
+    public void displayDialog(int status, String recordtype, int optype)
     {
-//        addpersonButton.setText("");
-//                addpersonButton.setGraphic(null);
-//                
-//                JFXSpinner spinner = new JFXSpinner();
-//                subanchor_tca.getChildren().add(spinner);
-//                System.out.println(spinner.getMinWidth());
-//                spinner.setTranslateX(addpersonButton.getTranslateX() + addpersonButton.getWidth()/2 - spinner.getMinWidth()/2);
-//                spinner.setTranslateY(addpersonButton.getTranslateY() + addpersonButton.getHeight()/2 - spinner.getMinHeight()/2);
-//                System.out.println(task_addperson.isRunning());
+        String operation;
+        switch (optype)
+        {
+            case 1:
+                operation = "CONSOLIDATION";
+                break;
+            case 2:
+                operation = "UPDATE";
+                break;
+            case 3:
+                operation = "DELETE";
+                break;
+            default:
+                return;
+        }
+        
+        switch (status)
+        {
+            case 0:
+                try{dialog.close();}catch(Exception ex){}
+                dialog = initializeDialog(1, ContentFactory.getDialog(operation + " SUCESSFUL", recordtype + " record added to database successfully", 1));
+                dialog.show();
+                break;
+            case 1:
+                try{dialog.close();}catch(Exception ex){}
+                dialog = initializeDialog(1, ContentFactory.getDialog("FIELDS EMPTY/INVALID", "Please fill out all required fields correctly", 2));
+                dialog.show();
+                break;
+            case 2:
+                try{dialog.close();}catch(Exception ex){}
+                dialog = initializeDialog(1, ContentFactory.getDialog(operation + " FAILED", "failed due to an internal error", 2));
+                dialog.show();
+                break;
+            default:
+                break;
+        }
     }
 }
