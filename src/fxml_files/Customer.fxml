@@ -366,7 +366,7 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="CENTER" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="80.0" vgrow="NEVER" />
                                           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
@@ -387,6 +387,16 @@
                                              <GridPane.margin>
                                                 <Insets />
                                              </GridPane.margin></JFXButton>
+                                          <Label alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="249.0" styleClass="headers" text="LOAN SEARCH" textFill="WHITE" GridPane.rowIndex="3">
+                                             <font>
+                                                <Font name="Roboto Condensed Regular" size="21.0" />
+                                             </font>
+                                          </Label>
+                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                                             <GridPane.margin>
+                                                <Insets bottom="20.0" />
+                                             </GridPane.margin>
+                                          </Line>
                                        </children>
                                        <padding>
                                           <Insets left="20.0" right="20.0" />

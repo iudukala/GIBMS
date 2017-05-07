@@ -151,6 +151,7 @@ public class InsuranceManagementController implements Initializable
             public void handle(ActionEvent event)
             {
                 Entity customer_search = customerSearchTableHandle.getSelection();
+                nic_if.setDisable(true);
                 nic_if.setText(customer_search.getAsString("nic"));
                 jfxtabpane_Insurance.getSelectionModel().select(1);
             }

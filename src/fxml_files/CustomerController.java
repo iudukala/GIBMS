@@ -252,10 +252,10 @@ public class CustomerController implements Initializable
     }
     
     
-    private void add_person()
+    private void add_customer()
     {
         int person_stat = -1, customer_stat = -1, spouse_stat = -1;
-        Entity person ,customer, spouse;
+        Entity person ,customer, spouse = null;
 
         if(personControls.triggerValidators() && customerControls.triggerValidators())
         {
@@ -267,10 +267,7 @@ public class CustomerController implements Initializable
             displayDialog(1, "customer", 1);
             return;
         }
-
-        person_stat = person.consolidate();
-        customer_stat = customer.consolidate();
-
+        
         if(!spouseControls.isDisabled())
         {
             spouse = spouseControls.getValues();
@@ -283,6 +280,11 @@ public class CustomerController implements Initializable
         }
         else
             spouse_stat = 0;
+
+        person_stat = person.consolidate();
+        if(spouse.getAGKey()!=null)
+            customer.add("spouse_id", spouse.getAGKey());
+        customer_stat = customer.consolidate();
 
         if(person_stat == 0 && customer_stat == 0 && spouse_stat ==0)
         {
@@ -317,16 +319,18 @@ public class CustomerController implements Initializable
         up_person.update();
         up_customer.update();
 
-//        if(!spouseControls.isDisabled())
-//        {
-//            up_spouse = spouseControls.getValues();
-//            if(spouseControls.triggerValidators())
-//            {
-//                //up_spouse.add("customer_id", up_customer.getAGKey());
-//                up_spouse.validate(true);
-//                up_spouse.update();
-//            }
-//        }
+        if(!spouseControls.isDisabled())
+        {
+            up_spouse = spouseControls.getValues();
+            if(spouseControls.triggerValidators())
+            {
+                AGData agd = AGData.getInstance();
+                up_spouse.add("spouse_id", agd.get("spouse_id"));
+//                up_spouse.add("customer_id", up_customer.getAGKey());
+                up_spouse.validate(true);
+                up_spouse.update();
+            }
+        }
         
         personControls.clearControls();
         customerControls.clearControls();
@@ -393,7 +397,6 @@ public class CustomerController implements Initializable
             {"gender", tgroup_gender},
             {"marital_status", tgroup_marital}
         });
-    
         
         customerControls = new EntityControls("customer_state",nbconn);
         customerControls.add(new Object[][]
@@ -454,7 +457,7 @@ public class CustomerController implements Initializable
             @Override
             public void handle(ActionEvent e)
             {
-                add_person();
+                add_customer();
             }
         });
         
@@ -471,7 +474,6 @@ public class CustomerController implements Initializable
                 update_customer();
             }
         });
-        
         
         Commons.subAnchorButton reset_custsab = new Commons.subAnchorButton(subanchor_tca, null, Commons.RESET_GLYPH);
         reset_custsab.setButtonDepth(1);
@@ -515,13 +517,24 @@ public class CustomerController implements Initializable
                 if(custable_handle.getSelection()!=null)
                 {
                     Entity personS = custable_handle.fetchExtendedSelection("person", "NIC");
-                    Entity customerS = custable_handle.fetchExtendedSelection("customer_state", "NIC");
+                    Entity customerS = custable_handle.fetchExtendedSelection("customer_state", "stateid", "customer_id");
+                    Entity spouseS = custable_handle.fetchExtendedSelection("spouse", "spouseid", "spouse_id");
+                    
+                    
+                    System.out.println(customerS);
+                    System.out.println(spouseS);
+                    
                     
                     AGData agd = AGData.getInstance();
                     agd.add("customer_id", customerS.getObject("customer_id"));
+                    agd.add("spouse_id", customerS.getObject("spouse_id"));
+                    
+                    System.out.println(customerS);
+                    System.out.println(spouseS);
 
                     personControls.setValues(personS);
                     customerControls.setValues(customerS);
+                    spouseControls.setValues(spouseS);
                     jfxtabpane_customer.getSelectionModel().select(0);
                     
                     addpersonButton.setVisible(false);

@@ -103,11 +103,15 @@ public class tableViewHandler
         Object identifier;
         try{
             identifier = table.getSelectionModel().getSelectedItem().getAsString(over_tvpkey);
+            if(identifier==null)
+                return null;
         }
         catch(Exception e){
             return null;
         }
         
+        //testingmarker
+        System.out.println(exsearch_query);
         Entity selected_entity;
         try{
             prp = nbconn.get().prepareStatement(exsearch_query);

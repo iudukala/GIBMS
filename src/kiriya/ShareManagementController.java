@@ -56,6 +56,9 @@ public class ShareManagementController implements Initializable
     dbConcurrent nbconn;
     
     int maximum_share_amount=40000;
+    double maximum_share_price=150;
+    
+    int as=0;
     
     @FXML
     private TabPane tabpane_shareholder;
@@ -218,26 +221,27 @@ public class ShareManagementController implements Initializable
             {
             
                 Entity person ,shareholder;
-                
-            
+    
             try
             {
-            
-                
-                
+  
                 person = search_cont.getValues();
                 person.update();
-                search_cont.clearControls();
+                //search_cont.clearControls();
                 
                 shareholder=searchShareCont.getValues();
                 shareholder.update();
-                searchShareCont.clearControls();
+                //searchShareCont.clearControls();
                 }
             catch(Exception ex)
             {
             System.out.println("nullpointer no inputs");
                
             }
+//            custable_handle = new tableViewHandler(u_table,"select p.nic, p.full_name,p.dob,p.address,p.phone,p.email,s.share_amount , s.share_price ,"
+//                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
+//               custable_handle.writeToTable();
+//            
 
             }
         });
@@ -288,11 +292,11 @@ public class ShareManagementController implements Initializable
             {   
             
            custable_handle = new tableViewHandler(u_table,"select p.nic, p.full_name,p.dob,p.address,p.phone,p.email,s.share_amount , s.share_price ,"
-                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic;",nbconn);
+                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
                custable_handle.writeToTable();
                        
-                    Entity search=new Entity("select p.nic, p.full_name , s.share_amount, s.share_price, s.issue_date, s.expiry_date \n" +
-"from person p inner join shareholder s on p.nic=s.nic;",nbconn);
+                    Entity search=new Entity("select p.nic, p.full_name ,p.dob,p.address,p.phone,p.email,s.bank_name,s.account_no, s.share_amount, s.share_price, s.issue_date,"
+                            + " s.expiry_date,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
                     search.add("p.nic",u_search.getText());
                     System.out.println(search);
                     custable_handle.writeToTable(search.executeAsSearch());
@@ -331,20 +335,68 @@ public class ShareManagementController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
+                int share_amount = Integer.parseInt(viewTable.getSelection().getAsString("share_amount"));
+                System.out.println(share_amount);
+                //viewTable=new tableViewHandler(app_table,"update shareholder set share_amount",nbconn);
+//                Entity.parseFromQuery("update shares set shares= share_amount - "+share_amount,nbconn);
+//                Entity.parseFromQuery("select share_amount from shareholer",nbconn).get(0).getAsString("share_amount");
+//                
+                
+                
                 Entity shareholder_approval = viewTable.fetchExtendedSelection("shareholder", "nic");
                 shareholder_approval.add("approval", "approved");
                 shareholder_approval.update();
+                
+                
                    
                 viewTable = new tableViewHandler(app_table, "select p.nic, p.full_name,p.address,p.dob,p.email,p.phone,s.bank_name,"
                             + "s.account_no,s.share_amount , s.share_price,s.approval ,"
                         + " s.issue_date , s.expiry_date from person p inner join shareholder s on p.nic=s.nic  where approval != 'approved' and approval != 'rejected' or approval is null",nbconn);
  
                  viewTable.writeToTable();   
+                 
+                 int amt = Integer.parseInt(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));
+
+                 amt = amt - share_amount;
+                 Entity update_shares=new Entity("shares",nbconn);
+                 update_shares.add("share_id",1);
+                 update_shares.add("shares",amt);
+                 update_shares.update();
+                 
+                 stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));
+//                 String query =  "update shares set shares= shares - "+share_amount+" where share_id = '1'";
+//                 System.out.print(query);
+//               Entity.parseFromQuery(query,nbconn);
+
+                 /*
+                 Entity update_shares=new Entity("shares",nbconn);
+                 update_shares.add("share_id",1);
+                 update_shares.add("shares","shares - "+share_amount);
+                 update_shares.update();
+*/
+           //    stockss.setText(Entity.parseFromQuery("select share_amount from shareholer",nbconn).get(0).getAsString("share_amount"));
+
+
+                // stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));    
+//               Entity sha=viewTable.fetchExtendedSelection("shareholder", "share_amount");
+//               Entity saha=viewTable.fetchExtendedSelection("shares", "shares");
+//               //int z=saha-sha;
+               
+//                 
+//            
+//        int x=Integer.parseInt(a_shareamount.getText());
+//        int y=Integer.parseInt(stockss.getText());
+//        
+//        int z=y-x;
+//        System.out.println(z);
+        
+        //Entity.parseFromQuery("select share_amount from shareholer",nbconn).get(0).getAsString("share_amount");
+
+            
             }
         });
         
-        reject_share.setOnAction(
-        new EventHandler<ActionEvent>()
+        reject_share.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -384,6 +436,7 @@ public class ShareManagementController implements Initializable
 //                {
                     stockss.setText(Entity.parseFromQuery("select shares from shares",nbconn).get(0).getAsString("shares"));
 //                }
+                    
             }
         });
     }
