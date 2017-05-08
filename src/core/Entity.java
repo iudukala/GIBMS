@@ -472,6 +472,8 @@ public class Entity
             return (Double)obj;
         else if(obj.getClass().equals(Long.class))
             return (Long)obj;
+        else if(obj.getClass().equals(java.math.BigDecimal.class))
+            return (((java.math.BigDecimal)obj).toString());
         else if(obj.getClass().equals(java.sql.Timestamp.class))
             return ((java.sql.Timestamp)obj).toLocalDateTime().toLocalDate();
         else

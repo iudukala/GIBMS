@@ -41,6 +41,9 @@ public class FXMLTemplateController implements Initializable {
     
     dbConcurrent nbconn;
     EntityControls empcont;
+    EntityControls personCont;
+     EntityControls atcont;
+     EntityControls atcontl;
      JFXTabPane jfxtabpane_employee;
     private tableViewHandler emptable_handle;
 
@@ -48,22 +51,6 @@ public class FXMLTemplateController implements Initializable {
     private AnchorPane anchorpane;
     @FXML
     private TabPane tabpane;
-    @FXML
-    private JFXRadioButton rb_married1111;
-    @FXML
-    private ToggleGroup tgroup_marital1111;
-    @FXML
-    private JFXRadioButton rb_notmarried1111;
-    @FXML
-    private JFXRadioButton rb_married121;
-    @FXML
-    private ToggleGroup tgroup_marital121;
-    @FXML
-    private JFXRadioButton rb_notmarried121;
-    @FXML
-    private JFXDatePicker date_dob11;
-    @FXML
-    private JFXDatePicker date_dob21;
     @FXML
     private AnchorPane a_ap1;
     @FXML
@@ -107,14 +94,6 @@ public class FXMLTemplateController implements Initializable {
     @FXML
     private JFXTextField a_insuarancecompany;
     @FXML
-    private JFXTextField u_address;
-    @FXML
-    private JFXTextField u_email;
-    @FXML
-    private JFXTextField u_empname;
-    @FXML
-    private JFXTextField u_empid;
-    @FXML
     private ToggleGroup tgroup_sex;
     @FXML
     private ToggleGroup tgroup_marital;
@@ -124,6 +103,30 @@ public class FXMLTemplateController implements Initializable {
     private JFXButton search;
     @FXML
     private TableView<?> u_employee_table;
+    @FXML
+    private JFXTextField u_namee;
+    @FXML
+    private JFXTextField u_searchhh;
+    @FXML
+    private JFXButton delete;
+    @FXML
+    private AnchorPane at_ap1;
+    @FXML
+    private JFXTextField at_empid;
+    @FXML
+    private JFXTextField at_checkin;
+    @FXML
+    private JFXTextField at_checkout;
+    @FXML
+    private JFXDatePicker at_date_date;
+    @FXML
+    private JFXTextField at_time;
+    @FXML
+    private JFXTextField at_reason;
+    @FXML
+    private JFXTextField at_type;
+    @FXML
+    private JFXDatePicker at_leavedate_date;
     
     
 
@@ -135,32 +138,42 @@ public class FXMLTemplateController implements Initializable {
     {
         nbconn = dbConcurrent.getInstance();
          jfxtabpane_employee = Integrator.integrate(anchorpane);
-        
         initializeaddbutton();
-        initializeEmpinputs();
         initializeRadioButtons();
         initializeupdatebutton();
+        initializesubmitbutton();
+        initializebookbutton();
+        initializepersoninputs();
+        initializeEmpinputs();
+        initializeattendenceinputs();
+        initializeleaveinputs();
         select();
         search();
-
-        
+        delete();
+    
     } 
+    
+    public void initializepersoninputs()
+    {
+        personCont=new EntityControls("person",nbconn);
+        personCont.add("full_name", a_empname);
+        personCont.add("nic",a_nic,new NICValidator());
+        personCont.add("dob",a_dob_date, new birthdayValidator() );
+        personCont.add("email",a_email,new EmailValidator() );
+        personCont.add("gender",tgroup_sex );
+        personCont.add("marital_status",tgroup_marital );
+        personCont.add("address",a_address);
+        personCont.add("phone",a_tp1,new PhoneValidator());
+    }
     
     public void initializeEmpinputs()
     {
         empcont=new EntityControls("employee_details",nbconn);
-        empcont.add("empid",a_empid);
-        empcont.add("empname", a_empname);
         empcont.add("nic",a_nic,new NICValidator());
-        empcont.add("dob",a_dob_date, new birthdayValidator() );
-        empcont.add("email",a_email,new EmailValidator() );
+        empcont.add("empid",a_empid);
         empcont.add("job",a_jobtitle );
-        empcont.add("sex",tgroup_sex );
-        empcont.add("marital_status",tgroup_marital );
-        empcont.add("tp1",a_tp1,new PhoneValidator() );
-        empcont.add("address",a_address );
         empcont.add("department",a_department );
-        empcont.add("joining_date",a_joiningdate_date,new pastDateValidator() );
+        empcont.add("joining_date",a_joiningdate_date,new pastDateValidator());
         empcont.add("account_no",a_accountnumber );
         empcont.add("account_holder",a_accountholder );
         empcont.add("bank_name",a_bankname);
@@ -169,6 +182,29 @@ public class FXMLTemplateController implements Initializable {
         empcont.add("tp2",a_tp2,new PhoneValidator());
     
     }
+    
+      public void initializeattendenceinputs()
+    {
+        atcont=new EntityControls("Attendence",nbconn);
+        atcont.add("empid",at_empid);
+        atcont.add("date",at_date_date);
+        atcont.add("check_in",at_checkin);
+        atcont.add("check_out",at_checkout);
+        
+    }
+    
+      public void initializeleaveinputs()
+      {
+        atcontl=new EntityControls("Leave",nbconn);
+        atcontl.add("empid",at_empid);
+        atcontl.add("type",at_type);
+        atcontl.add("reason",at_reason);
+        atcontl.add("leave_date",at_leavedate_date);
+        atcontl.add("time",at_time);
+        
+      }
+      
+      
     
         public void initializeaddbutton()
     {
@@ -180,12 +216,18 @@ public class FXMLTemplateController implements Initializable {
             @Override
             public void handle(ActionEvent e)
             {
+                
+                Entity person = personCont.getValues();
+                person.validate(true);
+                int p=person.consolidate();
+                
                 Entity emp=empcont.getValues();
                 emp.validate(true);
-                int E = emp.consolidate();
+                int E =emp.consolidate();
                 
-                if(E==0)
+                if(E==0 && p==0)
                 {
+                    personCont.clearControls();
                     empcont.clearControls();
                 }
                 
@@ -193,21 +235,12 @@ public class FXMLTemplateController implements Initializable {
             
         });
     }
-        private void initializeRadioButtons()
-    {
-        a_male_rb.setUserData("M");
-        a_female_rb.setUserData("F");
-        
-        a_married_rb.setUserData("M");
-        a_notmarried_rb.setUserData("N");
-    }
-        
-        
+     
         
         public void initializeupdatebutton()
     {
         Commons.subAnchorButton u_emp_button = new Commons.subAnchorButton(a_ap1,"UPDATE EMPLOYEE", Commons.ADD_PERSON_GLYPH);
-         u_emp_button.setCoordinates(150, 600);
+         u_emp_button.setCoordinates(150, 300);
          u_emp_button.setButtonLength(200);
         JFXButton updateButton = u_emp_button.getButton();
         
@@ -233,6 +266,68 @@ public class FXMLTemplateController implements Initializable {
             }
         });
     }
+    private void initializeRadioButtons()
+    {
+        a_male_rb.setUserData("M");
+        a_female_rb.setUserData("F");
+        
+        a_married_rb.setUserData("M");
+        a_notmarried_rb.setUserData("N");
+    
+    }
+        
+     
+    public void initializesubmitbutton()
+    
+    {
+        
+        Commons.subAnchorButton at_emp_button = new Commons.subAnchorButton(at_ap1,"SUBMIT", Commons.ADD_PERSON_GLYPH);
+        at_emp_button.setCoordinates(150, 300);
+        JFXButton submitbutton = at_emp_button.getButton();
+        
+        
+        submitbutton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity submit=atcont.getValues();
+                submit.validate(true);
+                int at = submit.consolidate();
+                
+                if(at==0)
+                {
+                    atcont.clearControls();
+                }
+                
+            }
+            
+        });
+        
+    }
+         public void initializebookbutton()
+         {
+                Commons.subAnchorButton at_book_button = new Commons.subAnchorButton(at_ap1,"BOOK", Commons.ADD_PERSON_GLYPH);
+                JFXButton bookbutton = at_book_button.getButton();
+        
+        bookbutton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+                Entity attendence=atcontl.getValues();
+                attendence.validate(true);
+                int atl = attendence.consolidate();
+                
+                if(atl==0)
+                {
+                    atcontl.clearControls();
+                }
+             
+            }
+            
+        });
+         }
       public void select()
       {
             u_select.setOnAction(new EventHandler<ActionEvent>()
@@ -244,29 +339,53 @@ public class FXMLTemplateController implements Initializable {
                 //String sname = text_csname.getText();
                 
                 //empcont.setValues(emptable_handle.getSelection("employee_details", "empid"));
+                personCont.setValues(emptable_handle.getSelection());
                 empcont.setValues(emptable_handle.getSelection());
                 //customerControls.setValues(custable_handle.getSelection("customer_state", "NIC"));
                 jfxtabpane_employee.getSelectionModel().select(0);
             }
         });
-            
-        
-        
-        
       }
+      
       public void search()
       {
-      emptable_handle=new tableViewHandler(u_employee_table,"select empid , empname , job , nic , address, tp1 from employee_details",nbconn);
+      
       search.setOnAction(new EventHandler<ActionEvent>()
         
                 {
             @Override
             public void handle(ActionEvent e)
-            {  
+            { 
+                emptable_handle=new tableViewHandler(u_employee_table," select e.empid , p.full_name , e.job , p.nic , p.address, e.tp2 from person p inner join employee_details e on p.nic=e.nic",nbconn);
                 emptable_handle.writeToTable();
+                
+                    Entity search=new Entity("select p.nic, p.full_name ,p.dob,p.address,p.phone,p.email,e.job,e.empid,"
+                            + "e.tp2 from person p inner join employee_details e on p.nic=e.nic",nbconn);
+                    search.add("p.nic",u_searchhh.getText());
+                    System.out.println(search);
+                    emptable_handle.writeToTable(search.executeAsSearch());
+                    
+                
+                
             }
                 });
       }
+      public void delete()
+      {
+      delete.setOnAction(new EventHandler<ActionEvent>()
+        
+                {
+            @Override
+            public void handle(ActionEvent e)
+            { 
+                Entity delete = emptable_handle.fetchExtendedSelection("employee_details", "nic");
+                Entity elete = emptable_handle.fetchExtendedSelection("person", "nic");
+                delete.deleteFromDB();
+                elete.deleteFromDB();
+                emptable_handle.writeToTable();
+            }
       
+              });
+      }   
      
 }

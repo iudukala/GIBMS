@@ -13,7 +13,6 @@ import javafx.scene.control.TextInputControl;
 
 import core.Validator;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;

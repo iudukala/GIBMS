@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="1800.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hassim.FXMLTemplateController">
+<AnchorPane id="AnchorPane" fx:id="anchorpane" maxHeight="1000.0" prefHeight="1000.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hassim.FXMLTemplateController">
    <children>
       <TabPane fx:id="tabpane" layoutX="182.0" layoutY="83.0" prefHeight="1800.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <opaqueInsets>
@@ -76,7 +76,7 @@
                                           <JFXTextField fx:id="a_accountholder" promptText="Account holder" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                           <JFXTextField fx:id="a_tp1" promptText="Personal phone 1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <JFXTextField fx:id="a_tp2" promptText="Personal phone 2" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="a_accountnumber" promptText="Account number" GridPane.rowIndex="7" />
+                                          <JFXTextField fx:id="a_accountnumber" prefWidth="257.0" promptText="Account number" GridPane.rowIndex="7" />
                                           <JFXDatePicker fx:id="a_joiningdate_date" prefHeight="19.0" prefWidth="280.0" promptText="Joining date" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <children>
@@ -118,9 +118,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0" prefHeight="1500.0" prefWidth="942.0">
+                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0" prefHeight="1000.0" prefWidth="942.0">
                            <content>
-                              <StackPane prefHeight="1500.0" prefWidth="942.0" style="-fx-background-color: #333333;">
+                              <StackPane prefHeight="1000.0" prefWidth="942.0" style="-fx-background-color: #333333;">
                                  <children>
                                     <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
                                        <columnConstraints>
@@ -138,11 +138,6 @@
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="View/Delete " textFill="WHITE" GridPane.rowIndex="2">
@@ -150,91 +145,17 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Search by Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TableView fx:id="u_employee_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="4" GridPane.rowSpan="8">
+                                          <JFXTextField fx:id="u_namee" promptText="Search by Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TableView fx:id="u_employee_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="4" GridPane.rowSpan="4">
                                              <columns>
                                                 <TableColumn prefWidth="75.0" text="C1" />
                                                 <TableColumn prefWidth="75.0" text="C2" />
                                              </columns>
                                           </TableView>
-                                          <JFXTextField promptText="Search by ID" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="u_searchhh" promptText="Search by ID" GridPane.rowIndex="3" />
                                           <JFXButton fx:id="u_select" text="select" textFill="#e80d0d" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                           <JFXButton fx:id="search" text="search" textFill="#d0e016" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="40.0" right="40.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Update Employee">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0">
-                           <content>
-                              <StackPane prefHeight="580.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="332.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="225.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Update Employee" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_married1111" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Male">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_marital1111" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_notmarried1111" text="Female" toggleGroup="$tgroup_marital1111" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_married121" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Married">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_marital121" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_notmarried121" text="Not married" toggleGroup="$tgroup_marital121" />
-                                             </children>
-                                          </HBox>
-                                          <JFXDatePicker fx:id="date_dob11" prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <JFXTextField fx:id="u_address" promptText="Address" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="u_email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="NIC" GridPane.rowIndex="4" />
-                                          <JFXTextField fx:id="u_empname" promptText="Employee name" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Job title" GridPane.rowIndex="5" />
-                                          <JFXTextField fx:id="u_empid" promptText="Employee ID" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="Bank name" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <JFXTextField promptText="Account holder" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                          <JFXTextField promptText="Personal phone 1" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                          <JFXTextField promptText="Personal phone 2" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <JFXTextField promptText="Account number" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <JFXDatePicker fx:id="date_dob21" prefHeight="19.0" prefWidth="280.0" promptText="Joining date" GridPane.rowIndex="6" />
+                                          <JFXButton fx:id="delete" styleClass="buttonS2" text="delete" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />
@@ -250,7 +171,7 @@
             </Tab>
             <Tab text="Attendence">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="at_ap1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="39.0" prefHeight="1500.0" prefWidth="942.0">
                            <content>
@@ -277,21 +198,20 @@
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Employee ID" GridPane.rowIndex="1" />
+                                          <JFXTextField fx:id="at_empid" promptText="Employee ID" GridPane.rowIndex="1" />
                                           <Label text="Name" textFill="#f5f2f2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label text="Job title" textFill="#f2f0f0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField promptText="Check in" GridPane.rowIndex="3" />
-                                          <JFXTextField promptText="Check out" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXDatePicker prefHeight="28.0" prefWidth="271.0" promptText="Date" GridPane.rowIndex="2" />
+                                          <JFXTextField fx:id="at_checkin" promptText="Check in" GridPane.rowIndex="3" />
+                                          <JFXTextField fx:id="at_checkout" promptText="Check out" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <JFXDatePicker fx:id="at_date_date" prefHeight="28.0" prefWidth="271.0" promptText="Date" GridPane.rowIndex="2" />
                                           <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Leave Booking" textFill="WHITE" GridPane.rowIndex="4">
                                              <font>
                                                 <Font name="Roboto Condensed Regular" size="21.0" />
                                              </font>
                                           </Label>
-                                          <JFXTextField promptText="Time" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <JFXTextField promptText="Reason" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <JFXTextField promptText="Type" GridPane.rowIndex="5" />
-                                          <JFXDatePicker prefHeight="28.0" prefWidth="272.0" promptText="Leave date" GridPane.rowIndex="6" />
+                                          <JFXTextField fx:id="at_reason" promptText="Reason" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <JFXTextField fx:id="at_type" promptText="Type" GridPane.rowIndex="6" />
+                                          <JFXDatePicker fx:id="at_leavedate_date" prefHeight="28.0" prefWidth="272.0" promptText="Leave date" GridPane.rowIndex="5" />
                                        </children>
                                        <padding>
                                           <Insets left="40.0" right="40.0" />

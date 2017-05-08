@@ -38,12 +38,17 @@ public class Arrears_interfaceController implements Initializable {
     
     EntityControls personCont;
     EntityControls arrearsCont;
+    EntityControls loanCont;
+    EntityControls custCont;
     
     EntityControls searchArrearsCont;
-    EntityControls loanControls;
+    EntityControls searchloanControls;
+    EntityControls searchPersoncont;
     
-    private tableViewHandler customerSearchTableHandle;
+    private tableViewHandler personSearchTableHandle;
+     private tableViewHandler customerSearchTableHandle;
     private tableViewHandler arrearsSearchTableHandle;
+    private tableViewHandler loanSearchTableHandle;
     
     dbConcurrent nbconn;
     JFXTabPane jfxtabpane_arrears;
@@ -123,9 +128,10 @@ public class Arrears_interfaceController implements Initializable {
         tableHandler();
         initializeArrearsInputs();
         setarrearsInput();
-        // initializePersonInputs();
-        //initializeLoanControls();
-        //setPersonInput();
+        initializePersonInputs();
+        initializeLoanControls();
+        setPersonInput();
+        setLoanControls();
         //tabPane();
        
          
@@ -150,8 +156,20 @@ public class Arrears_interfaceController implements Initializable {
                 
                 Entity search_NIC_mn = new Entity("select * from person ",nbconn);
                 search_NIC_mn.add("nic",s_nic.getText());
-                customerSearchTableHandle.writeToTable(search_NIC_mn.executeAsSearch());
+                //search_NIC_mn.validate(true);
+                personSearchTableHandle.writeToTable(search_NIC_mn.executeAsSearch());
                 
+                Entity search_fname_mn = new Entity("select * from person ",nbconn);
+                search_fname_mn.add("full_name",s_fname.getText());
+                personSearchTableHandle.writeToTable(search_fname_mn.executeAsSearch());
+                
+                Entity search_address_mn = new Entity("select * from person ",nbconn);
+                search_address_mn.add("address",e_address.getText());
+                personSearchTableHandle.writeToTable(search_address_mn.executeAsSearch());
+                
+                
+                
+            
             }
         });
         
@@ -168,9 +186,14 @@ public class Arrears_interfaceController implements Initializable {
             @Override
             public void handle(ActionEvent event)
             {
-                Entity customer_search = customerSearchTableHandle.getSelection();
+                Entity customer_search = personSearchTableHandle.getSelection();
                 e_nic.setText(customer_search.getAsString("nic"));
+                e_fname.setText(customer_search.getAsString("full_name"));
+                e_address.setText(customer_search.getAsString("address"));
+                
+                
                 jfxtabpane_arrears.getSelectionModel().select(1);
+                
             }
         });
       
@@ -234,7 +257,7 @@ public class Arrears_interfaceController implements Initializable {
         search_ed.setButtonLength(110);
         search_ed.setButtonHeigth(20);
         search_ed.setGlyphWidth(20); 
-        search_ed.setCoordinates(400, 138);
+        search_ed.setCoordinates(600, 230);
         search_ed.setStyle(Commons.BTNSTYLE_2);
         JFXButton searchbutton_ed = search_ed.getButton();
         
@@ -255,7 +278,7 @@ public class Arrears_interfaceController implements Initializable {
         select_ed.setButtonLength(110);
         select_ed.setButtonHeigth(20);
         select_ed.setGlyphWidth(20); 
-        select_ed.setCoordinates(750, 300);
+        select_ed.setCoordinates(600, 300);
         select_ed.setStyle(Commons.BTNSTYLE_2);
         JFXButton selectbutton_if=select_ed.getButton();
         
@@ -264,7 +287,9 @@ public class Arrears_interfaceController implements Initializable {
             @Override
             public void handle(ActionEvent event)
             {
-                
+                arrearsSearchTableHandle = new tableViewHandler(e_table,"select p.nic, p.full_name,p.dob,p.address,p.phone,p.email,s.share_amount , s.share_price ,"
+                    + " s.issue_date , s.expiry_date,s.bank_name,s.account_no,s.approval from person p inner join shareholder s on p.nic=s.nic",nbconn);
+               arrearsSearchTableHandle.writeToTable();
                searchArrearsCont.setValues(arrearsSearchTableHandle.getSelection());
 
             }
@@ -308,30 +333,33 @@ public class Arrears_interfaceController implements Initializable {
         
     }
 
-   /* private void initializePersonInputs() {
+   private void initializePersonInputs() {
         
         personCont = new EntityControls("customer_state",nbconn);
         personCont.add("nic", e_nic, new ValidationHandler.NICValidator());
         personCont.add("full_name", e_fname);
         personCont.add("address", e_address);
-    }*/
+    }
 
-   /* private void initializeLoanControls() {
-        loanControls = new EntityControls("loanplan", nbconn);
+    private void initializeLoanControls() {
+        EntityControls loanControls = new EntityControls("loanplan", nbconn);
         loanControls.add(new Object[][]
         {
             {"customer_id", e_customerID},
             {"amount", e_loanAmount},
     });
-    }*/
+    }
     public void tableHandler()
     {
         
-        customerSearchTableHandle = new tableViewHandler(man_table,"select * from person",nbconn);
-        customerSearchTableHandle.writeToTable();
+        personSearchTableHandle = new tableViewHandler(man_table,"select * from person",nbconn);
+        personSearchTableHandle.writeToTable();
         
         arrearsSearchTableHandle = new tableViewHandler(e_table,"select * from arrears_edit", nbconn);
         arrearsSearchTableHandle.writeToTable();
+        
+        //loanSearchTableHandle = new tableViewHandler(e_table, "select * from loanplan;", nbconn);
+       // loanSearchTableHandle.writeToTable();
     
     }
 
@@ -350,5 +378,17 @@ public class Arrears_interfaceController implements Initializable {
         searchArrearsCont.add("last_payment_amount",e_lastPaymentAmount,new DoubleValidator());
         searchArrearsCont.add("outstanding_amount",e_outstandingAmount);
         
+    }
+
+    private void setLoanControls() {
+        
+    }
+
+    private void setPersonInput() {
+        
+        searchPersoncont = new EntityControls("customer_state",nbconn);
+        searchPersoncont.add("nic", e_nic, new ValidationHandler.NICValidator());
+        searchPersoncont.add("full_name", e_fname);
+        searchPersoncont.add("address", e_address);
     }
 }
