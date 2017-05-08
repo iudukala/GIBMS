@@ -34,6 +34,11 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
@@ -172,6 +177,8 @@ public class FXMLTemplateController implements Initializable {
     final double maxmemberamount = 500000;    
     @FXML
     private JFXTextField bvr_list_total;
+    @FXML
+    private JFXButton ireport;
             
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -203,10 +210,31 @@ public class FXMLTemplateController implements Initializable {
         initializebvr_search();
         initializetabepane();
         initializeglpop();
+        initializeNodes();
        }    
     
      private void initializeNodes() {
-        
+         
+         
+         ireport.setOnAction(new EventHandler<ActionEvent>()
+         {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/paniya.jrxml";
+                    JasperReport jr =JasperCompileManager.compileReport(path);
+                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
+
       
         
     }

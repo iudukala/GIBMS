@@ -296,8 +296,7 @@ public class CustomerController implements Initializable
                 {
                     label_totalloans.setText(Entity.parseFromQuery("select sum(amount) as total from loanplan;", nbconn).get(0).getAsString("total"));
                     label_totalintallments.setText(Entity.parseFromQuery("select sum(monthly_installment) as total from loanplan;", nbconn).get(0).getAsString("total"));
-                }
-                    
+                }    
             }
         });
     }
@@ -1133,7 +1132,7 @@ public class CustomerController implements Initializable
         }
         else
         {
-            displayDialog(0, 1, "loan", 2);
+            displayDialog(1, 1, "loan", 2);
             return;
         }
 
@@ -1145,6 +1144,6 @@ public class CustomerController implements Initializable
         guar1Controls.clearControls();
         guar2Controls.clearControls();
 
-        displayDialog(0, 0, "loan", 2);
+        displayDialog(1, 0, "loan", 2);
     }
 }

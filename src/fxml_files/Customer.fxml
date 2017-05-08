@@ -534,7 +534,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="View loans">
+            <Tab text="Review">
                <content>
                   <AnchorPane fx:id="subanchor_tls1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

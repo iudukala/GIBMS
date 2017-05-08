@@ -15,12 +15,9 @@ import core.Integrator;
 import guiMediators.Commons;
 import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
-import handlers.ValidationHandler;
 import handlers.dbConcurrent;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,6 +27,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import handlers.ValidationHandler. *;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
@@ -44,6 +44,7 @@ public class FXMLTemplateController implements Initializable {
     EntityControls personCont;
      EntityControls atcont;
      EntityControls atcontl;
+     EntityControls paycont;
      JFXTabPane jfxtabpane_employee;
     private tableViewHandler emptable_handle;
 
@@ -112,21 +113,52 @@ public class FXMLTemplateController implements Initializable {
     @FXML
     private AnchorPane at_ap1;
     @FXML
-    private JFXTextField at_empid;
-    @FXML
-    private JFXTextField at_checkin;
-    @FXML
-    private JFXTextField at_checkout;
-    @FXML
-    private JFXDatePicker at_date_date;
-    @FXML
-    private JFXTextField at_time;
-    @FXML
     private JFXTextField at_reason;
     @FXML
     private JFXTextField at_type;
-    @FXML
     private JFXDatePicker at_leavedate_date;
+    @FXML
+    private JFXTextField at_empid1;
+    @FXML
+    private JFXTextField a_salary;
+    @FXML
+    private JFXDatePicker a_salarydate_date;
+    @FXML
+    private JFXTextField p_overtime;
+    @FXML
+    private JFXTextField p_privilages;
+    @FXML
+    private JFXTextField p_other;
+    @FXML
+    private JFXTextField p_tax;
+    @FXML
+    private JFXTextField p_loan;
+    @FXML
+    private JFXTextField p_provident;
+    @FXML
+    private JFXTextField p_medical;
+    @FXML
+    private JFXTextField p_bonus;
+    @FXML
+    private JFXTextField p_empid;
+    @FXML
+    private AnchorPane p_ap1;
+    @FXML
+    private JFXTextField p_total;
+    @FXML
+    private JFXTextField p_basic;
+    @FXML
+    private JFXDatePicker at_date_date;
+    @FXML
+    private JFXTextField at_tp;
+    @FXML
+    private JFXTextField at_remarks;
+    @FXML
+    private JFXDatePicker at_to_date;
+    @FXML
+    private JFXDatePicker at_from_date;
+    @FXML
+    private JFXButton ireport;
     
     
 
@@ -141,15 +173,18 @@ public class FXMLTemplateController implements Initializable {
         initializeaddbutton();
         initializeRadioButtons();
         initializeupdatebutton();
-        initializesubmitbutton();
+        //initializesubmitbutton();
         initializebookbutton();
         initializepersoninputs();
         initializeEmpinputs();
-        initializeattendenceinputs();
+        //initializeattendenceinputs();
         initializeleaveinputs();
         select();
         search();
         delete();
+        initializecalculatebutton();
+        initializepayrollinputs();
+        ireport();
     
     } 
     
@@ -180,28 +215,48 @@ public class FXMLTemplateController implements Initializable {
         empcont.add("insurance_no",a_inusarancenumber );
         empcont.add("insurance_company",a_insuarancecompany );
         empcont.add("tp2",a_tp2,new PhoneValidator());
+        empcont.add("salary",a_salary);
+        empcont.add("salary_date",a_salarydate_date);
     
     }
     
-      public void initializeattendenceinputs()
-    {
-        atcont=new EntityControls("Attendence",nbconn);
-        atcont.add("empid",at_empid);
-        atcont.add("date",at_date_date);
-        atcont.add("check_in",at_checkin);
-        atcont.add("check_out",at_checkout);
-        
-    }
+//      public void initializeattendenceinputs()
+//    {
+//        atcont=new EntityControls("Attendence",nbconn);
+//        atcont.add("empid",at_empid);
+//        atcont.add("date",at_date_date);
+//        atcont.add("check_in",at_checkin);
+//        atcont.add("check_out",at_checkout);
+//        
+//    }
     
       public void initializeleaveinputs()
       {
-        atcontl=new EntityControls("Leave",nbconn);
-        atcontl.add("empid",at_empid);
+        atcontl=new EntityControls("Attendence_leave",nbconn);
+        atcontl.add("empid",at_empid1);
         atcontl.add("type",at_type);
         atcontl.add("reason",at_reason);
-        atcontl.add("leave_date",at_leavedate_date);
-        atcontl.add("time",at_time);
+        atcontl.add("leave_date",at_date_date);
+        atcontl.add("phone",at_tp);
+        atcontl.add("from",at_from_date);
+        atcontl.add("to",at_to_date);
+        atcontl.add("remarks",at_remarks);
         
+      }
+      
+      public void initializepayrollinputs()
+      {
+          paycont=new EntityControls("payroll",nbconn);
+          paycont.add("empid",p_empid);
+          paycont.add("overtime",p_overtime);
+          paycont.add("bonus",p_bonus);
+          paycont.add("medical",p_medical);
+          paycont.add("privilages",p_privilages);
+          paycont.add("provident_fund",p_provident);
+          paycont.add("loan",p_loan);
+          paycont.add("tax",p_tax);
+          paycont.add("other",p_other);
+          
       }
       
       
@@ -239,8 +294,8 @@ public class FXMLTemplateController implements Initializable {
         
         public void initializeupdatebutton()
     {
-        Commons.subAnchorButton u_emp_button = new Commons.subAnchorButton(a_ap1,"UPDATE EMPLOYEE", Commons.ADD_PERSON_GLYPH);
-         u_emp_button.setCoordinates(150, 300);
+        Commons.subAnchorButton u_emp_button = new Commons.subAnchorButton(a_ap1,"UPDATE EMPLOYEE", Commons.UPDATE_GLYPH);
+         u_emp_button.setCoordinates(100, 600);
          u_emp_button.setButtonLength(200);
         JFXButton updateButton = u_emp_button.getButton();
         
@@ -249,7 +304,7 @@ public class FXMLTemplateController implements Initializable {
         @Override
             public void handle(ActionEvent e)
             {
-                Entity Employee;
+                Entity Employee,person;
                 
              
             
@@ -257,6 +312,9 @@ public class FXMLTemplateController implements Initializable {
             
                 Employee = empcont.getValues();
                 Employee.update();
+                
+                person = personCont.getValues();
+                person.update();
                 }
             catch(Exception ex)
             {
@@ -277,37 +335,41 @@ public class FXMLTemplateController implements Initializable {
     }
         
      
-    public void initializesubmitbutton()
-    
-    {
-        
-        Commons.subAnchorButton at_emp_button = new Commons.subAnchorButton(at_ap1,"SUBMIT", Commons.ADD_PERSON_GLYPH);
-        at_emp_button.setCoordinates(150, 300);
-        JFXButton submitbutton = at_emp_button.getButton();
-        
-        
-        submitbutton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent e)
-            {
-                Entity submit=atcont.getValues();
-                submit.validate(true);
-                int at = submit.consolidate();
-                
-                if(at==0)
-                {
-                    atcont.clearControls();
-                }
-                
-            }
-            
-        });
-        
-    }
+//    public void initializesubmitbutton()
+//    
+//    {
+//        
+//        Commons.subAnchorButton at_emp_button = new Commons.subAnchorButton(at_ap1,"SUBMIT", Commons.ADD_PERSON_GLYPH);
+//        at_emp_button.setCoordinates(700, 160);
+//        at_emp_button.setButtonHeigth(90);
+//        JFXButton submitbutton = at_emp_button.getButton();
+//        
+//        
+//        submitbutton.setOnAction(new EventHandler<ActionEvent>()
+//        {
+//            @Override
+//            public void handle(ActionEvent e)
+//            {
+//                Entity submit=atcont.getValues();
+//                submit.validate(true);
+//                int at = submit.consolidate();
+//                
+//                if(at==0)
+//                {
+//                    atcont.clearControls();
+//                }
+//                
+//            }
+//            
+//        });
+//        
+//    }
          public void initializebookbutton()
          {
-                Commons.subAnchorButton at_book_button = new Commons.subAnchorButton(at_ap1,"BOOK", Commons.ADD_PERSON_GLYPH);
+                Commons.subAnchorButton at_book_button = new Commons.subAnchorButton(at_ap1,"BOOK", Commons.LIST_GLYPH);
+               at_book_button.setButtonHeigth(90);
+               at_book_button.setCoordinates(700,140);
+               
                 JFXButton bookbutton = at_book_button.getButton();
         
         bookbutton.setOnAction(new EventHandler<ActionEvent>()
@@ -341,6 +403,8 @@ public class FXMLTemplateController implements Initializable {
                 //empcont.setValues(emptable_handle.getSelection("employee_details", "empid"));
                 personCont.setValues(emptable_handle.getSelection());
                 empcont.setValues(emptable_handle.getSelection());
+                
+                
                 //customerControls.setValues(custable_handle.getSelection("customer_state", "NIC"));
                 jfxtabpane_employee.getSelectionModel().select(0);
             }
@@ -356,17 +420,27 @@ public class FXMLTemplateController implements Initializable {
             @Override
             public void handle(ActionEvent e)
             { 
-                emptable_handle=new tableViewHandler(u_employee_table," select e.empid , p.full_name , e.job , p.nic , p.address, e.tp2 from person p inner join employee_details e on p.nic=e.nic",nbconn);
+                emptable_handle=new tableViewHandler(u_employee_table," select   e.empid , p.nic,  p.full_name  ,e.job, p.address,p.email,e.nic,"
+                        + "p.phone,p.gender,p.dob,p.marital_status,e.tp2, "
+                        + "e.department,e.joining_date,e.account_no,e.bank_name, e.account_holder,e.insurance_no,e.insurance_company,e.salary,e.salary_date "
+                        + " from person p"
+                        + " inner join employee_details e on p.nic=e.nic",nbconn);                
                 emptable_handle.writeToTable();
                 
-                    Entity search=new Entity("select p.nic, p.full_name ,p.dob,p.address,p.phone,p.email,e.job,e.empid,"
-                            + "e.tp2 from person p inner join employee_details e on p.nic=e.nic",nbconn);
-                    search.add("p.nic",u_searchhh.getText());
+                Entity search=new Entity("select e.empid , p.nic,  p.full_name  ,e.job, p.address,p.email,e.nic,"
+                        + "p.phone,p.gender,p.dob,p.marital_status,e.tp2, "
+                        + "e.department,e.joining_date,e.account_no,e.bank_name, e.account_holder,e.insurance_no,e.insurance_company,e.salary,e.salary_date"
+                        + " from person p inner join employee_details e on p.nic=e.nic",nbconn);
+//                    Entity search=new Entity("select p.nic, p.full_name ,p.dob,p.address,p.phone,p.email,e.job,e.empid,"
+//                            + "e.tp2 from person p inner join employee_details e on p.nic=e.nic",nbconn);
+                    search.add("e.empid",u_searchhh.getText());
+                    search.add("p.full_name",u_namee.getText());
                     System.out.println(search);
-                    emptable_handle.writeToTable(search.executeAsSearch());
-                    
-                
-                
+                   emptable_handle.writeToTable(search.executeAsSearch());
+                   
+                   
+                   
+                   
             }
                 });
       }
@@ -383,9 +457,103 @@ public class FXMLTemplateController implements Initializable {
                 delete.deleteFromDB();
                 elete.deleteFromDB();
                 emptable_handle.writeToTable();
+                
             }
       
               });
-      }   
+      }
+      
+      public void initializecalculatebutton()
+      {
+            Commons.subAnchorButton p_emp_button = new Commons.subAnchorButton(p_ap1,"CALCULATE SALARY", Commons.HAMBURGER_GLYPH);
+            p_emp_button.setButtonLength(250);
+            JFXButton calculateButton = p_emp_button.getButton();
+            //String value = p_empid.getText();
+            
+        
+        calculateButton.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent e)
+            {
+//                double num1;
+//                num1 = Double.parseDouble(p_empid.getText());
+                
+                //
+                p_basic.setText(Entity.parseFromQuery("select salary from employee_details where empid=321", nbconn).get(0).getAsString("salary"));
+                
+               p_total.setText(Entity.parseFromQuery("SELECT (overtime + bonus + medical+privilages-provident_fund-loan-tax-other) as subtotal\n" +
+"FROM payroll \n" +
+"where empid=321", nbconn).get(0).getAsString("subtotal"));
+               
+              
+                
+                Entity pay=paycont.getValues();
+                pay.validate(true);
+                int P =pay.consolidate();
+                
+                
+                //int overtime = Integer.parseInt(Entity.parseFromQuery("select overtime from payroll",nbconn).get(0).getAsString("overtime"));
+//                double bonus = Integer.parseInt(Entity.parseFromQuery("select bonus from payroll",nbconn).get(0).getAsString("payroll"));
+//                double medical  = Integer.parseInt(Entity.parseFromQuery("select medical from payroll",nbconn).get(0).getAsString("payroll"));
+//                double privilages = Integer.parseInt(Entity.parseFromQuery("select privilages from payroll",nbconn).get(0).getAsString("payroll"));
+//                double provident_fund = Integer.parseInt(Entity.parseFromQuery("select provident_fund from payroll",nbconn).get(0).getAsString("payroll"));
+//                double loan = Integer.parseInt(Entity.parseFromQuery("select loan from payroll",nbconn).get(0).getAsString("payroll"));
+//                double tax = Integer.parseInt(Entity.parseFromQuery("select tax from payroll",nbconn).get(0).getAsString("payroll"));
+//                double other = Integer.parseInt(Entity.parseFromQuery("select other from payroll",nbconn).get(0).getAsString("payroll"));
+//                
+//                double total=(overtime+bonus+medical+privilages)-(provident_fund+loan+tax+other);
+                
+                
+
+//select (sum(overtime)+sum(bonus)+sum(medical)+sum(privilages)) as allowances from payroll where empid=1212
+        
+//        int amt = Integer.parseInt(Entity.parseFromQuery("select (sum(overtime)+sum(bonus)+sum(medical)+sum(privilages)) as allowances from payroll where empid=1212",nbconn).get(0).getAsString("allowances"));
+//        System.out.println(amt);
+                
+                
+                
+                if(P==0 )
+                {
+                    paycont.clearControls();
+                }
+             }
+            
+        });
+        
+//        int amtt = Integer.parseInt(Entity.parseFromQuery("select (sum(overtime)+sum(bonus)+sum(medical)+sum(privilages)) as "
+//                + "allowances from payroll group by empid",nbconn).get(0).getAsString("allowances"));
+//        System.out.println(amtt);
+        
+          
+      }
+      public void ireport()
+      {
+      ireport.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/isuru1.jrxml";
+                    JasperReport jr =net.sf.jasperreports.engine.JasperCompileManager.compileReport(path);
+                    JasperPrint jp =net.sf.jasperreports.engine.JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
+      
+      
+      
+      
+      
+      }
+      
+      
      
 }

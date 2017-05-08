@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -143,6 +144,7 @@
                                             </columns>
                                           </TableView>
                                           <JFXTextField fx:id="bvr_list_total" promptText="Total Amount :" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                          <JFXButton fx:id="ireport" styleClass="buttonGR" text="ireport" GridPane.rowIndex="6" />
                                        </children>
                                     </GridPane>
                                  </children>
