@@ -34,7 +34,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="user" labelFloat="true" prefHeight="40.0" prefWidth="307.0" promptText="Username" GridPane.rowIndex="3">
+                  <JFXTextField fx:id="text_ufield" labelFloat="true" prefHeight="40.0" prefWidth="307.0" promptText="Username" GridPane.rowIndex="3">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -42,7 +42,7 @@
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXPasswordField labelFloat="true" prefHeight="39.0" prefWidth="307.0" promptText="Password" GridPane.rowIndex="4">
+                  <JFXPasswordField fx:id="pass_pfield" labelFloat="true" prefHeight="39.0" prefWidth="307.0" promptText="Password" GridPane.rowIndex="4">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -50,7 +50,7 @@
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXPasswordField>
-                  <JFXButton fx:id="button_login" prefHeight="91.0" prefWidth="347.0" text="LOGIN" textFill="WHITE" GridPane.rowIndex="5">
+                  <JFXButton fx:id="button_login" buttonType="RAISED" prefHeight="91.0" prefWidth="347.0" text="LOGIN" textFill="WHITE" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

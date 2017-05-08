@@ -765,7 +765,7 @@ public class Entity
         }
         catch(SQLException e)
         {
-            System.err.println(e);
+            System.err.println("Encoutered error while deleting records: " + e);
             return false;
         }
     }

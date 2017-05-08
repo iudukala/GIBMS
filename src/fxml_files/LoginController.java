@@ -6,8 +6,7 @@
 package fxml_files;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXSpinner;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 import com.jfoenix.svg.SVGGlyph;
@@ -35,13 +34,15 @@ public class LoginController implements Initializable {
     @FXML
     private StackPane stackpane;
     @FXML
-    private JFXTextField user;
-    @FXML
     private Label label;
     @FXML
     private JFXButton button_login;
     @FXML
     private AnchorPane rootAnchor;
+    @FXML
+    private JFXTextField text_ufield;
+    @FXML
+    private JFXPasswordField pass_pfield;
 
     /**
      * Initializes the controller class.
@@ -55,11 +56,13 @@ public class LoginController implements Initializable {
         label.setText("");
         label.setGraphic(glyph);
         
-        button_login.setOnAction(new EventHandler<ActionEvent>(){
+        button_login.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
             public void handle(ActionEvent e)
             {
-                Navigator.switchForm(rootAnchor, 0);
+                //if(text_ufield.getText().toLowerCase().equals("gilemp") && pass_pfield.getText().toLowerCase().equals("alpine64"))
+                    Navigator.switchForm(rootAnchor, 0);
             }
         });
     }

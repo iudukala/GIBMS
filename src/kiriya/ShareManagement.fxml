@@ -267,6 +267,7 @@
                                           <JFXTextField fx:id="add_shares" promptText="Shares" GridPane.rowIndex="3" />
                                           <JFXTextField fx:id="share_id" promptText="Share ID" GridPane.rowIndex="1" />
                                           <JFXButton fx:id="share_btn" prefHeight="37.0" prefWidth="86.0" styleClass="buttonGR" text="select" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                          <JFXButton fx:id="ireport" styleClass="buttonS2" text="I report" textFill="#dd1515" GridPane.columnIndex="2" />
                                        </children>
                                     </GridPane>
                                  </children>

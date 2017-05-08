@@ -30,6 +30,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -154,6 +159,8 @@ public class ShareManagementController implements Initializable
     private JFXButton reject_share;
     @FXML
     private JFXButton share_btn;
+    @FXML
+    private JFXButton ireport;
 
     /**
      * Initializes the controller class.
@@ -175,8 +182,7 @@ public class ShareManagementController implements Initializable
         tabPane();
         addShares();
         btndisable();
-   
-   
+        IReport();
     }
  
 
@@ -445,8 +451,6 @@ public class ShareManagementController implements Initializable
                        share_btn.setDisable(false);
                        
                     }
-                    
-               
                 }
             }
         });
@@ -506,6 +510,29 @@ public class ShareManagementController implements Initializable
          
          addShareCont.add("share_id",share_id);
          addShareCont.add("shares",add_shares);
+       
+       }
+       public void IReport()
+       {
+       ireport.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/kiriya.jrxml";
+                    JasperReport jr =JasperCompileManager.compileReport(path);
+                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
+       
        
        }
 }

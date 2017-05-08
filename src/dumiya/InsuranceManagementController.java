@@ -28,6 +28,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -388,7 +393,62 @@ public class InsuranceManagementController implements Initializable
 
             }
         });
+        
+        Commons.subAnchorButton ireport_if = new Commons.subAnchorButton(anchor_insurance_fund, "iREPORT", Commons.LIST_GLYPH);       
+        ireport_if.setButtonLength(110);
+        ireport_if.setButtonHeigth(20);
+        ireport_if.setGlyphWidth(20); 
+        ireport_if.setCoordinates(800, 50);
+        ireport_if.setStyle(Commons.BTNSTYLE_2);
+        JFXButton ireportbutton_if=ireport_if.getButton();
             
+        ireportbutton_if.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/dumiyaFund.jrxml";
+                    JasperReport jr =JasperCompileManager.compileReport(path);
+                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
+        
+        Commons.subAnchorButton ireport_ic = new Commons.subAnchorButton(anchor_insurance_claim, "iREPORT", Commons.LIST_GLYPH);       
+        ireport_ic.setButtonLength(110);
+        ireport_ic.setButtonHeigth(20);
+        ireport_ic.setGlyphWidth(20); 
+        ireport_ic.setCoordinates(800, 50);
+        ireport_ic.setStyle(Commons.BTNSTYLE_2);
+        JFXButton ireportbutton_ic=ireport_ic.getButton();
+            
+        ireportbutton_ic.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/dumiyaClaim.jrxml";
+                    JasperReport jr =JasperCompileManager.compileReport(path);
+                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
+        
+        
     }
  
     public void initializeInsuranceFundInputs()

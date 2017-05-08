@@ -20,6 +20,7 @@ import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
 import handlers.ValidationHandler.IntegerValidator;
 import handlers.dbConcurrent;
+import java.time.format.DateTimeFormatter;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -30,6 +31,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 
@@ -123,7 +129,7 @@ public class ResourceFXMLController implements Initializable
     @FXML
     private JFXDatePicker other_date;
     @FXML
-    private JFXTextArea other_des;
+    private JFXTextField other_des;
     @FXML
     private TableView<?> table_building;
     @FXML
@@ -150,6 +156,20 @@ public class ResourceFXMLController implements Initializable
     private JFXTextField text_vsearch;
     @FXML
     private JFXButton btn_delvehicle;
+    @FXML
+    private JFXButton btn_irepvehicle;
+    @FXML
+    private AnchorPane subanchor_other1;
+    @FXML
+    private ScrollPane scroll_add31;
+    @FXML
+    private StackPane stack_add31;
+    @FXML
+    private JFXButton btn_loansearchamount11;
+    @FXML
+    private JFXButton btn_loansearchamount111;
+    @FXML
+    private JFXButton btn_irepbuilding;
     
     
     private void seperatorFunction(){}
@@ -298,6 +318,25 @@ public class ResourceFXMLController implements Initializable
             }
         });
         
+        
+        btn_irepvehicle.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/battibois1.jrxml";
+                    JasperReport jr =JasperCompileManager.compileReport(path);
+                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
     }
     
     public void initializeBuildingInputs()
@@ -396,13 +435,32 @@ public class ResourceFXMLController implements Initializable
                 tableBuilding_handle.writeToTable();
             }
         });
+        
+        btn_irepbuilding.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/battibois2.jrxml";
+                    JasperReport jr =JasperCompileManager.compileReport(path);
+                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
+                    JasperViewer.viewReport(jp,false);
+                }
+                catch(Exception e)
+                {
+                    System.out.println("ireport error : \n" + e);
+                }
+            }
+        });
     }
     
     public void initializeOtherInputs()
     {
         tableOther_handle = new tableViewHandler(table_other,"select * from other_bill;",nbconn);
         
-        otherControls = new EntityControls("other",nbconn);
+        otherControls = new EntityControls("other_bill",nbconn);
         otherControls.add(new Object[][]
         {
             {"bill no", other_no},
@@ -450,7 +508,7 @@ public class ResourceFXMLController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
-                Entity osearch = new Entity("select * from other", nbconn);
+                Entity osearch = new Entity("select * from other_bill", nbconn);
                 osearch.add("bill_ID", text_vsearch.getText());
                 tableOther_handle.writeToTable(osearch.executeAsSearch());       
             }

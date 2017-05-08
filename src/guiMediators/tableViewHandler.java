@@ -56,15 +56,15 @@ public class tableViewHandler
         catch (SQLException e){
             System.out.println("Error executing SQL statement in writeToTable()\n" + e);
         }
-        writeData(entity_list);
+        writeToTable(entity_list);
     }
     
     public void writeToTable(ResultSet rs)
     {
-        writeData(Entity.parseFromRS(rs, nbconn));
+        writeToTable(Entity.parseFromRS(rs, nbconn));
     }
     
-    private void writeData(List<Entity> entity_list)
+    public void writeToTable(List<Entity> entity_list)
     {
         if(entity_list.isEmpty() || nbconn.get() == null)
         {
