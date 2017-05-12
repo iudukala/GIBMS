@@ -85,7 +85,7 @@ public class Entity
         return null;
     }
     
-    public void overrideTablename(String tablename)
+    public void overrideTableName(String tablename)
     {
         this.tablename = tablename;
     }
@@ -129,7 +129,7 @@ public class Entity
         return update_string;
     }
     
-    public boolean alreadyExists()
+    public boolean recordExists()
     {
         List<String> primaryKeys = fetchPrimaryKeys();
         StringBuilder strb = new StringBuilder("select * from " + tablename);
@@ -473,7 +473,7 @@ public class Entity
         else if(obj.getClass().equals(Long.class))
             return (Long)obj;
         else if(obj.getClass().equals(java.math.BigDecimal.class))
-            return (((java.math.BigDecimal)obj).toString());
+            return (obj.toString());
         else if(obj.getClass().equals(java.sql.Timestamp.class))
             return ((java.sql.Timestamp)obj).toLocalDateTime().toLocalDate();
         else

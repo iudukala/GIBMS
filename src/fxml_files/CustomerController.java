@@ -1056,7 +1056,7 @@ public class CustomerController implements Initializable
                 translate = -445;
                 break;
             case 1:
-                control = text_lcid;
+                control = text_lamount;
                 translate = -445;
                 break;
             case 2:
@@ -1071,6 +1071,8 @@ public class CustomerController implements Initializable
             default:
                 return null;
         }
+        //testingmarker
+        System.out.println(control);
         dialog.setDialogContainer((StackPane)control.getParent().getParent());
         dialog.setTranslateY(translate);
         

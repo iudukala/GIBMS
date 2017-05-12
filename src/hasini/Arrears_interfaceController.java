@@ -166,10 +166,6 @@ public class Arrears_interfaceController implements Initializable {
                 Entity search_address_mn = new Entity("select * from person ",nbconn);
                 search_address_mn.add("address",e_address.getText());
                 personSearchTableHandle.writeToTable(search_address_mn.executeAsSearch());
-                
-                
-                
-            
             }
         });
         
@@ -214,8 +210,7 @@ public class Arrears_interfaceController implements Initializable {
                 System.out.println(arrears_add);
                 arrears_add.validate(true);
                 arrears_add.consolidate();
-                arrearsSearchTableHandle.writeToTable();
-                
+                arrearsSearchTableHandle.writeToTable(); 
             }
         });
         
