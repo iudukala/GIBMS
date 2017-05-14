@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<AnchorPane id="AnchorPane" prefHeight="388.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_files.loginOldController">
-   <children>
-      <GridPane hgap="15.0" layoutX="63.0" layoutY="102.0" prefHeight="286.0" prefWidth="368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="102.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="81.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.0" minWidth="10.0" prefWidth="272.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="112.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="199.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label fx:id="label" minHeight="16" minWidth="69" text="Username" />
-            <Label text="Password" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
-            <Button fx:id="button" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="111.0" text="Login" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-   </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="388.0" prefWidth="495.0"
+            xmlns="http://javafx.com/javafx/8.0.111" fx:controller="fxml_files.loginOldController">
+    <children>
+        <GridPane hgap="15.0" layoutX="63.0" layoutY="102.0" prefHeight="286.0" prefWidth="368.0"
+                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="64.0"
+                  AnchorPane.topAnchor="102.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0"
+                                   prefWidth="81.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.0" minWidth="10.0" prefWidth="272.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="112.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="199.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Label fx:id="label" minHeight="16" minWidth="69" text="Username"/>
+                <Label text="Password" GridPane.rowIndex="1"/>
+                <TextField GridPane.columnIndex="1"/>
+                <Button fx:id="button" onAction="#handleButtonAction" prefHeight="35.0" prefWidth="111.0" text="Login"
+                        GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2"
+                        GridPane.valignment="CENTER"/>
+                <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            </children>
+        </GridPane>
+    </children>
 </AnchorPane>

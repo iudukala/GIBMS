@@ -6,6 +6,7 @@
 package core;
 
 import handlers.dbConcurrent;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -14,70 +15,66 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
  * @author Isuru Udukala
  */
 public class Validator
 {
     public static boolean isPhone(String str)
     {
-        List<Character> allowed=new ArrayList<>(Arrays.asList('+','-','(',')'));
+        List<Character> allowed = new ArrayList<>(Arrays.asList('+', '-', '(', ')'));
         //allowed.addAll(Arrays.asList('+','-'));
-        boolean valid=true;
-        for(int i=0; i<str.length(); i++)
+        boolean valid = true;
+        for (int i = 0; i < str.length(); i++)
         {
-            if(! (Character.isDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
+            if (!(Character.isDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
             {
-                valid=false;
+                valid = false;
                 break;
             }
         }
         return valid;
     }
-    
+
     public static boolean isEmail(String str)
     {
-        List<Character> allowed=new ArrayList<>(Arrays.asList('@','.'));
-        boolean valid=true;
-        if(!(str.contains("@") && str.contains(".")))
+        List<Character> allowed = new ArrayList<>(Arrays.asList('@', '.'));
+        boolean valid = true;
+        if (!(str.contains("@") && str.contains(".")))
             return false;
-        else if(str.startsWith("@") || str.startsWith("."))
+        else if (str.startsWith("@") || str.startsWith("."))
             return false;
-        else if(str.endsWith("@") || str.endsWith("."))
+        else if (str.endsWith("@") || str.endsWith("."))
             return false;
-        
-        for(int i=0; i<str.length(); i++)
+
+        for (int i = 0; i < str.length(); i++)
         {
-            if(! (Character.isLetterOrDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
+            if (!(Character.isLetterOrDigit(str.charAt(i)) || allowed.contains(str.charAt(i))))
             {
-                valid=false;
+                valid = false;
                 break;
             }
         }
         return valid;
     }
-    
+
     public static boolean isNIC(String str)
     {
         boolean valid;
-        if(str.length() == 10)
+        if (str.length() == 10)
             valid = true;
-        else 
+        else
             return false;
-        for(int i=0;i<9;i++)
-            if(! (Character.isDigit(str.charAt(i))))
+        for (int i = 0; i < 9; i++)
+            if (!(Character.isDigit(str.charAt(i))))
             {
-                valid=false;
+                valid = false;
                 break;
             }
         if (!valid)
             return false;
-        if(str.charAt(9) == 'v' || str.charAt(9) == 'V')
-            return true;
-        else
-            return false;
+        return str.charAt(9) == 'v' || str.charAt(9) == 'V';
     }
-    
+
     public static boolean isInteger(String str)
     {
         try
@@ -85,12 +82,12 @@ public class Validator
             Integer.parseInt(str);
             return true;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            return false;   
+            return false;
         }
     }
-    
+
     public static boolean isDouble(String str)
     {
         try
@@ -98,22 +95,22 @@ public class Validator
             Double.parseDouble(str);
             return true;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            return false;   
+            return false;
         }
     }
-    
+
     public static boolean isExistingNIC(String str, dbConcurrent nbconn)
     {
         boolean valid = true;
-        try 
+        try
         {
             PreparedStatement prp = nbconn.get().prepareStatement("select * from `person` where `nic` = ?");
-            prp.setString(1,str);
+            prp.setString(1, str);
             ResultSet rs = prp.executeQuery();
             valid = rs.next();
-        } 
+        }
         catch (Exception e)
         {
             System.out.println("Error checking NIC existence\n" + e);
@@ -121,21 +118,23 @@ public class Validator
         }
         return valid;
     }
-    
+
     public static boolean isValidBirthday(String datestr)
     {
         LocalDate date = Manipulator.parseISODate(datestr);
-        if(date == null)return false;
+        if (date == null)
+            return false;
         return LocalDate.now().minusYears(date.getYear()).getYear() > 17;
     }
-    
+
     public static boolean isPastDate(String datestr)
     {
         LocalDate date = Manipulator.parseISODate(datestr);
-        if(date == null)return false;
+        if (date == null)
+            return false;
         return LocalDate.now().compareTo(date) > -1;
     }
-    
+
     public static boolean isValidDOBNIC(String nic, LocalDate dob)
     {
         int year = (dob.getYear() % 1000) % 100;

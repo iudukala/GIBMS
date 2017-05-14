@@ -6,9 +6,9 @@
 package hassim;
 
 /**
- *
  * @author Shamodh
  */
-class JasperCompileManager {
-    
+class JasperCompileManager
+{
+
 }

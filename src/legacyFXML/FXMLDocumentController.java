@@ -5,33 +5,29 @@
  */
 package legacyFXML;
 
-import legacyEntities.shareholder;
-import legacyEntities.Person;
+import core.Integrator;
 import handlers.DynamicTable;
-import java.net.URL;
-import java.sql.Connection;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-
-import core.Integrator;
-import java.time.format.DateTimeFormatter;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import legacyEntities.Person;
+import legacyEntities.shareholder;
+
+import java.net.URL;
+import java.sql.Connection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+
 /**
- *
  * @author ASUS-PC
  */
-public class FXMLDocumentController implements Initializable {
-    
+public class FXMLDocumentController implements Initializable
+{
+
+    Connection conn = null;
     private Label label;
     @FXML
     private TextField idnumber;
@@ -55,10 +51,6 @@ public class FXMLDocumentController implements Initializable {
     private DatePicker sharerangeclose;
     @FXML
     private Button add;
-    
-    Connection conn=null;
-    
-    
     @FXML
     private TextField addres;
     @FXML
@@ -129,35 +121,36 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane anchorpane_shares;
     @FXML
     private TabPane tabpane_shares;
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         Integrator.integrate(anchorpane_shares);
-        
-       conn = handlers.dbConcurrent.connect();
-       DynamicTable.getColumns(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-"from person p ,shareholder s where p.nic=s.nic" , utable);
-       
-        utable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> 
+
+        conn = handlers.dbConcurrent.connect();
+        DynamicTable.getColumns(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
+                "from person p ,shareholder s where p.nic=s.nic", utable);
+
+        utable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->
         {
             if (newSelection != null)
             {
-                int index=utable.getSelectionModel().getSelectedIndex();
-                String x=utable.getItems().get(index).toString();
+                int index = utable.getSelectionModel().getSelectedIndex();
+                String x = utable.getItems().get(index).toString();
                 String nic = x.split(",")[0].substring(1);
                 System.out.println(nic);
                 unic.setDisable(true);
-                
+
                 shareholder shareholder_object = shareholder_search.shareholderFromSQL(nic, conn);
                 Person person_object = legacyEntities.customer_search.personFromSQL(nic, conn);
-                
+
                 unic.setText(person_object.nic);
                 uname.setText(person_object.name);
                 uemail.setText(person_object.email);
                 uphone.setText(person_object.personal_phone);
                 uaddress.setText(person_object.home_address);
-                udob.setValue(LocalDate.parse(person_object.dob,DateTimeFormatter.ISO_DATE));
-                
+                udob.setValue(LocalDate.parse(person_object.dob, DateTimeFormatter.ISO_DATE));
+
                 unic.setText(shareholder_object.nic);
                 ubname.setText(shareholder_object.bank_name);
                 ubnumber.setText(Integer.toString(shareholder_object.account_no));
@@ -168,155 +161,154 @@ public class FXMLDocumentController implements Initializable {
                 udescription.setText(shareholder_object.description);
             }
         });
-        
-        
+
+
     }
-    
+
     @FXML
-    private void handleAdd(ActionEvent event) throws Exception 
+    private void handleAdd(ActionEvent event) throws Exception
     {
         String nic = idnumber.getText();
         System.out.println(nic);
-        
-            String name = fname.getText();
-            System.out.println(name);
-            
-            String email =emai.getText();
-            System.out.println(email);
-            
-            LocalDate dob = date.getValue();
-            System.out.println(dob.toString());
-            
-            String personal_phone = contactno.getText();
-            System.out.println(personal_phone);
-            
-            String home_address = addres.getText();
-            System.out.println(home_address);
-            
-            String bank_name =bname.getText();
-            System.out.println(bank_name);
-            
-            int account_no =Integer.valueOf(bnumber.getText()) ;
-            System.out.println(account_no);
-            
-            int share_amount =Integer.valueOf (noshare.getText());
-            System.out.println(share_amount);
-            
-            Double share_price =Double.valueOf(shareprice.getText());
-            System.out.println(share_price);
-            
-            LocalDate share_range_start = sharerangestart.getValue();
-            System.out.println(share_range_start);
-            
-            LocalDate share_range_close = sharerangeclose.getValue();
-            System.out.println(share_range_close);
-            
-            String description = descriptio.getText();
-            System.out.println(description);
-            
-            legacyEntities.add_btn.display("info","shares added successfully");
-       try
-       {
-           Person person_object = new Person (name,nic,dob,personal_phone,home_address,'.','.',email);
+
+        String name = fname.getText();
+        System.out.println(name);
+
+        String email = emai.getText();
+        System.out.println(email);
+
+        LocalDate dob = date.getValue();
+        System.out.println(dob.toString());
+
+        String personal_phone = contactno.getText();
+        System.out.println(personal_phone);
+
+        String home_address = addres.getText();
+        System.out.println(home_address);
+
+        String bank_name = bname.getText();
+        System.out.println(bank_name);
+
+        int account_no = Integer.valueOf(bnumber.getText());
+        System.out.println(account_no);
+
+        int share_amount = Integer.valueOf(noshare.getText());
+        System.out.println(share_amount);
+
+        Double share_price = Double.valueOf(shareprice.getText());
+        System.out.println(share_price);
+
+        LocalDate share_range_start = sharerangestart.getValue();
+        System.out.println(share_range_start);
+
+        LocalDate share_range_close = sharerangeclose.getValue();
+        System.out.println(share_range_close);
+
+        String description = descriptio.getText();
+        System.out.println(description);
+
+        legacyEntities.add_btn.display("info", "shares added successfully");
+        try
+        {
+            Person person_object = new Person(name, nic, dob, personal_phone, home_address, '.', '.', email);
             person_object.toString();
             person_object.consolidate(conn);
-            
-            shareholder shareholder_object = new shareholder(nic,bank_name,account_no,share_amount,share_price,share_range_start,share_range_close,description);
+
+            shareholder shareholder_object = new shareholder(nic, bank_name, account_no, share_amount, share_price, share_range_start, share_range_close, description);
             shareholder_object.toString();
             //shareholder_object.consolidate(conn);
-            } 
-            catch(Exception e)
-            {
-                System.out.println("EX" + e);   
-            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("EX" + e);
+        }
     }
-    
+
     @FXML
     private void handle_update(ActionEvent event)
     {
-//        try {
-//            PreparedStatement prp = conn.prepareStatement("delete from person where nic = ?");
-//            prp = conn.prepareStatement("delete from person where nic = ?");
-//            
-//            Person person_object = new Person (uname,unic,udob,uphone,uaddress,'.','.',uemail);
-//            person_object.toString();
-//            person_object.consolidate(conn);
-//            
-//            
-//            shareholder shareholder_object = new shareholder(nic,bank_name,account_no,share_amount,share_price,share_range_start,share_range_close,description);
-//            shareholder_object.toString();
-//            shareholder_object.consolidate(conn);
-//      
-//            String nic = unic.getText();
-//        
-//        
-//            String name = uname.getText();
-//            
-//            
-//            String email =uemail.getText();
-//            
-//            
-//            LocalDate dob = udob.getValue();
-//            
-//            
-//            String personal_phone = uphone.getText();
-//            
-//            
-//            String home_address = uaddress.getText();
-//            
-//            
-//            String bank_name =ubname.getText();
-//            
-//            
-//            int account_no =Integer.valueOf(ubnumber.getText()) ;
-//            
-//            
-//            int share_amount =Integer.valueOf (ushareamount.getText());
-//            
-//            
-//            Double share_price =Double.valueOf(ushareprice.getText());
-//            
-//            
-//            LocalDate share_range_start = usharerangestart.getValue();
-//            
-//            
-//            LocalDate share_range_close = usharerangeclose.getValue();
-//            
-//            
-//            String description = udescription.getText();
-//            prp.executeUpdate();
-//              } 
-//        
-//            
-//        catch (SQLException ex) {
-//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        
-//        
-        
-//    try
-//        {
-//           
-//           
-//           PreparedStatement prp = conn.prepareStatement("delete from shareholder where nic = ?");
-//            
-//            
-//            prp.setString(1, shareholder_object.nic);
-//            prp.setString(2, shareholder_object.bank_name);
-//            prp.executeUpdate();
-//            prp = conn.prepareStatement("delete from person where nic = ?");
-//            prp.setString(1, person_object.nic);
-//            prp.executeUpdate();
-//        }
-//        catch(SQLException e)
-//        {
-//            System.out.println("Error removing customer\n" + e);
-//        }  
-//       
- 
-        
-        
+        //        try {
+        //            PreparedStatement prp = conn.prepareStatement("delete from person where nic = ?");
+        //            prp = conn.prepareStatement("delete from person where nic = ?");
+        //
+        //            Person person_object = new Person (uname,unic,udob,uphone,uaddress,'.','.',uemail);
+        //            person_object.toString();
+        //            person_object.consolidate(conn);
+        //
+        //
+        //            shareholder shareholder_object = new shareholder(nic,bank_name,account_no,share_amount,share_price,share_range_start,share_range_close,description);
+        //            shareholder_object.toString();
+        //            shareholder_object.consolidate(conn);
+        //
+        //            String nic = unic.getText();
+        //
+        //
+        //            String name = uname.getText();
+        //
+        //
+        //            String email =uemail.getText();
+        //
+        //
+        //            LocalDate dob = udob.getValue();
+        //
+        //
+        //            String personal_phone = uphone.getText();
+        //
+        //
+        //            String home_address = uaddress.getText();
+        //
+        //
+        //            String bank_name =ubname.getText();
+        //
+        //
+        //            int account_no =Integer.valueOf(ubnumber.getText()) ;
+        //
+        //
+        //            int share_amount =Integer.valueOf (ushareamount.getText());
+        //
+        //
+        //            Double share_price =Double.valueOf(ushareprice.getText());
+        //
+        //
+        //            LocalDate share_range_start = usharerangestart.getValue();
+        //
+        //
+        //            LocalDate share_range_close = usharerangeclose.getValue();
+        //
+        //
+        //            String description = udescription.getText();
+        //            prp.executeUpdate();
+        //              }
+        //
+        //
+        //        catch (SQLException ex) {
+        //            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        //        }
+        //
+        //
+        //
+
+        //    try
+        //        {
+        //
+        //
+        //           PreparedStatement prp = conn.prepareStatement("delete from shareholder where nic = ?");
+        //
+        //
+        //            prp.setString(1, shareholder_object.nic);
+        //            prp.setString(2, shareholder_object.bank_name);
+        //            prp.executeUpdate();
+        //            prp = conn.prepareStatement("delete from person where nic = ?");
+        //            prp.setString(1, person_object.nic);
+        //            prp.executeUpdate();
+        //        }
+        //        catch(SQLException e)
+        //        {
+        //            System.out.println("Error removing customer\n" + e);
+        //        }
+        //
+
+
     }
 
     @FXML
@@ -324,10 +316,9 @@ public class FXMLDocumentController implements Initializable {
     {
         String search = usearch.getText();
         handlers.DynamicTable.buildData(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
-"from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, utable);
-        
+                "from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, utable);
+
     }
 
-   
-    
+
 }

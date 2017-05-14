@@ -12,88 +12,84 @@ import core.Manipulator;
 import handlers.ValidationHandler;
 import handlers.ValidationInterface;
 import handlers.dbConcurrent;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Control;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
- *
  * @author Isuru Udukala
  */
 public class EntityControls
 {
     public final String TABLE_NAME;
     private final dbConcurrent nbconn;
-    private final Map<String,Object> nodeList = new LinkedHashMap<>();
-    private int dyn_val_count = 0;
+    private final Map<String, Object> nodeList = new LinkedHashMap<>();
     private final String VALIDATION_IDENTIFIER = "EXCLUSION-VAL-";
+    private int dyn_val_count = 0;
     private Entity entity;
     private boolean disabled;
-    
+
     public EntityControls(String tablename, dbConcurrent nbconn)
     {
         TABLE_NAME = tablename;
         this.nbconn = nbconn;
         disabled = false;
     }
-    
+
     public void add(String key, Object obj)
     {
         key = key.toLowerCase();
         nodeList.put(key, obj);
     }
-    
+
     public void add(Object entries[][])
     {
         List<Control> nic_dob = new ArrayList<>();
-        for(int i=0;i<entries.length;i++)
+        for (int i = 0; i < entries.length; i++)
         {
             Object key = entries[i][0];
             Object control = entries[i][1];
-            if(entries[i].length == 2)
+            if (entries[i].length == 2)
                 add(key.toString(), control);
-            
-            else if(entries[i].length == 3)
+
+            else if (entries[i].length == 3)
             {
                 Object validator = entries[i][2];
-                if(ValidationInterface.class.isAssignableFrom(validator.getClass()))
-                    add(key.toString(), control, (ValidationInterface)validator);
-                if(validator.getClass().equals(ValidationHandler.NICValidator.class))
-                    nic_dob.add(0, (Control)control);
+                if (ValidationInterface.class.isAssignableFrom(validator.getClass()))
+                    add(key.toString(), control, (ValidationInterface) validator);
+                if (validator.getClass().equals(ValidationHandler.NICValidator.class))
+                    nic_dob.add(0, (Control) control);
             }
         }
     }
-    
+
     public <E extends ValidationInterface> void add(String key, Object obj, E validator)
     {
         add(key, obj);
-        
-        if(obj.getClass().equals(JFXTextField.class))
-            validator.register((JFXTextField)obj);
-        else if(obj.getClass().equals(JFXDatePicker.class))
+
+        if (obj.getClass().equals(JFXTextField.class))
+            validator.register((JFXTextField) obj);
+        else if (obj.getClass().equals(JFXDatePicker.class))
         {
             //strong gridpane assumption
-            JFXDatePicker datepicker = (JFXDatePicker)obj;
-            GridPane grid = (GridPane)datepicker.getParent();
-            
+            JFXDatePicker datepicker = (JFXDatePicker) obj;
+            GridPane grid = (GridPane) datepicker.getParent();
+
             JFXTextField vtf = new JFXTextField();
-            
+
             //adding to entityControl with identifier
             String ec_val_key = VALIDATION_IDENTIFIER + dyn_val_count++;
             this.add(ec_val_key, vtf);
-            
+
             vtf.setStyle("-jfx-focus-color: transparent; -jfx-unfocus-color: transparent; -fx-text-fill: transparent;");
-            
+
             validator.register(vtf);
             datepicker.valueProperty().addListener(new ChangeListener<LocalDate>()
             {
@@ -105,16 +101,20 @@ public class EntityControls
                         vtf.setText(newValue.format(DateTimeFormatter.ISO_DATE));
                         vtf.validate();
                     }
-                    catch(Exception e){}
+                    catch (Exception e)
+                    {
+                    }
                 }
             });
-            
+
             Integer column = GridPane.getColumnIndex(datepicker), row = GridPane.getRowIndex(datepicker);
-            if(column == null){
+            if (column == null)
+            {
                 column = 0;
                 //System.out.println("Date validator registration warning : null on column - " + datepicker);
             }
-            if(row == null){
+            if (row == null)
+            {
                 row = 0;
                 //System.out.println("Date validator registration warning : null on row - " + datepicker);
             }
@@ -124,183 +124,183 @@ public class EntityControls
         else
             System.out.println("Error: attempting to register validator to invalid control : \nControl : " + obj + "\nValidator : " + validator);
     }
-    
+
     public Entity getValues()
     {
         entity = new Entity(TABLE_NAME, nbconn);
         List<String> primaryKeys = entity.fetchPrimaryKeys();
-        
-        for(Entry<String,Object> entry : nodeList.entrySet())
+
+        for (Entry<String, Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();
             Object control = entry.getValue();
-            
+
             boolean disabled_pkey = false;
-            for(Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext();)
+            for (Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext(); )
             {
                 String pkey = iterator.next();
-                if(key.equals(pkey))
+                if (key.equals(pkey))
                     disabled_pkey = true;
             }
-            
-            if(control.getClass().equals(JFXTextField.class) || control.getClass().equals(JFXDatePicker.class))
-                if(((Control)control).isDisabled() && !disabled_pkey)
+
+            if (control.getClass().equals(JFXTextField.class) || control.getClass().equals(JFXDatePicker.class))
+                if (((Control) control).isDisabled() && !disabled_pkey)
                     continue;
             try
             {
-                if(entry.getValue().getClass().equals(ToggleGroup.class))
+                if (entry.getValue().getClass().equals(ToggleGroup.class))
                 {
-                    ToggleGroup tg = (ToggleGroup)control;
-                    if(tg.getSelectedToggle()!=null)
+                    ToggleGroup tg = (ToggleGroup) control;
+                    if (tg.getSelectedToggle() != null)
                         entity.add(key, tg.getSelectedToggle().getUserData());
                 }
-                else if(control.getClass().equals(JFXDatePicker.class))
-                    entity.add(key,((JFXDatePicker)control).getValue());
-                else if(control.getClass().equals(JFXTextField.class))
+                else if (control.getClass().equals(JFXDatePicker.class))
+                    entity.add(key, ((JFXDatePicker) control).getValue());
+                else if (control.getClass().equals(JFXTextField.class))
                 {
-                    String value = ((JFXTextField)control).getText();
+                    String value = ((JFXTextField) control).getText();
 
                     List<List> tdata = entity.fetchTableStructure();
 
-                    for(List list : tdata)
-                        for(int i=0;i<list.size();i++)
+                    for (List list : tdata)
+                        for (int i = 0; i < list.size(); i++)
                         {
-                            if(list.get(0).equals(key))
+                            if (list.get(0).equals(key))
                             {
-                                if(list.get(1).equals("varchar"))
+                                if (list.get(1).equals("varchar"))
                                     entity.add(key, value);
-                                if(!value.equals(""))
+                                if (!value.equals(""))
                                 {
-                                    if(list.get(1).equals("double"))
+                                    if (list.get(1).equals("double"))
                                         entity.add(key, Double.parseDouble(value));
-                                    else if(list.get(1).equals("int"))
+                                    else if (list.get(1).equals("int"))
                                         entity.add(key, Integer.parseInt(value));
-                                    else if(list.get(1).equals("long"))
+                                    else if (list.get(1).equals("long"))
                                         entity.add(key, Long.parseLong(value));
                                 }
                             }
                         }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 System.out.println("Nullvalue detected: " + entry.getKey() + " - " + entry.getValue());
             }
         }
         return entity;
     }
-    
+
+    public void setValues(Entity entity)
+    {
+        if (entity == null)
+            return;
+        for (Entry<String, Object> entry : nodeList.entrySet())
+        {
+            String key = entry.getKey();
+            Object control = entry.getValue();
+            if (entry.getValue().getClass().equals(ToggleGroup.class))
+                Manipulator.setToggleSelection((ToggleGroup) control, entity.getString(key));
+            else if (control.getClass().equals(JFXTextField.class))
+                ((JFXTextField) control).setText(entity.getAsString(key));
+            else if (control.getClass().equals(JFXDatePicker.class))
+                ((JFXDatePicker) control).setValue(entity.getLocalDate(key));
+        }
+
+        List<String> primaryKeys = entity.fetchPrimaryKeys();
+        for (Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext(); )
+        {
+            String key = iterator.next();
+            if (nodeList.get(key) != null)
+                ((Control) nodeList.get(key)).setDisable(true);
+        }
+    }
+
     public void addToEntity(String key, Object value)
     {
         entity.add(key, value);
     }
-    
-    public void setValues(Entity entity)
-    {
-        if(entity == null)
-            return;
-        for(Entry<String,Object> entry : nodeList.entrySet())
-        {
-            String key = entry.getKey();
-            Object control = entry.getValue();
-            if(entry.getValue().getClass().equals(ToggleGroup.class))
-                Manipulator.setToggleSelection((ToggleGroup)control, entity.getString(key));
-            else if(control.getClass().equals(JFXTextField.class))
-                ((JFXTextField)control).setText(entity.getAsString(key));
-            else if(control.getClass().equals(JFXDatePicker.class))
-                ((JFXDatePicker)control).setValue(entity.getLocalDate(key));
-        }
-        
-        List<String> primaryKeys = entity.fetchPrimaryKeys();
-        for(Iterator<String> iterator = primaryKeys.listIterator(); iterator.hasNext();)
-        {
-            String key = iterator.next();
-            if(nodeList.get(key)!=null)
-                ((Control)nodeList.get(key)).setDisable(true);
-        }
-    }
-    
+
     public boolean triggerValidators()
     {
         boolean valid = true;
-        for(Entry<String, Object> entry : nodeList.entrySet())
+        for (Entry<String, Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();
             Object control = entry.getValue();
-            if(control.getClass().equals(JFXTextField.class) || control.getClass().equals(JFXDatePicker.class))
-                if(((Control)control).isDisabled())
+            if (control.getClass().equals(JFXTextField.class) || control.getClass().equals(JFXDatePicker.class))
+                if (((Control) control).isDisabled())
                     continue;
-            
-            if(control.getClass().equals(JFXTextField.class))
+
+            if (control.getClass().equals(JFXTextField.class))
             {
-                JFXTextField textField = (JFXTextField)control;
-                if(! (textField.getValidators().isEmpty()) )
+                JFXTextField textField = (JFXTextField) control;
+                if (!(textField.getValidators().isEmpty()))
                 {
                     valid = (textField.validate());// && !textField.getText().equals(""));
-                    if(!valid)
+                    if (!valid)
                         return false;
                 }
             }
         }
-        
+
         return valid;
     }
-    
+
     public void clearControls()
     {
-        for(Entry<String,Object> entry : nodeList.entrySet())
+        for (Entry<String, Object> entry : nodeList.entrySet())
         {
             String key = entry.getKey();
             Object control = entry.getValue();
-            if(entry.getValue().getClass().equals(ToggleGroup.class))
-                ((ToggleGroup)control).selectToggle(null);
-            
-            else if(control.getClass().equals(JFXDatePicker.class))
-                ((JFXDatePicker)control).setValue(null);
-            else if(control.getClass().equals(JFXTextField.class))
+            if (entry.getValue().getClass().equals(ToggleGroup.class))
+                ((ToggleGroup) control).selectToggle(null);
+
+            else if (control.getClass().equals(JFXDatePicker.class))
+                ((JFXDatePicker) control).setValue(null);
+            else if (control.getClass().equals(JFXTextField.class))
             {
-                JFXTextField textField = (JFXTextField)control;
+                JFXTextField textField = (JFXTextField) control;
                 textField.clear();
-                if(! (textField.getValidators().isEmpty()) )
+                if (!(textField.getValidators().isEmpty()))
                 {
-                   textField.validate();
+                    textField.validate();
                 }
             }
         }
     }
-    
+
     public void disable()
     {
-        for(Entry<String,Object> entry : nodeList.entrySet())
-            ((Control)entry.getValue()).setDisable(true);
+        for (Entry<String, Object> entry : nodeList.entrySet())
+            ((Control) entry.getValue()).setDisable(true);
         disabled = true;
     }
-    
+
     public void enable()
     {
-        for(Entry<String,Object> entry : nodeList.entrySet())
-            ((Control)entry.getValue()).setDisable(false);
+        for (Entry<String, Object> entry : nodeList.entrySet())
+            ((Control) entry.getValue()).setDisable(false);
         disabled = false;
     }
-    
+
     public boolean isDisabled()
     {
         return disabled;
     }
-    
+
     public int getAGKey()
     {
         return entity.getAGKey();
     }
-    
+
     @Override
     public String toString()
     {
         StringBuilder strb = new StringBuilder();
         strb.append("-----[").append(TABLE_NAME).append("] EntityControls-------------\n");
-        for(Entry<String,Object> entry : nodeList.entrySet())
+        for (Entry<String, Object> entry : nodeList.entrySet())
         {
-            strb.append(Manipulator.formatTabs(entry.getKey(),3,true))
+            strb.append(Manipulator.formatTabs(entry.getKey(), 3, true))
                     .append(" - ").append(entry.getValue()).append("\n");
         }
         return strb.toString();

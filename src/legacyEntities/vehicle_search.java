@@ -6,10 +6,8 @@
 package legacyEntities;
 
 
-
-public class vehicle_search 
+public class vehicle_search
 {
-    
-    
-    
+
+
 }

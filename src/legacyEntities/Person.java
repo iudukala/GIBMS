@@ -5,16 +5,15 @@
  */
 package legacyEntities;
 
+import core.Manipulator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import core.Manipulator;
-
 /**
- *
  * @author Isuru Udukala
  */
 public class Person
@@ -39,11 +38,11 @@ public class Person
         this.marital_status = marital_status;
         this.email = email;
     }
-    
+
     @Override
     public String toString()
     {
-        StringBuilder strb=new StringBuilder();
+        StringBuilder strb = new StringBuilder();
         strb.append("NIC\t:").append(nic);
         strb.append("\nName\t:").append(name);
         strb.append("\nDOB\t:").append(dob);
@@ -54,14 +53,15 @@ public class Person
         strb.append("\nMarital\t:").append(marital_status);
         return strb.toString();
     }
+
     public void consolidate(Connection conn)
     {
         try
         {
             String query = "insert into person(nic, full_name, email, dob, phone, address, gender, marital_status)";
-            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
-            prp.setString(1,nic);
-            prp.setString(2,name);
+            PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
+            prp.setString(1, nic);
+            prp.setString(2, name);
             prp.setString(3, email);
             prp.setString(4, dob);
             prp.setString(5, personal_phone);
@@ -70,7 +70,7 @@ public class Person
             prp.setString(8, Character.toString(marital_status));
             prp.executeUpdate();
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             System.out.println("Consolidation error[Person]:\n" + e);
         }

@@ -1,142 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="legacy.InsuranceOldController">
-   <children>
-      <TabPane prefHeight="800.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
-         <tabs>
-            <Tab text="Insurance fund">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0" text="Insurance_fund">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="679.0">
-                                 <children>
-                                    <GridPane layoutX="14.0" prefHeight="221.0" prefWidth="840.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label text="Customer ID" />
-                                          <TextField fx:id="Customer_ID_if" prefHeight="25.0" prefWidth="376.0" GridPane.columnIndex="1" />
-                                          <Label text="Insurance fee" GridPane.rowIndex="1" />
-                                          <TextField fx:id="Insurance_Fee_if" prefHeight="25.0" prefWidth="376.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="Date issued" GridPane.rowIndex="2" />
-                                          <DatePicker fx:id="Date_Issued_if" prefHeight="25.0" prefWidth="439.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label text="Expiry date" GridPane.rowIndex="3" />
-                                          <DatePicker fx:id="Expiry_Date_if" prefHeight="25.0" prefWidth="436.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <Label text="Payed amount" GridPane.rowIndex="4" />
-                                          <TextField fx:id="Payed_Amount_if" prefHeight="25.0" prefWidth="376.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <Label text="Due amount" GridPane.rowIndex="5" />
-                                          <TextField fx:id="Due_Amount_if" prefHeight="25.0" prefWidth="376.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                       </children>
-                                    </GridPane>
-                                    <Button fx:id="Add_if" layoutX="48.0" layoutY="242.0" mnemonicParsing="false" onAction="#Add_Button_if" prefHeight="25.0" prefWidth="60.0" text="Add" />
-                                    <Button fx:id="Update_if" layoutX="167.0" layoutY="242.0" mnemonicParsing="false" onAction="#Update_Button_if" text="Update" />
-                                    <Button fx:id="Delete_if" layoutX="286.0" layoutY="242.0" mnemonicParsing="false" onAction="#Delete_Button_if" text="Delete" />
-                                    <TextField fx:id="Search_Bar_if" layoutX="434.0" layoutY="242.0" prefHeight="25.0" prefWidth="355.0" />
-                                    <Button fx:id="Search_if" layoutX="802.0" layoutY="242.0" mnemonicParsing="false" onAction="#Search_Button_if" text="Search" />
-                                    <TableView fx:id="Table_if" layoutX="14.0" layoutY="289.0" prefHeight="413.0" prefWidth="838.0">
-                                       <columns>
-                                          <TableColumn prefWidth="124.0" text="Customer_ID " />
-                                          <TableColumn minWidth="7.0" prefWidth="126.0" text="Insurance_fee" />
-                                          <TableColumn prefWidth="122.0" text="Date_issued" />
-                                          <TableColumn prefWidth="133.0" text="Expiry_date" />
-                                          <TableColumn prefWidth="152.0" text="Payed_amount" />
-                                          <TableColumn prefWidth="195.0" text="Due_amount" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Insurance claim">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0" text="Insurance_claim">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="718.0" prefWidth="869.0">
-                                 <children>
-                                    <GridPane layoutX="15.0" layoutY="2.0" prefHeight="206.0" prefWidth="843.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label text="Claim number" />
-                                          <TextField fx:id="Claim_Number_ic" prefHeight="25.0" prefWidth="388.0" GridPane.columnIndex="1" />
-                                          <Label text="Claim status" GridPane.rowIndex="1" />
-                                          <TextField fx:id="Claim_Status_ic" prefHeight="25.0" prefWidth="388.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="Claim type" GridPane.rowIndex="2" />
-                                          <TextField fx:id="Claim_Type_ic" prefHeight="25.0" prefWidth="388.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label text="Open date" GridPane.rowIndex="3" />
-                                          <Label text="Closed date" GridPane.rowIndex="4" />
-                                          <DatePicker fx:id="Open_Date_ic" prefHeight="25.0" prefWidth="440.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <DatePicker fx:id="Closed_Date_ic" prefHeight="25.0" prefWidth="440.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <Label text="Description" GridPane.rowIndex="5" />
-                                          <TextField fx:id="Description_ic" prefHeight="18.0" prefWidth="418.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                       </children>
-                                    </GridPane>
-                                    <Button fx:id="Add_ic" layoutX="68.0" layoutY="220.0" mnemonicParsing="false" onAction="#Add_Button_ic" prefHeight="25.0" prefWidth="60.0" text="Add" />
-                                    <Button fx:id="Update_ic" layoutX="194.0" layoutY="220.0" mnemonicParsing="false" onAction="#Update_Button_ic" text="Update" />
-                                    <Button fx:id="Delete_ic" layoutX="319.0" layoutY="220.0" mnemonicParsing="false" onAction="#Delete_Button_ic" text="Delete" />
-                                    <TextField fx:id="Search_Bar_ic" layoutX="440.0" layoutY="220.0" prefHeight="25.0" prefWidth="356.0" />
-                                    <Button fx:id="Search_ic" layoutX="806.0" layoutY="220.0" mnemonicParsing="false" onAction="#Search_ic" text="Search" />
-                                    <TableView fx:id="Table_ic" layoutX="25.0" layoutY="272.0" prefHeight="420.0" prefWidth="830.0">
-                                       <columns>
-                                          <TableColumn prefWidth="94.0" text="Claim_number" />
-                                          <TableColumn prefWidth="148.0" text="Claim_status" />
-                                          <TableColumn prefWidth="123.0" text="Claim_type" />
-                                          <TableColumn prefWidth="148.0" text="Open_date" />
-                                          <TableColumn prefWidth="153.0" text="Colsed_date" />
-                                          <TableColumn prefWidth="163.0" text="Description" />
-                                       </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-   </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="800.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/8.0.111" fx:controller="legacy.InsuranceOldController">
+    <children>
+        <TabPane prefHeight="800.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Insurance fund">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0" text="Insurance_fund">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="679.0">
+                                            <children>
+                                                <GridPane layoutX="14.0" prefHeight="221.0" prefWidth="840.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="Customer ID"/>
+                                                        <TextField fx:id="Customer_ID_if" prefHeight="25.0"
+                                                                   prefWidth="376.0" GridPane.columnIndex="1"/>
+                                                        <Label text="Insurance fee" GridPane.rowIndex="1"/>
+                                                        <TextField fx:id="Insurance_Fee_if" prefHeight="25.0"
+                                                                   prefWidth="376.0" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="1"/>
+                                                        <Label text="Date issued" GridPane.rowIndex="2"/>
+                                                        <DatePicker fx:id="Date_Issued_if" prefHeight="25.0"
+                                                                    prefWidth="439.0" GridPane.columnIndex="1"
+                                                                    GridPane.rowIndex="2"/>
+                                                        <Label text="Expiry date" GridPane.rowIndex="3"/>
+                                                        <DatePicker fx:id="Expiry_Date_if" prefHeight="25.0"
+                                                                    prefWidth="436.0" GridPane.columnIndex="1"
+                                                                    GridPane.rowIndex="3"/>
+                                                        <Label text="Payed amount" GridPane.rowIndex="4"/>
+                                                        <TextField fx:id="Payed_Amount_if" prefHeight="25.0"
+                                                                   prefWidth="376.0" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="4"/>
+                                                        <Label text="Due amount" GridPane.rowIndex="5"/>
+                                                        <TextField fx:id="Due_Amount_if" prefHeight="25.0"
+                                                                   prefWidth="376.0" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="5"/>
+                                                    </children>
+                                                </GridPane>
+                                                <Button fx:id="Add_if" layoutX="48.0" layoutY="242.0"
+                                                        mnemonicParsing="false" onAction="#Add_Button_if"
+                                                        prefHeight="25.0" prefWidth="60.0" text="Add"/>
+                                                <Button fx:id="Update_if" layoutX="167.0" layoutY="242.0"
+                                                        mnemonicParsing="false" onAction="#Update_Button_if"
+                                                        text="Update"/>
+                                                <Button fx:id="Delete_if" layoutX="286.0" layoutY="242.0"
+                                                        mnemonicParsing="false" onAction="#Delete_Button_if"
+                                                        text="Delete"/>
+                                                <TextField fx:id="Search_Bar_if" layoutX="434.0" layoutY="242.0"
+                                                           prefHeight="25.0" prefWidth="355.0"/>
+                                                <Button fx:id="Search_if" layoutX="802.0" layoutY="242.0"
+                                                        mnemonicParsing="false" onAction="#Search_Button_if"
+                                                        text="Search"/>
+                                                <TableView fx:id="Table_if" layoutX="14.0" layoutY="289.0"
+                                                           prefHeight="413.0" prefWidth="838.0">
+                                                    <columns>
+                                                        <TableColumn prefWidth="124.0" text="Customer_ID "/>
+                                                        <TableColumn minWidth="7.0" prefWidth="126.0"
+                                                                     text="Insurance_fee"/>
+                                                        <TableColumn prefWidth="122.0" text="Date_issued"/>
+                                                        <TableColumn prefWidth="133.0" text="Expiry_date"/>
+                                                        <TableColumn prefWidth="152.0" text="Payed_amount"/>
+                                                        <TableColumn prefWidth="195.0" text="Due_amount"/>
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Insurance claim">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0"
+                                            text="Insurance_claim">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="718.0" prefWidth="869.0">
+                                            <children>
+                                                <GridPane layoutX="15.0" layoutY="2.0" prefHeight="206.0"
+                                                          prefWidth="843.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="Claim number"/>
+                                                        <TextField fx:id="Claim_Number_ic" prefHeight="25.0"
+                                                                   prefWidth="388.0" GridPane.columnIndex="1"/>
+                                                        <Label text="Claim status" GridPane.rowIndex="1"/>
+                                                        <TextField fx:id="Claim_Status_ic" prefHeight="25.0"
+                                                                   prefWidth="388.0" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="1"/>
+                                                        <Label text="Claim type" GridPane.rowIndex="2"/>
+                                                        <TextField fx:id="Claim_Type_ic" prefHeight="25.0"
+                                                                   prefWidth="388.0" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="2"/>
+                                                        <Label text="Open date" GridPane.rowIndex="3"/>
+                                                        <Label text="Closed date" GridPane.rowIndex="4"/>
+                                                        <DatePicker fx:id="Open_Date_ic" prefHeight="25.0"
+                                                                    prefWidth="440.0" GridPane.columnIndex="1"
+                                                                    GridPane.rowIndex="3"/>
+                                                        <DatePicker fx:id="Closed_Date_ic" prefHeight="25.0"
+                                                                    prefWidth="440.0" GridPane.columnIndex="1"
+                                                                    GridPane.rowIndex="4"/>
+                                                        <Label text="Description" GridPane.rowIndex="5"/>
+                                                        <TextField fx:id="Description_ic" prefHeight="18.0"
+                                                                   prefWidth="418.0" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="5"/>
+                                                    </children>
+                                                </GridPane>
+                                                <Button fx:id="Add_ic" layoutX="68.0" layoutY="220.0"
+                                                        mnemonicParsing="false" onAction="#Add_Button_ic"
+                                                        prefHeight="25.0" prefWidth="60.0" text="Add"/>
+                                                <Button fx:id="Update_ic" layoutX="194.0" layoutY="220.0"
+                                                        mnemonicParsing="false" onAction="#Update_Button_ic"
+                                                        text="Update"/>
+                                                <Button fx:id="Delete_ic" layoutX="319.0" layoutY="220.0"
+                                                        mnemonicParsing="false" onAction="#Delete_Button_ic"
+                                                        text="Delete"/>
+                                                <TextField fx:id="Search_Bar_ic" layoutX="440.0" layoutY="220.0"
+                                                           prefHeight="25.0" prefWidth="356.0"/>
+                                                <Button fx:id="Search_ic" layoutX="806.0" layoutY="220.0"
+                                                        mnemonicParsing="false" onAction="#Search_ic" text="Search"/>
+                                                <TableView fx:id="Table_ic" layoutX="25.0" layoutY="272.0"
+                                                           prefHeight="420.0" prefWidth="830.0">
+                                                    <columns>
+                                                        <TableColumn prefWidth="94.0" text="Claim_number"/>
+                                                        <TableColumn prefWidth="148.0" text="Claim_status"/>
+                                                        <TableColumn prefWidth="123.0" text="Claim_type"/>
+                                                        <TableColumn prefWidth="148.0" text="Open_date"/>
+                                                        <TableColumn prefWidth="153.0" text="Colsed_date"/>
+                                                        <TableColumn prefWidth="163.0" text="Description"/>
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

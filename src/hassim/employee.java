@@ -5,19 +5,18 @@
  */
 package hassim;
 
+import core.Manipulator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import core.Manipulator;
-
 /**
- *
  * @author Shamodh
  */
-public class employee 
+public class employee
 {
     public String empid;
     public String empname;
@@ -29,32 +28,31 @@ public class employee
     public String work_exp;
     public char sex;
     public char marital_status;
-    public String tp,address;
+    public String tp, address;
 
-    public employee(String empid, String empname, String nic, LocalDate dob,String email,String job,String edu_quali,String work_exp,char sex,char marital_status,String tp,String address)
+    public employee(String empid, String empname, String nic, LocalDate dob, String email, String job, String edu_quali, String work_exp, char sex, char marital_status, String tp, String address)
     {
-        this.empid=empid;
-        this.empname=empname;
-        this.nic=nic;
-        this.dob=dob.format(DateTimeFormatter.ISO_DATE);
-        this.email=email;
-        this.job=job;
-        this.sex=sex;
-        this.marital_status=marital_status;
-        this.work_exp=work_exp;
-        this.edu_quali=edu_quali;
-        this.tp=tp;
-        this.address=address;
-        
-        
+        this.empid = empid;
+        this.empname = empname;
+        this.nic = nic;
+        this.dob = dob.format(DateTimeFormatter.ISO_DATE);
+        this.email = email;
+        this.job = job;
+        this.sex = sex;
+        this.marital_status = marital_status;
+        this.work_exp = work_exp;
+        this.edu_quali = edu_quali;
+        this.tp = tp;
+        this.address = address;
+
+
     }
 
-    
-    
+
     @Override
     public String toString()
     {
-        StringBuilder strb=new StringBuilder();
+        StringBuilder strb = new StringBuilder();
         strb.append("EMP_ID\t:").append(empid);
         strb.append("\nEMP_NAME\t:").append(empname);
         strb.append("\nNIC\t:").append(nic);
@@ -69,34 +67,34 @@ public class employee
         strb.append("\nADDRESS\t:").append(address);
         return strb.toString();
     }
-    
+
     public void consolidate(Connection conn)
     {
         try
         {
-            String query="insert into employee_details(empid,empname,nic,dob,email,job,sex,marital_status,edu_quali,work_exp,tp,address)";
-            PreparedStatement prp=conn.prepareStatement(Manipulator.psFromQuery(query));
-            prp.setString(1,empid);
-            prp.setString(2,empname);
-            prp.setString(3,nic);
-            prp.setString(4,dob);
-            prp.setString(5,email);
-            prp.setString(6,job);
-            prp.setString(7,Character.toString(sex));
-            prp.setString(8,Character.toString(marital_status));
-            prp.setString(9,edu_quali);
-            prp.setString(10,work_exp);
-            prp.setString(11,tp);
-            prp.setString(12,address);
+            String query = "insert into employee_details(empid,empname,nic,dob,email,job,sex,marital_status,edu_quali,work_exp,tp,address)";
+            PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
+            prp.setString(1, empid);
+            prp.setString(2, empname);
+            prp.setString(3, nic);
+            prp.setString(4, dob);
+            prp.setString(5, email);
+            prp.setString(6, job);
+            prp.setString(7, Character.toString(sex));
+            prp.setString(8, Character.toString(marital_status));
+            prp.setString(9, edu_quali);
+            prp.setString(10, work_exp);
+            prp.setString(11, tp);
+            prp.setString(12, address);
             prp.executeUpdate();
-            
+
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             System.out.println("Consolidation error[Person]:\n" + e);
         }
-   
-   
+
+
     }
 }
 

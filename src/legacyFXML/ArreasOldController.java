@@ -10,30 +10,25 @@ package legacyFXML;
 
 
 import handlers.dbConcurrent;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import legacyEntities.arrears_entity;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.shape.Rectangle;
 
 /**
- *
  * @author Hasini Subasinghe
  */
-public class ArreasOldController implements Initializable {
-    
-       Connection conn=null;
-    
+public class ArreasOldController implements Initializable
+{
+
+    Connection conn = null;
+
     private Label label;
     @FXML
     private MenuButton branch;
@@ -85,48 +80,51 @@ public class ArreasOldController implements Initializable {
     private TextField addrees;
     @FXML
     private TextField lastPayment;
-    
-    private void handleButtonAction(ActionEvent event) {
+
+    private void handleButtonAction(ActionEvent event)
+    {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
     }
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-      
+    public void initialize(URL url, ResourceBundle rb)
+    {
+
         // TODO
-         conn=dbConcurrent.connect();
+        conn = dbConcurrent.connect();
         //DynamicTable.getColumns(conn, "select * from arrears", table_search);
-        
-        
-    }    
 
 
-    private void add(ActionEvent event) {
-        
+    }
+
+
+    private void add(ActionEvent event)
+    {
+
         try
-	{
-		String nic=text_nic.getText();
-		String customerID=text_customerId.getText();
-		String fName=text_fname.getText();
-		String lName=text_lname.getText();
-		String address=text_address.getText();
-		String loanAmount=text_loanAmount.getText();
-		LocalDate loanDate=ldate.getValue();
-		LocalDate dueDate=dDate.getValue();
-		String lastPayment=text_lastPayment.getText();
-		LocalDate lastPaymentDate=lastPayedDate.getValue();
-		String outstanding=text_outstanding.getText();
-		
-		arrears_entity arrears_object = new arrears_entity(nic,customerID,fName,lName,address,loanAmount,loanDate,dueDate,lastPayment,lastPaymentDate,outstanding);
-        //System.out.println(arrears_object.toString());
-        arrears_object.consolidate(conn); 
-	}
-	catch(Exception e)
-	{
-	System.out.println(e);
-	}
-}
+        {
+            String nic = text_nic.getText();
+            String customerID = text_customerId.getText();
+            String fName = text_fname.getText();
+            String lName = text_lname.getText();
+            String address = text_address.getText();
+            String loanAmount = text_loanAmount.getText();
+            LocalDate loanDate = ldate.getValue();
+            LocalDate dueDate = dDate.getValue();
+            String lastPayment = text_lastPayment.getText();
+            LocalDate lastPaymentDate = lastPayedDate.getValue();
+            String outstanding = text_outstanding.getText();
 
-    
+            arrears_entity arrears_object = new arrears_entity(nic, customerID, fName, lName, address, loanAmount, loanDate, dueDate, lastPayment, lastPaymentDate, outstanding);
+            //System.out.println(arrears_object.toString());
+            arrears_object.consolidate(conn);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+
 }

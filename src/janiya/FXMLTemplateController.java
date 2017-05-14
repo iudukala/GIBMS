@@ -5,19 +5,21 @@
  */
 package janiya;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
  *
  * @author Isuru Udukala
  */
-public class FXMLTemplateController implements Initializable {
+public class FXMLTemplateController implements Initializable
+{
 
     @FXML
     private AnchorPane anchorpane;
@@ -31,6 +33,6 @@ public class FXMLTemplateController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         core.Integrator.integrate(anchorpane);
-    }    
-    
+    }
+
 }

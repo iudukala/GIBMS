@@ -1,607 +1,913 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXRadioButton?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane id="AnchorPane" fx:id="anchor_customer" prefHeight="1800.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_files.CustomerController">
-   <children>
-      <TabPane layoutX="182.0" layoutY="83.0" prefHeight="700.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <tabs>
-            <Tab text="Add customer">
-              <content>
-                <AnchorPane fx:id="subanchor_tca" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" prefHeight="1523.0" prefWidth="942.0">
-                           <content>
-                              <StackPane prefHeight="1500.0" prefWidth="942.0" styleClass="stackpane">
-                                 <children>
-                                    <GridPane hgap="20.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="PERSONAL INFORMATION" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="text_nic" promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="text_fullname" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_male" prefHeight="17.0" prefWidth="108.0" text="Male">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_gender" />
-                                                   </toggleGroup></JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_female" text="Female" toggleGroup="$tgroup_gender" />
-                                             </children>
-                                          </HBox>
-                                          <JFXDatePicker fx:id="date_dob" prefHeight="19.0" prefWidth="280.0" promptText="Date of birth" GridPane.rowIndex="2" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_married" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="110.0" text="Married">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_marital" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_notmarried" text="Not married" toggleGroup="$tgroup_marital" />
-                                             </children>
-                                          </HBox>
-                                          <JFXTextField fx:id="text_pphone" promptText="Personal phone" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="text_email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="text_haddress" promptText="Home address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="306.0" styleClass="headers" text="OCCUPATIONAL INFORMATION" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="4">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="text_company" promptText="Company name" GridPane.rowIndex="5" />
-                                          <JFXTextField fx:id="text_position" promptText="Position" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_permanent" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="122.0" text="Permanent">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_servicetype" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_temporary" prefHeight="15.0" prefWidth="118.0" text="Temporary" toggleGroup="$tgroup_servicetype" />
-                                             </children>
-                                          </HBox>
-                                          <JFXTextField fx:id="text_wphone" promptText="Company phone" GridPane.rowIndex="6" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_state" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="104.0" text="State">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_sector" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_statecorp" prefHeight="15.0" prefWidth="154.0" text="State corporation" toggleGroup="$tgroup_sector" />
-                                                <JFXRadioButton fx:id="rb_selfemployed" text="Self employed" toggleGroup="$tgroup_sector" />
-                                             </children>
-                                          </HBox>
-                                          <JFXDatePicker fx:id="date_empl_start" prefHeight="29.0" prefWidth="285.0" promptText="Employment start" GridPane.rowIndex="7" />
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="297.0" styleClass="headers" text="FINANCIAL INFORMATION" textFill="WHITE" GridPane.rowIndex="8">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="text_accnum" promptText="Account number" GridPane.rowIndex="9" />
-                                          <JFXTextField fx:id="text_accbank" promptText="Bank" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                          <JFXTextField fx:id="text_accbranch" promptText="Branch" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                          <JFXTextField fx:id="text_earncareer" promptText="Career" GridPane.rowIndex="11" />
-                                          <JFXTextField fx:id="text_earnbusiness" promptText="Business" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                          <JFXTextField fx:id="text_earnhouses" promptText="Houses" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                                          <JFXTextField fx:id="text_earnvehicles" promptText="Vehicles" GridPane.rowIndex="12" />
-                                          <JFXTextField fx:id="text_earnland" promptText="Land" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="64.0" prefWidth="408.0" styleClass="subheaders" text="AVERAGE MONTHLY EARNINGS BY CATEGORY" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="10">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="297.0" styleClass="headers" text="SPOUSE" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.rowIndex="13">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="text_spnic" promptText="NIC" GridPane.rowIndex="14" />
-                                          <JFXTextField fx:id="text_spname" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                                          <JFXTextField fx:id="text_spprofession" promptText="Profession" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.columnSpan="2147483647" GridPane.rowIndex="8" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="15.0" />
-                                             </GridPane.margin></Line>
-                                          <JFXTextField fx:id="text_spcareer" promptText="Career" GridPane.rowIndex="16" />
-                                          <JFXTextField fx:id="text_spbusiness" promptText="Business" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                                          <JFXTextField fx:id="text_sphouses" promptText="Houses" GridPane.columnIndex="2" GridPane.rowIndex="16" />
-                                          <JFXTextField fx:id="text_spvehicles" promptText="Vehicles" GridPane.rowIndex="17" />
-                                          <JFXTextField fx:id="text_spland" promptText="Land" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                                          <Label alignment="BOTTOM_LEFT" layoutX="50.0" layoutY="897.0" prefHeight="46.0" prefWidth="396.0" styleClass="subheaders" text="AVERAGE MONTHLY EARNINGS BY CATEGORY" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="15">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="780.0" layoutX="151.0" layoutY="95.0" startX="-100.0" styleClass="line" GridPane.rowIndex="13" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="15.0" />
-                                             </GridPane.margin></Line>
-                                          <Line endX="780.0" layoutX="151.0" layoutY="435.0" startX="-100.0" styleClass="line" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="15.0" />
-                                             </GridPane.margin></Line>
-                                          <Line endX="780.0" layoutX="151.0" layoutY="401.0" startX="-100.0" styleClass="line" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="15.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                       </children>
-                                       <padding>
-                                          <Insets left="40.0" right="40.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Add loan">
-               <content>
-                  <AnchorPane fx:id="subanchor_tla" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" prefHeight="1050.0" prefWidth="942.0">
-                           <content>
-                              <StackPane prefHeight="1000.0" prefWidth="942.0" styleClass="stackpane">
-                                 <children>
-                                    <GridPane hgap="20.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="90.0" minHeight="90.0" prefHeight="90.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label accessibleRoleDescription="R" alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="LOAN INFORMATION" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="text_lamount" promptText="Loan amount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="text_lexppayback" promptText="Expected payback duration (Months)" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="text_lbank" promptText="Bank" GridPane.rowIndex="4" />
-                                          <JFXTextField fx:id="text_lbranch" promptText="Branch" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <JFXTextField fx:id="text_laccount" promptText="Account" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="306.0" styleClass="headers" text="GUARANTOR 1" textFill="WHITE" GridPane.columnSpan="2" GridPane.rowIndex="5">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="text_lg1nic" promptText="NIC" GridPane.rowIndex="6" />
-                                          <JFXTextField fx:id="text_lg1name" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <JFXDatePicker fx:id="date_lg1dob" prefHeight="29.0" prefWidth="285.0" promptText="Birthday" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                          <JFXTextField fx:id="text_lg1address" promptText="Permanent address" GridPane.rowIndex="7" />
-                                          <JFXTextField fx:id="text_lg1phone" promptText="Contact number" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_lg1male" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="122.0" text="Male">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_lg1gender" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_lg1female" prefHeight="15.0" prefWidth="118.0" text="Female" toggleGroup="$tgroup_lg1gender" />
-                                             </children>
-                                          </HBox>
-                                          <JFXTextField fx:id="text_lg1income" promptText="Average monthly income" GridPane.rowIndex="8" />
-                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.columnSpan="2147483647" GridPane.rowIndex="9" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="15.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <Line endX="780.0" layoutX="151.0" layoutY="435.0" startX="-100.0" styleClass="line" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="15.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <Line endX="780.0" layoutX="151.0" layoutY="401.0" startX="-100.0" styleClass="line" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="15.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <GridPane GridPane.columnSpan="3" GridPane.rowIndex="3">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="228.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="268.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="458.0" minWidth="10.0" prefWidth="369.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_lmonthly" text="Monthly by cash" GridPane.rowIndex="1">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_paybackmode" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_lpaycheck" text="Deducted from paycheck" toggleGroup="$tgroup_paybackmode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <JFXRadioButton fx:id="rb_lbank" text="Deducted from bank account" toggleGroup="$tgroup_paybackmode" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                <Label alignment="BOTTOM_LEFT" prefHeight="64.0" prefWidth="408.0" styleClass="subheaders" text="Expected payback method" textFill="WHITE" GridPane.columnSpan="2">
-                                                   <font>
-                                                      <Font name="Roboto Condensed Regular" size="21.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </GridPane>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="306.0" styleClass="headers" text="GUARANTOR 2" textFill="WHITE" GridPane.rowIndex="9">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="text_lg2nic" promptText="NIC" GridPane.rowIndex="10" />
-                                          <JFXTextField fx:id="text_lg2name" promptText="Full name" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                          <JFXDatePicker fx:id="date_lg2dob" prefHeight="29.0" prefWidth="285.0" promptText="Birthday" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                          <JFXTextField fx:id="text_lg2address" promptText="Permanent address" GridPane.rowIndex="11" />
-                                          <JFXTextField fx:id="text_lg2phone" promptText="Contact number" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="11">
-                                             <children>
-                                                <JFXRadioButton fx:id="rb_lg2male" alignment="CENTER_LEFT" prefHeight="17.0" prefWidth="122.0" text="Male">
-                                                   <toggleGroup>
-                                                      <ToggleGroup fx:id="tgroup_lg2gender" />
-                                                   </toggleGroup>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rb_lg2female" prefHeight="15.0" prefWidth="118.0" text="Female" toggleGroup="$tgroup_lg2gender" />
-                                             </children>
-                                          </HBox>
-                                          <JFXTextField fx:id="text_lg2income" promptText="Average monthly income" GridPane.rowIndex="12" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                             <children>
-                                                <JFXTextField fx:id="text_lcid" prefWidth="190.0" promptText="Customer ID" />
-                                                <JFXButton fx:id="btn_lcidsearch" styleClass="buttonS2" text="Search">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </JFXButton>
-                                             </children>
-                                          </HBox>
-                                          <JFXTextField fx:id="text_linterest" promptText="Interest rate" GridPane.rowIndex="2" />
-                                          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                             <children>
-                                                <Label styleClass="sublabel" text="Calculated monthly installment:">
-                                                   <padding>
-                                                      <Insets top="15.0" />
-                                                   </padding>
-                                                </Label>
-                                                <Label fx:id="lbl_interest" prefHeight="38.0" prefWidth="224.0" text="Unavailable" textFill="WHITE" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                       <padding>
-                                          <Insets left="40.0" right="40.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Search">
-               <content>
-                  <AnchorPane fx:id="subanchor_ts" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
-                           <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="130.0" minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="249.0" styleClass="headers" text="CUSTOMER SEARCH " textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="20.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <JFXTextField fx:id="text_csnic" promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="text_csname" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXButton fx:id="btn_custsearch" buttonType="RAISED" prefHeight="38.0" prefWidth="94.0" styleClass="buttonS2" text="SEARCH" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                                             <GridPane.margin>
-                                                <Insets />
-                                             </GridPane.margin></JFXButton>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="249.0" styleClass="headers" text="LOAN SEARCH" textFill="WHITE" GridPane.rowIndex="3">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="20.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <JFXTextField fx:id="text_cscompany" promptText="Company" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="text_csaddress" promptText="Address" GridPane.rowIndex="2" />
-                                          <JFXButton fx:id="btn_loansearchdate" buttonType="RAISED" prefHeight="38.0" prefWidth="94.0" styleClass="buttonS2" text="SEARCH" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                                          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
-                                             <children>
-                                                <Label styleClass="subheaders" text="Requested date range" />
-                                                <JFXDatePicker fx:id="date_lsds" prefHeight="19.0" prefWidth="280.0" promptText="Start">
-                                                   <padding>
-                                                      <Insets top="30.0" />
-                                                   </padding>
-                                                </JFXDatePicker>
-                                             </children>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="5">
-                                             <children>
-                                                <Label styleClass="subheaders" text="Loan amount range" />
-                                                <JFXTextField fx:id="text_lsas" promptText="Lower bound">
-                                                   <VBox.margin>
-                                                      <Insets top="30.0" />
-                                                   </VBox.margin>
-                                                </JFXTextField>
-                                             </children>
-                                          </VBox>
-                                          <JFXTextField fx:id="text_lsae" promptText="Upper bound" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <JFXButton fx:id="btn_loansearchamount" buttonType="RAISED" prefHeight="38.0" prefWidth="94.0" styleClass="buttonS2" text="SEARCH" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                                          <JFXDatePicker fx:id="date_lsde" prefHeight="19.0" prefWidth="280.0" promptText="End" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="20.0" right="20.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="View customers">
-               <content>
-                  <AnchorPane fx:id="subanchor_tcs" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
-                           <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label fx:id="label_customerrecords" alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="249.0" styleClass="headers" text="CUSTOMER RECORDS " textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="20.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <TableView fx:id="table_customer_search" prefHeight="466.0" prefWidth="902.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
-                                             <columns>
-                                                <TableColumn prefWidth="92.0" text="C1" />
-                                                <TableColumn minWidth="0.0" prefWidth="293.0" text="C2" />
-                                             </columns>
-                                          </TableView>
-                                       </children>
-                                       <padding>
-                                          <Insets left="20.0" right="20.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="View loans">
-               <content>
-                  <AnchorPane fx:id="subanchor_tls" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
-                           <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label fx:id="label_loanrecords" alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="249.0" styleClass="headers" text="LOAN RECORDS" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="20.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <TableView fx:id="table_loan_search" prefHeight="466.0" prefWidth="902.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
-                                             <columns>
-                                                <TableColumn prefWidth="92.0" text="C1" />
-                                                <TableColumn minWidth="0.0" prefWidth="293.0" text="C2" />
-                                             </columns>
-                                          </TableView>
-                                       </children>
-                                       <padding>
-                                          <Insets left="20.0" right="20.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Review">
-               <content>
-                  <AnchorPane fx:id="subanchor_tls1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
-                           <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" valignment="CENTER" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label fx:id="label_loanrecords1" alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="249.0" styleClass="headers" text="REVIEW" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Line endX="780.0" startX="-100.0" styleClass="line" GridPane.valignment="BOTTOM">
-                                             <GridPane.margin>
-                                                <Insets bottom="20.0" />
-                                             </GridPane.margin>
-                                          </Line>
-                                          <JFXButton fx:id="btn_irepcust" buttonType="RAISED" prefHeight="38.0" prefWidth="169.0" styleClass="buttonS2" text="CUSTOMER REPORTS" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXButton fx:id="btn_ireploan" buttonType="RAISED" prefHeight="38.0" prefWidth="169.0" styleClass="buttonS2" text="LOAN REPORTS" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <Label fx:id="label_totalloans" alignment="BOTTOM_LEFT" prefHeight="51.0" prefWidth="290.0" styleClass="subheaders" text="\$total" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="label_totalintallments" alignment="BOTTOM_LEFT" prefHeight="51.0" prefWidth="290.0" styleClass="subheaders" text="\$total" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <Label styleClass="sublabel" text="Total loans within last month" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                             <padding>
-                                                <Insets top="15.0" />
-                                             </padding>
-                                          </Label>
-                                          <Label styleClass="sublabel" text="Expected installments total" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <padding>
-                                                <Insets top="15.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets left="20.0" right="20.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-   </children>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" fx:id="anchor_customer" prefHeight="1800.0"
+            prefWidth="1000.0" stylesheets="@../resources/style.css"
+            xmlns="http://javafx.com/javafx/8.0.111" fx:controller="fxml_files.CustomerController">
+    <children>
+        <TabPane layoutX="182.0" layoutY="83.0" prefHeight="700.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE"
+                 tabMaxHeight="40.0" tabMinHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <tabs>
+                <Tab text="Add customer">
+                    <content>
+                        <AnchorPane fx:id="subanchor_tca" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" prefHeight="1523.0"
+                                            prefWidth="942.0">
+                                    <content>
+                                        <StackPane prefHeight="1500.0" prefWidth="942.0" styleClass="stackpane">
+                                            <children>
+                                                <GridPane hgap="20.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="90.0" minHeight="90.0"
+                                                                        prefHeight="90.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="NEVER"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="90.0" minHeight="90.0"
+                                                                        prefHeight="90.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="90.0" minHeight="90.0"
+                                                                        prefHeight="90.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="60.0" minHeight="60.0"
+                                                                        prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="90.0" minHeight="90.0"
+                                                                        prefHeight="90.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="60.0" minHeight="60.0"
+                                                                        prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="249.0" styleClass="headers"
+                                                               text="PERSONAL INFORMATION" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="text_nic" promptText="NIC"
+                                                                      GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="text_fullname" promptText="Full name"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0"
+                                                              prefWidth="200.0" GridPane.columnIndex="2"
+                                                              GridPane.rowIndex="1">
+                                                            <children>
+                                                                <JFXRadioButton fx:id="rb_male" prefHeight="17.0"
+                                                                                prefWidth="108.0" text="Male">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgroup_gender"/>
+                                                                    </toggleGroup>
+                                                                </JFXRadioButton>
+                                                                <JFXRadioButton fx:id="rb_female" text="Female"
+                                                                                toggleGroup="$tgroup_gender"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <JFXDatePicker fx:id="date_dob" prefHeight="19.0"
+                                                                       prefWidth="280.0" promptText="Date of birth"
+                                                                       GridPane.rowIndex="2"/>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0"
+                                                              prefWidth="200.0" GridPane.columnIndex="1"
+                                                              GridPane.rowIndex="2">
+                                                            <children>
+                                                                <JFXRadioButton fx:id="rb_married"
+                                                                                alignment="CENTER_LEFT"
+                                                                                prefHeight="17.0" prefWidth="110.0"
+                                                                                text="Married">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgroup_marital"/>
+                                                                    </toggleGroup>
+                                                                </JFXRadioButton>
+                                                                <JFXRadioButton fx:id="rb_notmarried" text="Not married"
+                                                                                toggleGroup="$tgroup_marital"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <JFXTextField fx:id="text_pphone" promptText="Personal phone"
+                                                                      GridPane.rowIndex="3"/>
+                                                        <JFXTextField fx:id="text_email" promptText="Email"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                                                        <JFXTextField fx:id="text_haddress" promptText="Home address"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="306.0" styleClass="headers"
+                                                               text="OCCUPATIONAL INFORMATION" textFill="WHITE"
+                                                               GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="text_company" promptText="Company name"
+                                                                      GridPane.rowIndex="5"/>
+                                                        <JFXTextField fx:id="text_position" promptText="Position"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0"
+                                                              prefWidth="200.0" GridPane.columnIndex="2"
+                                                              GridPane.rowIndex="5">
+                                                            <children>
+                                                                <JFXRadioButton fx:id="rb_permanent"
+                                                                                alignment="CENTER_LEFT"
+                                                                                prefHeight="17.0" prefWidth="122.0"
+                                                                                text="Permanent">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgroup_servicetype"/>
+                                                                    </toggleGroup>
+                                                                </JFXRadioButton>
+                                                                <JFXRadioButton fx:id="rb_temporary" prefHeight="15.0"
+                                                                                prefWidth="118.0" text="Temporary"
+                                                                                toggleGroup="$tgroup_servicetype"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <JFXTextField fx:id="text_wphone" promptText="Company phone"
+                                                                      GridPane.rowIndex="6"/>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0"
+                                                              prefWidth="200.0" GridPane.columnIndex="1"
+                                                              GridPane.columnSpan="2" GridPane.rowIndex="6">
+                                                            <children>
+                                                                <JFXRadioButton fx:id="rb_state" alignment="CENTER_LEFT"
+                                                                                prefHeight="17.0" prefWidth="104.0"
+                                                                                text="State">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgroup_sector"/>
+                                                                    </toggleGroup>
+                                                                </JFXRadioButton>
+                                                                <JFXRadioButton fx:id="rb_statecorp" prefHeight="15.0"
+                                                                                prefWidth="154.0"
+                                                                                text="State corporation"
+                                                                                toggleGroup="$tgroup_sector"/>
+                                                                <JFXRadioButton fx:id="rb_selfemployed"
+                                                                                text="Self employed"
+                                                                                toggleGroup="$tgroup_sector"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <JFXDatePicker fx:id="date_empl_start" prefHeight="29.0"
+                                                                       prefWidth="285.0" promptText="Employment start"
+                                                                       GridPane.rowIndex="7"/>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="297.0" styleClass="headers"
+                                                               text="FINANCIAL INFORMATION" textFill="WHITE"
+                                                               GridPane.rowIndex="8">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="text_accnum" promptText="Account number"
+                                                                      GridPane.rowIndex="9"/>
+                                                        <JFXTextField fx:id="text_accbank" promptText="Bank"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+                                                        <JFXTextField fx:id="text_accbranch" promptText="Branch"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+                                                        <JFXTextField fx:id="text_earncareer" promptText="Career"
+                                                                      GridPane.rowIndex="11"/>
+                                                        <JFXTextField fx:id="text_earnbusiness" promptText="Business"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+                                                        <JFXTextField fx:id="text_earnhouses" promptText="Houses"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="11"/>
+                                                        <JFXTextField fx:id="text_earnvehicles" promptText="Vehicles"
+                                                                      GridPane.rowIndex="12"/>
+                                                        <JFXTextField fx:id="text_earnland" promptText="Land"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="64.0"
+                                                               prefWidth="408.0" styleClass="subheaders"
+                                                               text="AVERAGE MONTHLY EARNINGS BY CATEGORY"
+                                                               textFill="WHITE" GridPane.columnSpan="2"
+                                                               GridPane.rowIndex="10">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="297.0" styleClass="headers" text="SPOUSE"
+                                                               textFill="WHITE" GridPane.columnSpan="2147483647"
+                                                               GridPane.rowIndex="13">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="text_spnic" promptText="NIC"
+                                                                      GridPane.rowIndex="14"/>
+                                                        <JFXTextField fx:id="text_spname" promptText="Full name"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+                                                        <JFXTextField fx:id="text_spprofession" promptText="Profession"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="14"/>
+                                                        <Line endX="780.0" startX="-100.0" styleClass="line"
+                                                              GridPane.columnSpan="2147483647" GridPane.rowIndex="8"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="15.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <JFXTextField fx:id="text_spcareer" promptText="Career"
+                                                                      GridPane.rowIndex="16"/>
+                                                        <JFXTextField fx:id="text_spbusiness" promptText="Business"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="16"/>
+                                                        <JFXTextField fx:id="text_sphouses" promptText="Houses"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="16"/>
+                                                        <JFXTextField fx:id="text_spvehicles" promptText="Vehicles"
+                                                                      GridPane.rowIndex="17"/>
+                                                        <JFXTextField fx:id="text_spland" promptText="Land"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="17"/>
+                                                        <Label alignment="BOTTOM_LEFT" layoutX="50.0" layoutY="897.0"
+                                                               prefHeight="46.0" prefWidth="396.0"
+                                                               styleClass="subheaders"
+                                                               text="AVERAGE MONTHLY EARNINGS BY CATEGORY"
+                                                               textFill="WHITE" GridPane.columnSpan="2"
+                                                               GridPane.rowIndex="15">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Line endX="780.0" layoutX="151.0" layoutY="95.0"
+                                                              startX="-100.0" styleClass="line" GridPane.rowIndex="13"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="15.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <Line endX="780.0" layoutX="151.0" layoutY="435.0"
+                                                              startX="-100.0" styleClass="line" GridPane.rowIndex="4"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="15.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <Line endX="780.0" layoutX="151.0" layoutY="401.0"
+                                                              startX="-100.0" styleClass="line"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="15.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="40.0" right="40.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Add loan">
+                    <content>
+                        <AnchorPane fx:id="subanchor_tla" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" prefHeight="1050.0"
+                                            prefWidth="942.0">
+                                    <content>
+                                        <StackPane prefHeight="1000.0" prefWidth="942.0" styleClass="stackpane">
+                                            <children>
+                                                <GridPane hgap="20.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="90.0" minHeight="90.0"
+                                                                        prefHeight="90.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="NEVER"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="NEVER"/>
+                                                        <RowConstraints maxHeight="100.0" minHeight="100.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="90.0" minHeight="90.0"
+                                                                        prefHeight="90.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="90.0" minHeight="90.0"
+                                                                        prefHeight="90.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="60.0" minHeight="60.0"
+                                                                        prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label accessibleRoleDescription="R" alignment="BOTTOM_LEFT"
+                                                               prefHeight="46.0" prefWidth="249.0" styleClass="headers"
+                                                               text="LOAN INFORMATION" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="text_lamount" promptText="Loan amount"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="text_lexppayback"
+                                                                      promptText="Expected payback duration (Months)"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="text_lbank" promptText="Bank"
+                                                                      GridPane.rowIndex="4"/>
+                                                        <JFXTextField fx:id="text_lbranch" promptText="Branch"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                                                        <JFXTextField fx:id="text_laccount" promptText="Account"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="306.0" styleClass="headers" text="GUARANTOR 1"
+                                                               textFill="WHITE" GridPane.columnSpan="2"
+                                                               GridPane.rowIndex="5">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="text_lg1nic" promptText="NIC"
+                                                                      GridPane.rowIndex="6"/>
+                                                        <JFXTextField fx:id="text_lg1name" promptText="Full name"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                                                        <JFXDatePicker fx:id="date_lg1dob" prefHeight="29.0"
+                                                                       prefWidth="285.0" promptText="Birthday"
+                                                                       GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                                                        <JFXTextField fx:id="text_lg1address"
+                                                                      promptText="Permanent address"
+                                                                      GridPane.rowIndex="7"/>
+                                                        <JFXTextField fx:id="text_lg1phone" promptText="Contact number"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0"
+                                                              prefWidth="200.0" GridPane.columnIndex="2"
+                                                              GridPane.rowIndex="7">
+                                                            <children>
+                                                                <JFXRadioButton fx:id="rb_lg1male"
+                                                                                alignment="CENTER_LEFT"
+                                                                                prefHeight="17.0" prefWidth="122.0"
+                                                                                text="Male">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgroup_lg1gender"/>
+                                                                    </toggleGroup>
+                                                                </JFXRadioButton>
+                                                                <JFXRadioButton fx:id="rb_lg1female" prefHeight="15.0"
+                                                                                prefWidth="118.0" text="Female"
+                                                                                toggleGroup="$tgroup_lg1gender"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <JFXTextField fx:id="text_lg1income"
+                                                                      promptText="Average monthly income"
+                                                                      GridPane.rowIndex="8"/>
+                                                        <Line endX="780.0" startX="-100.0" styleClass="line"
+                                                              GridPane.columnSpan="2147483647" GridPane.rowIndex="9"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="15.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <Line endX="780.0" layoutX="151.0" layoutY="435.0"
+                                                              startX="-100.0" styleClass="line" GridPane.rowIndex="5"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="15.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <Line endX="780.0" layoutX="151.0" layoutY="401.0"
+                                                              startX="-100.0" styleClass="line"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="15.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <GridPane GridPane.columnSpan="3" GridPane.rowIndex="3">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0"
+                                                                                   minWidth="10.0" prefWidth="228.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0"
+                                                                                   minWidth="10.0" prefWidth="268.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="458.0"
+                                                                                   minWidth="10.0" prefWidth="369.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints maxHeight="41.0" minHeight="10.0"
+                                                                                prefHeight="41.0" vgrow="SOMETIMES"/>
+                                                                <RowConstraints maxHeight="1.7976931348623157E308"
+                                                                                minHeight="10.0" prefHeight="59.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <JFXRadioButton fx:id="rb_lmonthly"
+                                                                                text="Monthly by cash"
+                                                                                GridPane.rowIndex="1">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgroup_paybackmode"/>
+                                                                    </toggleGroup>
+                                                                </JFXRadioButton>
+                                                                <JFXRadioButton fx:id="rb_lpaycheck"
+                                                                                text="Deducted from paycheck"
+                                                                                toggleGroup="$tgroup_paybackmode"
+                                                                                GridPane.columnIndex="1"
+                                                                                GridPane.rowIndex="1"/>
+                                                                <JFXRadioButton fx:id="rb_lbank"
+                                                                                text="Deducted from bank account"
+                                                                                toggleGroup="$tgroup_paybackmode"
+                                                                                GridPane.columnIndex="2"
+                                                                                GridPane.rowIndex="1"/>
+                                                                <Label alignment="BOTTOM_LEFT" prefHeight="64.0"
+                                                                       prefWidth="408.0" styleClass="subheaders"
+                                                                       text="Expected payback method" textFill="WHITE"
+                                                                       GridPane.columnSpan="2">
+                                                                    <font>
+                                                                        <Font name="Roboto Condensed Regular"
+                                                                              size="21.0"/>
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </GridPane>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="306.0" styleClass="headers" text="GUARANTOR 2"
+                                                               textFill="WHITE" GridPane.rowIndex="9">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="text_lg2nic" promptText="NIC"
+                                                                      GridPane.rowIndex="10"/>
+                                                        <JFXTextField fx:id="text_lg2name" promptText="Full name"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+                                                        <JFXDatePicker fx:id="date_lg2dob" prefHeight="29.0"
+                                                                       prefWidth="285.0" promptText="Birthday"
+                                                                       GridPane.columnIndex="2" GridPane.rowIndex="10"/>
+                                                        <JFXTextField fx:id="text_lg2address"
+                                                                      promptText="Permanent address"
+                                                                      GridPane.rowIndex="11"/>
+                                                        <JFXTextField fx:id="text_lg2phone" promptText="Contact number"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0"
+                                                              prefWidth="200.0" GridPane.columnIndex="2"
+                                                              GridPane.rowIndex="11">
+                                                            <children>
+                                                                <JFXRadioButton fx:id="rb_lg2male"
+                                                                                alignment="CENTER_LEFT"
+                                                                                prefHeight="17.0" prefWidth="122.0"
+                                                                                text="Male">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgroup_lg2gender"/>
+                                                                    </toggleGroup>
+                                                                </JFXRadioButton>
+                                                                <JFXRadioButton fx:id="rb_lg2female" prefHeight="15.0"
+                                                                                prefWidth="118.0" text="Female"
+                                                                                toggleGroup="$tgroup_lg2gender"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <JFXTextField fx:id="text_lg2income"
+                                                                      promptText="Average monthly income"
+                                                                      GridPane.rowIndex="12"/>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="100.0"
+                                                              prefWidth="200.0" GridPane.rowIndex="1">
+                                                            <children>
+                                                                <JFXTextField fx:id="text_lcid" prefWidth="190.0"
+                                                                              promptText="Customer ID"/>
+                                                                <JFXButton fx:id="btn_lcidsearch" styleClass="buttonS2"
+                                                                           text="Search">
+                                                                    <HBox.margin>
+                                                                        <Insets left="10.0"/>
+                                                                    </HBox.margin>
+                                                                </JFXButton>
+                                                            </children>
+                                                        </HBox>
+                                                        <JFXTextField fx:id="text_linterest" promptText="Interest rate"
+                                                                      GridPane.rowIndex="2"/>
+                                                        <VBox prefHeight="200.0" prefWidth="100.0"
+                                                              GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                            <children>
+                                                                <Label styleClass="sublabel"
+                                                                       text="Calculated monthly installment:">
+                                                                    <padding>
+                                                                        <Insets top="15.0"/>
+                                                                    </padding>
+                                                                </Label>
+                                                                <Label fx:id="lbl_interest" prefHeight="38.0"
+                                                                       prefWidth="224.0" text="Unavailable"
+                                                                       textFill="WHITE"/>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="40.0" right="40.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Search">
+                    <content>
+                        <AnchorPane fx:id="subanchor_ts" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0"
+                                            minHeight="610.0">
+                                    <content>
+                                        <StackPane prefHeight="610.0" prefWidth="942.0"
+                                                   style="-fx-background-color: #333333;">
+                                            <children>
+                                                <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" valignment="CENTER"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="60.0" minHeight="60.0"
+                                                                        prefHeight="60.0" vgrow="NEVER"/>
+                                                        <RowConstraints maxHeight="60.0" minHeight="60.0"
+                                                                        prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="130.0" minHeight="130.0"
+                                                                        prefHeight="130.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="130.0" minHeight="130.0"
+                                                                        prefHeight="130.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="60.0" minHeight="60.0"
+                                                                        prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="60.0" minHeight="60.0"
+                                                                        prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="34.0"
+                                                               prefWidth="249.0" styleClass="headers"
+                                                               text="CUSTOMER SEARCH " textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Line endX="780.0" startX="-100.0" styleClass="line"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="20.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <JFXTextField fx:id="text_csnic" promptText="NIC"
+                                                                      GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="text_csname" promptText="Name"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <JFXButton fx:id="btn_custsearch" buttonType="RAISED"
+                                                                   prefHeight="38.0" prefWidth="94.0"
+                                                                   styleClass="buttonS2" text="SEARCH"
+                                                                   GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                                                   GridPane.rowIndex="2">
+                                                            <GridPane.margin>
+                                                                <Insets/>
+                                                            </GridPane.margin>
+                                                        </JFXButton>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="34.0"
+                                                               prefWidth="249.0" styleClass="headers" text="LOAN SEARCH"
+                                                               textFill="WHITE" GridPane.rowIndex="3">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Line endX="780.0" startX="-100.0" styleClass="line"
+                                                              GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="20.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <JFXTextField fx:id="text_cscompany" promptText="Company"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="text_csaddress" promptText="Address"
+                                                                      GridPane.rowIndex="2"/>
+                                                        <JFXButton fx:id="btn_loansearchdate" buttonType="RAISED"
+                                                                   prefHeight="38.0" prefWidth="94.0"
+                                                                   styleClass="buttonS2" text="SEARCH"
+                                                                   GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                                                   GridPane.rowIndex="4"/>
+                                                        <VBox prefHeight="200.0" prefWidth="100.0"
+                                                              GridPane.rowIndex="4">
+                                                            <children>
+                                                                <Label styleClass="subheaders"
+                                                                       text="Requested date range"/>
+                                                                <JFXDatePicker fx:id="date_lsds" prefHeight="19.0"
+                                                                               prefWidth="280.0" promptText="Start">
+                                                                    <padding>
+                                                                        <Insets top="30.0"/>
+                                                                    </padding>
+                                                                </JFXDatePicker>
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox prefHeight="200.0" prefWidth="100.0"
+                                                              GridPane.rowIndex="5">
+                                                            <children>
+                                                                <Label styleClass="subheaders"
+                                                                       text="Loan amount range"/>
+                                                                <JFXTextField fx:id="text_lsas"
+                                                                              promptText="Lower bound">
+                                                                    <VBox.margin>
+                                                                        <Insets top="30.0"/>
+                                                                    </VBox.margin>
+                                                                </JFXTextField>
+                                                            </children>
+                                                        </VBox>
+                                                        <JFXTextField fx:id="text_lsae" promptText="Upper bound"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                                                        <JFXButton fx:id="btn_loansearchamount" buttonType="RAISED"
+                                                                   prefHeight="38.0" prefWidth="94.0"
+                                                                   styleClass="buttonS2" text="SEARCH"
+                                                                   GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                                                                   GridPane.rowIndex="5"/>
+                                                        <JFXDatePicker fx:id="date_lsde" prefHeight="19.0"
+                                                                       prefWidth="280.0" promptText="End"
+                                                                       GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="20.0" right="20.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="View customers">
+                    <content>
+                        <AnchorPane fx:id="subanchor_tcs" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0"
+                                            minHeight="610.0">
+                                    <content>
+                                        <StackPane prefHeight="610.0" prefWidth="942.0"
+                                                   style="-fx-background-color: #333333;">
+                                            <children>
+                                                <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" valignment="CENTER"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="1.7976931348623157E308"
+                                                                        minHeight="80.0" prefHeight="80.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label fx:id="label_customerrecords" alignment="BOTTOM_LEFT"
+                                                               prefHeight="34.0" prefWidth="249.0" styleClass="headers"
+                                                               text="CUSTOMER RECORDS " textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Line endX="780.0" startX="-100.0" styleClass="line"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="20.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <TableView fx:id="table_customer_search" prefHeight="466.0"
+                                                                   prefWidth="902.0" GridPane.columnSpan="2147483647"
+                                                                   GridPane.rowIndex="1">
+                                                            <columns>
+                                                                <TableColumn prefWidth="92.0" text="C1"/>
+                                                                <TableColumn minWidth="0.0" prefWidth="293.0"
+                                                                             text="C2"/>
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="20.0" right="20.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="View loans">
+                    <content>
+                        <AnchorPane fx:id="subanchor_tls" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0"
+                                            minHeight="610.0">
+                                    <content>
+                                        <StackPane prefHeight="610.0" prefWidth="942.0"
+                                                   style="-fx-background-color: #333333;">
+                                            <children>
+                                                <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" valignment="CENTER"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="1.7976931348623157E308"
+                                                                        minHeight="80.0" prefHeight="80.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label fx:id="label_loanrecords" alignment="BOTTOM_LEFT"
+                                                               prefHeight="34.0" prefWidth="249.0" styleClass="headers"
+                                                               text="LOAN RECORDS" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Line endX="780.0" startX="-100.0" styleClass="line"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="20.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <TableView fx:id="table_loan_search" prefHeight="466.0"
+                                                                   prefWidth="902.0" GridPane.columnSpan="2147483647"
+                                                                   GridPane.rowIndex="1">
+                                                            <columns>
+                                                                <TableColumn prefWidth="92.0" text="C1"/>
+                                                                <TableColumn minWidth="0.0" prefWidth="293.0"
+                                                                             text="C2"/>
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="20.0" right="20.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Review">
+                    <content>
+                        <AnchorPane fx:id="subanchor_tls1" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0"
+                                            minHeight="610.0">
+                                    <content>
+                                        <StackPane prefHeight="610.0" prefWidth="942.0"
+                                                   style="-fx-background-color: #333333;">
+                                            <children>
+                                                <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" valignment="CENTER"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="1.7976931348623157E308"
+                                                                        minHeight="80.0" prefHeight="80.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label fx:id="label_loanrecords1" alignment="BOTTOM_LEFT"
+                                                               prefHeight="34.0" prefWidth="249.0" styleClass="headers"
+                                                               text="REVIEW" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Line endX="780.0" startX="-100.0" styleClass="line"
+                                                              GridPane.valignment="BOTTOM">
+                                                            <GridPane.margin>
+                                                                <Insets bottom="20.0"/>
+                                                            </GridPane.margin>
+                                                        </Line>
+                                                        <JFXButton fx:id="btn_irepcust" buttonType="RAISED"
+                                                                   prefHeight="38.0" prefWidth="169.0"
+                                                                   styleClass="buttonS2" text="CUSTOMER REPORTS"
+                                                                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                                                        <JFXButton fx:id="btn_ireploan" buttonType="RAISED"
+                                                                   prefHeight="38.0" prefWidth="169.0"
+                                                                   styleClass="buttonS2" text="LOAN REPORTS"
+                                                                   GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                                                        <Label fx:id="label_totalloans" alignment="BOTTOM_LEFT"
+                                                               prefHeight="51.0" prefWidth="290.0"
+                                                               styleClass="subheaders" text="\$total" textFill="WHITE"
+                                                               GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label fx:id="label_totalintallments" alignment="BOTTOM_LEFT"
+                                                               prefHeight="51.0" prefWidth="290.0"
+                                                               styleClass="subheaders" text="\$total" textFill="WHITE"
+                                                               GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <Label styleClass="sublabel"
+                                                               text="Total loans within last month"
+                                                               GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                            <padding>
+                                                                <Insets top="15.0"/>
+                                                            </padding>
+                                                        </Label>
+                                                        <Label styleClass="sublabel" text="Expected installments total"
+                                                               GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                            <padding>
+                                                                <Insets top="15.0"/>
+                                                            </padding>
+                                                        </Label>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="20.0" right="20.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

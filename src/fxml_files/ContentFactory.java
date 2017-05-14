@@ -30,7 +30,6 @@ import javafx.scene.text.TextAlignment;
 import org.controlsfx.control.PopOver;
 
 /**
- *
  * @author Isuru Udukala
  */
 public class ContentFactory
@@ -40,87 +39,87 @@ public class ContentFactory
         Label heading = new Label("Select customer state for loan request");
         heading.getStyleClass().add("subheaders");
         heading.setStyle("-fx-padding: 10 5 10 20;");
-        
+
         HBox hbox = new HBox();
         hbox.setStyle("-fx-padding: 30 5 5 5;");
-        
+
         String textStyle = "-fx-padding: 0 20 0 20;";
         double textWidth = 270;
-        
+
         JFXTextField snic = new JFXTextField();
         snic.setPromptText("NIC filter");
         snic.setStyle(textStyle);
         snic.setPrefWidth(textWidth);
-        
+
         JFXTextField sname = new JFXTextField();
         sname.setPromptText("Name filter");
         sname.setStyle(textStyle);
         sname.setPrefWidth(textWidth);
-        
+
         Commons.subAnchorButton ssab = new Commons.subAnchorButton("Filter results", null);
         ssab.setStyle(Commons.BTNSTYLE_2);
-        ssab.setButtonSize(((Double)button.getMaxWidth()).intValue(), ((Double)button.getMaxHeight()).intValue());
+        ssab.setButtonSize(((Double) button.getMaxWidth()).intValue(), ((Double) button.getMaxHeight()).intValue());
         JFXButton btn_search = ssab.generateButton();
         btn_search.setTranslateX(50);
-        
+
         TableView table_lcid = new TableView();
-        table_lcid.setPrefSize(700,300);
-        
-        hbox.getChildren().addAll(snic,sname,btn_search);
+        table_lcid.setPrefSize(700, 300);
+
+        hbox.getChildren().addAll(snic, sname, btn_search);
         VBox vbox = new VBox(heading, hbox, table_lcid);
         JFXDepthManager.setDepth(vbox, 0);
-        
+
         String query = "select * from lcid_view";
         tableViewHandler tvh_lcid = new tableViewHandler(table_lcid, query, nbconn);
         tvh_lcid.writeToTable();
-        
+
         btn_search.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
             {
-                Entity search_ent = new Entity(query,nbconn);
+                Entity search_ent = new Entity(query, nbconn);
                 search_ent.add("nic", snic.getText());
                 search_ent.add("full name", sname.getText());
                 tvh_lcid.writeToTable(search_ent.executeAsSearch());
             }
         });
-        
+
         table_lcid.getSelectionModel().selectedItemProperty().addListener(new ChangeListener()
         {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue)
             {
-                if(tvh_lcid.getSelection()!=null)
+                if (tvh_lcid.getSelection() != null)
                     textfield.setText(tvh_lcid.getSelection().getAsString("stateid"));
             }
         });
-        
+
         PopOver popover = new PopOver(vbox);
         popover.getRoot().getStylesheets().add("resources/tableOverride.css");
-        
+
         popover.show(button);
     }
-    
+
     public static JFXDialog getDialog(String str_head, String str_body, int style)
     {
         JFXDialogLayout layout = new JFXDialogLayout();
-        
+
         Text heading = new Text(str_head);
-        if(style==1)
+        if (style == 1)
             heading.setFill(Paint.valueOf("#57E7C5"));
-        else if(style == 2)
+        else if (style == 2)
             heading.setFill(Paint.valueOf("#CB503F"));
         heading.getStyleClass().add("subheaders");
         heading.setStyle("-fx-font-size: 18px;");
-        
+
         Label body = new Label(str_body);
         body.setMinWidth(450);
-        
+
         body.setStyle("-fx-font-size: 14px; -fx-text-fill: #D3D3D3;");// -fx-text-alignment: left");
         body.setTextAlignment(TextAlignment.LEFT);
         layout.setAlignment(Pos.BASELINE_LEFT);
-        
+
         layout.setHeading(heading);
         layout.setBody(body);
         layout.setStyle("-fx-background-color: #424242;");
@@ -128,7 +127,7 @@ public class ContentFactory
         JFXButton button = new JFXButton("Okay");
         button.setStyle("-fx-font-family: \"Roboto condensed\"; -fx-font-size: 16; -fx-text-fill: WHITE;");
         layout.setActions(button);
-        
+
         JFXDialog dialog = new JFXDialog(new StackPane(), layout, JFXDialog.DialogTransition.TOP, true);
         button.setOnAction(new EventHandler<ActionEvent>()
         {

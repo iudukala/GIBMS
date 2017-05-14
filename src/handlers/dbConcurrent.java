@@ -6,24 +6,21 @@
 package handlers;
 
 import core.Navigator;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
+
 /**
- *
  * @author Isuru Udukala
  */
 public class dbConcurrent
 {
     private static dbConcurrent singleton = null;
+    private final boolean T, V;
     Future<Connection> dbFuture = null;
-    private final boolean T,V;
-    
+
     private dbConcurrent(Boolean T, Boolean V)
     {
         this.T = T;
@@ -32,23 +29,31 @@ public class dbConcurrent
         Callable<Connection> connCallable = new dbCallable();
         dbFuture = executor.submit(connCallable);
     }
+
     private dbConcurrent()
     {
-        this(false,true);
+        this(false, true);
     }
-    
+
     public static dbConcurrent getInstance()
     {
-        if(singleton == null)
+        if (singleton == null)
             singleton = new dbConcurrent();
         return singleton;
     }
-    
+
     public static dbConcurrent getInstance(Boolean T, Boolean V)
     {
-        return new dbConcurrent(T,V);
+        return new dbConcurrent(T, V);
     }
-    
+
+    //legacy support
+    public static Connection connect()
+    {
+        System.out.println("Requesting connection from depracated method. use dbConcurrent.get() instead");
+        return null;
+    }
+
     public Connection get()
     {
         Connection conn = null;
@@ -56,40 +61,36 @@ public class dbConcurrent
         {
             conn = dbFuture.get();
         }
-        catch(InterruptedException | ExecutionException e)
+        catch (InterruptedException | ExecutionException e)
         {
             System.out.println("Database connection future<Connection> fetch error\n" + e);
         }
         return conn;
     }
-    
+
     public class dbCallable implements Callable<Connection>
     {
         @Override
         public Connection call()
         {
-            Connection conn=null;
+            Connection conn = null;
             try
             {
-                conn=DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank","gilemp","alpine64");
+                conn = DriverManager.getConnection("jdbc:mysql://gildb.cxrwzu2u3mfq.us-west-2.rds.amazonaws.com:3306/bank", "gilemp", "alpine64");
                 //conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","");
-                if(V)System.out.println("Database connection successful");
-                
+                if (V)
+                    System.out.println("Database connection successful");
+
                 conn.createStatement().executeQuery("SET time_zone = \"+05:30\";");
-                if(T)Navigator.initializeNavaigator(new dbConcurrent(false,false));
+                if (T)
+                    Navigator.initializeNavaigator(new dbConcurrent(false, false));
             }
-            catch(SQLException e)
+            catch (SQLException e)
             {
-                if(V)System.out.println("dbConcurrent exception:\n" + e);
+                if (V)
+                    System.out.println("dbConcurrent exception:\n" + e);
             }
             return conn;
         }
-    }
-    
-    //legacy support
-    public static Connection connect()
-    {
-        System.out.println("Requesting connection from depracated method. use dbConcurrent.get() instead");
-        return null;
     }
 }

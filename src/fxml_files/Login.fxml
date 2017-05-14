@@ -5,65 +5,73 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane id="AnchorPane" fx:id="rootAnchor" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/loginStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_files.LoginController">
-   <children>
-      <StackPane fx:id="stackpane" layoutX="327.0" layoutY="107.0" prefHeight="487.0" prefWidth="347.0" styleClass="stackpane">
-         <children>
-            <GridPane prefHeight="486.0" prefWidth="347.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="150.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="51.0" valignment="TOP" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="88.0" valignment="TOP" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="414.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="157.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0" styleClass="subheading" text="Authentication portal" textFill="WHITE" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <JFXTextField fx:id="text_ufield" labelFloat="true" prefHeight="40.0" prefWidth="307.0" promptText="Username" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </GridPane.margin>
-                  </JFXTextField>
-                  <JFXPasswordField fx:id="pass_pfield" labelFloat="true" prefHeight="39.0" prefWidth="307.0" promptText="Password" GridPane.rowIndex="4">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </GridPane.margin>
-                  </JFXPasswordField>
-                  <JFXButton fx:id="button_login" buttonType="RAISED" prefHeight="91.0" prefWidth="347.0" text="LOGIN" textFill="WHITE" GridPane.rowIndex="5">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="347.0" text="Label" textFill="WHITE" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0" styleClass="header" text="GRADUATE INVESTMENT" textFill="WHITE">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-         </children>
-      </StackPane>
-   </children>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" fx:id="rootAnchor" prefHeight="700.0"
+            prefWidth="1000.0" stylesheets="@../resources/loginStyle.css"
+            xmlns="http://javafx.com/javafx/8.0.111" fx:controller="fxml_files.LoginController">
+    <children>
+        <StackPane fx:id="stackpane" layoutX="327.0" layoutY="107.0" prefHeight="487.0" prefWidth="347.0"
+                   styleClass="stackpane">
+            <children>
+                <GridPane prefHeight="486.0" prefWidth="347.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="150.0" valignment="BOTTOM"
+                                        vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="51.0" valignment="TOP"
+                                        vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="88.0" valignment="TOP"
+                                        vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="414.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="157.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0"
+                               styleClass="subheading" text="Authentication portal" textFill="WHITE"
+                               GridPane.rowIndex="1">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <JFXTextField fx:id="text_ufield" labelFloat="true" prefHeight="40.0" prefWidth="307.0"
+                                      promptText="Username" GridPane.rowIndex="3">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="20.0" right="20.0"/>
+                            </GridPane.margin>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="pass_pfield" labelFloat="true" prefHeight="39.0" prefWidth="307.0"
+                                          promptText="Password" GridPane.rowIndex="4">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                            <GridPane.margin>
+                                <Insets left="20.0" right="20.0"/>
+                            </GridPane.margin>
+                        </JFXPasswordField>
+                        <JFXButton fx:id="button_login" buttonType="RAISED" prefHeight="91.0" prefWidth="347.0"
+                                   text="LOGIN" textFill="WHITE" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="System Bold" size="18.0"/>
+                            </font>
+                        </JFXButton>
+                        <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0"
+                               prefWidth="347.0" text="Label" textFill="WHITE" GridPane.rowIndex="2"/>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="347.0"
+                               styleClass="header" text="GRADUATE INVESTMENT" textFill="WHITE">
+                            <font>
+                                <Font size="28.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </GridPane>
+            </children>
+        </StackPane>
+    </children>
 </AnchorPane>

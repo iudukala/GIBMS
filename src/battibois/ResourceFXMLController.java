@@ -1,35 +1,21 @@
 package battibois;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import core.Entity;
 import core.Integrator;
 import fxml_files.ContentFactory;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
-
-
 import guiMediators.EntityControls;
 import guiMediators.tableViewHandler;
 import handlers.ValidationHandler.IntegerValidator;
 import handlers.dbConcurrent;
-import java.time.format.DateTimeFormatter;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -37,7 +23,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 public class ResourceFXMLController implements Initializable
@@ -72,7 +59,7 @@ public class ResourceFXMLController implements Initializable
     private JFXTextField build_des;
     @FXML
     private JFXDatePicker end;
-    
+
     @FXML
     private AnchorPane subanchor_vehicle;
     @FXML
@@ -97,7 +84,7 @@ public class ResourceFXMLController implements Initializable
     private ScrollPane scroll_add3;
     @FXML
     private StackPane stack_add3;
-    
+
     @FXML
     private JFXButton add_vehicle;
     @FXML
@@ -170,34 +157,28 @@ public class ResourceFXMLController implements Initializable
     private JFXButton btn_loansearchamount111;
     @FXML
     private JFXButton btn_irepbuilding;
-    
-    
-    private void seperatorFunction(){}
-    
     private JFXTabPane tabpane_resource;
     private JFXDialog dialog;
-    
     private dbConcurrent nbconn;
-    
     private EntityControls vehicleControls;
     private EntityControls buildingControls;
     private EntityControls otherControls;
-    
     private tableViewHandler tableVehicle_handle;
     private tableViewHandler tableBuilding_handle;
     private tableViewHandler tableOther_handle;
-    
-    
+
+    private void seperatorFunction() {}
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         nbconn = dbConcurrent.getInstance();
         tabpane_resource = Integrator.integrate(anchor_resource);
-        
+
         initializeVehicleInputs();
         initializeBuildingInputs();
         initializeOtherInputs();
-        
+
         tableVehicle_handle.writeToTable();
         tableBuilding_handle.writeToTable();
         tableOther_handle.writeToTable();
@@ -206,39 +187,39 @@ public class ResourceFXMLController implements Initializable
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue)
             {
-                if((int)newValue == 0)
+                if ((int) newValue == 0)
                     tableVehicle_handle.writeToTable();
-                else if((int)newValue == 1)
+                else if ((int) newValue == 1)
                     tableBuilding_handle.writeToTable();
-                else if((int)newValue == 2)
+                else if ((int) newValue == 2)
                     tableOther_handle.writeToTable();
             }
         });
     }
-    
+
     public void initializeVehicleInputs()
     {
-        tableVehicle_handle = new tableViewHandler(table_vehi,"select * from vehicle;",nbconn);
-        
-        vehicleControls = new EntityControls("vehicle",nbconn);
+        tableVehicle_handle = new tableViewHandler(table_vehi, "select * from vehicle;", nbconn);
+
+        vehicleControls = new EntityControls("vehicle", nbconn);
         vehicleControls.add(new Object[][]
-        {
-            {"license", text_license},
-            {"brand", text_brand},
-            {"year",text_year, new IntegerValidator(2018)},
-            {"model",text_model},
-            {"colour", text_colour},
-            {"engine_no",text_engine},
-            {"seat_count", text_seat, new IntegerValidator(50)}
-        });
-        
+                {
+                        {"license", text_license},
+                        {"brand", text_brand},
+                        {"year", text_year, new IntegerValidator(2018)},
+                        {"model", text_model},
+                        {"colour", text_colour},
+                        {"engine_no", text_engine},
+                        {"seat_count", text_seat, new IntegerValidator(50)}
+                });
+
         add_vehicle.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
                 Entity vehicle = null;
-                if(vehicleControls.triggerValidators())
+                if (vehicleControls.triggerValidators())
                 {
                     vehicle = vehicleControls.getValues();
                 }
@@ -248,20 +229,20 @@ public class ResourceFXMLController implements Initializable
                 }
                 try
                 {
-                    int vehicleStatus=vehicle.consolidate();
-                    if(vehicleStatus == 0)
+                    int vehicleStatus = vehicle.consolidate();
+                    if (vehicleStatus == 0)
                     {
                         vehicleControls.clearControls();
                         displayDialog(0, "vehicle", 1);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     displayDialog(1, "vehicle", 1);
                 }
             }
         });
-        
+
         btn_searchvehi.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -269,10 +250,10 @@ public class ResourceFXMLController implements Initializable
             {
                 Entity vsearch = new Entity("select * from vehicle", nbconn);
                 vsearch.add("license", text_vsearch.getText());
-                tableVehicle_handle.writeToTable(vsearch.executeAsSearch());       
+                tableVehicle_handle.writeToTable(vsearch.executeAsSearch());
             }
         });
-        
+
         btn_selectvehi.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -281,14 +262,14 @@ public class ResourceFXMLController implements Initializable
                 vehicleControls.setValues(tableVehicle_handle.getSelection());
             }
         });
-        
+
         btn_upvehi.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
                 Entity vehicle;
-                if(vehicleControls.triggerValidators())
+                if (vehicleControls.triggerValidators())
                 {
                     vehicle = vehicleControls.getValues();
                 }
@@ -297,28 +278,28 @@ public class ResourceFXMLController implements Initializable
                     displayDialog(1, "vehicle", 2);
                     return;
                 }
-                
-                if(vehicle.update())
+
+                if (vehicle.update())
                 {
                     displayDialog(0, "vehicle", 2);
                 }
             }
         });
-        
+
         btn_delvehicle.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-                if(tableVehicle_handle.getSelection().deleteFromDB())
+                if (tableVehicle_handle.getSelection().deleteFromDB())
                 {
                     displayDialog(0, "vehicle", 3);
                 }
                 tableVehicle_handle.writeToTable();
             }
         });
-        
-        
+
+
         btn_irepvehicle.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -327,70 +308,70 @@ public class ResourceFXMLController implements Initializable
                 try
                 {
                     String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/battibois1.jrxml";
-                    JasperReport jr =JasperCompileManager.compileReport(path);
-                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
-                    JasperViewer.viewReport(jp,false);
+                    JasperReport jr = JasperCompileManager.compileReport(path);
+                    JasperPrint jp = JasperFillManager.fillReport(jr, null, nbconn.get());
+                    JasperViewer.viewReport(jp, false);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     System.out.println("ireport error : \n" + e);
                 }
             }
         });
     }
-    
+
     public void initializeBuildingInputs()
     {
-        tableBuilding_handle = new tableViewHandler(table_building,"select * from building;",nbconn);
-        
-        buildingControls = new EntityControls("building",nbconn);
+        tableBuilding_handle = new tableViewHandler(table_building, "select * from building;", nbconn);
+
+        buildingControls = new EntityControls("building", nbconn);
         buildingControls.add(new Object[][]
-        {
-            {"address", build_address},
-            {"floor", floor, new IntegerValidator()},
-            {"rent_date", rent},
-            {"condition", build_con},
-            {"rent_value", build_value},
-            {"end_date", end},
-            {"description", build_des},
-        });
-        
+                {
+                        {"address", build_address},
+                        {"floor", floor, new IntegerValidator()},
+                        {"rent_date", rent},
+                        {"condition", build_con},
+                        {"rent_value", build_value},
+                        {"end_date", end},
+                        {"description", build_des},
+                });
+
         add_building.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
                 Entity building = null;
-                if(buildingControls.triggerValidators())
+                if (buildingControls.triggerValidators())
                 {
                     building = buildingControls.getValues();
                 }
                 try
                 {
-                    int buildingStatus=building.consolidate();
-                    if(buildingStatus == 0)
+                    int buildingStatus = building.consolidate();
+                    if (buildingStatus == 0)
                     {
                         buildingControls.clearControls();
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     System.out.println("nullpointer no inputs");
                 }
             }
         });
-        
-         btn_searchbul.setOnAction(new EventHandler<ActionEvent>()
+
+        btn_searchbul.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
             {
                 Entity builsearch = new Entity("select * from building", nbconn);
                 builsearch.add("", building_ID.getText());
-               // tableVehicle_handle.writeToTable(vsearch.executeAsSearch());       
+                // tableVehicle_handle.writeToTable(vsearch.executeAsSearch());
             }
         });
-        
+
         btn_selectbuil.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -399,14 +380,14 @@ public class ResourceFXMLController implements Initializable
                 buildingControls.setValues(tableBuilding_handle.getSelection());
             }
         });
-        
+
         btn_upbuilding.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
                 Entity building;
-                if(buildingControls.triggerValidators())
+                if (buildingControls.triggerValidators())
                 {
                     building = buildingControls.getValues();
                 }
@@ -415,27 +396,27 @@ public class ResourceFXMLController implements Initializable
                     displayDialog(1, "building", 2);
                     return;
                 }
-                
-                if(building.update())
+
+                if (building.update())
                 {
                     displayDialog(0, "building", 2);
                 }
             }
         });
-        
+
         btn_delbul.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-                if(tableBuilding_handle.getSelection().deleteFromDB())
+                if (tableBuilding_handle.getSelection().deleteFromDB())
                 {
                     displayDialog(0, "building", 3);
                 }
                 tableBuilding_handle.writeToTable();
             }
         });
-        
+
         btn_irepbuilding.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -444,42 +425,42 @@ public class ResourceFXMLController implements Initializable
                 try
                 {
                     String path = "/Volumes/Media/Home/isuru/Documents/NetBeansProjects/GIBMS/src/reports/battibois2.jrxml";
-                    JasperReport jr =JasperCompileManager.compileReport(path);
-                    JasperPrint jp =JasperFillManager.fillReport(jr,null,nbconn.get());
-                    JasperViewer.viewReport(jp,false);
+                    JasperReport jr = JasperCompileManager.compileReport(path);
+                    JasperPrint jp = JasperFillManager.fillReport(jr, null, nbconn.get());
+                    JasperViewer.viewReport(jp, false);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     System.out.println("ireport error : \n" + e);
                 }
             }
         });
     }
-    
+
     public void initializeOtherInputs()
     {
-        tableOther_handle = new tableViewHandler(table_other,"select * from other_bill;",nbconn);
-        
-        otherControls = new EntityControls("other_bill",nbconn);
-        otherControls.add(new Object[][]
-        {
-            {"bill no", other_no},
-            {"category", other_cat},
-            {"date", other_date},
-            {"price", other_price},
-            {"usage", other_use},
-            {"quantity", other_qun},
-            {"description", other_des},
+        tableOther_handle = new tableViewHandler(table_other, "select * from other_bill;", nbconn);
 
-        });
-        
+        otherControls = new EntityControls("other_bill", nbconn);
+        otherControls.add(new Object[][]
+                {
+                        {"bill no", other_no},
+                        {"category", other_cat},
+                        {"date", other_date},
+                        {"price", other_price},
+                        {"usage", other_use},
+                        {"quantity", other_qun},
+                        {"description", other_des},
+
+                });
+
         other_add.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
                 Entity other = null;
-                if(otherControls.triggerValidators())
+                if (otherControls.triggerValidators())
                 {
                     other = otherControls.getValues();
                 }
@@ -489,20 +470,20 @@ public class ResourceFXMLController implements Initializable
                 }
                 try
                 {
-                    int otherStatus=other.consolidate();
-                    if(otherStatus == 0)
+                    int otherStatus = other.consolidate();
+                    if (otherStatus == 0)
                     {
                         otherControls.clearControls();
                         displayDialog(0, "other", 1);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     displayDialog(1, "other", 1);
                 }
             }
         });
-        
+
         other_search.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -510,10 +491,10 @@ public class ResourceFXMLController implements Initializable
             {
                 Entity osearch = new Entity("select * from other_bill", nbconn);
                 osearch.add("bill_ID", text_vsearch.getText());
-                tableOther_handle.writeToTable(osearch.executeAsSearch());       
+                tableOther_handle.writeToTable(osearch.executeAsSearch());
             }
         });
-        
+
         select_other.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -522,14 +503,14 @@ public class ResourceFXMLController implements Initializable
                 otherControls.setValues(tableOther_handle.getSelection());
             }
         });
-        
+
         other_up.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
                 Entity other;
-                if(otherControls.triggerValidators())
+                if (otherControls.triggerValidators())
                 {
                     other = otherControls.getValues();
                 }
@@ -538,29 +519,29 @@ public class ResourceFXMLController implements Initializable
                     displayDialog(1, "other", 2);
                     return;
                 }
-                
-                if(other.update())
+
+                if (other.update())
                 {
                     displayDialog(0, "other", 2);
                 }
             }
         });
-        
+
         other_del.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent e)
             {
-                if(tableOther_handle.getSelection().deleteFromDB())
+                if (tableOther_handle.getSelection().deleteFromDB())
                 {
                     displayDialog(0, "other", 3);
                 }
                 tableOther_handle.writeToTable();
             }
         });
-        
+
     }
-    
+
     public void displayDialog(int status, String recordtype, int optype)
     {
         String operation;
@@ -578,21 +559,39 @@ public class ResourceFXMLController implements Initializable
             default:
                 return;
         }
-        
+
         switch (status)
         {
             case 0:
-                try{dialog.close();}catch(Exception ex){}
+                try
+                {
+                    dialog.close();
+                }
+                catch (Exception ex)
+                {
+                }
                 dialog = initializeDialog(1, ContentFactory.getDialog(operation + " SUCESSFUL", recordtype + " record added to database successfully", 1));
                 dialog.show();
                 break;
             case 1:
-                try{dialog.close();}catch(Exception ex){}
+                try
+                {
+                    dialog.close();
+                }
+                catch (Exception ex)
+                {
+                }
                 dialog = initializeDialog(1, ContentFactory.getDialog("FIELDS EMPTY/INVALID", "Please fill out all required fields correctly", 2));
                 dialog.show();
                 break;
             case 2:
-                try{dialog.close();}catch(Exception ex){}
+                try
+                {
+                    dialog.close();
+                }
+                catch (Exception ex)
+                {
+                }
                 dialog = initializeDialog(1, ContentFactory.getDialog(operation + " FAILED", "failed due to an internal error", 2));
                 dialog.show();
                 break;
@@ -600,11 +599,11 @@ public class ResourceFXMLController implements Initializable
                 break;
         }
     }
-    
+
     private JFXDialog initializeDialog(int tabnum, JFXDialog dialog)
     {
         Control control;
-        switch(tabnum)
+        switch (tabnum)
         {
             case 1:
                 control = text_license;
@@ -618,8 +617,8 @@ public class ResourceFXMLController implements Initializable
             default:
                 return null;
         }
-        dialog.setDialogContainer((StackPane)control.getParent().getParent());
-        
+        dialog.setDialogContainer((StackPane) control.getParent().getParent());
+
         return dialog;
     }
 }

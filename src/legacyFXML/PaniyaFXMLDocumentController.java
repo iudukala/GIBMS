@@ -5,31 +5,24 @@
  */
 package legacyFXML;
 
-import legacyEntities.bank_receipt_voucher;
-import legacyEntities.bank_slip;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import legacyEntities.general_ledger;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 
 /**
- *
  * @author PNJ
  */
-public class PaniyaFXMLDocumentController implements Initializable {
-    
+public class PaniyaFXMLDocumentController implements Initializable
+{
+
+    Connection conn = null;
     private Label label;
     @FXML
     private ToggleGroup select;
@@ -385,340 +378,356 @@ public class PaniyaFXMLDocumentController implements Initializable {
     private TableColumn<?, ?> colum_cheque_no_bvrl;
     @FXML
     private TableColumn<?, ?> colum_cheque_date_bvrl;
-    
-    
-     Connection conn = null;
     @FXML
     private TextField txt_assets_tb;
     @FXML
     private TextField txt_liabilities_tb;
-    
-  
-    @FXML private TableView table;
-    
+
+
+    @FXML
+    private TableView table;
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-         conn = handlers.dbConcurrent.connect();
-         //data.DynamicTable.buildData(con, "select * from person", table);
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        conn = handlers.dbConcurrent.connect();
+        //data.DynamicTable.buildData(con, "select * from person", table);
         // TODO
-    }    
+    }
 
 
     @FXML
-    private void button_add_bvr(ActionEvent event) {
+    private void button_add_bvr(ActionEvent event)
+    {
     }
 
     @FXML
-    private void button_delete1_bvr(ActionEvent event) {
+    private void button_delete1_bvr(ActionEvent event)
+    {
     }
 
     @FXML
-    private void button_edit_bvr(ActionEvent event) {
+    private void button_edit_bvr(ActionEvent event)
+    {
     }
 
     @FXML
-    private void button_save_brv(ActionEvent event) {
-        
-            String serial_no = txt_serial_no_bvr.getText();
-            //String receipt_voucher = txt_receipt_voucher_bvr.getText();
-           
-            LocalDate date = txt_date_bvr.getValue();
-            String transaction_code = txt_serial_no_bvr.getText();
-            String transaction_name = txt_transaction_name_bvr.getText();
-            String nic = txt_nic_bvr.getText();
-            String resource_id = txt_resource_id_bvr.getText();
-            String name = txt_name_bvr.getText();
-            String description = txt_description_bvr.getText();
-            Double amount = Double.parseDouble(txt_amount_bvr.getText());
-            Double total_amount = Double.parseDouble(txt_total_amount_bvr.getText());
-            String payment_type = txt_payment_type_bvr.getText();
-            String cheque_no = txt_cheque_no_bvr.getText();
-            
-           
-            LocalDate cheque_date = txt_cheque_date_bvr.getValue();
-             try
-        {
-//           bank_receipt_voucher  bank_receipt_voucher_object = new  bank_receipt_voucher(serial_no,date,transaction_code,transaction_name,nic,resource_id,name,description,amount,total_amount,payment_type,cheque_no,cheque_date);
-//                      bank_receipt_voucher_object.toString();
-//            bank_receipt_voucher_object.consolidate(conn);
-            
-        
-        }
-        catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-        
-      
-    }
+    private void button_save_brv(ActionEvent event)
+    {
 
-    @FXML
-    private void button_delete_brv(ActionEvent event) {
-    }
+        String serial_no = txt_serial_no_bvr.getText();
+        //String receipt_voucher = txt_receipt_voucher_bvr.getText();
 
-    @FXML
-    private void button_add_br(ActionEvent event) {
-         
-            String br_no = txt_br_no_br.getText();
-            //String receipt_voucher = txt_receipt_voucher_bvr.getText();
-           
-            LocalDate date = txt_date_br.getValue();
-         
-            String bank_name = txt_bank_name_br.getText();
-         
-         
-            
-            String description = txt_description_br.getText();
-            Double withdrawals = Double.parseDouble(txt_withdrawals_br.getText());
-            Double deposits = Double.parseDouble(txt_deposits_br.getText());
-            Double balance = Double.parseDouble(txt_balance_br.getText());
-           
-            
-           try
-        {
-            
-//                      legacyEntities.bank_reconciliation  bank_reconciliation_object = new  bank_reconciliation(br_no,date,description,withdrawals,deposits,balance);          
-//                bank_reconciliation_object.toString();
-//                  bank_reconciliation_object.consolidate(conn);
-            
-        
-        }
-        catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-        
-      
-    }
+        LocalDate date = txt_date_bvr.getValue();
+        String transaction_code = txt_serial_no_bvr.getText();
+        String transaction_name = txt_transaction_name_bvr.getText();
+        String nic = txt_nic_bvr.getText();
+        String resource_id = txt_resource_id_bvr.getText();
+        String name = txt_name_bvr.getText();
+        String description = txt_description_bvr.getText();
+        Double amount = Double.parseDouble(txt_amount_bvr.getText());
+        Double total_amount = Double.parseDouble(txt_total_amount_bvr.getText());
+        String payment_type = txt_payment_type_bvr.getText();
+        String cheque_no = txt_cheque_no_bvr.getText();
 
-    @FXML
-    private void button_edit_br(ActionEvent event) {
-    }
 
-    @FXML
-    private void button_delete_br(ActionEvent event) {
-    }
-
-    @FXML
-    private void button_save_bs(ActionEvent event) {
-       
-            String bank_slip_no = txt_bank_slip_no_bs.getText();
-            //String receipt_voucher = txt_receipt_voucher_bvr.getText();
-           
-            LocalDate date = txt_date_bs.getValue();
-         
-            String bank_name = txt_bank_name_bs.getText();
-            String description = txt_description_bs.getText();
-            Double withdrawals = Double.parseDouble(txt_withdrawals_bs.getText());
-            Double deposits = Double.parseDouble(txt_deposits_bs.getText());
-            Double balance = Double.parseDouble(txt_balance_bs.getText());
-           
-            
-           
-             try
-        {
-//            
-//          bank_slip  bank_slip_object = new  bank_slip(bank_slip_no,date,description,withdrawals,deposits,balance);           
-//          
-//          bank_slip_object.toString();
-//          bank_slip_object.consolidate(conn);
-            
-        
-        }
-        catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-        
-      
-        
-    }
-
-    @FXML
-    private void button_edit_bs(ActionEvent event) {
-    }
-
-    @FXML
-    private void button_delete_bs(ActionEvent event) {
-    }
-
-    @FXML
-    private void button_edit_cb(ActionEvent event) {
-    }
-
-    @FXML
-    private void button_add_cb(ActionEvent event) {
-        
-            LocalDate date = txt_date_cb.getValue();
-            String cashbook_id = txt_cash_book_id_cb.getText();
-            String serial_no = txt_serial_no_cb.getText();
-            String br_no = txt_br_no_cb.getText();
-            String bank_slip_no = txt_bank_slip_no_cb.getText();
-            //String receipt_voucher = txt_receipt_voucher_cb.getText();
-           
-            
-            String transaction_code = txt_transaction_code_cb.getText();
-            String transaction_name = txt_transaction_name_cb.getText();
-            String nic = txt_nic_cb.getText();
-            String resource_id = txt_resource_id_cb.getText();
-            String name = txt_name_cb.getText();
-            String description = txt_description_cb.getText();
-            Double withdrawals = Double.parseDouble(txt_withdrawals_cb.getText());
-            Double deposits = Double.parseDouble(txt_deposits_cb.getText());
-            Double balance = Double.parseDouble(txt_balance_cb.getText());
-            Double commercial_bank = Double.parseDouble(txt_commercial_bank_cb.getText());
-            Double sampath_bank = Double.parseDouble(txt_sampath_bank_cb.getText());
-            
-         
+        LocalDate cheque_date = txt_cheque_date_bvr.getValue();
         try
         {
-           
-//          cashbook  cashbook_object = new  cashbook(cashbook_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance,commercial_bank,sampath_bank);
-//                     cashbook_object.toString();
-//          cashbook_object.consolidate(conn);
-            
-        
+            //           bank_receipt_voucher  bank_receipt_voucher_object = new  bank_receipt_voucher(serial_no,date,transaction_code,transaction_name,nic,resource_id,name,description,amount,total_amount,payment_type,cheque_no,cheque_date);
+            //                      bank_receipt_voucher_object.toString();
+            //            bank_receipt_voucher_object.consolidate(conn);
+
+
         }
-        catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-        
-    }
-
-    @FXML
-    private void button_delete_cb(ActionEvent event) {
-    }
-
-    @FXML
-    private void button_add_pa(ActionEvent event) {
-        
-            String account_id = txt_account_id_pa.getText();
-            //String receipt_voucher = txt_receipt_voucher_bvr.getText();
-           String serial_no = txt_serial_no_pa.getText();
-           String br_no = txt_br_no_pa.getText();
-           String bank_slip_no = txt_bank_slip_no_pa.getText();
-           
-            String transaction_code = txt_transaction_code_pa.getText();
-            String transaction_name = txt_transaction_name_pa.getText();
-            String nic = txt_nic_pa.getText();
-            String resource_id = txt_resource_id_pa.getText();
-            String name = txt_name_pa.getText();
-            String description = txt_description_pa.getText();
-            Double withdrawals = Double.parseDouble(txt_withdrawals_pa.getText());
-            Double deposits = Double.parseDouble(txt_deposits_pa.getText());
-            Double balance = Double.parseDouble(txt_balance_pa.getText());
-         
-            
-           
-       try
+        catch (Exception e)
         {
-//         personal_account  personal_account_object = new  personal_account(account_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance);
-//        
-//         personal_account_object.toString();
-//         personal_account_object.consolidate(conn);
-            
-        
+            System.out.println(e);
         }
-        catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-        
-      
+
+
     }
 
     @FXML
-    private void button_edit_pa(ActionEvent event) {
+    private void button_delete_brv(ActionEvent event)
+    {
     }
 
     @FXML
-    private void button_delete_pa(ActionEvent event) {
-    }
+    private void button_add_br(ActionEvent event)
+    {
 
-    @FXML
-    private void button_save_gl(ActionEvent event) {
-        
-            
-            //String receipt_voucher = txt_receipt_voucher_bvr.getText();
-           
-            LocalDate date = txt_date_gl.getValue();
-            String transaction_code = txt_transaction_code_gl.getText();
-            String transaction_name = txt_transaction_name_gl.getText();
-           
-            String description = txt_description_gl.getText();
-            Double withdrawals = Double.parseDouble(txt_withdrawals_gl.getText());
-            Double deposits = Double.parseDouble(txt_deposits_gl.getText());
-            Double balance = Double.parseDouble(txt_balance_gl.getText());
-            
-           
-           try
-        { 
-//            
-          general_ledger  general_ledger_object = new  general_ledger(date,transaction_code,transaction_name,description,withdrawals,deposits,balance);
-                      general_ledger_object.toString();
-           general_ledger_object.consolidate(conn);
-            
-        
-        }
-        catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-        
-      
-    }
+        String br_no = txt_br_no_br.getText();
+        //String receipt_voucher = txt_receipt_voucher_bvr.getText();
 
-    @FXML
-    private void button_edit_gl(ActionEvent event) {
-    }
+        LocalDate date = txt_date_br.getValue();
 
-    @FXML
-    private void button_delete_gl(ActionEvent event) {
-    }
+        String bank_name = txt_bank_name_br.getText();
 
-    @FXML
-    private void button_add_tb(ActionEvent event) {
-         try
+
+        String description = txt_description_br.getText();
+        Double withdrawals = Double.parseDouble(txt_withdrawals_br.getText());
+        Double deposits = Double.parseDouble(txt_deposits_br.getText());
+        Double balance = Double.parseDouble(txt_balance_br.getText());
+
+
+        try
         {
-            
+
+            //                      legacyEntities.bank_reconciliation  bank_reconciliation_object = new  bank_reconciliation(br_no,date,description,withdrawals,deposits,balance);
+            //                bank_reconciliation_object.toString();
+            //                  bank_reconciliation_object.consolidate(conn);
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+
+    }
+
+    @FXML
+    private void button_edit_br(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_delete_br(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_save_bs(ActionEvent event)
+    {
+
+        String bank_slip_no = txt_bank_slip_no_bs.getText();
+        //String receipt_voucher = txt_receipt_voucher_bvr.getText();
+
+        LocalDate date = txt_date_bs.getValue();
+
+        String bank_name = txt_bank_name_bs.getText();
+        String description = txt_description_bs.getText();
+        Double withdrawals = Double.parseDouble(txt_withdrawals_bs.getText());
+        Double deposits = Double.parseDouble(txt_deposits_bs.getText());
+        Double balance = Double.parseDouble(txt_balance_bs.getText());
+
+
+        try
+        {
+            //
+            //          bank_slip  bank_slip_object = new  bank_slip(bank_slip_no,date,description,withdrawals,deposits,balance);
+            //
+            //          bank_slip_object.toString();
+            //          bank_slip_object.consolidate(conn);
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+
+    }
+
+    @FXML
+    private void button_edit_bs(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_delete_bs(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_edit_cb(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_add_cb(ActionEvent event)
+    {
+
+        LocalDate date = txt_date_cb.getValue();
+        String cashbook_id = txt_cash_book_id_cb.getText();
+        String serial_no = txt_serial_no_cb.getText();
+        String br_no = txt_br_no_cb.getText();
+        String bank_slip_no = txt_bank_slip_no_cb.getText();
+        //String receipt_voucher = txt_receipt_voucher_cb.getText();
+
+
+        String transaction_code = txt_transaction_code_cb.getText();
+        String transaction_name = txt_transaction_name_cb.getText();
+        String nic = txt_nic_cb.getText();
+        String resource_id = txt_resource_id_cb.getText();
+        String name = txt_name_cb.getText();
+        String description = txt_description_cb.getText();
+        Double withdrawals = Double.parseDouble(txt_withdrawals_cb.getText());
+        Double deposits = Double.parseDouble(txt_deposits_cb.getText());
+        Double balance = Double.parseDouble(txt_balance_cb.getText());
+        Double commercial_bank = Double.parseDouble(txt_commercial_bank_cb.getText());
+        Double sampath_bank = Double.parseDouble(txt_sampath_bank_cb.getText());
+
+
+        try
+        {
+
+            //          cashbook  cashbook_object = new  cashbook(cashbook_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance,commercial_bank,sampath_bank);
+            //                     cashbook_object.toString();
+            //          cashbook_object.consolidate(conn);
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+
+    @FXML
+    private void button_delete_cb(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_add_pa(ActionEvent event)
+    {
+
+        String account_id = txt_account_id_pa.getText();
+        //String receipt_voucher = txt_receipt_voucher_bvr.getText();
+        String serial_no = txt_serial_no_pa.getText();
+        String br_no = txt_br_no_pa.getText();
+        String bank_slip_no = txt_bank_slip_no_pa.getText();
+
+        String transaction_code = txt_transaction_code_pa.getText();
+        String transaction_name = txt_transaction_name_pa.getText();
+        String nic = txt_nic_pa.getText();
+        String resource_id = txt_resource_id_pa.getText();
+        String name = txt_name_pa.getText();
+        String description = txt_description_pa.getText();
+        Double withdrawals = Double.parseDouble(txt_withdrawals_pa.getText());
+        Double deposits = Double.parseDouble(txt_deposits_pa.getText());
+        Double balance = Double.parseDouble(txt_balance_pa.getText());
+
+
+        try
+        {
+            //         personal_account  personal_account_object = new  personal_account(account_id,serial_no,br_no,bank_slip_no,transaction_code,transaction_name,nic,resource_id,name,description,withdrawals,deposits,balance);
+            //
+            //         personal_account_object.toString();
+            //         personal_account_object.consolidate(conn);
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+
+    }
+
+    @FXML
+    private void button_edit_pa(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_delete_pa(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_save_gl(ActionEvent event)
+    {
+
+
+        //String receipt_voucher = txt_receipt_voucher_bvr.getText();
+
+        LocalDate date = txt_date_gl.getValue();
+        String transaction_code = txt_transaction_code_gl.getText();
+        String transaction_name = txt_transaction_name_gl.getText();
+
+        String description = txt_description_gl.getText();
+        Double withdrawals = Double.parseDouble(txt_withdrawals_gl.getText());
+        Double deposits = Double.parseDouble(txt_deposits_gl.getText());
+        Double balance = Double.parseDouble(txt_balance_gl.getText());
+
+
+        try
+        {
+            //
+            general_ledger general_ledger_object = new general_ledger(date, transaction_code, transaction_name, description, withdrawals, deposits, balance);
+            general_ledger_object.toString();
+            general_ledger_object.consolidate(conn);
+
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+
+    }
+
+    @FXML
+    private void button_edit_gl(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_delete_gl(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void button_add_tb(ActionEvent event)
+    {
+        try
+        {
+
             //String receipt_voucher = txt_receipt_voucher_bvr.getText();
-           
+
             LocalDate date = txt_date_tb.getValue();
             String trial_balance_id = txt_trial_balance_id_tb.getText();
             String transaction_code = txt_transaction_code_tb.getText();
             String transaction_name = txt_transaction_name_tb.getText();
-           
-          
+
+
             Double assets = Double.parseDouble(txt_assets_tb.getText());
             Double liabilities = Double.parseDouble(txt_liabilities_tb.getText());
             Double balance = Double.parseDouble(txt_balance_tb.getText());
-            
-           
-            
-//            
-//          general_ledger  general_ledger_object = new  general_ledger(date,transaction_code,transaction_name,assets,liabilities,balance);
-//           
-//           general_ledger_object.toString();
-//           general_ledger_object.consolidate(conn);
-//            
-        
+
+
+            //
+            //          general_ledger  general_ledger_object = new  general_ledger(date,transaction_code,transaction_name,assets,liabilities,balance);
+            //
+            //           general_ledger_object.toString();
+            //           general_ledger_object.consolidate(conn);
+            //
+
         }
-        catch(Exception e)
-                {
-                    System.out.println(e);
-                }
-        
-      
-        
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+
     }
 
     @FXML
-    private void button_edit_tb(ActionEvent event) {
+    private void button_edit_tb(ActionEvent event)
+    {
     }
 
     @FXML
-    private void button_delete_tb(ActionEvent event) {
+    private void button_delete_tb(ActionEvent event)
+    {
     }
-    
+
 }

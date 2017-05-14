@@ -5,45 +5,45 @@
  */
 package hassim;
 
+import core.Manipulator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-import core.Manipulator;
 /**
- *
  * @author Shamodh
  */
-public class task 
+public class task
 {
     LocalDate date;
     String time_period;
     String task;
-    
-    public task(LocalDate date,String time_period,String task)
+
+    public task(LocalDate date, String time_period, String task)
     {
-        this.date=date;
+        this.date = date;
         this.task = task;
-        this.time_period =time_period ;
+        this.time_period = time_period;
     }
-    
+
     public void consolidate(Connection conn)
     {
-        
+
         try
-        {   String query = "insert into task(date,task,time_period)";
+        {
+            String query = "insert into task(date,task,time_period)";
             PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, time_period);
             prp.setString(2, task);
             prp.setString(3, date.toString());
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
-          System.out.println("Consolidation error [Customer]:\n" + e);
+            System.out.println("Consolidation error [Customer]:\n" + e);
 
         }
     }
-    
+
 }

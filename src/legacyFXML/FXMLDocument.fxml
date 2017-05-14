@@ -1,234 +1,323 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Box?>
-
-<AnchorPane fx:id="anchorpane_shares" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kiriya.FXMLDocumentController">
-   <children>
-      <VBox layoutX="482.0" prefHeight="400.0" prefWidth="118.0" />
-      <TabPane fx:id="tabpane_shares" prefHeight="800.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <tabs>
-            <Tab text="ADD SHARES">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
-                     <children>
-                        <AnchorPane layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <Box />
-                              <TitledPane animated="false" layoutX="1.0" layoutY="1.0" prefHeight="800.0" prefWidth="900.0" text="shareholder details">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="597.0">
-                                       <children>
-                                          <GridPane layoutX="41.0" layoutY="21.0" prefHeight="603.0" prefWidth="494.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                             <children>
-                                                <Label text="ID number" />
-                                                <Label text="Full name" GridPane.rowIndex="1" />
-                                                <Label text="Address" GridPane.rowIndex="2" />
-                                                <TextField fx:id="idnumber" GridPane.columnIndex="1" />
-                                                <TextField fx:id="fname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <TextField fx:id="addres" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <Label text="Date of birth" GridPane.rowIndex="3" />
-                                                <DatePicker fx:id="date" prefHeight="25.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <Label text="Contact no" GridPane.rowIndex="4" />
-                                                <TextField fx:id="contactno" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Label text="E-mail" GridPane.rowIndex="5" />
-                                                <TextField fx:id="emai" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Label text="Bank name" GridPane.rowIndex="6" />
-                                                <TextField fx:id="bname" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                                <Label text="Bank acount number" GridPane.rowIndex="7" />
-                                                <TextField fx:id="bnumber" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                                <Label text="Share amount" GridPane.rowIndex="8" />
-                                                <TextField fx:id="noshare" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                                <Label text="Share price" GridPane.rowIndex="9" />
-                                                <TextField fx:id="shareprice" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                                <Label text="Share range start" GridPane.rowIndex="10" />
-                                                <DatePicker fx:id="sharerangestart" prefHeight="25.0" prefWidth="347.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                                <Label text="Share range close" GridPane.rowIndex="11" />
-                                                <DatePicker fx:id="sharerangeclose" prefHeight="25.0" prefWidth="353.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                                <TextField fx:id="descriptio" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                                <Label text="Description" GridPane.rowIndex="12" />
-                                             </children>
-                                          </GridPane>
-                                          <Button fx:id="add" layoutX="325.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="56.0" prefWidth="174.0" text="Add" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </TitledPane>
-                           </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="anchorpane_shares" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/8.0.111" fx:controller="kiriya.FXMLDocumentController">
+    <children>
+        <VBox layoutX="482.0" prefHeight="400.0" prefWidth="118.0"/>
+        <TabPane fx:id="tabpane_shares" prefHeight="800.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE"
+                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab text="ADD SHARES">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                            <children>
+                                <AnchorPane layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                            minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0"
+                                            prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Box/>
+                                        <TitledPane animated="false" layoutX="1.0" layoutY="1.0" prefHeight="800.0"
+                                                    prefWidth="900.0" text="shareholder details">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0"
+                                                            prefWidth="597.0">
+                                                    <children>
+                                                        <GridPane layoutX="41.0" layoutY="21.0" prefHeight="603.0"
+                                                                  prefWidth="494.0">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="100.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="100.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Label text="ID number"/>
+                                                                <Label text="Full name" GridPane.rowIndex="1"/>
+                                                                <Label text="Address" GridPane.rowIndex="2"/>
+                                                                <TextField fx:id="idnumber" GridPane.columnIndex="1"/>
+                                                                <TextField fx:id="fname" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="1"/>
+                                                                <TextField fx:id="addres" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="2"/>
+                                                                <Label text="Date of birth" GridPane.rowIndex="3"/>
+                                                                <DatePicker fx:id="date" prefHeight="25.0"
+                                                                            prefWidth="344.0" GridPane.columnIndex="1"
+                                                                            GridPane.rowIndex="3"/>
+                                                                <Label text="Contact no" GridPane.rowIndex="4"/>
+                                                                <TextField fx:id="contactno" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="4"/>
+                                                                <Label text="E-mail" GridPane.rowIndex="5"/>
+                                                                <TextField fx:id="emai" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="5"/>
+                                                                <Label text="Bank name" GridPane.rowIndex="6"/>
+                                                                <TextField fx:id="bname" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="6"/>
+                                                                <Label text="Bank acount number" GridPane.rowIndex="7"/>
+                                                                <TextField fx:id="bnumber" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="7"/>
+                                                                <Label text="Share amount" GridPane.rowIndex="8"/>
+                                                                <TextField fx:id="noshare" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="8"/>
+                                                                <Label text="Share price" GridPane.rowIndex="9"/>
+                                                                <TextField fx:id="shareprice" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="9"/>
+                                                                <Label text="Share range start" GridPane.rowIndex="10"/>
+                                                                <DatePicker fx:id="sharerangestart" prefHeight="25.0"
+                                                                            prefWidth="347.0" GridPane.columnIndex="1"
+                                                                            GridPane.rowIndex="10"/>
+                                                                <Label text="Share range close" GridPane.rowIndex="11"/>
+                                                                <DatePicker fx:id="sharerangeclose" prefHeight="25.0"
+                                                                            prefWidth="353.0" GridPane.columnIndex="1"
+                                                                            GridPane.rowIndex="11"/>
+                                                                <TextField fx:id="descriptio" GridPane.columnIndex="1"
+                                                                           GridPane.rowIndex="12"/>
+                                                                <Label text="Description" GridPane.rowIndex="12"/>
+                                                            </children>
+                                                        </GridPane>
+                                                        <Button fx:id="add" layoutX="325.0" layoutY="587.0"
+                                                                mnemonicParsing="false" onAction="#handleAdd"
+                                                                prefHeight="56.0" prefWidth="174.0" text="Add"/>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                        </TitledPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
                         </AnchorPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="APPLY SHARES">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
-                                 <children>
-                                    <TableView fx:id="TableLoad" layoutX="62.0" layoutY="64.0" prefHeight="323.0" prefWidth="588.0">
-                                       <columns>
-                                          <TableColumn fx:id="name" prefWidth="88.0" text="Name" />
-                                          <TableColumn fx:id="nic" prefWidth="84.0" text="ID number" />
-                                          <TableColumn fx:id="shareno" prefWidth="104.0" text="Share amount" />
-                                          <TableColumn fx:id="sharepric" prefWidth="98.0" text="Share price" />
-                                          <TableColumn fx:id="sharestart" prefWidth="105.0" text="Share range start" />
-                                          <TableColumn fx:id="shareclose" prefWidth="108.0" text="Share range close" />
-                                       </columns>
-                                    </TableView>
-                                    <Button layoutX="532.0" layoutY="491.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="118.0" text="REJECT" />
-                                    <Button layoutX="82.0" layoutY="491.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="118.0" text="CONFIRM" />
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </TitledPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="UPDATE SHARES">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0" text="Update details">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="597.0">
-                                 <children>
-                                    <GridPane layoutX="41.0" layoutY="21.0" prefHeight="317.0" prefWidth="660.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="122.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="156.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="65.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="122.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="156.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label text="ID number" GridPane.rowIndex="2" />
-                                          <Label text="Full name" GridPane.rowIndex="3" />
-                                          <Label text="Address" GridPane.rowIndex="4" />
-                                          <TextField fx:id="unic" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TextField fx:id="uname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <TextField fx:id="uaddress" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <Label text="Date of birth" GridPane.rowIndex="5" />
-                                          <DatePicker fx:id="udob" prefHeight="25.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <Label text="Contact no" GridPane.rowIndex="6" />
-                                          <TextField fx:id="uphone" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <Label text="E-mail" GridPane.rowIndex="7" />
-                                          <TextField fx:id="uemail" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                          <Label text="Bank name" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                          <TextField fx:id="ubname" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                          <Label text="Bank acount number" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                          <TextField fx:id="ubnumber" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                          <Label text="Share amount" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                          <TextField fx:id="ushareamount" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                                          <Label text="Share price" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                          <TextField fx:id="ushareprice" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                                          <Label text="Share range start" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                          <DatePicker fx:id="usharerangestart" prefHeight="25.0" prefWidth="347.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                                          <Label text="Share range close" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                          <DatePicker fx:id="usharerangeclose" prefHeight="25.0" prefWidth="353.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                                          <TextField fx:id="udescription" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                                          <Label text="description" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                          <TextField fx:id="usearch" promptText="searh by nic" GridPane.columnIndex="1" />
-                                          <Button fx:id="uselectt" mnemonicParsing="false" onAction="#handleselectt" prefHeight="33.0" prefWidth="74.0" text="select" GridPane.columnIndex="3" />
-                                       </children>
-                                    </GridPane>
-                                    <Button fx:id="update" layoutX="337.0" layoutY="653.0" mnemonicParsing="false" onAction="#handle_update" prefHeight="56.0" prefWidth="174.0" text="Update" />
-                                    <TableView fx:id="utable" layoutX="58.0" layoutY="387.0" prefHeight="200.0" prefWidth="710.0">
-                                      <columns>
-                                        <TableColumn fx:id="tu_nic" prefWidth="106.0" text="ID number" />
-                                        <TableColumn fx:id="tu_name" prefWidth="103.0" text="Name" />
-                                          <TableColumn fx:id="tu_shareamount" prefWidth="102.0" text="Share amount" />
-                                          <TableColumn fx:id="tu_shareprice" prefWidth="134.0" text="Share price" />
-                                          <TableColumn fx:id="tu_sharerangestart" prefWidth="119.0" text="Share range start" />
-                                          <TableColumn fx:id="tu_sharerangeclose" minWidth="6.0" prefWidth="135.0" text="share range close" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="DELETE &amp; VIEW SHARES">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="73.0" layoutY="68.0" text="choose date" />
-                        <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
-                                 <children>
-                                    <DatePicker layoutX="119.0" layoutY="82.0" promptText="select date" />
-                                    <Button layoutX="420.0" layoutY="82.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Select" />
-                                    <TableView layoutX="77.0" layoutY="187.0" prefHeight="260.0" prefWidth="633.0">
-                                       <columns>
-                                          <TableColumn prefWidth="109.0" text="Close date" />
-                                          <TableColumn prefWidth="97.0" text="Start date" />
-                                          <TableColumn minWidth="1.0" prefWidth="184.0" text="Name" />
-                                          <TableColumn prefWidth="132.0" text="Share price" />
-                                          <TableColumn prefWidth="110.0" text="Share amount" />
-                                       </columns>
-                                    </TableView>
-                                    <Button layoutX="584.0" layoutY="541.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="134.0" text="View" />
-                                    <Button layoutX="116.0" layoutY="541.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="134.0" text="Delete" />
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </TitledPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-   </children>
+                    </content>
+                </Tab>
+                <Tab text="APPLY SHARES">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                                            <children>
+                                                <TableView fx:id="TableLoad" layoutX="62.0" layoutY="64.0"
+                                                           prefHeight="323.0" prefWidth="588.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="name" prefWidth="88.0" text="Name"/>
+                                                        <TableColumn fx:id="nic" prefWidth="84.0" text="ID number"/>
+                                                        <TableColumn fx:id="shareno" prefWidth="104.0"
+                                                                     text="Share amount"/>
+                                                        <TableColumn fx:id="sharepric" prefWidth="98.0"
+                                                                     text="Share price"/>
+                                                        <TableColumn fx:id="sharestart" prefWidth="105.0"
+                                                                     text="Share range start"/>
+                                                        <TableColumn fx:id="shareclose" prefWidth="108.0"
+                                                                     text="Share range close"/>
+                                                    </columns>
+                                                </TableView>
+                                                <Button layoutX="532.0" layoutY="491.0" mnemonicParsing="false"
+                                                        prefHeight="50.0" prefWidth="118.0" text="REJECT"/>
+                                                <Button layoutX="82.0" layoutY="491.0" mnemonicParsing="false"
+                                                        prefHeight="50.0" prefWidth="118.0" text="CONFIRM"/>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="UPDATE SHARES">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0" text="Update details">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="597.0">
+                                            <children>
+                                                <GridPane layoutX="41.0" layoutY="21.0" prefHeight="317.0"
+                                                          prefWidth="660.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="122.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0"
+                                                                           minWidth="10.0" prefWidth="156.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0"
+                                                                           minWidth="10.0" prefWidth="65.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0"
+                                                                           minWidth="10.0" prefWidth="122.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0"
+                                                                           minWidth="10.0" prefWidth="156.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label text="ID number" GridPane.rowIndex="2"/>
+                                                        <Label text="Full name" GridPane.rowIndex="3"/>
+                                                        <Label text="Address" GridPane.rowIndex="4"/>
+                                                        <TextField fx:id="unic" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="2"/>
+                                                        <TextField fx:id="uname" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="3"/>
+                                                        <TextField fx:id="uaddress" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="4"/>
+                                                        <Label text="Date of birth" GridPane.rowIndex="5"/>
+                                                        <DatePicker fx:id="udob" prefHeight="25.0" prefWidth="344.0"
+                                                                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                                                        <Label text="Contact no" GridPane.rowIndex="6"/>
+                                                        <TextField fx:id="uphone" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="6"/>
+                                                        <Label text="E-mail" GridPane.rowIndex="7"/>
+                                                        <TextField fx:id="uemail" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="7"/>
+                                                        <Label text="Bank name" GridPane.columnIndex="3"
+                                                               GridPane.rowIndex="2"/>
+                                                        <TextField fx:id="ubname" GridPane.columnIndex="4"
+                                                                   GridPane.rowIndex="2"/>
+                                                        <Label text="Bank acount number" GridPane.columnIndex="3"
+                                                               GridPane.rowIndex="3"/>
+                                                        <TextField fx:id="ubnumber" GridPane.columnIndex="4"
+                                                                   GridPane.rowIndex="3"/>
+                                                        <Label text="Share amount" GridPane.columnIndex="3"
+                                                               GridPane.rowIndex="4"/>
+                                                        <TextField fx:id="ushareamount" GridPane.columnIndex="4"
+                                                                   GridPane.rowIndex="4"/>
+                                                        <Label text="Share price" GridPane.columnIndex="3"
+                                                               GridPane.rowIndex="5"/>
+                                                        <TextField fx:id="ushareprice" GridPane.columnIndex="4"
+                                                                   GridPane.rowIndex="5"/>
+                                                        <Label text="Share range start" GridPane.columnIndex="3"
+                                                               GridPane.rowIndex="6"/>
+                                                        <DatePicker fx:id="usharerangestart" prefHeight="25.0"
+                                                                    prefWidth="347.0" GridPane.columnIndex="4"
+                                                                    GridPane.rowIndex="6"/>
+                                                        <Label text="Share range close" GridPane.columnIndex="3"
+                                                               GridPane.rowIndex="7"/>
+                                                        <DatePicker fx:id="usharerangeclose" prefHeight="25.0"
+                                                                    prefWidth="353.0" GridPane.columnIndex="4"
+                                                                    GridPane.rowIndex="7"/>
+                                                        <TextField fx:id="udescription" GridPane.columnIndex="4"
+                                                                   GridPane.rowIndex="8"/>
+                                                        <Label text="description" GridPane.columnIndex="3"
+                                                               GridPane.rowIndex="8"/>
+                                                        <TextField fx:id="usearch" promptText="searh by nic"
+                                                                   GridPane.columnIndex="1"/>
+                                                        <Button fx:id="uselectt" mnemonicParsing="false"
+                                                                onAction="#handleselectt" prefHeight="33.0"
+                                                                prefWidth="74.0" text="select"
+                                                                GridPane.columnIndex="3"/>
+                                                    </children>
+                                                </GridPane>
+                                                <Button fx:id="update" layoutX="337.0" layoutY="653.0"
+                                                        mnemonicParsing="false" onAction="#handle_update"
+                                                        prefHeight="56.0" prefWidth="174.0" text="Update"/>
+                                                <TableView fx:id="utable" layoutX="58.0" layoutY="387.0"
+                                                           prefHeight="200.0" prefWidth="710.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="tu_nic" prefWidth="106.0" text="ID number"/>
+                                                        <TableColumn fx:id="tu_name" prefWidth="103.0" text="Name"/>
+                                                        <TableColumn fx:id="tu_shareamount" prefWidth="102.0"
+                                                                     text="Share amount"/>
+                                                        <TableColumn fx:id="tu_shareprice" prefWidth="134.0"
+                                                                     text="Share price"/>
+                                                        <TableColumn fx:id="tu_sharerangestart" prefWidth="119.0"
+                                                                     text="Share range start"/>
+                                                        <TableColumn fx:id="tu_sharerangeclose" minWidth="6.0"
+                                                                     prefWidth="135.0" text="share range close"/>
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="DELETE &amp; VIEW SHARES">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="73.0" layoutY="68.0" text="choose date"/>
+                                <TitledPane animated="false" prefHeight="800.0" prefWidth="900.0">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="900.0">
+                                            <children>
+                                                <DatePicker layoutX="119.0" layoutY="82.0" promptText="select date"/>
+                                                <Button layoutX="420.0" layoutY="82.0" mnemonicParsing="false"
+                                                        prefHeight="25.0" prefWidth="74.0" text="Select"/>
+                                                <TableView layoutX="77.0" layoutY="187.0" prefHeight="260.0"
+                                                           prefWidth="633.0">
+                                                    <columns>
+                                                        <TableColumn prefWidth="109.0" text="Close date"/>
+                                                        <TableColumn prefWidth="97.0" text="Start date"/>
+                                                        <TableColumn minWidth="1.0" prefWidth="184.0" text="Name"/>
+                                                        <TableColumn prefWidth="132.0" text="Share price"/>
+                                                        <TableColumn prefWidth="110.0" text="Share amount"/>
+                                                    </columns>
+                                                </TableView>
+                                                <Button layoutX="584.0" layoutY="541.0" mnemonicParsing="false"
+                                                        prefHeight="46.0" prefWidth="134.0" text="View"/>
+                                                <Button layoutX="116.0" layoutY="541.0" mnemonicParsing="false"
+                                                        prefHeight="46.0" prefWidth="134.0" text="Delete"/>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </TitledPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

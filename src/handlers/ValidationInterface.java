@@ -8,11 +8,11 @@ package handlers;
 import com.jfoenix.controls.JFXTextField;
 
 /**
- *
  * @author Isuru Udukala
  */
 public interface ValidationInterface
 {
-    public void eval();
-    public void register(JFXTextField textField);
+    void eval();
+
+    void register(JFXTextField textField);
 }

@@ -4,47 +4,53 @@
  * and open the template in the editor.
  */
 package legacyEntities;
-import java.sql.*;
 
 import core.Manipulator;
 
-public class Resourceman 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class Resourceman
 {
-    
-    final static String TABLE_NAME="resource";
+
+    final static String TABLE_NAME = "resource";
     public int resource_id;
+
     public Resourceman(int resource_id)
-            
+
     {
-        this.resource_id=resource_id;
+        this.resource_id = resource_id;
     }
-     public int getResource_id()
+
+    public int getResource_id()
     {
         return resource_id;
     }
-     
-     @Override
+
+    @Override
     public String toString()
     {
-        StringBuilder strb=new StringBuilder();
+        StringBuilder strb = new StringBuilder();
         strb.append("\nResource_id\t :  ").append(resource_id);
-        
-           return strb.toString();
+
+        return strb.toString();
     }
+
     public void consolidate(Connection con)
     {
         try
         {
-             String query="insert into resource(resource_id)";
-            PreparedStatement prp=con.prepareStatement(Manipulator.psFromQuery(query));
+            String query = "insert into resource(resource_id)";
+            PreparedStatement prp = con.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, Integer.toString(resource_id));
-            
+
             prp.executeUpdate();
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             System.out.println("Consolidation error[resource]:\n" + e);
-        } 
-    } 
-    
+        }
+    }
+
 }

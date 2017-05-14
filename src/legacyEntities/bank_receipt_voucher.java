@@ -5,27 +5,27 @@
  */
 package legacyEntities;
 
+import core.Manipulator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import core.Manipulator;
 /**
- *
  * @author Isuru Udukala
  */
-public class bank_receipt_voucher 
+public class bank_receipt_voucher
 {
-    String serial_no,receipt_voucher,branch_no,branch_name,transation_code,transation_name,
-            narration,nic,resource_id,name,description,payment_type,cheque_no;
-    Double amount,total_amount;
-    LocalDate date,cheque_date;
+    String serial_no, receipt_voucher, branch_no, branch_name, transation_code, transation_name,
+            narration, nic, resource_id, name, description, payment_type, cheque_no;
+    Double amount, total_amount;
+    LocalDate date, cheque_date;
 
-   public bank_receipt_voucher(String serial_no,LocalDate date,String receipt_voucher,String branch_no,String branch_name,String transation_code,String transation_name,String narration,String nic,String resource_id,String name,String description,Double amount,Double total_amount,String payment_type,String cheque_no,LocalDate cheque_date)
+    public bank_receipt_voucher(String serial_no, LocalDate date, String receipt_voucher, String branch_no, String branch_name, String transation_code, String transation_name, String narration, String nic, String resource_id, String name, String description, Double amount, Double total_amount, String payment_type, String cheque_no, LocalDate cheque_date)
     {
         this.serial_no = serial_no;
-        this.date = date ;
+        this.date = date;
         this.receipt_voucher = receipt_voucher;
         this.branch_no = branch_no;
         this.branch_name = branch_name;
@@ -43,14 +43,15 @@ public class bank_receipt_voucher
         this.cheque_date = cheque_date;
     }
 
-    bank_receipt_voucher(String serial_no, LocalDate date, String transaction_code, String transaction_name, String nic, String resource_id, String name, String description, Double amount, Double total_amount, String payment_type, String cheque_no, LocalDate cheque_date) {
+    bank_receipt_voucher(String serial_no, LocalDate date, String transaction_code, String transaction_name, String nic, String resource_id, String name, String description, Double amount, Double total_amount, String payment_type, String cheque_no, LocalDate cheque_date)
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
-   @Override
+
+    @Override
     public String toString()
     {
-        StringBuilder string =new StringBuilder();
+        StringBuilder string = new StringBuilder();
         string.append("\nserial_no\t :  ").append(serial_no);
         string.append("\ndate\t :  ").append(date.toString());
         string.append("\nreceipt_voucher\t :  ").append(receipt_voucher);
@@ -68,20 +69,21 @@ public class bank_receipt_voucher
         string.append("\npayment_type\t :  ").append(payment_type);
         string.append("\ncheque_no\t :  ").append(cheque_no);
         string.append("\ncheque_date\t :  ").append(cheque_date);
-        
-        
+
+
         return string.toString();
     }
-    
+
     public void consolidate(Connection conn)
     {
         System.out.println("AA");
         try
-        {   String query = "insert into bank_receipt_voucher(serial_no,date,receipt_voucher,branch_no,branch_name,transation_code,transation_name,narration,nic,resource_id,name,description,amount,total_amount,payment_type,cheque_no,cheque_date)";
+        {
+            String query = "insert into bank_receipt_voucher(serial_no,date,receipt_voucher,branch_no,branch_name,transation_code,transation_name,narration,nic,resource_id,name,description,amount,total_amount,payment_type,cheque_no,cheque_date)";
             PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
-            prp.setString(1,serial_no);
+            prp.setString(1, serial_no);
             prp.setString(2, date.toString());
-            prp.setString(3,receipt_voucher);
+            prp.setString(3, receipt_voucher);
             prp.setString(4, branch_no);
             prp.setString(5, branch_name);
             prp.setString(6, transation_code);
@@ -98,13 +100,13 @@ public class bank_receipt_voucher
             prp.setString(17, cheque_date.toString());
             prp.executeUpdate();
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             System.out.println("Consolidation error [bank_receipt_voucher]:\n" + e);
         }
     }
-    
-    
+
+
 }
 
 

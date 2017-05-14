@@ -1,181 +1,238 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hasini.Arrears_interfaceController">
-   <children>
-      <TabPane fx:id="tabpane" layoutX="182.0" layoutY="83.0" prefHeight="700.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <tabs>
-            <Tab text="Arrears Search">
-              <content>
-                <AnchorPane fx:id="anchor_man" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
-                           <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Arrears Management" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="s_nic" promptText="NIC" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="s_fname" promptText="Full Name" GridPane.rowIndex="2" />
-                                          <JFXButton fx:id="e_search" text="Search" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <TableView fx:id="man_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                          </TableView>
-                                       </children>
-                                       <padding>
-                                          <Insets left="40.0" right="40.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Arrears Edit">
-               <content>
-                  <AnchorPane fx:id="anchor_edit" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
-                           <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="283.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="127.0" minHeight="67.0" prefHeight="67.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="138.0" minHeight="43.0" prefHeight="47.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="175.0" minHeight="42.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="212.0" minHeight="34.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="248.0" minHeight="35.0" prefHeight="54.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="276.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="285.0" minHeight="80.0" prefHeight="94.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="285.0" minHeight="38.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="285.0" minHeight="33.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="285.0" minHeight="0.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="285.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Arrears Edit" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <JFXTextField fx:id="e_nic" promptText="NIC" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="e_customerID" promptText="Customer ID" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="e_fname" promptText="Full Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <JFXTextField fx:id="e_address" promptText="Address" GridPane.rowIndex="2" />
-                                          <JFXTextField fx:id="e_loanAmount" promptText="Loan Amount" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <JFXDatePicker fx:id="e_loanDate" promptText="Loan Date" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                          <JFXDatePicker fx:id="e_dueDate" promptText="Due Date" GridPane.rowIndex="3" />
-                                          <JFXDatePicker fx:id="e_lastPaymentDate" promptText="Last Payment Date" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="e_lastPaymentAmount" promptText="Last Payment Amount" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <JFXTextField fx:id="e_outstandingAmount" promptText="Outstanding Amount" GridPane.rowIndex="4" />
-                                          <TableView fx:id="e_table" prefHeight="241.0" prefWidth="857.0" GridPane.columnSpan="3" GridPane.rowIndex="6" GridPane.rowSpan="4">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="C1" />
-                                              <TableColumn prefWidth="75.0" text="C2" />
-                                            </columns>
-                                          </TableView>
-                                       </children>
-                                       <padding>
-                                          <Insets left="40.0" right="40.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Arrears List &amp; Letters">
-               <content>
-                  <AnchorPane fx:id="anchor_list" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0" minHeight="610.0">
-                           <content>
-                              <StackPane prefHeight="610.0" prefWidth="942.0" style="-fx-background-color: #333333;">
-                                 <children>
-                                    <GridPane hgap="20.0" prefHeight="580.0" prefWidth="862.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="268.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0" minWidth="10.0" prefWidth="280.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="NEVER" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="80.0" minHeight="80.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label alignment="BOTTOM_LEFT" prefHeight="46.0" prefWidth="249.0" styleClass="headers" text="Arrears List &amp; Letters" textFill="WHITE">
-                                             <font>
-                                                <Font name="Roboto Condensed Regular" size="21.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets left="40.0" right="40.0" />
-                                       </padding>
-                                    </GridPane>
-                                 </children>
-                              </StackPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </TabPane>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" fx:id="anchorpane" prefHeight="700.0"
+            prefWidth="1000.0" stylesheets="@../resources/style.css"
+            xmlns="http://javafx.com/javafx/8.0.111" fx:controller="hasini.Arrears_interfaceController">
+    <children>
+        <TabPane fx:id="tabpane" layoutX="182.0" layoutY="83.0" prefHeight="700.0" prefWidth="900.0"
+                 tabClosingPolicy="UNAVAILABLE" tabMaxHeight="40.0" tabMinHeight="40.0" AnchorPane.bottomAnchor="0.0"
+                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <tabs>
+                <Tab text="Arrears Search">
+                    <content>
+                        <AnchorPane fx:id="anchor_man" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0"
+                                            minHeight="610.0">
+                                    <content>
+                                        <StackPane prefHeight="610.0" prefWidth="942.0"
+                                                   style="-fx-background-color: #333333;">
+                                            <children>
+                                                <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="100.0" minHeight="100.0"
+                                                                        prefHeight="100.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="NEVER"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="249.0" styleClass="headers"
+                                                               text="Arrears Management" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="s_nic" promptText="NIC"
+                                                                      GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="s_fname" promptText="Full Name"
+                                                                      GridPane.rowIndex="2"/>
+                                                        <JFXButton fx:id="e_search" text="Search"
+                                                                   GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                                        <TableView fx:id="man_table" prefHeight="200.0"
+                                                                   prefWidth="200.0" GridPane.columnSpan="3"
+                                                                   GridPane.rowIndex="3" GridPane.rowSpan="3">
+                                                            <columns>
+                                                                <TableColumn prefWidth="75.0" text="C1"/>
+                                                                <TableColumn prefWidth="75.0" text="C2"/>
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="40.0" right="40.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Arrears Edit">
+                    <content>
+                        <AnchorPane fx:id="anchor_edit" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0"
+                                            minHeight="610.0">
+                                    <content>
+                                        <StackPane prefHeight="610.0" prefWidth="942.0"
+                                                   style="-fx-background-color: #333333;">
+                                            <children>
+                                                <GridPane hgap="20.0" prefHeight="424.0" prefWidth="942.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="283.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="127.0" minHeight="67.0"
+                                                                        prefHeight="67.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="138.0" minHeight="43.0"
+                                                                        prefHeight="47.0" vgrow="NEVER"/>
+                                                        <RowConstraints maxHeight="175.0" minHeight="42.0"
+                                                                        prefHeight="52.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="212.0" minHeight="34.0"
+                                                                        prefHeight="51.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="248.0" minHeight="35.0"
+                                                                        prefHeight="54.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="276.0" minHeight="50.0"
+                                                                        prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="285.0" minHeight="80.0"
+                                                                        prefHeight="94.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="285.0" minHeight="38.0"
+                                                                        prefHeight="45.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="285.0" minHeight="33.0"
+                                                                        prefHeight="45.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="285.0" minHeight="0.0"
+                                                                        prefHeight="46.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="285.0" minHeight="0.0"
+                                                                        prefHeight="72.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="249.0" styleClass="headers"
+                                                               text="Arrears Edit" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                        <JFXTextField fx:id="e_nic" promptText="NIC"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="e_customerID" promptText="Customer ID"
+                                                                      GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="e_fname" promptText="Full Name"
+                                                                      GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                                                        <JFXTextField fx:id="e_address" promptText="Address"
+                                                                      GridPane.rowIndex="2"/>
+                                                        <JFXTextField fx:id="e_loanAmount" promptText="Loan Amount"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                                        <JFXDatePicker fx:id="e_loanDate" promptText="Loan Date"
+                                                                       GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                                        <JFXDatePicker fx:id="e_dueDate" promptText="Due Date"
+                                                                       GridPane.rowIndex="3"/>
+                                                        <JFXDatePicker fx:id="e_lastPaymentDate"
+                                                                       promptText="Last Payment Date"
+                                                                       GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                                                        <JFXTextField fx:id="e_lastPaymentAmount"
+                                                                      promptText="Last Payment Amount"
+                                                                      GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                                                        <JFXTextField fx:id="e_outstandingAmount"
+                                                                      promptText="Outstanding Amount"
+                                                                      GridPane.rowIndex="4"/>
+                                                        <TableView fx:id="e_table" prefHeight="241.0" prefWidth="857.0"
+                                                                   GridPane.columnSpan="3" GridPane.rowIndex="6"
+                                                                   GridPane.rowSpan="4">
+                                                            <columns>
+                                                                <TableColumn prefWidth="75.0" text="C1"/>
+                                                                <TableColumn prefWidth="75.0" text="C2"/>
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="40.0" right="40.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Arrears List &amp; Letters">
+                    <content>
+                        <AnchorPane fx:id="anchor_list" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                    prefWidth="200.0">
+                            <children>
+                                <ScrollPane fitToWidth="true" layoutX="30.0" layoutY="15.0" maxHeight="610.0"
+                                            minHeight="610.0">
+                                    <content>
+                                        <StackPane prefHeight="610.0" prefWidth="942.0"
+                                                   style="-fx-background-color: #333333;">
+                                            <children>
+                                                <GridPane hgap="20.0" prefHeight="580.0" prefWidth="862.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0"
+                                                                           minWidth="10.0" prefWidth="268.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="611.0"
+                                                                           minWidth="10.0" prefWidth="280.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints maxHeight="100.0" minHeight="100.0"
+                                                                        prefHeight="100.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="NEVER"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                        <RowConstraints maxHeight="80.0" minHeight="80.0"
+                                                                        prefHeight="80.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Label alignment="BOTTOM_LEFT" prefHeight="46.0"
+                                                               prefWidth="249.0" styleClass="headers"
+                                                               text="Arrears List &amp; Letters" textFill="WHITE">
+                                                            <font>
+                                                                <Font name="Roboto Condensed Regular" size="21.0"/>
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="40.0" right="40.0"/>
+                                                    </padding>
+                                                </GridPane>
+                                            </children>
+                                        </StackPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

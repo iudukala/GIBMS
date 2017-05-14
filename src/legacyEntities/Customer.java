@@ -5,28 +5,28 @@
  */
 package legacyEntities;
 
+import core.Manipulator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import core.Manipulator;
 /**
- *
  * @author Isuru Udukala
  */
-public class Customer 
+public class Customer
 {
-    public String nic,work_phone,company,position,acc_num, acc_bank, acc_branch;
-    public char emp_sector,service_nature;
+    public String nic, work_phone, company, position, acc_num, acc_bank, acc_branch;
+    public char emp_sector, service_nature;
     public String emp_start_date;
     public int earn_career, earn_business, earn_houses, earn_vehicles, earn_land;
 
-    public Customer(String nic, String work_phone, String company, String position, String acc_num, String acc_bank, String acc_branch, 
-            char emp_sector, char service_nature, LocalDate emp_start_date, int earn_career, int earn_business, int earn_houses, int earn_vehicles, int earn_land)
+    public Customer(String nic, String work_phone, String company, String position, String acc_num, String acc_bank, String acc_branch,
+                    char emp_sector, char service_nature, LocalDate emp_start_date, int earn_career, int earn_business, int earn_houses, int earn_vehicles, int earn_land)
     {
-        this.nic=nic;
+        this.nic = nic;
         this.work_phone = work_phone;
         this.company = company;
         this.position = position;
@@ -42,13 +42,14 @@ public class Customer
         this.earn_vehicles = earn_vehicles;
         this.earn_land = earn_land;
     }
-    
+
     public void consolidate(Connection conn)
     {
         System.out.println("AA");
         try
-        {   String query = "insert into customer_state(nic, work_phone, emp_sector, company, position, emp_startdate, service_nature, account_num, "
-                + "account_bank, account_branch, earn_career, earn_bussiness, earn_houses, earn_vehicles, earn_land)";
+        {
+            String query = "insert into customer_state(nic, work_phone, emp_sector, company, position, emp_startdate, service_nature, account_num, "
+                    + "account_bank, account_branch, earn_career, earn_bussiness, earn_houses, earn_vehicles, earn_land)";
             PreparedStatement prp = conn.prepareStatement(Manipulator.psFromQuery(query));
             prp.setString(1, nic);
             prp.setString(2, work_phone);
@@ -67,11 +68,11 @@ public class Customer
             prp.setInt(15, earn_land);
             prp.executeUpdate();
         }
-        catch(SQLException e)
+        catch (SQLException e)
         {
             System.out.println("Consolidation error [Customer]:\n" + e);
         }
     }
-    
-    
+
+
 }

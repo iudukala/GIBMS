@@ -13,34 +13,33 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- *
  * @author ASUS-PC
  */
-public class add_btn {
+public class add_btn
+{
     public static void display(String title, String message)
     {
-    
-    Stage window =new Stage();
-    window.setTitle(title);
-    window.setMinWidth(300);
-    window.setMaxHeight(150);
-    
-    Label label = new Label();
-    label.setText(message);
-    Button buttonOK = new Button("OK");
-    Button buttoncansel = new Button("cancel");
-    buttonOK.setOnAction(e-> window.close());
-    
-    VBox layout = new VBox(5);
-    layout.getChildren().addAll(label,buttonOK,buttoncansel);
-    layout.setAlignment(Pos.CENTER);
-    
-    Scene scene = new Scene(layout);
-    window.setScene(scene);
-    window.showAndWait();
-    
+
+        Stage window = new Stage();
+        window.setTitle(title);
+        window.setMinWidth(300);
+        window.setMaxHeight(150);
+
+        Label label = new Label();
+        label.setText(message);
+        Button buttonOK = new Button("OK");
+        Button buttoncansel = new Button("cancel");
+        buttonOK.setOnAction(e -> window.close());
+
+        VBox layout = new VBox(5);
+        layout.getChildren().addAll(label, buttonOK, buttoncansel);
+        layout.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.showAndWait();
+
     }
-    
-    
-    
+
+
 }
