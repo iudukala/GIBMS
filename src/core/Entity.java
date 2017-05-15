@@ -621,19 +621,14 @@ public class Entity
         PreparedStatement prp;
         try
         {
-            //testingmarker
-            //System.out.println(strb.toString());
-            //System.out.println(this.toString());
             prp = nbconn.get().prepareStatement(update_string);
             for (Iterator<Object> iterator = fields.iterator(); iterator.hasNext(); )
             {
-                //testingmarker
                 Object nextobj = iterator.next();
                 prp.setObject(++counter, recastJavaObject(nextobj));
             }
             for (Iterator<String> iterator = primaryKeys.iterator(); iterator.hasNext(); )
             {
-                //testingmarker
                 Object nextobj = iterator.next();
                 prp.setObject(++counter, recastJavaObject(data.get(nextobj)));
             }
@@ -656,7 +651,8 @@ public class Entity
         return status;
     }
 
-    //execute as search won't work with columns that have 
+    //executeAsSearch() will not work with columns containing periods in their name.
+    //the period, if exists is used to recognize the table identifier
     private String synthesizeWhereClause(List<String> keylist, boolean wildcards)
     {
         String search_op = wildcards ? " like " : " = ";

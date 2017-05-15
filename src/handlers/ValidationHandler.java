@@ -78,6 +78,31 @@ public class ValidationHandler
         }
     }
 
+    public static class PhoneValidator extends ValidatorBase implements ValidationInterface
+    {
+        @Override
+        public void eval()
+        {
+            TextInputControl textField = (TextInputControl) srcControl.get();
+            if (Validator.isPhone(textField.getText()) || textField.getText().equals(""))
+            {
+                hasErrors.set(false);
+            }
+            else
+            {
+                message.set("Invalid phone number");
+                fieldInvalid(icon, hasErrors);
+            }
+        }
+
+        @Override
+        public void register(JFXTextField textField)
+        {
+            ValidationHandler.register(this, textField);
+        }
+    }
+
+
     public static class ExistingNICValidator extends ValidatorBase implements ValidationInterface
     {
         private dbConcurrent nbconn = null;
@@ -168,29 +193,7 @@ public class ValidationHandler
 
     }
 
-    public static class PhoneValidator extends ValidatorBase implements ValidationInterface
-    {
-        @Override
-        public void eval()
-        {
-            TextInputControl textField = (TextInputControl) srcControl.get();
-            if (Validator.isPhone(textField.getText()) || textField.getText().equals(""))
-            {
-                hasErrors.set(false);
-            }
-            else
-            {
-                message.set("Invalid phone number");
-                fieldInvalid(icon, hasErrors);
-            }
-        }
 
-        @Override
-        public void register(JFXTextField textField)
-        {
-            ValidationHandler.register(this, textField);
-        }
-    }
 
     public static class EmailValidator extends ValidatorBase implements ValidationInterface
     {

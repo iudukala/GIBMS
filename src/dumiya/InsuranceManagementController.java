@@ -456,43 +456,28 @@ public class InsuranceManagementController implements Initializable
 
     public void initializeInsuranceFundInputs()
     {
-
         insuranceFundCont = new EntityControls("Insurance_Fund", nbconn);
-
         insuranceFundCont.add("NIC", nic_if, new NICValidator());
-
         insuranceFundCont.add("Insurance_Fee", insurance_fee_if, new DoubleValidator());
-
         insuranceFundCont.add("Date_Issued", date_issued_if, new pastDateValidator());
-
         insuranceFundCont.add("Expiry_Date", expiry_date_if);
-
         insuranceFundCont.add("Payed_Amount", payed_amount_if, new DoubleValidator());
-
         insuranceFundCont.add("Due_Amount", due_amount_if, new DoubleValidator());
-
     }
 
     public void initializeInsuranceClaimInputs()
     {
         insuranceClaimCont = new EntityControls("Insurance_Claim", nbconn);
-
         insuranceClaimCont.add("Claim_Number", claim_number_ic, new IntegerValidator());
-
         insuranceClaimCont.add("Open_Date", open_date_ic, new pastDateValidator());
-
         insuranceClaimCont.add("Closed_Date", closed_date_ic);
-
         insuranceClaimCont.add("Total_Claim_Amount", total_claim_amount_ic, new DoubleValidator());
-
         insuranceClaimCont.add("Issued_Claim_Amount", issued_claim_amount_ic, new DoubleValidator());
-
         insuranceClaimCont.add("Remaining_Claim_Amount", remaining_claim_amount_ic, new DoubleValidator());
     }
 
     public void tableHandler()
     {
-
         customerSearchTableHandle = new tableViewHandler(table_cs, "select * from customer_view", nbconn);
         customerSearchTableHandle.writeToTable();
 
@@ -501,44 +486,27 @@ public class InsuranceManagementController implements Initializable
 
         insuranceClaimTableHandle = new tableViewHandler(table_ic, "select * from Insurance_Claim", nbconn);
         insuranceClaimTableHandle.writeToTable();
-
     }
 
     public void setInsuranceFundInputs()
     {
-
         searchInsuranceFundCont = new EntityControls("Insurance_Fund", nbconn);
-
         searchInsuranceFundCont.add("NIC", nic_if, new NICValidator());
-
         searchInsuranceFundCont.add("Insurance_Fee", insurance_fee_if, new DoubleValidator());
-
         searchInsuranceFundCont.add("Date_Issued", date_issued_if, new pastDateValidator());
-
         searchInsuranceFundCont.add("Expiry_Date", expiry_date_if);
-
         searchInsuranceFundCont.add("Payed_Amount", payed_amount_if, new DoubleValidator());
-
         searchInsuranceFundCont.add("Due_Amount", due_amount_if, new DoubleValidator());
-
     }
 
     public void setInsuranceClaimInputs()
     {
-
         searchInsuranceClaimCont = new EntityControls("Insurance_Claim", nbconn);
-
         searchInsuranceClaimCont.add("Claim_Number", claim_number_ic, new IntegerValidator());
-
         searchInsuranceClaimCont.add("Open_Date", open_date_ic, new pastDateValidator());
-
         searchInsuranceClaimCont.add("Closed_Date", closed_date_ic);
-
         searchInsuranceClaimCont.add("Total_Claim_Amount", total_claim_amount_ic, new DoubleValidator());
-
         searchInsuranceClaimCont.add("Issued_Claim_Amount", issued_claim_amount_ic, new DoubleValidator());
-
         searchInsuranceClaimCont.add("Remaining_Claim_Amount", remaining_claim_amount_ic, new DoubleValidator());
-
     }
 }
