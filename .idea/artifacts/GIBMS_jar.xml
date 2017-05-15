@@ -1,0 +1,40 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GIBMS:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GIBMS_jar</output-path>
+    <root id="archive" name="GIBMS.jar">
+      <element id="module-output" name="GIBMS" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/jfoenix.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/mysql-connector-java-5.1.42-bin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/controlsfx-8.40.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-htmlcomponent-4.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jfreechart-1.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-htmlcomponent-5.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-extensions-3.5.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-core-renderer.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-jtidy-r938.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/commons-beanutils-1.8.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/commons-digester-2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jcommon-xml-1.0.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jfreechart-1.0.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/com-jaspersoft-jrx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-json.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/com-jaspersoft-ireport-components.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jcalendar-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jfreechart-1.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/commons-logging-1.2-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jcommon-1.0.8-junit.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/com-jaspersoft-ireport-jasperserver.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-5.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jcommon-1.0.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/com-jaspersoft-ireport.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jcommon-1.0.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/groovy-2.4.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/joda-time-2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/commons-collections-3.2.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-fonts-5.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-chart-themes-5.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/ireport libs 5.6.0/jasperreports-functions-5.6.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
