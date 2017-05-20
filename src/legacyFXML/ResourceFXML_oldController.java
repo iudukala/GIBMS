@@ -5,7 +5,6 @@
  */
 package legacyFXML;
 
-import handlers.DynamicTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,10 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import legacyEntities.Bill;
-import legacyEntities.Building;
-import legacyEntities.Other;
-import legacyEntities.Vehicle;
+import legacyEntities.*;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -363,7 +359,7 @@ public class ResourceFXML_oldController implements Initializable
     private void handle_vehiclesearch(ActionEvent event)
     {
         String search = vehsearch.getText();
-        handlers.DynamicTable.buildData(conn, "select * from vehicle where `license` like ?", search, table_vehsearch);
+        DynamicTable.buildData(conn, "select * from vehicle where `license` like ?", search, table_vehsearch);
     }
 
     @FXML

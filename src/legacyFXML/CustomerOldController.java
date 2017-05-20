@@ -8,7 +8,6 @@ package legacyFXML;
 import core.Entity;
 import core.Integrator;
 import core.Validator;
-import handlers.DynamicTable;
 import handlers.dbConcurrent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import legacyEntities.Customer;
+import legacyEntities.DynamicTable;
 import legacyEntities.Person;
 
 import java.net.URL;
@@ -270,7 +270,7 @@ public class CustomerOldController implements Initializable
     private void handleSearchnic(ActionEvent event)
     {
         String nic_search = text_searchnic.getText();
-        handlers.DynamicTable.buildData(conn, "select * from customer_view where `nic` like ?;", nic_search, table_search);
+        DynamicTable.buildData(conn, "select * from customer_view where `nic` like ?;", nic_search, table_search);
     }
 
     @FXML

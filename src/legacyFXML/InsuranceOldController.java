@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import legacyEntities.DynamicTable;
 import legacyEntities.Insurance_Claim;
 import legacyEntities.Insurance_Fund;
 
@@ -132,7 +133,7 @@ public class InsuranceOldController implements Initializable
     {
 
         String Customer_ID_Search = Search_Bar_if.getText();
-        handlers.DynamicTable.buildData(conn, "select c.Customer_ID,i.Insurance_Fee,i.Date_Issued,i.Expiry_Date,i.Payed_Amount,i.Due_Amount from customer_state c,Insurance_Fund i where c.Customer_ID=i.Customer_ID and i.Customer_ID like ?;", Customer_ID_Search, Table_if);
+        DynamicTable.buildData(conn, "select c.Customer_ID,i.Insurance_Fee,i.Date_Issued,i.Expiry_Date,i.Payed_Amount,i.Due_Amount from customer_state c,Insurance_Fund i where c.Customer_ID=i.Customer_ID and i.Customer_ID like ?;", Customer_ID_Search, Table_if);
 
     }
 
@@ -179,7 +180,7 @@ public class InsuranceOldController implements Initializable
     {
 
         String Claim_Number_Search = Search_Bar_ic.getText();
-        handlers.DynamicTable.buildData(conn, "select * from Insurance_Claim where `Claim_Number` like ?;", Claim_Number_Search, Table_ic);
+        DynamicTable.buildData(conn, "select * from Insurance_Claim where `Claim_Number` like ?;", Claim_Number_Search, Table_ic);
 
     }
 }

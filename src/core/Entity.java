@@ -44,7 +44,7 @@ public class Entity
 
     public static List<Entity> parseFromRS(ResultSet rs, dbConcurrent nbconn)
     {
-        //resetting RS incase next() has been called before being passed
+        //resetting RS in case next() has been called before being passed
         try
         {
             rs.beforeFirst();

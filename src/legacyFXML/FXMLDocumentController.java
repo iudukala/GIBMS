@@ -6,12 +6,12 @@
 package legacyFXML;
 
 import core.Integrator;
-import handlers.DynamicTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import legacyEntities.DynamicTable;
 import legacyEntities.Person;
 import legacyEntities.shareholder;
 
@@ -315,7 +315,7 @@ public class FXMLDocumentController implements Initializable
     private void handleselectt(ActionEvent event)
     {
         String search = usearch.getText();
-        handlers.DynamicTable.buildData(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
+        DynamicTable.buildData(conn, "select p.nic, p.full_name  , s.share_amount, s.share_price, s.share_range_start, s.share_range_close\n" +
                 "from person p ,shareholder s where p.nic=s.nic and p.nic like ?", search, utable);
 
     }
