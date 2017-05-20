@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="aws_rds">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="bank">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="gibms"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <table id="5" parent="2" name="Attendence_leave"/>
+    <table id="6" parent="2" name="External_bank_fund"/>
+    <table id="7" parent="2" name="Insurance_Claim"/>
+    <table id="8" parent="2" name="Insurance_Customer"/>
+    <table id="9" parent="2" name="Insurance_Fund"/>
+    <table id="10" parent="2" name="arrears_edit"/>
+    <table id="11" parent="2" name="branches"/>
+    <table id="12" parent="2" name="building"/>
+    <table id="13" parent="2" name="bvr_add"/>
+    <table id="14" parent="2" name="bvr_addmember"/>
+    <table id="15" parent="2" name="cashbook"/>
+    <table id="16" parent="2" name="company_list"/>
+    <table id="17" parent="2" name="customer_state"/>
+    <table id="18" parent="2" name="employee_details"/>
+    <table id="19" parent="2" name="general_ledger"/>
+    <table id="20" parent="2" name="loanplan"/>
+    <table id="21" parent="2" name="other_bill"/>
+    <table id="22" parent="2" name="paniya2"/>
+    <table id="23" parent="2" name="payroll"/>
+    <table id="24" parent="2" name="person"/>
+    <table id="25" parent="2" name="resource"/>
+    <table id="26" parent="2" name="shareholder"/>
+    <table id="27" parent="2" name="shares"/>
+    <table id="28" parent="2" name="spouse"/>
+    <table id="29" parent="2" name="total_payroll"/>
+    <table id="30" parent="2" name="transaction_code"/>
+    <table id="31" parent="2" name="trial_balance"/>
+    <table id="32" parent="2" name="vehicle"/>
+    <view id="33" parent="2" name="customer_view">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="34" parent="2" name="lcid_view">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="35" parent="2" name="ppp">
+      <Comment>VIEW</Comment>
+    </view>
+    <column id="36" parent="5" name="empid">
+      <Position>1</Position>
+      <DataType>varchar(15)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="5" name="leave_date">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="5" name="type">
+      <Position>3</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="39" parent="5" name="reason">
+      <Position>4</Position>
+      <DataType>varchar(1000)|0</DataType>
+    </column>
+    <column id="40" parent="5" name="from">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="41" parent="5" name="to">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="42" parent="5" name="phone">
+      <Position>7</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="43" parent="5" name="remarks">
+      <Position>8</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <key id="44" parent="5" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>empid
+leave_date</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="45" parent="6" name="Bank_Id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="6" name="Bank_Name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="47" parent="6" name="Emp_Id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="48" parent="6" name="Address">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="49" parent="6" name="Duration">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="50" parent="6" name="Amount">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="51" parent="6" name="Interset">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="52" parent="6" name="Monthly_installment">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="53" parent="6" name="Date">
+      <Position>9</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="54" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Bank_Id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="55" parent="7" name="Claim_Number">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="7" name="Open_Date">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="57" parent="7" name="Closed_Date">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="58" parent="7" name="Total_Claim_Amount">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="59" parent="7" name="Issued_Claim_Amount">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="60" parent="7" name="Remaining_Claim_Amount">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="61" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Claim_Number</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="62" parent="8" name="Customer_id">
+      <Position>1</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="8" name="Name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="64" parent="8" name="Nationality">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="65" parent="8" name="NIC_No">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="66" parent="8" name="DOB">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="67" parent="8" name="Gender">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="68" parent="8" name="Branch">
+      <Position>7</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="69" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Customer_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="70" parent="9" name="NIC">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="71" parent="9" name="Insurance_Fee">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="72" parent="9" name="Date_Issued">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="73" parent="9" name="Expiry_Date">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="74" parent="9" name="Payed_Amount">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="75" parent="9" name="Due_Amount">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="76" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>NIC</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="77" parent="10" name="customer_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="10" name="nic">
+      <Position>2</Position>
+      <DataType>varchar(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="10" name="full_name">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="80" parent="10" name="address">
+      <Position>4</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="81" parent="10" name="loan_amount">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="82" parent="10" name="loan_date">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="83" parent="10" name="due_date">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="84" parent="10" name="last_payment_date">
+      <Position>8</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="85" parent="10" name="last_payment_amount">
+      <Position>9</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="86" parent="10" name="outstanding_amount">
+      <Position>10</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <index id="87" parent="10" name="nic_idx">
+      <ColNames>nic</ColNames>
+    </index>
+    <key id="88" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>customer_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="89" parent="10" name="customer_id">
+      <ColNames>customer_id</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>customer_state</RefTableName>
+      <RefColNames>customer_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="90" parent="10" name="nic">
+      <ColNames>nic</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>person</RefTableName>
+      <RefColNames>nic</RefColNames>
+    </foreign-key>
+    <column id="91" parent="11" name="branch_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="92" parent="11" name="location">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="93" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>branch_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="94" parent="12" name="building_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="95" parent="12" name="address">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="96" parent="12" name="floor">
+      <Position>3</Position>
+      <DataType>varchar(5)|0</DataType>
+    </column>
+    <column id="97" parent="12" name="rent_value">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="98" parent="12" name="description">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="99" parent="12" name="end_date">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="100" parent="12" name="rent_date">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="101" parent="12" name="condition">
+      <Position>8</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="102" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>building_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="103" parent="13" name="serial_no">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="104" parent="13" name="date">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="105" parent="13" name="voucher_receipt">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="106" parent="13" name="branch_no">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="107" parent="13" name="branch_name">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="108" parent="13" name="transaction_code">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="109" parent="13" name="transaction_name">
+      <Position>7</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="110" parent="13" name="narration">
+      <Position>8</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="111" parent="13" name="company_name">
+      <Position>9</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="112" parent="13" name="payment_type">
+      <Position>10</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="113" parent="13" name="cheque_no">
+      <Position>11</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="114" parent="13" name="cheque_date">
+      <Position>12</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="115" parent="13" name="total_amount">
+      <Position>13</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="116" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>serial_no</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="117" parent="14" name="serial_no">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="118" parent="14" name="nic">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="119" parent="14" name="description">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="120" parent="14" name="credit_amount">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="121" parent="14" name="debit_amount">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <index id="122" parent="14" name="serial_no_idx">
+      <ColNames>serial_no</ColNames>
+    </index>
+    <foreign-key id="123" parent="14" name="serial_no">
+      <ColNames>serial_no</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>bvr_add</RefTableName>
+      <RefColNames>serial_no</RefColNames>
+    </foreign-key>
+    <column id="124" parent="15" name="cashbook_id">
+      <Position>1</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="125" parent="15" name="credit_bring_down_balance">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="126" parent="15" name="debit_bring_down_balance">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="127" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>cashbook_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="128" parent="16" name="company_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="129" parent="16" name="branch_no">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="130" parent="16" name="company_name">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="131" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>company_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="132" parent="17" name="nic">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="133" parent="17" name="customer_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="134" parent="17" name="work_phone">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="135" parent="17" name="emp_sector">
+      <Position>4</Position>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <column id="136" parent="17" name="company">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="137" parent="17" name="position">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="138" parent="17" name="emp_startdate">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="139" parent="17" name="service_nature">
+      <Position>8</Position>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <column id="140" parent="17" name="account_num">
+      <Position>9</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="141" parent="17" name="account_bank">
+      <Position>10</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="142" parent="17" name="account_branch">
+      <Position>11</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="143" parent="17" name="earn_career">
+      <Position>12</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="144" parent="17" name="earn_business">
+      <Position>13</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="145" parent="17" name="earn_houses">
+      <Position>14</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="146" parent="17" name="earn_vehicles">
+      <Position>15</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="147" parent="17" name="earn_land">
+      <Position>16</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="148" parent="17" name="spouse_id">
+      <Position>17</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="149" parent="17" name="customer_id">
+      <ColNames>customer_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="150" parent="17" name="fk_nic">
+      <ColNames>nic</ColNames>
+    </index>
+    <index id="151" parent="17" name="fk_spouse">
+      <ColNames>spouse_id</ColNames>
+    </index>
+    <key id="152" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>customer_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="153" parent="17" name="customer_id">
+      <ColNames>customer_id</ColNames>
+      <UnderlyingIndexName>customer_id</UnderlyingIndexName>
+    </key>
+    <foreign-key id="154" parent="17" name="fk_nic">
+      <ColNames>nic</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>person</RefTableName>
+      <RefColNames>nic</RefColNames>
+    </foreign-key>
+    <foreign-key id="155" parent="17" name="fk_spouse">
+      <ColNames>spouse_id</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>spouse</RefTableName>
+      <RefColNames>spouse_id</RefColNames>
+    </foreign-key>
+    <column id="156" parent="18" name="nic">
+      <Position>1</Position>
+      <DataType>varchar(15)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="157" parent="18" name="empid">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="158" parent="18" name="job">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="159" parent="18" name="department">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="160" parent="18" name="joining_date">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="161" parent="18" name="account_no">
+      <Position>6</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="162" parent="18" name="account_holder">
+      <Position>7</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="163" parent="18" name="bank_name">
+      <Position>8</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="164" parent="18" name="insurance_no">
+      <Position>9</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="165" parent="18" name="insurance_company">
+      <Position>10</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="166" parent="18" name="tp2">
+      <Position>11</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="167" parent="18" name="salary">
+      <Position>12</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="168" parent="18" name="salary_date">
+      <Position>13</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <index id="169" parent="18" name="a_idx">
+      <ColNames>empid</ColNames>
+    </index>
+    <key id="170" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>nic</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="171" parent="19" name="transaction_code">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="172" parent="19" name="credit_bring_down_balance">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="173" parent="19" name="debit_bring_down_balance">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="174" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>transaction_code</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="175" parent="20" name="loanid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="176" parent="20" name="customer_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="177" parent="20" name="amount">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="178" parent="20" name="interest">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="179" parent="20" name="payback_duration">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="180" parent="20" name="payback_method">
+      <Position>6</Position>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <column id="181" parent="20" name="monthly_installment">
+      <Position>7</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="182" parent="20" name="bank">
+      <Position>8</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="183" parent="20" name="branch">
+      <Position>9</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="184" parent="20" name="account">
+      <Position>10</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="185" parent="20" name="guarantor1">
+      <Position>11</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="186" parent="20" name="guarantor1_income">
+      <Position>12</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="187" parent="20" name="guarantor2">
+      <Position>13</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="188" parent="20" name="guarantor2_income">
+      <Position>14</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="189" parent="20" name="timestamp">
+      <Position>15</Position>
+      <DataType>datetime|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="190" parent="20" name="branch_id">
+      <Position>16</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="191" parent="20" name="branch_id">
+      <ColNames>branch_id</ColNames>
+    </index>
+    <index id="192" parent="20" name="customer_id">
+      <ColNames>customer_id</ColNames>
+    </index>
+    <key id="193" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>loanid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="194" parent="20" name="loanplan_ibfk_1">
+      <ColNames>customer_id</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>customer_state</RefTableName>
+      <RefColNames>customer_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="195" parent="20" name="loanplan_ibfk_2">
+      <ColNames>branch_id</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>branches</RefTableName>
+      <RefColNames>branch_id</RefColNames>
+    </foreign-key>
+    <column id="196" parent="21" name="bill_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="197" parent="21" name="category">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="198" parent="21" name="description">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="199" parent="21" name="price">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="200" parent="21" name="usage">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="201" parent="21" name="quantity">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="202" parent="21" name="date">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <key id="203" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>bill_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="204" parent="22" name="field1">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="205" parent="22" name="name">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <key id="206" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>field1</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="207" parent="23" name="empid">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="208" parent="23" name="overtime">
+      <Position>2</Position>
+      <DataType>int(10)|0</DataType>
+    </column>
+    <column id="209" parent="23" name="bonus">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="210" parent="23" name="medical">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="211" parent="23" name="privilages">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="212" parent="23" name="provident_fund">
+      <Position>6</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="213" parent="23" name="loan">
+      <Position>7</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="214" parent="23" name="tax">
+      <Position>8</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="215" parent="23" name="other">
+      <Position>9</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="216" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>empid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="217" parent="24" name="nic">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="218" parent="24" name="full_name">
+      <Position>2</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="219" parent="24" name="email">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="220" parent="24" name="dob">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="221" parent="24" name="phone">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="222" parent="24" name="address">
+      <Position>6</Position>
+      <DataType>varchar(300)|0</DataType>
+    </column>
+    <column id="223" parent="24" name="gender">
+      <Position>7</Position>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <column id="224" parent="24" name="marital_status">
+      <Position>8</Position>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <key id="225" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>nic</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="226" parent="25" name="resource_id">
+      <Position>1</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="227" parent="25" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>resource_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="228" parent="26" name="nic">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="229" parent="26" name="bank_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="230" parent="26" name="account_no">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="231" parent="26" name="share_amount">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="232" parent="26" name="share_price">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="233" parent="26" name="issue_date">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="234" parent="26" name="expiry_date">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="235" parent="26" name="approval">
+      <Position>8</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="236" parent="26" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>nic</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="237" parent="26" name="shareholder_ibfk_1">
+      <ColNames>nic</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>person</RefTableName>
+      <RefColNames>nic</RefColNames>
+    </foreign-key>
+    <column id="238" parent="27" name="share_id">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="239" parent="27" name="shares">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="240" parent="27" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>share_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="241" parent="28" name="spouse_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="242" parent="28" name="nic">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="243" parent="28" name="name">
+      <Position>3</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="244" parent="28" name="profession">
+      <Position>4</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="245" parent="28" name="earn_career">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="246" parent="28" name="earn_business">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="247" parent="28" name="earn_houses">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="248" parent="28" name="earn_vehicles">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="249" parent="28" name="earn_land">
+      <Position>9</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="250" parent="28" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>spouse_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="251" parent="29" name="empid">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="252" parent="29" name="a">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="253" parent="29" name="b">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="254" parent="29" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>empid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="255" parent="29" name="qq">
+      <ColNames>empid</ColNames>
+      <RefSchemaName>bank</RefSchemaName>
+      <RefTableName>payroll</RefTableName>
+      <RefColNames>empid</RefColNames>
+    </foreign-key>
+    <column id="256" parent="30" name="transaction_code">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="257" parent="30" name="transaction_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="258" parent="31" name="trial_balance_id">
+      <Position>1</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="259" parent="31" name="credit_bring_down_balance">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="260" parent="31" name="debit_bring_down_balance">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <key id="261" parent="31" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>trial_balance_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="262" parent="32" name="license">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="263" parent="32" name="brand">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="264" parent="32" name="model">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="265" parent="32" name="engine_no">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="266" parent="32" name="year">
+      <Position>5</Position>
+      <DataType>varchar(4)|0</DataType>
+    </column>
+    <column id="267" parent="32" name="colour">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="268" parent="32" name="seats">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="269" parent="32" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>license</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="270" parent="33" name="StateID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="271" parent="33" name="NIC">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="272" parent="33" name="Full name">
+      <Position>3</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="273" parent="33" name="Home address">
+      <Position>4</Position>
+      <DataType>varchar(300)|0</DataType>
+    </column>
+    <column id="274" parent="33" name="Phone no">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="275" parent="33" name="Company">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="276" parent="33" name="Date of birth">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="277" parent="33" name="Gender">
+      <Position>8</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="278" parent="33" name="Marital status">
+      <Position>9</Position>
+      <DataType>varchar(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="279" parent="33" name="Spouse name">
+      <Position>10</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="280" parent="33" name="SpouseID">
+      <Position>11</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="281" parent="33" name="Email">
+      <Position>12</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="282" parent="34" name="StateID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="283" parent="34" name="NIC">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="284" parent="34" name="Total assets">
+      <Position>3</Position>
+      <DataType>bigint(15)|0</DataType>
+    </column>
+    <column id="285" parent="34" name="Full name">
+      <Position>4</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="286" parent="34" name="Company">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="287" parent="35" name="nic">
+      <Position>1</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+  </database-model>
+</dataSource>
